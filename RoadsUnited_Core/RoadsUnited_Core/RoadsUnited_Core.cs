@@ -324,7 +324,7 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Avenues", "LargeAvenue8LM_Elevated_MainTex.dds")));
 
-                                if (false)
+                                if (false) // this buggy ATM
                                 {
                                     if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Avenues", "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
@@ -340,6 +340,23 @@ namespace RoadsUnited_Core
                             #endregion
 
                             #region NExt Highways Default
+
+                            if (netInfo.name.Contains("Rural Highway") && netInfo.name.Contains("Small"))
+                            {
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Highways", "Highway1L_Ground_Segment_MainTex.dds")));
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Highways", "Highway1L_Ground_Segment_MainTex.dds")));
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Highways", "Highway1L_Slope_Segment_MainTex.dds")));
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Highways", "Highway1L_Tunnel_Segment_MainTex.dds")));
+
+                                segment.m_lodRenderDistance = 2500;
+                            }
 
                             if (netInfo.name.Contains("Rural Highway") && !netInfo.name.Contains("Small"))
                             {
@@ -485,7 +502,7 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Elevated"))
                                     segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Avenues", "LargeAvenue8LM_Elevated_APRMap.dds")));
 
-                                if (false)
+                                if (false) // this buggy ATM
                                 {
                                     if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Slope"))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_NetExt + "/Avenues", "LargeAvenue8LM_Slope_Segment_APRMap.dds")));

@@ -23,12 +23,27 @@ namespace RoadsUnited_Core
         {
             this.themeName = name;
             this.themeDescription = themeDescription;
+            this.packPath = packPath;
         }
 
 
 
+        public void OnPreSerialize()
+        {
+        }
+
         public void OnPostDeserialize()
         {
+        }
+
+        public static void Serialize(string filename, RoadThemePack config)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(RoadThemePack));
+            using (StreamWriter streamWriter = new StreamWriter(filename))
+            {
+                config.OnPreSerialize();
+                xmlSerializer.Serialize(streamWriter, config);
+            }
         }
 
 

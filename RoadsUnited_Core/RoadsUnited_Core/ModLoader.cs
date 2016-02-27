@@ -232,7 +232,7 @@ namespace RoadsUnited_Core
             //            Resources.UnloadUnusedAssets();
 
 
-            if (false)
+            if (false) // only for debug
             {
                 // Get the UIView object. This seems to be the top-level object for most
                 // of the UI.

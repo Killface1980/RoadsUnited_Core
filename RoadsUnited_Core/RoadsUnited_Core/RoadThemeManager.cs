@@ -20,9 +20,6 @@ namespace RoadsUnited_Core
 
         public bool isLoaded;
 
-        public static readonly string configDirectory = RoadThemeManager.getModPath();
-
-
         public RoadThemePack activePack;
 
         public RoadThemePack activeDefaultPack;
@@ -96,5 +93,27 @@ namespace RoadsUnited_Core
             }
             return list;
         }
+
+        public RoadThemePack ActivePack
+        {
+            get
+            {
+                return this.activePack;
+            }
+            set
+            {
+                this.activePack = value;
+                if (!this.levelIsLoaded)
+                {
+                    return;
+                }
+                if (this.activePack != null)
+                {
+                 //   this.ApplyPack(this.activePack);
+                    return;
+                }
+            }
+        }
+
     }
 }

@@ -6,105 +6,95 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using System.Xml.Serialization;
+using System.Xml;
+using RoadsUnited_Core;
+
 
 namespace RoadsUnited_Core
 {
-    public class RoadThemesManager : Singleton<RoadThemesManager>
+    public class RoadThemeManager : Singleton<RoadThemeManager>
     {
-        private bool imported = false;
-        private const string ModConfigPath = "RoadsUnitedTheme.xml";
 
-        private const string userConfigPath = "RoadsUnitedTheme.xml";
-        private Configuration _configuration;
-        internal Configuration Configuration
+        public bool levelIsLoaded;
+
+        public bool isLoaded;
+
+        public static readonly string configDirectory = RoadThemeManager.getModPath();
+
+
+        public RoadThemePack activePack;
+
+        public RoadThemePack activeDefaultPack;
+
+        public RoadThemePack currentPack;
+
+        public static string getModPath()
         {
-            get
+            string result = null;
+            foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
-                if (_configuration == null)
+                if (current.isEnabled)
                 {
-                    try
+                    string path = Path.Combine(current.modPath, "RoadsUnited.dll");
+                    if (File.Exists(path))
                     {
-                        _configuration = Configuration.Deserialize(userConfigPath);
+                        result = current.modPath;
+                    }
+                }
+            }
+            return result;
+        }
 
-                        if (_configuration == null)
+        public RoadsUnited_Core config;
+
+        public List<RoadThemePack> GetAvailablePacks()
+        {
+            List<RoadThemePack> list = new List<RoadThemePack>();
+            string[] array = new string[]
+
+            {
+                "Vanilla"
+            };
+
+            foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
+            {
+                if (current.isEnabled)
+                {
+                    string text = Path.Combine(current.modPath, "RoadsUnitedTheme.xml");
+                    if (File.Exists(text))
+                    {
+                        RoadThemePack RoadThemePack = RoadThemePack.Deserialize(text);
+                        if (RoadThemePack != null)
                         {
-                            _configuration = new Configuration();
-                            ModLoader.SaveConfig();
+                            if (RoadThemePack.themeName == null)
+                            {
+                                RoadThemePack.themeName = current.name;
+                            }
+                            RoadThemePack.packPath = current.modPath;
+                            list.Add(RoadThemePack);
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
-                }
-
-                return _configuration;
-            }
-        }
-
-        public void ImportThemes()
-        {
-            if (!imported)
-            {
-                ImportThemesFromThemeMods();
-                imported = true;
-            }
-        }
-
-        private void ImportThemesFromThemeMods()
-        {
-            foreach (var pluginInfo in Singleton<PluginManager>.instance.GetPluginsInfo().Where(pluginInfo => pluginInfo.isEnabled))
-            {
-                try
-                {
-                    var config = RoadsUnited_Core.Configuration.Deserialize(Path.Combine(pluginInfo.modPath, ModConfigPath));
-                    if (config == null)
-                    {
-                        continue;
-                    }
-                    foreach (var theme in config.themes)
-                    {
-                        AddModTheme(theme, pluginInfo.name);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.Log("Error while parsing BuildingThemes.xml of mod " + pluginInfo.name);
-                    Debug.LogException(e);
                 }
             }
-        }
-
-        private void AddModTheme(Configuration.Theme modTheme, string modName)
-        {
-            if (modTheme == null)
+            string[] array2 = array;
+            for (int i = 0; i < array2.Length; i++)
             {
-                return;
-            }
-            Configuration.Theme theme;
-            AddImportedTheme(modTheme.name, null, out theme);
-            Debug.LogFormat(
-                "Imported theme from mod \"{0}\" as theme \"{1}\".",
-                modName, theme.name
-                );
-        }
-
-        private void AddImportedTheme(string themeName, string stylePackage, out Configuration.Theme theme)
-        {
-            theme = Configuration.getTheme(themeName);
-            if (theme == null)
-            {
-                theme = new Configuration.Theme
+                string path = array2[i];
+                string modPath = RoadThemeManager.getModPath();
+                string text2 = Path.Combine(modPath, path);
+                string text3 = Path.Combine(text2, "RoadsUnitedTheme.xml");
+                if (File.Exists(text3))
                 {
-                    name = themeName,
-                    stylePackage = stylePackage
-                };
-                Configuration.themes.Add(theme);
+                    RoadThemePack RoadThemePack2 = RoadThemePack.Deserialize(text3);
+                    if (RoadThemePack2 != null)
+                    {
+                        RoadThemePack2.packPath = text2;
+                        list.Add(RoadThemePack2);
+                    }
+                }
             }
-            theme.isBuiltIn = true;
-
+            return list;
         }
-
-
     }
 }

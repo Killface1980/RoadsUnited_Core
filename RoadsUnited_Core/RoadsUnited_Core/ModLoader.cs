@@ -58,7 +58,7 @@ namespace RoadsUnited_Core
         public static string currentTexturesPath_NetExt = Path.Combine(modPath, "NetExtTextures");
 
 
-        public RoadsUnited textureManager;
+        public RoadsUnited_Core textureManager;
 
 
         public override void OnCreated(ILoading loading)
@@ -83,18 +83,20 @@ namespace RoadsUnited_Core
             if (ModLoader.config.create_vanilla_dictionary == true)
             {
                 bool isEmpty;
-                using (var dictionaryEnum = RoadsUnited.vanillaPrefabProperties.GetEnumerator())
+                using (var dictionaryEnum = RoadsUnited_Core.vanillaPrefabProperties.GetEnumerator())
                     isEmpty = !dictionaryEnum.MoveNext();
 
                 if (isEmpty)
                 {
-                    RoadsUnited.CreateVanillaDictionary();
+                    RoadsUnited_Core.CreateVanillaDictionary();
                 }
             }
 
 
             if (ModLoader.config.use_custom_textures == true)
-                RoadsUnited.ReplaceNetTextures();
+                RoadsUnited_Core.ReplaceNetTextures();
+
+
 
             #region.RoadColorChanger
 
@@ -298,20 +300,21 @@ namespace RoadsUnited_Core
 
         public void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
         {
-            RoadsUnited.ReplaceNetTextures();
+            RoadsUnited_Core.ReplaceNetTextures();
         }
 
         public void Button2Click(UIComponent component, UIMouseEventParameter eventParam)
         {
-            RoadsUnited.ApplyVanillaDictionary();
+            RoadsUnited_Core.ApplyVanillaDictionary();
         }
 
         public override void OnLevelUnloading()
         {
             base.OnLevelUnloading();
 
-            RoadsUnited.ApplyVanillaDictionary();
-            RoadsUnited.vanillaPrefabProperties.Clear();
+
+            RoadsUnited_Core.ApplyVanillaDictionary();
+            RoadsUnited_Core.vanillaPrefabProperties.Clear();
         }
 
 

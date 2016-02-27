@@ -54,6 +54,7 @@
     <Compile Include="RoadColorChanger.cs" />
     <Compile Include="RoadsUnited_Core.cs" />
     <Compile Include="RoadThemeManager.cs" />
+    <Compile Include="RoadThemePack.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

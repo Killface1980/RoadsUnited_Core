@@ -1,14 +1,18 @@
-﻿using ICities;
+﻿using ColossalFramework;
+using ColossalFramework.UI;
+using ICities;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using RoadsUnited_Core;
 
 namespace RoadsUnited_Core
 {
-    public class RoadsUnitedCoreMod : IUserMod
+    public class RoadsUnited_CoreMod : IUserMod
     {
-        public const UInt64 workshop_id = 598151121;
+        public const UInt64 workshop_id = 633547552;
 
-        public const String VersionName = "Update 4";
+        public const String VersionName = "Alpha";
 
 
         public string Name
@@ -102,6 +106,7 @@ namespace RoadsUnited_Core
         #endregion
 
         #region Oneway config
+
         private void EventOnewayRoadBrightness(float c)
         {
             ModLoader.config.oneway_road_ground_brightness = c;
@@ -152,6 +157,7 @@ namespace RoadsUnited_Core
         #endregion
 
         #region Medium roads config
+
         private void EventMediumRoadBrightness(float c)
         {
             ModLoader.config.medium_road_ground_brightness = c;
@@ -383,6 +389,8 @@ namespace RoadsUnited_Core
 
         #endregion
 
+        #region Parking marking
+
         private void EventSmallRoadParking(int c)
         {
             ModLoader.config.basic_road_parking = c;
@@ -431,6 +439,8 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
 
+        #endregion
+
 
         #region Config stuff
 
@@ -456,7 +466,7 @@ namespace RoadsUnited_Core
 
         private void EventRevertVanillaTextures()
         {
-            RoadsUnited.ApplyVanillaDictionary();
+            RoadsUnited_Core.ApplyVanillaDictionary();
 
         }
 
@@ -475,8 +485,8 @@ namespace RoadsUnited_Core
 
         private void EventReloadTextures()
         {
-            RoadsUnited.ApplyVanillaDictionary();
-            RoadsUnited.ReplaceNetTextures();
+            RoadsUnited_Core.ApplyVanillaDictionary();
+            RoadsUnited_Core.ReplaceNetTextures();
 
             ModLoader.SaveConfig();
         }
@@ -491,6 +501,16 @@ namespace RoadsUnited_Core
 
         #endregion
 
+        public static UIDropDown dropdown = null;
+
+        public static List<string> packNames;
+
+        public static List<string> packNames1;
+
+        public static List<string> filteredPackNames;
+
+        public static List<RoadThemePack> packs;
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             ModLoader.config = Configuration.Deserialize(ModLoader.configPath);
@@ -499,6 +519,51 @@ namespace RoadsUnited_Core
                 ModLoader.config = new Configuration();
             }
             ModLoader.SaveConfig();
+
+            RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
+            RoadsUnited_CoreMod.packNames = new List<string>();
+            RoadsUnited_CoreMod.packNames.Add("None");
+            RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_Core.packs
+                                                select pack.themeName);
+            RoadsUnited_CoreMod.packNames1 = new List<string>();
+            RoadsUnited_CoreMod.packNames1.Add("None");
+            RoadsUnited_CoreMod.packNames1.AddRange(from pack in RoadsUnited_Core.packs
+                                                 select pack.themeName);
+            RoadsUnited_CoreMod.filteredPackNames = new List<string>();
+            RoadsUnited_CoreMod.filteredPackNames = RoadsUnited_CoreMod.packNames;
+
+            TerrainThemesMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Terrain Theme", TerrainThemesMod.filteredPackNames.ToArray(), TerrainThemesMod.selectedPackID, delegate (int selectedIndex)
+            {
+                if (selectedIndex > 0)
+                {
+                    TerrainThemesMod.infoText.set_text(TerrainThemesUtil.GetDescription(TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[TerrainThemesMod.dropdown.get_selectedIndex()])));
+                    TerrainThemesMod.infoText1.set_text(TerrainThemesUtil.GetBiomes(TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[TerrainThemesMod.dropdown.get_selectedIndex()])));
+                    Singleton<TerrainThemeManager>.get_instance().ActivePack = TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[selectedIndex]);
+                    TerrainThemesMod.panel2.set_isVisible(true);
+                }
+                else
+                {
+                    Singleton<TerrainThemeManager>.get_instance().ActivePack = null;
+                    TerrainThemesMod.panel2.set_isVisible(false);
+                }
+                TerrainThemesMod.selectedPackID = selectedIndex;
+            });
+            {
+                if (selectedIndex > 0)
+                {
+                    TerrainThemesMod.infoText.set_text(TerrainThemesUtil.GetDescription(TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[TerrainThemesMod.dropdown.get_selectedIndex()])));
+                    TerrainThemesMod.infoText1.set_text(TerrainThemesUtil.GetBiomes(TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[TerrainThemesMod.dropdown.get_selectedIndex()])));
+                    Singleton<TerrainThemeManager>.get_instance().ActivePack = TerrainThemesMod.packs.Find((TerrainThemePack pack) => pack.themeName == TerrainThemesMod.filteredPackNames[selectedIndex]);
+                    TerrainThemesMod.panel2.set_isVisible(true);
+                }
+                else
+                {
+                    Singleton<TerrainThemeManager>.get_instance().ActivePack = null;
+                    TerrainThemesMod.panel2.set_isVisible(false);
+                }
+                TerrainThemesMod.selectedPackID = selectedIndex;
+            });
+
 
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);

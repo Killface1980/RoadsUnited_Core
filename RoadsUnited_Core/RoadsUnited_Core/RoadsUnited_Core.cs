@@ -11,9 +11,12 @@ using System.Linq;
 namespace RoadsUnited_Core
 {
 
-    public class RoadsUnited : MonoBehaviour
+    public class RoadsUnited_Core : MonoBehaviour
 
     {
+
+        public static List<RoadThemePack> packs;
+
         public static Configuration config;
 
         private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();

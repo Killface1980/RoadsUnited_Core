@@ -54,7 +54,7 @@ namespace RoadsUnited_Core
             List<RoadThemePack> list = new List<RoadThemePack>();
             string[] array = new string[]
             {
-                "Europe",
+                "Europe", // from TerrainThenes - do I still need this?
                 "North",
                 "Sunny",
                 "Tropical"

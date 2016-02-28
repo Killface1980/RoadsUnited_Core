@@ -15,21 +15,19 @@ namespace RoadsUnited_Core
 
     {
 
-
         public static Configuration config;
 
         private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
 
         public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
 
-
-
         //        public static Dictionary<string, Texture2D> currentPrefabProperties = new Dictionary<string, Texture2D>();
 
 
-
         private static Texture2D defaultmap;
+
         private static Texture2D aprmap;
+
 
         public static Texture2D LoadTextureDDS(string fullPath)
         {

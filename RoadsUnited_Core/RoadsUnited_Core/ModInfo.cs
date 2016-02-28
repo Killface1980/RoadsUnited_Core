@@ -502,6 +502,7 @@ namespace RoadsUnited_Core
         #endregion
 
 
+        #region RoadThemeDropdownMenu
 
         public static UICheckBox checkbox = null;
 
@@ -527,6 +528,8 @@ namespace RoadsUnited_Core
 
         public static int selectedPackID = 0;
 
+        #endregion
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             Debug.Log("Settings initializing");
@@ -540,12 +543,13 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
 
 
+            #region RoadThemSelector
 
             RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
             RoadsUnited_CoreMod.packNames = new List<string>();
             RoadsUnited_CoreMod.packNames.Add("None");
             RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs
-                                                select pack.themeName);
+                                                   select pack.themeName);
 
 
             UIHelperBase uIHelperBase2 = helper.AddGroup("Road Themes");
@@ -571,6 +575,8 @@ namespace RoadsUnited_Core
                 RoadsUnited_CoreMod.panel2.isVisible = false;
             }
 
+            #endregion
+
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
             uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter colour.", ModLoader.config.use_custom_colours, EventCheckUseCustomColours);
@@ -582,7 +588,6 @@ namespace RoadsUnited_Core
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);
 
             UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
-
             uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Use default" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
             uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Use default" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
             uIHelperParkingSpaceSettings.AddDropdown("Medium roads grass", new string[] { "No marking", "Use default" }, ModLoader.config.medium_road_grass_parking, EventMediumRoadGrassParking);

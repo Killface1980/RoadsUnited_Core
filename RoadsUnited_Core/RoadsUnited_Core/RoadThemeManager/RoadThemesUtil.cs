@@ -41,22 +41,6 @@ namespace RoadsUnited_Core
             fieldInfo.SetValue(o, value);
         }
 
-        public static FilterMode GetFilterMode(string filterMode)
-        {
-            if (filterMode != null)
-            {
-                if (filterMode == "Trilinear")
-                {
-                    return FilterMode.Trilinear;
-                }
-                if (filterMode == "Bilinear")
-                {
-                    return FilterMode.Bilinear;
-                }
-            }
-            return FilterMode.Point;
-        }
-
 
         public static string GetDescription(RoadThemePack pack)
         {

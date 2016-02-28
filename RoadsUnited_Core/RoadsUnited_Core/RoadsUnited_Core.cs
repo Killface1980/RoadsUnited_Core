@@ -15,7 +15,6 @@ namespace RoadsUnited_Core
 
     {
 
-        public static List<RoadThemePack> packs;
 
         public static Configuration config;
 

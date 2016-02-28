@@ -18,7 +18,7 @@ namespace RoadsUnited_Core
 
         public static Configuration config;
 
-        public static readonly string configPath = "RoadsUnitedConfig.xml";
+        public static readonly string configPath = "RoadsUnitedCoreConfig.xml";
 
         public static string getModPath()
         {

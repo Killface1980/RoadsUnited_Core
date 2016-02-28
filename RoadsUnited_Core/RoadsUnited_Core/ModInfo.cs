@@ -502,6 +502,31 @@ namespace RoadsUnited_Core
         #endregion
 
 
+
+        public static UICheckBox checkbox = null;
+
+        public static UICheckBox checkbox2 = null;
+
+        public static UIDropDown dropdown = null;
+
+        public static UIPanel panel1 = null;
+
+        public static UIPanel panel2 = null;
+
+        public static UITextField infoText = null;
+
+        public static UITextField infoText1 = null;
+
+        public static List<string> packNames;
+
+        public static List<string> packNames1;
+
+        public static List<string> filteredPackNames;
+
+        public static List<RoadThemePack> packs;
+
+        public static int selectedPackID = 0;
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             Debug.Log("Settings initializing");
@@ -514,9 +539,37 @@ namespace RoadsUnited_Core
             }
             ModLoader.SaveConfig();
 
- 
 
 
+            RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
+            RoadsUnited_CoreMod.packNames = new List<string>();
+            RoadsUnited_CoreMod.packNames.Add("None");
+            RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs
+                                                select pack.themeName);
+
+
+            UIHelperBase uIHelperBase2 = helper.AddGroup("Road Themes");
+            RoadsUnited_CoreMod.panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
+            RoadsUnited_CoreMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), RoadsUnited_CoreMod.selectedPackID, delegate (int selectedIndex)
+            {
+                if (selectedIndex > 0)
+                {
+                    RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
+                    Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
+                    RoadsUnited_CoreMod.panel2.isVisible = true;
+                }
+                else
+                {
+                    Singleton<RoadThemeManager>.instance.ActivePack = null;
+                    RoadsUnited_CoreMod.panel2.isVisible = false;
+                }
+                RoadsUnited_CoreMod.selectedPackID = selectedIndex;
+            });
+            RoadsUnited_CoreMod.dropdown.width = 600f;
+            if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
+            {
+                RoadsUnited_CoreMod.panel2.isVisible = false;
+            }
 
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);

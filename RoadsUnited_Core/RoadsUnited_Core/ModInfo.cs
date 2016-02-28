@@ -512,7 +512,6 @@ namespace RoadsUnited_Core
 
         public static UIPanel panel1 = null;
 
-        public static UIPanel panel2 = null;
 
         public static UITextField infoText = null;
 
@@ -560,20 +559,15 @@ namespace RoadsUnited_Core
                 {
                     RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
                     Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
-                    RoadsUnited_CoreMod.panel2.isVisible = true;
                 }
                 else
                 {
                     Singleton<RoadThemeManager>.instance.ActivePack = null;
-                    RoadsUnited_CoreMod.panel2.isVisible = false;
                 }
                 RoadsUnited_CoreMod.selectedPackID = selectedIndex;
             });
             RoadsUnited_CoreMod.dropdown.width = 600f;
-            if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
-            {
-                RoadsUnited_CoreMod.panel2.isVisible = false;
-            }
+
 
             #endregion
 

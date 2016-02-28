@@ -99,32 +99,6 @@ namespace RoadsUnited_Core
         public bool FixateToolbarButton = false;
 
 
-        [XmlArray(ElementName = "Themes")]
-        [XmlArrayItem(ElementName = "Theme")]
-        public List<Theme> themes = new List<Theme>();
-
-        public class Theme
-        {
-            [XmlAttribute("name")]
-            public string name;
-
-            [XmlIgnoreAttribute]
-            public bool isBuiltIn = false;
-
-            [XmlAttribute("style-package"), DefaultValue(null)]
-            public string stylePackage = null;
-
-        }
-
-        public Theme getTheme(string name)
-        {
-            foreach (Theme theme in themes)
-            {
-                if (theme.name == name) return theme;
-            }
-            return null;
-        }
-
         public void OnPreSerialize()
         {
         }

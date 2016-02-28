@@ -9,7 +9,6 @@ namespace RoadsUnited_Core
 {
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
-        public bool levelIsLoaded;
 
         public bool isLoaded;
 
@@ -35,10 +34,6 @@ namespace RoadsUnited_Core
             set
             {
                 this.activePack = value;
-                if (!this.levelIsLoaded)
-                {
-                    return;
-                }
                 if (this.activePack != null)
                 {
                     return;
@@ -81,17 +76,6 @@ namespace RoadsUnited_Core
             }
 
             return list;
-        }
-
-
-
-        private void TogglePanels()
-        {
-
-            if (RoadsUnited_CoreMod.dropdown != null)
-            {
-                RoadsUnited_CoreMod.dropdown.tooltip = "Themes that are not allowed in the current biome don't appear in the dropdown.";
-            }
         }
 
     }

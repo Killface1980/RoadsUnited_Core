@@ -47,13 +47,7 @@ namespace RoadsUnited_Core
         public List<RoadThemePack> GetAvailablePacks()
         {
             List<RoadThemePack> list = new List<RoadThemePack>();
-            string[] array = new string[]
-            {
-                "Europe", // from TerrainThenes - do I still need this?
-                "North",
-                "Sunny",
-                "Tropical"
-            };
+
             foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
                 if (current.isEnabled)

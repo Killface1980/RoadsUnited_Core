@@ -519,7 +519,6 @@ namespace RoadsUnited_Core
 
         public static List<string> packNames;
 
-        public static List<string> packNames1;
 
         public static List<string> filteredPackNames;
 
@@ -540,8 +539,9 @@ namespace RoadsUnited_Core
                 ModLoader.config = new Configuration();
             }
             ModLoader.SaveConfig();
+            Debug.Log("Config loaded.");
 
-
+        
             #region RoadThemSelector
 
             RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
@@ -549,7 +549,8 @@ namespace RoadsUnited_Core
             RoadsUnited_CoreMod.packNames.Add("None");
             RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs
                                                    select pack.themeName);
-
+            RoadsUnited_CoreMod.filteredPackNames = new List<string>();
+            RoadsUnited_CoreMod.filteredPackNames = RoadsUnited_CoreMod.packNames;
 
             UIHelperBase uIHelperBase2 = helper.AddGroup("Road Themes");
             RoadsUnited_CoreMod.panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
@@ -563,6 +564,7 @@ namespace RoadsUnited_Core
                 else
                 {
                     Singleton<RoadThemeManager>.instance.ActivePack = null;
+
                 }
                 RoadsUnited_CoreMod.selectedPackID = selectedIndex;
             });

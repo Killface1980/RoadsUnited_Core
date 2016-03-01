@@ -36,12 +36,20 @@ namespace RoadsUnited_Core
                 this.activePack = value;
                 if (this.activePack != null)
                 {
+                    ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
+                    ModLoader.currentTexturesPath_noParking = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "/BaseTextures/noParking");
+                    ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "/BaseTextures/apr_maps");
+                    ModLoader.currentTexturesPath_lod_rgb = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "/BaseTextures/lod_rgb");
+                    ModLoader.currentTexturesPath_NetExt = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "NetExtTextures");
+                    Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
+
+                    RoadsUnited_Core.ApplyVanillaDictionary();
+                    RoadsUnited_Core.ReplaceNetTextures();
                     return;
                 }
 
             }
         }
-
 
 
         public List<RoadThemePack> GetAvailablePacks()

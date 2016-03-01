@@ -4,6 +4,7 @@ using ICities;
 using System.IO;
 using UnityEngine;
 using ColossalFramework.UI;
+using ColossalFramework;
 
 namespace RoadsUnited_Core
 {
@@ -11,10 +12,6 @@ namespace RoadsUnited_Core
 
     public class ModLoader : LoadingExtensionBase
     {
-
-        //        private GameObject hookGo;
-
-        //        private RoadsUnitedHook hook;
 
         public static Configuration config;
 
@@ -71,6 +68,8 @@ namespace RoadsUnited_Core
                 config = new Configuration();
             }
             SaveConfig();
+
+
         }
 
 
@@ -100,7 +99,7 @@ namespace RoadsUnited_Core
 
             #region.RoadColorChanger
 
-            if (ModLoader.config.use_custom_colours == true)
+            if (ModLoader.config.use_custom_colors == true)
             {
                 RoadColourChanger.ChangeColour(ModLoader.config.basic_road_ground_brightness, "Basic Road", ModLoader.modPath);
                 RoadColourChanger.ChangeColour(ModLoader.config.basic_road_elevated_brightness, "Basic Road Elevated", ModLoader.modPath);
@@ -229,7 +228,6 @@ namespace RoadsUnited_Core
             #endregion
 
 
-            //            Resources.UnloadUnusedAssets();
 
 
             if (false) // only for debug

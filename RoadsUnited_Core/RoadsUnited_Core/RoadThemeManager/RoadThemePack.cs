@@ -48,11 +48,14 @@ namespace RoadsUnited_Core
             catch (Exception ex)
             {
 
-                    Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message.ToString()));
-                
+                Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message.ToString()));
+
                 result = null;
             }
             return result;
         }
+
+
     }
+
 }

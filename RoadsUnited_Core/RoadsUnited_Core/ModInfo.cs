@@ -460,7 +460,7 @@ namespace RoadsUnited_Core
 
         private void EventCheckUseCustomColours(bool c)
         {
-            ModLoader.config.use_custom_colours = c;
+            ModLoader.config.use_custom_colors = c;
             ModLoader.SaveConfig();
         }
 
@@ -512,6 +512,7 @@ namespace RoadsUnited_Core
 
         public static UIPanel panel1 = null;
 
+//        public static UIPanel panel2 = null;
 
         public static UITextField infoText = null;
 
@@ -556,26 +557,42 @@ namespace RoadsUnited_Core
             RoadsUnited_CoreMod.panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
             RoadsUnited_CoreMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), RoadsUnited_CoreMod.selectedPackID, delegate (int selectedIndex)
             {
+                if (selectedIndex == 0)
+                {
+                    ModLoader.config.use_custom_textures = false;
+                    ModLoader.SaveConfig();
+                    }
+
                 if (selectedIndex > 0)
                 {
-                    RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
+                    ModLoader.config.use_custom_textures = true;
+                    ModLoader.SaveConfig();
+                    //                  RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
+                    //                  Debug.Log("Got description");
                     Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
+                    Debug.Log("Set active pack");
+
+                    //                  RoadsUnited_CoreMod.panel2.isVisible = true;
                 }
                 else
                 {
                     Singleton<RoadThemeManager>.instance.ActivePack = null;
-
+//                    RoadsUnited_CoreMod.panel2.isVisible = false;
                 }
                 RoadsUnited_CoreMod.selectedPackID = selectedIndex;
             });
             RoadsUnited_CoreMod.dropdown.width = 600f;
 
+            if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
+            {
+ //               RoadsUnited_CoreMod.panel2.isVisible = false;
+            }
 
             #endregion
 
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
-            uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter colour.", ModLoader.config.use_custom_colours, EventCheckUseCustomColours);
+            uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter colour.", ModLoader.config.use_custom_colors, EventCheckUseCustomColours);
             uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
             uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
             uIHelperGeneralSettings.AddButton("Reload all mod textures (in-game only)", EventReloadTextures);

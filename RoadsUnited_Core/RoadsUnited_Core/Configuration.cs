@@ -11,7 +11,7 @@ namespace RoadsUnited_Core
         public bool create_vanilla_dictionary = true;
 
         public bool use_custom_textures = true;
-        public bool use_custom_colours = true;
+        public bool use_custom_colors = true;
 
         public int basic_road_parking = 0;
         public int medium_road_parking = 0;

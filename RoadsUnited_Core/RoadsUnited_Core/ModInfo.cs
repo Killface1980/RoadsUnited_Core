@@ -560,6 +560,7 @@ namespace RoadsUnited_Core
                 if (selectedIndex == 0)
                 {
                     ModLoader.config.use_custom_textures = false;
+                    RoadsUnited_Core.ApplyVanillaDictionary();
                     ModLoader.SaveConfig();
                     }
 

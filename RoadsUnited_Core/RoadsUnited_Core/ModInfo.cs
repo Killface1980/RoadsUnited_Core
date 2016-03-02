@@ -10,7 +10,7 @@ namespace RoadsUnited_Core
 {
     public class RoadsUnited_CoreMod : IUserMod
     {
-        public const UInt64 workshop_id = 633547552;
+        public const UInt64 workshop_id = 633547552uL;
 
         public const String VersionName = "Alpha";
 
@@ -555,18 +555,20 @@ namespace RoadsUnited_Core
 
             UIHelperBase uIHelperBase2 = helper.AddGroup("Road Themes");
             RoadsUnited_CoreMod.panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
-            RoadsUnited_CoreMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), RoadsUnited_CoreMod.selectedPackID, delegate (int selectedIndex)
+            RoadsUnited_CoreMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), ModLoader.config.selected_pack, delegate (int selectedIndex)
             {
                 if (selectedIndex == 0)
                 {
                     ModLoader.config.use_custom_textures = false;
                     RoadsUnited_Core.ApplyVanillaDictionary();
+                    ModLoader.config.selected_pack = selectedIndex;
                     ModLoader.SaveConfig();
                     }
 
                 if (selectedIndex > 0)
                 {
                     ModLoader.config.use_custom_textures = true;
+                    ModLoader.config.selected_pack = selectedIndex;
                     ModLoader.SaveConfig();
                     //                  RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
                     //                  Debug.Log("Got description");
@@ -594,9 +596,9 @@ namespace RoadsUnited_Core
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
             uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter colour.", ModLoader.config.use_custom_colors, EventCheckUseCustomColours);
-            uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
-            uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
-            uIHelperGeneralSettings.AddButton("Reload all mod textures (in-game only)", EventReloadTextures);
+    //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
+  //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
+            uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
 
 
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);

@@ -56,7 +56,7 @@ namespace RoadsUnited_Core
 
 
 
-        public static void ChangeColour(float brightness, string prefab_road_name, string TextureDir)
+        public static void ChangeColor(float brightness, string prefab_road_name, string TextureDir)
         {
 
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
@@ -90,7 +90,7 @@ namespace RoadsUnited_Core
 
 
         // RoadsUnited.RoadColourChanger
-        public static void ChangeColourNetExt(float brightness, string Prefab_Class_Name, string TextureDir)
+        public static void ChangeColorNetExt(float brightness, string Prefab_Class_Name, string TextureDir)
         {
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
             {

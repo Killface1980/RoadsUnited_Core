@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColossalFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -12,6 +13,8 @@ namespace RoadsUnited_Core
 
         public bool use_custom_textures = true;
         public bool use_custom_colors = true;
+
+        public int selected_pack = 0;
 
         public int basic_road_parking = 0;
         public int medium_road_parking = 0;

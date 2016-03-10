@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RoadsUnited_Core
 {
-    public class RoadColourChanger : MonoBehaviour
+    public class RoadColorChanger : MonoBehaviour
     {
         public static Configuration config;
 
@@ -102,7 +102,10 @@ namespace RoadsUnited_Core
                 if (netInfo.m_class.name.Contains(Prefab_Class_Name))
                 {
                     if (netInfo.m_color != null)
+                    {
                         netInfo.m_color = new Color(brightness, brightness, brightness);
+                        netInfo.RefreshLevelOfDetail();
+                    }
                 }
 
                 //                if (netInfo.name.Contains(Prefab_Class_Name))

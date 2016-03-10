@@ -17,11 +17,6 @@ namespace RoadsUnited_Core
 
         public RoadThemePack activePack;
 
-        public RoadThemePack activeDefaultPack;
-
-        public RoadThemePack currentPack;
-
-
 
 
 
@@ -37,10 +32,10 @@ namespace RoadsUnited_Core
                 if (this.activePack != null)
                 {
                     ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
-                    ModLoader.currentTexturesPath_noParking = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures/noParking");
+                    ModLoader.currentTexturesPath_parking1 = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures/parking1");
                     ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures/apr_maps");
-                    ModLoader.currentTexturesPath_lod_rgb = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures/lod_rgb");
                     ModLoader.currentTexturesPath_NetExt = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "NetExtTextures");
+
                     Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
 
                     RoadsUnited_Core.ApplyVanillaDictionary();

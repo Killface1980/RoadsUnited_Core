@@ -101,6 +101,7 @@ namespace RoadsUnited_Core
         public bool ShowToolbarButton = true;
         public bool FixateToolbarButton = false;
 
+        public string texturePackPath = "None";
 
         public void OnPreSerialize()
         {

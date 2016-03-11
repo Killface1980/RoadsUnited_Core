@@ -16,7 +16,7 @@ namespace RoadsUnited_Core
 
         public static Configuration config;
 
-        public static readonly string configPath = "RoadsUnitedCoreConfig.xml";
+        public static readonly string configFile = "RoadsUnitedCoreConfig.xml";
 
         public static string getModPath()
         {
@@ -51,10 +51,8 @@ namespace RoadsUnited_Core
 
 
 
-        public static string currentTexturesPath_default = Path.Combine(ModLoader.config.texturePackPath, "BaseTextures");
-        public static string currentTexturesPath_parking1 = Path.Combine(currentTexturesPath_default, "parking1");
-        public static string currentTexturesPath_apr_maps = Path.Combine(currentTexturesPath_default, "apr_maps");
-        public static string currentTexturesPath_NetExt = Path.Combine(ModLoader.config.texturePackPath, "NetExtTextures");
+        public static string currentTexturesPath_default = "None";
+        public static string currentTexturesPath_apr_maps = "None";
 
 
 
@@ -69,12 +67,16 @@ namespace RoadsUnited_Core
         {
             base.OnCreated(loading);
 
-            config = Configuration.Deserialize(configPath);
+            config = Configuration.Deserialize(configFile);
+
+
+
             if (config == null)
             {
                 config = new Configuration();
             }
             SaveConfig();
+
 
         }
 
@@ -84,6 +86,7 @@ namespace RoadsUnited_Core
             base.OnLevelLoaded(mode);
 
             string modPath = getModPath();
+
 
             if (ModLoader.config.create_vanilla_dictionary == true)
             {
@@ -99,7 +102,10 @@ namespace RoadsUnited_Core
 
 
             if (ModLoader.config.use_custom_textures == true)
+            {
                 RoadsUnited_Core.ReplaceNetTextures();
+            }
+
 
             #region.RoadColorChanger
 
@@ -248,7 +254,7 @@ namespace RoadsUnited_Core
 
         public static void SaveConfig()
         {
-            Configuration.Serialize(ModLoader.configPath, ModLoader.config);
+            Configuration.Serialize(ModLoader.configFile, ModLoader.config);
         }
 
         public override void OnReleased()

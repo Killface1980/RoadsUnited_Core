@@ -550,7 +550,7 @@ namespace RoadsUnited_Core
             Debug.Log("Settings initializing");
 
 
-            ModLoader.config = Configuration.Deserialize(ModLoader.configPath);
+            ModLoader.config = Configuration.Deserialize(ModLoader.configFile);
             if (ModLoader.config == null)
             {
                 ModLoader.config = new Configuration();

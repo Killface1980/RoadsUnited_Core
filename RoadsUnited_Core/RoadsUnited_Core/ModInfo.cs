@@ -591,8 +591,8 @@ namespace RoadsUnited_Core
 
                     Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
                     Debug.Log("Set active pack");
-                    ModLoader.config.texturePackPath = Singleton<RoadThemeManager>.instance.ActivePack.packPath;
                     ModLoader.SaveConfig();
+
 
                     //                  RoadsUnited_CoreMod.panel2.isVisible = true;
                 }

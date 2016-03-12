@@ -200,10 +200,11 @@ namespace RoadsUnited_Core
 
         public static void ReplaceNetTextures()
         {
-
-            ModLoader.currentTexturesPath_default = config.texturePackPath + "BaseTextures";
-            ModLoader.currentTexturesPath_apr_maps = config.texturePackPath + "APRMaps";
-
+            if (ModLoader.config.texturePackPath != null)
+            {
+            ModLoader.currentTexturesPath_default = Path.Combine(ModLoader.config.texturePackPath, "BaseTextures");
+                ModLoader.currentTexturesPath_apr_maps = Path.Combine(ModLoader.config.texturePackPath, "APRMaps");
+            }
 
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
             {
@@ -306,6 +307,12 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Ground_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Ground_Segment_MainTex.dds")));
 
+                                if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Ground"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_apr_maps, "RoadLargeSegment-default-apr.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_apr_maps, "RoadLargeSegment-default-apr.dds")));
+
+
+
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Elevated_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Elevated_MainTex.dds")));
@@ -326,6 +333,11 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Ground_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Ground_Segment_MainTex.dds")));
+
+                                if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Ground"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_apr_maps, "RoadLargeSegment-default-apr.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_apr_maps, "RoadLargeSegment-default-apr.dds")));
+
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Elevated_MainTex.dds")))

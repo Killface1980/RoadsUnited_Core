@@ -31,8 +31,10 @@ namespace RoadsUnited_Core
                 this.activePack = value;
                 if (this.activePack != null)
                 {
-                    ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
-                    ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "APRMaps");
+                    ModLoader.config.texturePackPath = Singleton<RoadThemeManager>.instance.activePack.packPath;
+                    ModLoader.SaveConfig();
+//                    ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
+//                    ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "APRMaps");
 
                     Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
 

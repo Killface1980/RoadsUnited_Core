@@ -52,7 +52,6 @@ namespace RoadsUnited_Core
 
 
         public static string currentTexturesPath_default = "None";
-        public static string currentTexturesPath_apr_maps = "None";
 
 
 
@@ -232,12 +231,17 @@ namespace RoadsUnited_Core
                 RoadColorChanger.ChangeColorNetExt(ModLoader.config.highway_ground_brightness, "NExtHighway6L", ModLoader.modPath);
                 RoadColorChanger.ChangeColorNetExt(ModLoader.config.highway_ground_brightness, "NExtHighwayTunnel6LTunnel", ModLoader.modPath);
 
-                RoadColorChanger.ReplaceLodAprAtlas(currentTexturesPath_apr_maps);
+                RoadColorChanger.ReplaceLodAprAtlas(currentTexturesPath_default);
             }
             #endregion
 
 
             RoadsUnited_Core.ChangeProps();
+
+            RoadsUnited_CoreArrow.ReplaceLaneProp();
+ //           ReplaceLaneProp("Oneway Road", "Bus Stop Small", "NC_BusStop_small_Typ2.NC_BusStop_small_Typ2_Data");
+  //          ReplaceLaneProp("Basic Road Decoration Trees", "Bus Stop Large", "NC_BusStop_small_Typ3.NC_BusStop_small_Typ3_Data");
+  //          ReplaceLaneProp("Basic Road Decoration Grass", "Bus Stop Large", "NC_BusStop_small_Typ4.NC_BusStop_small_Typ4_Data");
 
         }
 

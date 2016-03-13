@@ -460,7 +460,12 @@ namespace RoadsUnited_Core
 
         #region Config stuff
 
-
+        private void EventDisableOptionalArrows(bool c)
+        {
+            ModLoader.config.disable_optional_arrows = c;
+            ModLoader.SaveConfig();
+            RoadsUnited_Core.ChangeProps();
+        }
 
         private void EventCheckCreateVanillaDictionary(bool c)
         {
@@ -483,7 +488,6 @@ namespace RoadsUnited_Core
         private void EventRevertVanillaTextures()
         {
             RoadsUnited_Core.ApplyVanillaDictionary();
-
         }
 
         private void EventResetColor()
@@ -528,7 +532,7 @@ namespace RoadsUnited_Core
 
         public static UIPanel panel1 = null;
 
-//        public static UIPanel panel2 = null;
+        //        public static UIPanel panel2 = null;
 
         public static UITextField infoText = null;
 
@@ -558,7 +562,7 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
             Debug.Log("Config loaded.");
 
-        
+
             #region RoadThemSelector
 
             RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
@@ -579,7 +583,7 @@ namespace RoadsUnited_Core
                     RoadsUnited_Core.ApplyVanillaDictionary();
                     ModLoader.config.selected_pack = selectedIndex;
                     ModLoader.SaveConfig();
-                    }
+                }
 
                 if (selectedIndex > 0)
                 {
@@ -599,7 +603,7 @@ namespace RoadsUnited_Core
                 else
                 {
                     Singleton<RoadThemeManager>.instance.ActivePack = null;
-//                    RoadsUnited_CoreMod.panel2.isVisible = false;
+                    //                    RoadsUnited_CoreMod.panel2.isVisible = false;
                 }
                 RoadsUnited_CoreMod.selectedPackID = selectedIndex;
             });
@@ -607,7 +611,7 @@ namespace RoadsUnited_Core
 
             if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
             {
- //               RoadsUnited_CoreMod.panel2.isVisible = false;
+                //               RoadsUnited_CoreMod.panel2.isVisible = false;
             }
 
             #endregion
@@ -615,9 +619,10 @@ namespace RoadsUnited_Core
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
             uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter color.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);
-    //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
-  //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
-  //          uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
+            uIHelperGeneralSettings.AddCheckbox("Diasable optional arrows and manholes on highways.", ModLoader.config.disable_optional_arrows, EventDisableOptionalArrows);
+            //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
+            //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
+            //          uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
 
 
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);

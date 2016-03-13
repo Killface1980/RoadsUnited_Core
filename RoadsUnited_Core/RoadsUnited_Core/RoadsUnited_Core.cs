@@ -196,13 +196,13 @@ namespace RoadsUnited_Core
             }
         }
 
-        
+
 
         public static void ReplaceNetTextures()
         {
             if (ModLoader.config.texturePackPath != null)
             {
-            ModLoader.currentTexturesPath_default = Path.Combine(ModLoader.config.texturePackPath, "BaseTextures");
+                ModLoader.currentTexturesPath_default = Path.Combine(ModLoader.config.texturePackPath, "BaseTextures");
                 ModLoader.currentTexturesPath_apr_maps = Path.Combine(ModLoader.config.texturePackPath, "APRMaps");
             }
 
@@ -493,7 +493,7 @@ namespace RoadsUnited_Core
 
                             #region NExt Busways Default
 
-                            if (netInfo.name.Contains("Small Busway") && !(netInfo.name.Contains("Decoration")))
+                            if (netInfo.name.Contains("Small Busway") && !netInfo.name.Contains("Decoration"))
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Ground_Segment_MainTex.dds")))
@@ -528,7 +528,7 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_APRMap.dds")))
-                                    segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_APRMap.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_APRMap.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Elevated_APRMap.dds")))
@@ -931,9 +931,128 @@ namespace RoadsUnited_Core
             }
         }
 
+        public static void ChangeProps()
+        {
+            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+            {
+                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
 
+                if (prefab == null) continue;
+
+
+                PropInfo propInfo = prefab;
+
+
+                if ((ModLoader.config.disable_optional_arrows == true) && (propInfo.name.Equals("Road Arrow LFR") || propInfo.name.Equals("Road Arrow LR")))
+                {
+                    propInfo.m_maxRenderDistance = 0f;
+                    propInfo.m_maxScale = 0f;
+                    propInfo.m_minScale = 0f;
+                }
+
+                if ((ModLoader.config.disable_optional_arrows == false) && (propInfo.name.Equals("Road Arrow LFR") || propInfo.name.Equals("Road Arrow LR")))
+                {
+                    propInfo.m_maxRenderDistance = 1000f;
+                    propInfo.m_maxScale = 1f;
+                    propInfo.m_minScale = 1f;
+                }
+
+            }
+
+
+
+            NetCollection[] array3 = UnityEngine.Object.FindObjectsOfType<NetCollection>();
+            NetCollection[] array4 = array3;
+            for (int k = 0; k < array4.Length; k++)
+            {
+                NetCollection netCollection = array4[k];
+                bool flag6 = netCollection != null;
+                if (flag6)
+                {
+                    NetInfo[] prefabs2 = netCollection.m_prefabs;
+                    for (int l = 0; l < prefabs2.Length; l++)
+                    {
+                        NetInfo netInfo = prefabs2[l];
+                        bool flag7 = netInfo != null;
+                        if (flag7)
+                        {
+                            bool flag8 = netInfo.m_class.name.Equals("Highway");
+                            if (flag8)
+                            {
+                                NetInfo.Lane[] lanes = netInfo.m_lanes;
+                                for (int m = 0; m < lanes.Length; m++)
+                                {
+                                    NetInfo.Lane lane = lanes[m];
+                                    bool flag9 = lane != null;
+                                    if (flag9)
+                                    {
+                                        FastList<NetLaneProps.Prop> fastList = new FastList<NetLaneProps.Prop>();
+                                        NetLaneProps.Prop[] props = lane.m_laneProps.m_props;
+                                        for (int n = 0; n < props.Length; n++)
+                                        {
+                                            NetLaneProps.Prop prop = props[n];
+                                            bool flag10 = prop != null;
+                                            if (flag10)
+                                            {
+                                                if (ModLoader.config.disable_optional_arrows)
+                                                {
+                                                    bool flag11 = !prop.m_prop.name.Equals("Road Arrow F") && !prop.m_prop.name.Equals("Manhole");
+                                                    if (flag11)
+                                                    {
+                                                        fastList.Add(prop);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    bool flag12 = !prop.m_prop.name.Equals("Manhole");
+                                                    if (flag12)
+                                                    {
+                                                        fastList.Add(prop);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        lane.m_laneProps.m_props = fastList.ToArray();
+                                    }
+                                }
+                            }
+                            bool flag13 = netInfo.m_class.name.Contains("Elevated") || netInfo.m_class.name.Contains("Bridge");
+                            if (flag13)
+                            {
+                                NetInfo.Lane[] lanes2 = netInfo.m_lanes;
+                                for (int num = 0; num < lanes2.Length; num++)
+                                {
+                                    NetInfo.Lane lane2 = lanes2[num];
+                                    bool flag14 = lane2 != null && lane2.m_laneProps != null;
+                                    if (flag14)
+                                    {
+                                        FastList<NetLaneProps.Prop> fastList2 = new FastList<NetLaneProps.Prop>();
+                                        NetLaneProps.Prop[] props2 = lane2.m_laneProps.m_props;
+                                        for (int num2 = 0; num2 < props2.Length; num2++)
+                                        {
+                                            NetLaneProps.Prop prop2 = props2[num2];
+                                            bool flag15 = prop2 != null && !prop2.m_prop.name.Equals("Manhole");
+                                            if (flag15)
+                                            {
+                                                fastList2.Add(prop2);
+                                            }
+                                        }
+                                        lane2.m_laneProps.m_props = fastList2.ToArray();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+
+
+
+
 
 
 

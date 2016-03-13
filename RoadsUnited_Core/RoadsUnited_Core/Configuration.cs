@@ -13,6 +13,7 @@ namespace RoadsUnited_Core
 
         public bool use_custom_textures = true;
         public bool use_custom_colors = true;
+        public bool disable_optional_arrows = true;
 
         public int selected_pack = 0;
 

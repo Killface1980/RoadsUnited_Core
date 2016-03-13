@@ -106,7 +106,6 @@ namespace RoadsUnited_Core
                 RoadsUnited_Core.ReplaceNetTextures();
             }
 
-
             #region.RoadColorChanger
 
             if (ModLoader.config.use_custom_colors == true)
@@ -236,6 +235,9 @@ namespace RoadsUnited_Core
                 RoadColorChanger.ReplaceLodAprAtlas(currentTexturesPath_apr_maps);
             }
             #endregion
+
+
+            RoadsUnited_Core.ChangeProps();
 
         }
 

@@ -25,6 +25,8 @@ namespace RoadsUnited_Core
 
         private static Texture2D defaultmap;
 
+        private static Texture2D acimap;
+
         private static Texture2D aprmap;
 
 
@@ -124,6 +126,35 @@ namespace RoadsUnited_Core
 
 
             }
+
+
+            PropCollection[] array = UnityEngine.Object.FindObjectsOfType<PropCollection>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                PropCollection propCollection = array[i];
+                try
+                {
+                    PropInfo[] prefabs = propCollection.m_prefabs;
+                    for (int j = 0; j < prefabs.Length; j++)
+                    {
+                        PropInfo propInfo = prefabs[j];
+                        string str = propInfo.m_lodMaterialCombined.name;
+
+                        if (propInfo.m_lodMaterialCombined != null)
+                            if (propInfo.name.Contains("Road Arrow"))
+                            {
+                                if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex") != null)
+                                {
+                                    vanillaPrefabProperties.Add(str + "_prop_" + "_MainTex", propInfo.m_lodMaterialCombined.GetTexture("_MainTex") as Texture2D);
+                                    vanillaPrefabProperties.Add(str + "_prop_" + "_ACIMap", propInfo.m_lodMaterialCombined.GetTexture("_ACIMap") as Texture2D);
+                                }
+                            }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
         }
 
         public static void ApplyVanillaDictionary()
@@ -164,9 +195,6 @@ namespace RoadsUnited_Core
                 }
 
 
-
-
-
                 NetInfo.Segment[] segments = netInfo.m_segments;
                 for (int l = 0; l < segments.Length; l++)
                 {
@@ -193,6 +221,34 @@ namespace RoadsUnited_Core
                 }
 
 
+            }
+
+            PropCollection[] array = UnityEngine.Object.FindObjectsOfType<PropCollection>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                PropCollection propCollection = array[i];
+                try
+                {
+                    PropInfo[] prefabs = propCollection.m_prefabs;
+                    for (int j = 0; j < prefabs.Length; j++)
+                    {
+                        PropInfo propInfo = prefabs[j];
+                        string str = propInfo.m_lodMaterialCombined.name;
+
+                        if (propInfo.m_lodMaterialCombined != null)
+                            if (propInfo.name.Contains("Road Arrow"))
+                            {
+                                if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex") != null)
+                                {
+                                        if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_MainTex", out defaultmap)) propInfo.m_lodMaterialCombined.SetTexture("_MainTex", defaultmap);
+                                        if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_ACIMap", out acimap)) propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", acimap);
+                                    }
+                                }
+                    }
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 

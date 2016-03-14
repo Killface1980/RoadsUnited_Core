@@ -22,16 +22,20 @@ namespace RoadsUnited_Core
                     for (int j = 0; j < prefabs.Length; j++)
                     {
                         PropInfo propInfo = prefabs[j];
-                        string str = propInfo.m_material.name;
+                        string str = propInfo.m_lodMaterialCombined.name;
+
                         string text = Path.Combine(ModLoader.currentTexturesPath_default, str + ".dds");
                         string text2 = Path.Combine(ModLoader.currentTexturesPath_default, str + "-aci.dds");
+
                         if (File.Exists(text))
                         {
-                            propInfo.m_material.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(text));
+       //                     propInfo.m_material.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(text));
+                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(text));
                         }
                         if (File.Exists(text2))
                         {
-                            propInfo.m_material.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(text2));
+         //                   propInfo.m_material.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(text2));
+                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(text2));
                         }
                     }
                 }

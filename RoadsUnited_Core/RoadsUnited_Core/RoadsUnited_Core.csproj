@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="ArrowReplacer.cs" />
     <Compile Include="Configuration.cs" />
-    <None Include="Hook\Hook.cs" />
+    <Compile Include="Hook\Hook.cs" />
     <Compile Include="Hook\RedirectCallsState.cs" />
     <Compile Include="Hook\RedirectionHelper.cs" />
     <Compile Include="ModInfo.cs" />

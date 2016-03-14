@@ -13,6 +13,8 @@ namespace RoadsUnited_Core
 
     public class ModLoader : LoadingExtensionBase
     {
+        GameObject hookGo;
+        Hook4 hook;
 
         public static Configuration config;
 
@@ -86,6 +88,8 @@ namespace RoadsUnited_Core
 
             string modPath = getModPath();
 
+            hookGo = new GameObject("RoadsUnited_Core hook");
+            hook = hookGo.AddComponent<Hook4>();
 
             if (ModLoader.config.create_vanilla_dictionary == true)
             {
@@ -255,6 +259,10 @@ namespace RoadsUnited_Core
 
             RoadsUnited_Core.ApplyVanillaDictionary();
             RoadsUnited_Core.vanillaPrefabProperties.Clear();
+            hook.DisableHook();
+
+            GameObject.Destroy(hookGo);
+            hook = null;
         }
 
 

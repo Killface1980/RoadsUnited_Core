@@ -450,11 +450,11 @@ namespace RoadsUnited_Core
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
-                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
-                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;

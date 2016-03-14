@@ -420,8 +420,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")));
 
-                                if (false) // this buggy ATM
-                                {
+
                                     if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                         if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")))
                                             segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
@@ -429,7 +428,7 @@ namespace RoadsUnited_Core
                                     if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                         if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")))
                                             segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
-                                }
+                                
 
                                 segment.m_lodRenderDistance = 2500;
 
@@ -659,8 +658,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_APRMap.dds")))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_APRMap.dds")));
 
-                                if (false) // this buggy ATM
-                                {
+
                                     if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Slope"))
                                         if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")))
                                             segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")));
@@ -668,7 +666,7 @@ namespace RoadsUnited_Core
                                     if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
                                         if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")))
                                             segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")));
-                                }
+                                
 
                                 segment.m_lodRenderDistance = 2500;
 

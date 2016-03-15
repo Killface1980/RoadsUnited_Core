@@ -13,21 +13,25 @@ namespace RoadsUnited_Core
     public class RoadsUnited_Core : MonoBehaviour
 
     {
+        public static Texture2D crackRoadTex;
 
-        public static Configuration config;
-
-        private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
-
-        public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
-
-        //        public static Dictionary<string, Texture2D> currentPrefabProperties = new Dictionary<string, Texture2D>();
-
+        public static Texture2D cracksTex;
 
         private static Texture2D defaultmap;
 
         private static Texture2D acimap;
 
         private static Texture2D aprmap;
+
+        private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
+
+        public static Configuration config;
+
+        public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
+
+        //        public static Dictionary<string, Texture2D> currentPrefabProperties = new Dictionary<string, Texture2D>();
+
+
 
 
         public static Texture2D LoadTextureDDS(string fullPath)
@@ -58,8 +62,6 @@ namespace RoadsUnited_Core
 
             return texture;
         }
-
-
 
         public static void CreateVanillaDictionary()
         {
@@ -240,10 +242,10 @@ namespace RoadsUnited_Core
                             {
                                 if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex") != null)
                                 {
-                                        if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_MainTex", out defaultmap)) propInfo.m_lodMaterialCombined.SetTexture("_MainTex", defaultmap);
-                                        if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_ACIMap", out acimap)) propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", acimap);
-                                    }
+                                    if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_MainTex", out defaultmap)) propInfo.m_lodMaterialCombined.SetTexture("_MainTex", defaultmap);
+                                    if (vanillaPrefabProperties.TryGetValue(str + "_prop_" + "_ACIMap", out acimap)) propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", acimap);
                                 }
+                            }
                     }
                 }
                 catch (Exception)
@@ -252,6 +254,72 @@ namespace RoadsUnited_Core
             }
         }
 
+        public static void ApplyVanillaRoadDictionary()
+        {
+            for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+            {
+                var netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
+
+                if (netInfo == null) continue;
+
+                string prefab_road_name = netInfo.name.Replace(" ", "_").ToLowerInvariant().Trim();
+
+                NetInfo.Node[] nodes = netInfo.m_nodes;
+                for (int k = 0; k < nodes.Length; k++)
+                {
+                    NetInfo.Node node = nodes[k];
+
+                    if (!(
+                        //netInfo.m_class.name.Contains("NExt") ||
+                        netInfo.m_class.name.Contains("Heating Pipe") ||
+                        netInfo.m_class.name.Contains("Water") ||
+                        netInfo.m_class.name.Contains("Train") ||
+                        netInfo.m_class.name.Contains("Metro") ||
+                        netInfo.m_class.name.Contains("Transport") ||
+                        netInfo.m_class.name.Contains("Bus Line") ||
+                        netInfo.m_class.name.Contains("Airplane") ||
+                        netInfo.m_class.name.Contains("Ship")
+
+                        ))
+                    {
+
+                        if (node.m_nodeMaterial != null)
+                        {
+                            if (vanillaPrefabProperties.TryGetValue(prefab_road_name + "_node_" + (k) + "_nodeMaterial" + "_MainTex", out defaultmap)) node.m_nodeMaterial.SetTexture("_MainTex", defaultmap);
+                            if (vanillaPrefabProperties.TryGetValue(prefab_road_name + "_node_" + (k) + "_nodeMaterial" + "_APRMap", out aprmap)) node.m_nodeMaterial.SetTexture("_APRMap", aprmap);
+                        }
+                    }
+                }
+
+
+                NetInfo.Segment[] segments = netInfo.m_segments;
+                for (int l = 0; l < segments.Length; l++)
+                {
+                    NetInfo.Segment segment = segments[l];
+
+                    if (!(
+                        //netInfo.m_class.name.Contains("NExt") ||
+                        netInfo.m_class.name.Contains("Heating Pipe") || netInfo.m_class.name.Contains("Water") ||
+                        netInfo.m_class.name.Contains("Train") ||
+                        netInfo.m_class.name.Contains("Metro") ||
+                        netInfo.m_class.name.Contains("Transport") ||
+                        netInfo.m_class.name.Contains("Bus Line") ||
+                        netInfo.m_class.name.Contains("Airplane") ||
+                        netInfo.m_class.name.Contains("Ship")
+
+                        ))
+                    {
+                        if (segment.m_segmentMaterial != null)
+                        {
+                            if (vanillaPrefabProperties.TryGetValue(prefab_road_name + "_segment_" + (l) + "_segmentMaterial" + "_MainTex", out defaultmap)) segment.m_segmentMaterial.SetTexture("_MainTex", defaultmap);
+                            if (vanillaPrefabProperties.TryGetValue(prefab_road_name + "_segment_" + (l) + "_segmentMaterial" + "_APRMap", out aprmap)) segment.m_segmentMaterial.SetTexture("_APRMap", aprmap);
+                        }
+                    }
+                }
+
+
+            }
+        }
 
 
         public static void ReplaceNetTextures()
@@ -421,14 +489,14 @@ namespace RoadsUnited_Core
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")));
 
 
-                                    if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
-                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")))
-                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
 
-                                    if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
-                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")))
-                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
-                                
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
+
 
                                 segment.m_lodRenderDistance = 2500;
 
@@ -659,14 +727,14 @@ namespace RoadsUnited_Core
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_APRMap.dds")));
 
 
-                                    if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Slope"))
-                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")))
-                                            segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")));
+                                if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Slope"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_APRMap.dds")));
 
-                                    if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
-                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")))
-                                            segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")));
-                                
+                                if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")));
+
 
                                 segment.m_lodRenderDistance = 2500;
 
@@ -984,7 +1052,7 @@ namespace RoadsUnited_Core
             }
         }
 
-        public static void ChangeProps()
+        public static void ChangeArrowProp()
         {
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {

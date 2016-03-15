@@ -10,7 +10,7 @@ namespace RoadsUnited_Core
     {
 
 
-        public static void ReplaceLaneProp()
+        public static void ReplaceLaneArrowProp()
         {
             PropCollection[] array = UnityEngine.Object.FindObjectsOfType<PropCollection>();
             for (int i = 0; i < array.Length; i++)

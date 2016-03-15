@@ -40,7 +40,7 @@ namespace RoadsUnited_Core
 
                     RoadsUnited_Core.ApplyVanillaDictionary();
                     RoadsUnited_Core.ReplaceNetTextures();
-                    RoadsUnited_CoreArrow.ReplaceLaneProp();
+                    RoadsUnited_CoreArrow.ReplaceLaneArrowProp();
 
                     return;
                 }

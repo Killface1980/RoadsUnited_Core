@@ -714,23 +714,20 @@ namespace RoadsUnited_Core
                                         bool flag32 = flag30 != flag31;
                                         if (!flag32)
                                         {
-
 											//goto IL_E46;
 											m+=1; //instead
 											continue;
-
                                         }
+
                                         bool flag33 = flag30;
                                         if (flag33)
                                         {
                                             bool flag34 = (node4.m_connectGroup & NetInfo.ConnectGroup.OnewayStart) == NetInfo.ConnectGroup.None;
                                             if (flag34)
                                             {
-
 											//goto IL_E46;
 											m+=1; //instead
 											continue;
-
                                             }
                                         }
                                         else
@@ -738,12 +735,11 @@ namespace RoadsUnited_Core
                                             bool flag35 = (node4.m_connectGroup & NetInfo.ConnectGroup.OnewayEnd) > NetInfo.ConnectGroup.None;
                                             if (!flag35)
                                             {
-
 											//goto IL_E46;
 											m+=1; //instead
 											continue;
-
                                             }
+
                                             dataVector7.x = -dataVector7.x;
                                             dataVector7.y = -dataVector7.y;
                                         }

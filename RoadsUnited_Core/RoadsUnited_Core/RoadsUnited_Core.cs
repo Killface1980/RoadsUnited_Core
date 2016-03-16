@@ -637,7 +637,6 @@ namespace RoadsUnited_Core
 
                             #endregion
 
-
                         }
 
 
@@ -804,6 +803,66 @@ namespace RoadsUnited_Core
 
                             if (netInfo.name.Contains("Oneway"))
                             {
+
+                                #region Small Oneway
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "RoadSmallSegment")
+                                {
+                                    if (segment.m_mesh.name.Equals("SmallRoadSegmentBusSide"))
+                                    {
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusSide.dds")))
+                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusSide.dds")));
+                                    }
+
+                                    else if (segment.m_mesh.name.Equals("SmallRoadSegmentBusBoth"))
+                                    {
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusBoth.dds")))
+                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusBoth.dds")));
+                                    }
+
+                                    else if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment.dds")));
+                                }
+
+
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "SmallRoadSegmentDeco")
+                                {
+                                    if (segment.m_mesh.name.Equals("SmallRoadSegment2BusSide"))
+                                    {
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusSide.dds")))
+                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusSide.dds")));
+                                    }
+
+                                    else if (segment.m_mesh.name.Equals("SmallRoadSegment2BusBoth"))
+                                    {
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusBoth.dds")))
+                                            segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusBoth.dds")));
+                                    }
+
+                                    else if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco.dds")));
+                                }
+
+
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "small-tunnel_d")
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_small-tunnel_d.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_small-tunnel_d.dds")));
+                                }
+
+                                if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "RoadSmallElevatedSegment")
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallElevatedSegment_D.dds")))
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallElevatedSegment_D.dds")));
+                                }
+
+
+                                #endregion
+
+
+
                                 if (segment.m_mesh.name.Equals("LargeRoadSegmentBusSide"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeOnewaySegment_d_BusSide.dds")))
                                         segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeOnewaySegment_d_BusSide.dds");

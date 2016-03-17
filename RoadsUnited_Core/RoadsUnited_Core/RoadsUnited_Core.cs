@@ -768,9 +768,14 @@ namespace RoadsUnited_Core
                         if (node.m_nodeMaterial.GetTexture("_MainTex") != null)
                         {
                             string nodeMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, node.m_nodeMaterial.GetTexture("_MainTex").name + ".dds");
-                            Debug.Log(nodeMaterialTexture_name);
+                            string prefab_road_name = netInfo.name.Replace(" ", "_").ToLowerInvariant().Trim();
+
+                            if (File.Exists(prefab_road_name + "_" + nodeMaterialTexture_name))
+                                node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(prefab_road_name + "_" + nodeMaterialTexture_name));
+
                             if (File.Exists(nodeMaterialTexture_name))
                                 node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(nodeMaterialTexture_name));
+
                             node.m_lodRenderDistance = 2500;
                             node.m_lodMesh = null;
                         }
@@ -872,6 +877,9 @@ namespace RoadsUnited_Core
                                         segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeOnewaySegment_d_BusBoth.dds");
                             }
 
+
+
+
                             if (segment.m_mesh.name.Equals("SmallRoadSegmentBusSide"))
                                 if (!(netInfo.name.Contains("Bicycle")))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadSmall_D_BusSide.dds")))
@@ -898,14 +906,15 @@ namespace RoadsUnited_Core
                                 if (netInfo.name.Contains("Trees"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_BusSide.dds")))
                                         segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_BusSide.dds");
-                                    else
-                                if (netInfo.name.Contains("Bus"))
+
+                                    else if (netInfo.name.Contains("Bus"))
                                         if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusSide.dds")))
                                             segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusSide.dds");
-                                        else
-                                if (!(netInfo.name.Contains("Bicycle")))
+
+                                        else if (!(netInfo.name.Contains("Bicycle")))
                                             if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide.dds")))
                                                 segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide.dds");
+
                                 goto configsettings;
                             }
 
@@ -987,53 +996,101 @@ namespace RoadsUnited_Core
                                 (!(netInfo.name.Contains("Grass") || netInfo.name.Contains("Trees")))
                                 )
                             {
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D.dds")))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
 
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D_BusSide.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                if (segment.m_mesh.name.Equals("RoadMediumSegmentBusSide"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumSegment_d.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide_parking1.dds");
+                                }
 
+                                else if (segment.m_mesh.name.Equals("RoadMediumSegmentBusBoth"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumSegment_d.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusBoth_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusBoth_parking1.dds");
+                                }
 
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D_BusBoth.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumSegment_d.dds")))
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                }
 
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D.dds")))
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                }
                             }
 
                             if ((ModLoader.config.medium_road_grass_parking == 1) && (netInfo.name.Contains("Grass")))
                             {
-                                if ((segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                if (segment.m_mesh.name.Equals("RoadMediumSegmentBusSide"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusSide_parking1.dds");
+                                }
+                                else if (segment.m_mesh.name.Equals("RoadMediumSegmentBusBoth"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusBoth_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_BusBoth_parking1.dds");
+                                }
 
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D_BusSide.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumSegment_d.dds")))
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                }
 
-
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMedium_D_BusSide.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D.dds")))
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                }
                             }
 
                             if ((ModLoader.config.medium_road_trees_parking == 1) && (netInfo.name.Contains("Trees")))
                             {
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d.dds")))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                if (segment.m_mesh.name.Equals("RoadMediumSegmentBusSide"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumDeco_d.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_BusSide_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_BusSide_parking1.dds");
+                                }
 
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumDeco_d_BusSide.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                else if (segment.m_mesh.name.Equals("RoadMediumSegmentBusBoth"))
+                                { }
 
-                                if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumDeco_d_BusBoth.dds"))))
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMedium_D_parking1.dds");
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d.dds")))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumDeco_d_parking1.dds");
 
                             }
 
                             if (ModLoader.config.medium_road_bus_parking == 1)
                             {
-                                if ((
-                                    segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane.dds")) ||
-                                    segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusSide.dds"))
-                                    ))
+                                if (segment.m_mesh.name.Equals("RoadMediumSegmentBusSide"))
                                 {
-                                    segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_parking1.dds");
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumBusLane.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusSide_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusSide_parking1.dds");
                                 }
+                                else if (segment.m_mesh.name.Equals("RoadMediumSegmentBusBoth"))
+                                {
+                                    if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, ("RoadMediumBusLane.dds"))))
+                                        if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusBoth_parking1.dds")))
+                                            segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_BusBoth_parking1.dds");
+                                }
+
+                                else if (segmentMaterialTexture_name.Equals(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane.dds")))
+                                {
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_parking1.dds")))
+                                        segmentMaterialTexture_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadMediumBusLane_parking1.dds");
+                                }
+
                             }
 
                             if (ModLoader.config.large_road_parking == 1)

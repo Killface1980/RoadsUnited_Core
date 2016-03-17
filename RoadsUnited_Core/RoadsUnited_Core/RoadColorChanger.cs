@@ -62,6 +62,18 @@ namespace RoadsUnited_Core
                     if (netInfo.m_color != null)
                         netInfo.m_color = new Color(brightness, brightness, brightness);
                 }
+
+                if (netInfo.name.Equals(prefab_road_name + " Elevated"))
+                {
+                    if (netInfo.m_color != null)
+                        netInfo.m_color = new Color(brightness, brightness, brightness);
+                }
+
+                if (netInfo.name.Equals(prefab_road_name + " Bridge"))
+                {
+                    if (netInfo.m_color != null)
+                        netInfo.m_color = new Color(brightness, brightness, brightness);
+                }
             }
 
         }

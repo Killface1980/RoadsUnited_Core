@@ -330,17 +330,18 @@ namespace RoadsUnited_Core
  //           uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckUseCrackedRoads);
  //           uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventCrackIntensity));
 
+            // Parking spots deactivated for now. Should use props instead.
 
-            UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
-            uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Medium roads grass", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_grass_parking, EventMediumRoadGrassParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Medium roads trees", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_trees_parking, EventMediumRoadTreesParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Medium roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_bus_parking, EventMediumRoadBusParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Large roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_parking, EventLargeRoadParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
-            uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
-            uIHelperParkingSpaceSettings.AddSpace(10);
+            // UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
+            // uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads grass", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_grass_parking, EventMediumRoadGrassParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads trees", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_trees_parking, EventMediumRoadTreesParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_bus_parking, EventMediumRoadBusParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Large roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_parking, EventLargeRoadParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
+            // uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
+            // uIHelperParkingSpaceSettings.AddSpace(10);
 
 
             UIHelperBase uIHelperSmallRoads = helper.AddGroup("Small Roads");

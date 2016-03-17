@@ -235,6 +235,26 @@ namespace RoadsUnited_Core
                 RoadColorChanger.ChangeColorNetExt(ModLoader.config.highway_brightness, "NExtHighway6L", ModLoader.modPath);
                 RoadColorChanger.ChangeColorNetExt(ModLoader.config.highway_brightness, "NExtHighwayTunnel6LTunnel", ModLoader.modPath);
 
+
+
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_brightness, "Small Busway", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_decoration, "Small Busway Decoration Grass", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_decoration, "Small Busway Decoration Trees", ModLoader.modPath);
+
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_brightness, "Small Busway Oneway", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_decoration, "Small Busway Oneway Decoration Grass", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.small_road_decoration, "Small Busway Oneway Decoration Trees", ModLoader.modPath);
+
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_brightness, "Large Road With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_decoration_brightness, "Large Road Decoration Grass With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_decoration_brightness, "Large Road Decoration Trees With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_brightness, "Large Road Elevated With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_brightness, "Large Road Bridge With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_brightness, "Large Road Tunnel With Bus Lanes", ModLoader.modPath);
+                RoadColorChanger.ChangeColor(ModLoader.config.large_road_brightness, "Large Road Slope With Bus Lanes", ModLoader.modPath);
+
+
+
                 RoadColorChanger.ReplaceLodAprAtlas(currentTexturesPath_default);
             }
             #endregion
@@ -243,10 +263,6 @@ namespace RoadsUnited_Core
             RoadsUnited_Core.ChangeArrowProp();
 
             RoadsUnited_CoreArrow.ReplaceLaneArrowProp();
-
- //           ReplaceLaneProp("Oneway Road", "Bus Stop Small", "NC_BusStop_small_Typ2.NC_BusStop_small_Typ2_Data");
-  //          ReplaceLaneProp("Basic Road Decoration Trees", "Bus Stop Large", "NC_BusStop_small_Typ3.NC_BusStop_small_Typ3_Data");
-  //          ReplaceLaneProp("Basic Road Decoration Grass", "Bus Stop Large", "NC_BusStop_small_Typ4.NC_BusStop_small_Typ4_Data");
 
         }
 

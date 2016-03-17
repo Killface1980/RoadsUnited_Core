@@ -20,12 +20,12 @@ namespace RoadsUnited_Core
 
         public int basic_road_parking = 0;
         public int medium_road_parking = 0;
-        public int medium_road_grass_parking = 1;
-        public int medium_road_trees_parking = 1;
-        public int medium_road_bus_parking = 1;
+        public int medium_road_grass_parking = 0;
+        public int medium_road_trees_parking = 0;
+        public int medium_road_bus_parking = 0;
         public int large_road_parking = 0;
-        public int large_road_bus_parking = 1;
-        public int large_oneway_parking = 1;
+        public int large_road_bus_parking = 0;
+        public int large_oneway_parking = 0;
 
         public float ToolbarButtonX;
         public float ToolbarButtonY;

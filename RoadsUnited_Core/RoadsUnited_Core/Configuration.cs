@@ -43,9 +43,9 @@ namespace RoadsUnited_Core
 
         public float large_road_decoration_brightness = 0.375f;
 
-        public float highway_brightness = 0.5f;
+        public float highway_brightness = 0.375f;
 
-        public float highway_national_brightness = 0.5f;
+        public float highway_national_brightness = 0.375f;
 
         public bool ShowToolbarButton = true;
         public bool FixateToolbarButton = false;

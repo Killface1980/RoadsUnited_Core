@@ -262,7 +262,7 @@ namespace RoadsUnited_Core
 
             RoadsUnited_CoreProps.ChangeArrowProp();
 
-            RoadsUnited_CoreProps.ReplaceLaneArrowProp();
+            RoadsUnited_CoreProps.ReplacePropTextures();
 
         }
 

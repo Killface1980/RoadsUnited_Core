@@ -42,10 +42,12 @@ namespace RoadsUnited_Core
 
                     RoadsUnited_Core.ReplaceNetTextures();
 
-                    if (ModLoader.config.selected_pack > 0)
-
+                    if (ModLoader.config.selected_pack == 0)
                     {
-                        RoadsUnited_CoreProps.ReplaceLaneArrowProp();
+                    }
+                    else
+                    {
+                        RoadsUnited_CoreProps.ReplacePropTextures();
                     }
 
                     return;

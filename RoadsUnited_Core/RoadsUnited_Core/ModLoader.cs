@@ -260,9 +260,9 @@ namespace RoadsUnited_Core
             #endregion
 
 
-            RoadsUnited_Core.ChangeArrowProp();
+            RoadsUnited_CoreProps.ChangeArrowProp();
 
-            RoadsUnited_CoreArrow.ReplaceLaneArrowProp();
+            RoadsUnited_CoreProps.ReplaceLaneArrowProp();
 
         }
 

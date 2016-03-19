@@ -179,7 +179,7 @@ namespace RoadsUnited_Core
         {
             ModLoader.config.disable_optional_arrows = c;
             ModLoader.SaveConfig();
-            RoadsUnited_Core.ChangeArrowProp();
+            RoadsUnited_CoreProps.ChangeArrowProp();
         }
 
 

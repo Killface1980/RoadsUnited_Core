@@ -48,7 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrowReplacer.cs" />
+    <Compile Include="PropManager.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Hook\Hook.cs" />
     <Compile Include="Hook\RedirectCallsState.cs" />

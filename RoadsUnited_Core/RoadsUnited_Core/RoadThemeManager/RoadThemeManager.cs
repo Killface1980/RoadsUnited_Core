@@ -39,8 +39,14 @@ namespace RoadsUnited_Core
                     Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
 
                     RoadsUnited_Core.ApplyVanillaDictionary();
+
                     RoadsUnited_Core.ReplaceNetTextures();
-                    RoadsUnited_CoreArrow.ReplaceLaneArrowProp();
+
+                    if (ModLoader.config.selected_pack > 0)
+
+                    {
+                        RoadsUnited_CoreProps.ReplaceLaneArrowProp();
+                    }
 
                     return;
                 }

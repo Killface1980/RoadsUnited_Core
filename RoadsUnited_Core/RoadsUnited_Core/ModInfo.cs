@@ -318,7 +318,7 @@ namespace RoadsUnited_Core
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
             uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter color.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);
-            uIHelperGeneralSettings.AddCheckbox("Diasable optional arrows and manholes on highways.", ModLoader.config.disable_optional_arrows, EventDisableOptionalArrows);
+            uIHelperGeneralSettings.AddCheckbox("Disable optional arrows and manholes on highways.", ModLoader.config.disable_optional_arrows, EventDisableOptionalArrows);
             //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
             //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
             //          uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
@@ -359,7 +359,7 @@ namespace RoadsUnited_Core
 
             UIHelperBase uIHelperHighways = helper.AddGroup("Highways");
             uIHelperHighways.AddSlider("Standard", 0, 1f, 0.0625f, ModLoader.config.highway_brightness, new OnValueChanged(EventHighwayBrightness));
-            uIHelperHighways.AddSlider("NExt NAtional Road", 0, 1f, 0.0625f, ModLoader.config.highway_national_brightness, new OnValueChanged(EventHighwayNationalBrightness));
+            uIHelperHighways.AddSlider("NExt National Road", 0, 1f, 0.0625f, ModLoader.config.highway_national_brightness, new OnValueChanged(EventHighwayNationalBrightness));
 
 
 

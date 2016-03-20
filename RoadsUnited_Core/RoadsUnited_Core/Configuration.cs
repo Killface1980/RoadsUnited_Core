@@ -15,7 +15,6 @@ namespace RoadsUnited_Core
         public bool use_custom_colors = true;
         public bool disable_optional_arrows = true;
 
-
         public int selected_pack = 0;
 
         public int basic_road_parking = 0;
@@ -30,21 +29,18 @@ namespace RoadsUnited_Core
         public float ToolbarButtonX;
         public float ToolbarButtonY;
 
-
+        //Small Roads
         public float small_road_brightness = 0.4f;
-
         public float small_road_decoration = 0.4f;
-
+        //Medium Rpads
         public float medium_road_brightness = 0.4f;
-
         public float medium_road_decoration_brightness = 0.4f;
-
+        //Large Roads
         public float large_road_brightness = 0.4f;
-
         public float large_road_decoration_brightness = 0.4f;
-
+        //Highways
         public float highway_brightness = 0.4f;
-
+        //Rural/State Highway
         public float highway_national_brightness = 0.4f;
 
         public bool ShowToolbarButton = true;
@@ -91,5 +87,4 @@ namespace RoadsUnited_Core
             return result;
         }
     }
-
 }

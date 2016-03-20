@@ -1,4 +1,4 @@
-﻿using ColossalFramework;
+using ColossalFramework;
 using ColossalFramework.UI;
 using ICities;
 using System;
@@ -13,7 +13,6 @@ namespace RoadsUnited_Core
         public const UInt64 workshop_id = 633547552uL;
 
         public const String VersionName = "Alpha";
-
 
         public string Name
         {
@@ -32,8 +31,6 @@ namespace RoadsUnited_Core
         }
 
         #region Small road config
-
-
         private void EventSmallRoadBrightness(float c)
         {
             ModLoader.config.small_road_brightness = c;
@@ -45,29 +42,20 @@ namespace RoadsUnited_Core
             ModLoader.config.small_road_decoration = c;
             ModLoader.SaveConfig();
         }
-
-
-        
         #endregion
-
-
         #region Medium roads config
-
         private void EventMediumRoadBrightness(float c)
         {
             ModLoader.config.medium_road_brightness = c;
             ModLoader.SaveConfig();
         }
 
-
         private void EventMediumRoadDecorationBrightness(float c)
         {
             ModLoader.config.medium_road_decoration_brightness = c;
             ModLoader.SaveConfig();
         }       
-
         #endregion
-
         #region Large road config
 
         private void EventLargeRoadBrightness(float c)
@@ -75,21 +63,14 @@ namespace RoadsUnited_Core
             ModLoader.config.large_road_brightness = c;
             ModLoader.SaveConfig();
         }
-
-
-
+        
         private void EventLargeRoadDecorationBrightness(float c)
         {
             ModLoader.config.large_road_decoration_brightness = c;
             ModLoader.SaveConfig();
         }
-
-
         #endregion
-
-
         #region Highway config
-
         private void EventHighwayBrightness(float c)
         {
             ModLoader.config.highway_brightness = c;
@@ -101,11 +82,8 @@ namespace RoadsUnited_Core
             ModLoader.config.highway_national_brightness = c;
             ModLoader.SaveConfig();
         }
-
         #endregion
-
         #region Parking marking
-
         private void EventSmallRoadParking(int c)
         {
             ModLoader.config.basic_road_parking = c;
@@ -169,10 +147,7 @@ namespace RoadsUnited_Core
             RoadsUnited_Core.ApplyVanillaRoadDictionary();
             RoadsUnited_Core.ReplaceNetTextures();
         }
-
         #endregion
-
-
         #region Config stuff
 
         private void EventDisableOptionalArrows(bool c)
@@ -181,7 +156,6 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
             RoadsUnited_CoreProps.ChangeArrowProp();
         }
-
 
         private void EventCheckCreateVanillaDictionary(bool c)
         {
@@ -201,7 +175,6 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
 
-
         private void EventReloadTextures()
         {
             RoadsUnited_Core.ApplyVanillaDictionary();
@@ -216,43 +189,23 @@ namespace RoadsUnited_Core
 
             ModLoader.SaveConfig();
         }
-
-
         #endregion
-
-
         #region RoadThemeDropdownMenu
-
         public static UICheckBox checkbox = null;
-
         public static UICheckBox checkbox2 = null;
-
         public static UIDropDown dropdown = null;
-
         public static UIPanel panel1 = null;
-
-        //        public static UIPanel panel2 = null;
-
+        //public static UIPanel panel2 = null;
         public static UITextField infoText = null;
-
         public static UITextField infoText1 = null;
-
         public static List<string> packNames;
-
-
         public static List<string> filteredPackNames;
-
         public static List<RoadThemePack> packs;
-
         public static int selectedPackID = 0;
-
         #endregion
-
         public void OnSettingsUI(UIHelperBase helper)
         {
             Debug.Log("Settings initializing");
-
-
             ModLoader.config = Configuration.Deserialize(ModLoader.configFile);
             if (ModLoader.config == null)
             {
@@ -261,14 +214,11 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
             Debug.Log("Config loaded.");
 
-
             #region RoadThemSelector
-
             RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
             RoadsUnited_CoreMod.packNames = new List<string>();
             RoadsUnited_CoreMod.packNames.Add("Vanilla");
-            RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs
-                                                   select pack.themeName);
+            RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs select pack.themeName);
             RoadsUnited_CoreMod.filteredPackNames = new List<string>();
             RoadsUnited_CoreMod.filteredPackNames = RoadsUnited_CoreMod.packNames;
 
@@ -289,49 +239,39 @@ namespace RoadsUnited_Core
                     ModLoader.config.use_custom_textures = true;
                     ModLoader.config.selected_pack = selectedIndex;
                     ModLoader.SaveConfig();
-                    //                  RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
-                    //                  Debug.Log("Got description");
-
+                    //RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
+                    //Debug.Log("Got description");
                     Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
                     Debug.Log("Set active pack");
                     ModLoader.SaveConfig();
-
-
-                    //                  RoadsUnited_CoreMod.panel2.isVisible = true;
+                    //RoadsUnited_CoreMod.panel2.isVisible = true;
                 }
                 else
                 {
                     Singleton<RoadThemeManager>.instance.ActivePack = null;
-                    //                    RoadsUnited_CoreMod.panel2.isVisible = false;
+                    //RoadsUnited_CoreMod.panel2.isVisible = false;
                 }
                 RoadsUnited_CoreMod.selectedPackID = selectedIndex;
             });
             RoadsUnited_CoreMod.dropdown.width = 600f;
-
             if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
             {
-                //               RoadsUnited_CoreMod.panel2.isVisible = false;
+                //RoadsUnited_CoreMod.panel2.isVisible = false;
             }
-
             #endregion
 
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
-            //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
+            //uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
             uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter color.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);
             uIHelperGeneralSettings.AddCheckbox("Disable optional arrows and manholes on highways.", ModLoader.config.disable_optional_arrows, EventDisableOptionalArrows);
-            //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
-            //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
-            //          uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
-
-
+            //uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
+            //uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
+            //uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);
-
- //           UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
- //           uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckUseCrackedRoads);
- //           uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventCrackIntensity));
-
+            //UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
+            //uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckUseCrackedRoads);
+            //uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventCrackIntensity));
             // Parking spots deactivated for now. Should use props instead.
-
             UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
             uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
             uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
@@ -342,12 +282,10 @@ namespace RoadsUnited_Core
             uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
             uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
             uIHelperParkingSpaceSettings.AddSpace(10);
-
-
+            
             UIHelperBase uIHelperSmallRoads = helper.AddGroup("Small Roads");
             uIHelperSmallRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_brightness, new OnValueChanged(EventSmallRoadBrightness));
             uIHelperSmallRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_decoration, new OnValueChanged(EventSmallRoadDecorationBrightness));
-
 
             UIHelperBase uIHelperMediumRoads = helper.AddGroup("Medium Roads");
             uIHelperMediumRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_brightness, new OnValueChanged(EventMediumRoadBrightness));
@@ -360,14 +298,7 @@ namespace RoadsUnited_Core
             UIHelperBase uIHelperHighways = helper.AddGroup("Highways");
             uIHelperHighways.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.highway_brightness, new OnValueChanged(EventHighwayBrightness));
             uIHelperHighways.AddSlider("NExt National Road", 0.2f, 0.8f, 0.05f, ModLoader.config.highway_national_brightness, new OnValueChanged(EventHighwayNationalBrightness));
-
-
-
-
         }
-
-
     }
-
 }
 

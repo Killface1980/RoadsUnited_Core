@@ -10,11 +10,8 @@ namespace RoadsUnited_Core
 {
     public class Hook4 : MonoBehaviour
     {
-
         public bool hookEnabled = false;
-
         private Dictionary<MethodInfo, RedirectCallsState> redirects = new Dictionary<MethodInfo, RedirectCallsState>();
-
         public static Material invertedBridgeMat;
 
         public void Update()
@@ -28,7 +25,6 @@ namespace RoadsUnited_Core
 
         public void EnableHook()
         {
-
             var allFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
             var method = typeof(NetSegment).GetMethods(allFlags).Single(c => c.Name == "RenderInstance" && c.GetParameters().Length == 3);
             redirects.Add(method, RedirectionHelper.RedirectCalls(method, typeof(Hook4).GetMethod("RenderInstanceSegment", allFlags)));
@@ -53,7 +49,6 @@ namespace RoadsUnited_Core
             }
             foreach (var kvp in redirects)
             {
-
                 RedirectionHelper.RevertRedirect(kvp.Key, kvp.Value);
             }
             redirects.Clear();
@@ -78,7 +73,6 @@ namespace RoadsUnited_Core
             result = null;
             return result;
         }
-
 
         private void RefreshJunctionData(NetNode netnode, ushort nodeID, NetInfo info, uint instanceIndex)
         {
@@ -491,12 +485,8 @@ namespace RoadsUnited_Core
                                             bool flag13 = flag10 == flag12;
                                             if (flag13)
 											{
-
-												//goto IL_440;
-												//using the += operator removes the IL_440: goto call. goto is trouble as it makes it harder to track bugs.
-												i+=1; //the replacement code
-												continue;//still useful
-
+												i+=1;
+												continue;
                                             }
                                         }
                                         bool flag14 = flag10;
@@ -505,12 +495,8 @@ namespace RoadsUnited_Core
                                             bool flag15 = (node.m_connectGroup & NetInfo.ConnectGroup.OnewayStart) == NetInfo.ConnectGroup.None;
                                             if (flag15)
                                             {
-
-											//goto IL_440;
-											//using the += operator removes the IL_440: goto call. goto is trouble as it makes it harder to track bugs.
-											i+=1; //the replacement code
-											continue;//still useful
-
+											i+=1;
+											continue;
                                             }
                                         }
                                         else
@@ -518,15 +504,11 @@ namespace RoadsUnited_Core
                                             bool flag16 = (node.m_connectGroup & NetInfo.ConnectGroup.OnewayEnd) > NetInfo.ConnectGroup.None;
                                             if (!flag16)
                                             {
-
-											//goto IL_440;
-											//using the += operator removes the IL_440: goto call. goto is trouble as it makes it harder to track bugs.
-											i+=1; //the replacement code
-											continue;//still useful
+											i+=1;
+											continue;
                                             }
                                             dataVector2.x = -dataVector2.x;
                                             dataVector2.y = -dataVector2.y;
-
                                         }
                                     }
                                     instance2.m_materialBlock.Clear();
@@ -547,14 +529,8 @@ namespace RoadsUnited_Core
                                     var_30_3FE_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(node.m_nodeMesh, data.m_position, data.m_rotation, node.m_nodeMaterial, node.m_layer, null, 0, instance2.m_materialBlock);
                                 }
-								//The following IL_440: call flags as an error w/vs 2013
-								//using the += operator removes the unnecessary extra code
-							//IL_440:
-								i+=1; //the replacement code
-                                //num = i + 1;
-								//i=num;
-                                continue;//still useful
-								//goto IL_440;
+								i+=1;
+                                continue;
                             }
                         }
                     }
@@ -714,8 +690,7 @@ namespace RoadsUnited_Core
                                         bool flag32 = flag30 != flag31;
                                         if (!flag32)
                                         {
-											//goto IL_E46;
-											m+=1; //instead
+											m+=1;
 											continue;
                                         }
 
@@ -725,8 +700,7 @@ namespace RoadsUnited_Core
                                             bool flag34 = (node4.m_connectGroup & NetInfo.ConnectGroup.OnewayStart) == NetInfo.ConnectGroup.None;
                                             if (flag34)
                                             {
-											//goto IL_E46;
-											m+=1; //instead
+											m+=1;
 											continue;
                                             }
                                         }
@@ -735,8 +709,7 @@ namespace RoadsUnited_Core
                                             bool flag35 = (node4.m_connectGroup & NetInfo.ConnectGroup.OnewayEnd) > NetInfo.ConnectGroup.None;
                                             if (!flag35)
                                             {
-											//goto IL_E46;
-											m+=1; //instead
+											m+=1;
 											continue;
                                             }
 
@@ -762,17 +735,8 @@ namespace RoadsUnited_Core
                                     var_30_E04_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(node4.m_nodeMesh, data.m_position, data.m_rotation, node4.m_nodeMaterial, node4.m_layer, null, 0, instance5.m_materialBlock);
 								}
-
-								//goto IL_440;
-								//same as the last with IL_440:
-								//goto calls are trouble (it makes it harder to track bugs.)
-								m+=1; //the replacement code
+								m+=1;
 								continue;
-								//IL_E46:
-								//num = m + 1;
-								//m = num;
-								//continue;
-								//goto IL_E46;
                             }
                         }
                     }

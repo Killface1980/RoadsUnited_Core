@@ -1,4 +1,4 @@
-﻿using ColossalFramework.IO;
+using ColossalFramework.IO;
 using ColossalFramework.Steamworks;
 using ICities;
 using System.IO;
@@ -9,8 +9,6 @@ using ColossalFramework.Plugins;
 
 namespace RoadsUnited_Core
 {
-
-
     public class ModLoader : LoadingExtensionBase
     {
         GameObject hookGo;
@@ -51,52 +49,42 @@ namespace RoadsUnited_Core
 
         public static string modPath = getModPath();
 
-
-
         public static string currentTexturesPath_default = "None";
-
-
-
-
-
-
+        //New Path Variable to accomodate addition folders as needed
+        //TODO: Implement
+        //public static string Cortexiphan_Base = "None";
+        //public static string Cortexiphan_NExt = "None";
+        //public static string Cortexiphan_Props = "None";
+        /* With this setup, more flexibility is allowable in the mod folder 
+        *  and organization
+        *
+        *
+        */
 
         public RoadsUnited_Core textureManager;
-
-
+        
         public override void OnCreated(ILoading loading)
         {
             base.OnCreated(loading);
-
             config = Configuration.Deserialize(configFile);
-
-
-
             if (config == null)
             {
                 config = new Configuration();
             }
             SaveConfig();
-
-
         }
-
 
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
-
             string modPath = getModPath();
-
             hookGo = new GameObject("RoadsUnited_Core hook");
             hook = hookGo.AddComponent<Hook4>();
-
             if (ModLoader.config.create_vanilla_dictionary == true)
             {
                 bool isEmpty;
                 using (var dictionaryEnum = RoadsUnited_Core.vanillaPrefabProperties.GetEnumerator())
                     isEmpty = !dictionaryEnum.MoveNext();
-
                 if (isEmpty)
                 {
                     RoadsUnited_Core.CreateVanillaDictionary();
@@ -266,23 +254,16 @@ namespace RoadsUnited_Core
 
         }
 
-
-
-
         public override void OnLevelUnloading()
         {
             base.OnLevelUnloading();
-
-
             RoadsUnited_Core.ApplyVanillaDictionary();
             RoadsUnited_Core.vanillaPrefabProperties.Clear();
             hook.DisableHook();
-
             GameObject.Destroy(hookGo);
             hook = null;
         }
-
-
+        
         public static void SaveConfig()
         {
             Configuration.Serialize(ModLoader.configFile, ModLoader.config);
@@ -293,9 +274,6 @@ namespace RoadsUnited_Core
 
         }
 
-
-
-
 #if Debug
         public void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
         {
@@ -303,8 +281,4 @@ namespace RoadsUnited_Core
         } 
 #endif
     }
-
-
 }
-
-

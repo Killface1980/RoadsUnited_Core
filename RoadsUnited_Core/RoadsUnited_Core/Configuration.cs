@@ -31,21 +31,21 @@ namespace RoadsUnited_Core
         public float ToolbarButtonY;
 
 
-        public float small_road_brightness = 0.375f;
+        public float small_road_brightness = 0.4f;
 
-        public float small_road_decoration = 0.375f;
+        public float small_road_decoration = 0.4f;
 
-        public float medium_road_brightness = 0.375f;
+        public float medium_road_brightness = 0.4f;
 
-        public float medium_road_decoration_brightness = 0.375f;
+        public float medium_road_decoration_brightness = 0.4f;
 
-        public float large_road_brightness = 0.375f;
+        public float large_road_brightness = 0.4f;
 
-        public float large_road_decoration_brightness = 0.375f;
+        public float large_road_decoration_brightness = 0.4f;
 
-        public float highway_brightness = 0.375f;
+        public float highway_brightness = 0.4f;
 
-        public float highway_national_brightness = 0.375f;
+        public float highway_national_brightness = 0.4f;
 
         public bool ShowToolbarButton = true;
         public bool FixateToolbarButton = false;

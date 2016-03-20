@@ -332,34 +332,34 @@ namespace RoadsUnited_Core
 
             // Parking spots deactivated for now. Should use props instead.
 
-            // UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
-            // uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads grass", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_grass_parking, EventMediumRoadGrassParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads trees", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_trees_parking, EventMediumRoadTreesParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Medium roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_bus_parking, EventMediumRoadBusParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Large roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_parking, EventLargeRoadParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
-            // uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
-            // uIHelperParkingSpaceSettings.AddSpace(10);
+            UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
+            uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Medium roads grass", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_grass_parking, EventMediumRoadGrassParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Medium roads trees", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_trees_parking, EventMediumRoadTreesParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Medium roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_bus_parking, EventMediumRoadBusParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Large roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_parking, EventLargeRoadParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
+            uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
+            uIHelperParkingSpaceSettings.AddSpace(10);
 
 
             UIHelperBase uIHelperSmallRoads = helper.AddGroup("Small Roads");
-            uIHelperSmallRoads.AddSlider("Standard", 0, 1f, 0.0625f, ModLoader.config.small_road_brightness, new OnValueChanged(EventSmallRoadBrightness));
-            uIHelperSmallRoads.AddSlider("Decoration", 0, 1f, 0.0625f, ModLoader.config.small_road_decoration, new OnValueChanged(EventSmallRoadDecorationBrightness));
+            uIHelperSmallRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_brightness, new OnValueChanged(EventSmallRoadBrightness));
+            uIHelperSmallRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_decoration, new OnValueChanged(EventSmallRoadDecorationBrightness));
 
 
             UIHelperBase uIHelperMediumRoads = helper.AddGroup("Medium Roads");
-            uIHelperMediumRoads.AddSlider("Standard", 0, 1f, 0.0625f, ModLoader.config.medium_road_brightness, new OnValueChanged(EventMediumRoadBrightness));
-            uIHelperMediumRoads.AddSlider("Decoration", 0, 1f, 0.0625f, ModLoader.config.medium_road_decoration_brightness, new OnValueChanged(EventMediumRoadDecorationBrightness));
+            uIHelperMediumRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_brightness, new OnValueChanged(EventMediumRoadBrightness));
+            uIHelperMediumRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_decoration_brightness, new OnValueChanged(EventMediumRoadDecorationBrightness));
 
             UIHelperBase uIHelperLargeRoads = helper.AddGroup("Large Roads");
-            uIHelperLargeRoads.AddSlider("Standard", 0, 1f, 0.0625f, ModLoader.config.large_road_brightness, new OnValueChanged(EventLargeRoadBrightness));
-            uIHelperLargeRoads.AddSlider("Decoration", 0, 1f, 0.0625f, ModLoader.config.large_road_decoration_brightness, new OnValueChanged(EventLargeRoadDecorationBrightness));
+            uIHelperLargeRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.large_road_brightness, new OnValueChanged(EventLargeRoadBrightness));
+            uIHelperLargeRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.large_road_decoration_brightness, new OnValueChanged(EventLargeRoadDecorationBrightness));
 
             UIHelperBase uIHelperHighways = helper.AddGroup("Highways");
-            uIHelperHighways.AddSlider("Standard", 0, 1f, 0.0625f, ModLoader.config.highway_brightness, new OnValueChanged(EventHighwayBrightness));
-            uIHelperHighways.AddSlider("NExt National Road", 0, 1f, 0.0625f, ModLoader.config.highway_national_brightness, new OnValueChanged(EventHighwayNationalBrightness));
+            uIHelperHighways.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.highway_brightness, new OnValueChanged(EventHighwayBrightness));
+            uIHelperHighways.AddSlider("NExt National Road", 0.2f, 0.8f, 0.05f, ModLoader.config.highway_national_brightness, new OnValueChanged(EventHighwayNationalBrightness));
 
 
 

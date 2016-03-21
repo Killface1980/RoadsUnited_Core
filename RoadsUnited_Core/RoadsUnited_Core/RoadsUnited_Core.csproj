@@ -48,7 +48,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrowReplacer.cs" />
     <Compile Include="PropManager.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Hook\Hook.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="RoadThemeManager\RoadThemeManager.cs" />
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
     <Compile Include="RoadThemeManager\RoadThemesUtil.cs" />
-    <Compile Include="RoadsUnited_CorePropsError.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

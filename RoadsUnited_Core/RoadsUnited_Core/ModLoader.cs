@@ -50,16 +50,7 @@ namespace RoadsUnited_Core
         public static string modPath = getModPath();
 
         public static string currentTexturesPath_default = "None";
-        //New Path Variable to accomodate addition folders as needed
-        //TODO: Implement
-        //public static string Cortexiphan_Base = "None";
-        //public static string Cortexiphan_NExt = "None";
-        //public static string Cortexiphan_Props = "None";
-        /* With this setup, more flexibility is allowable in the mod folder 
-        *  and organization
-        *
-        *
-        */
+
 
         public RoadsUnited_Core textureManager;
         

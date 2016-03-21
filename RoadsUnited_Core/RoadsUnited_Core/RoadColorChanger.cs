@@ -1,4 +1,4 @@
-﻿using ColossalFramework;
+using ColossalFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,6 @@ namespace RoadsUnited_Core
     public class RoadColorChanger : MonoBehaviour
     {
         public static Configuration config;
-
         public static void ReplaceLodAprAtlas(string dir)
         {
             Texture2D texture2D = new Texture2D(Singleton<NetManager>.instance.m_lodAprAtlas.width, Singleton<NetManager>.instance.m_lodAprAtlas.height);
@@ -32,19 +31,12 @@ namespace RoadsUnited_Core
             Singleton<NetManager>.instance.m_lodAprAtlas = texture2D;
         }
 
- 
-
-
         public static void ChangeColor(float brightness, string prefab_road_name, string TextureDir)
         {
-
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
             {
                 var netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
-
                 if (netInfo == null) continue;
-
-
                 if (netInfo.name.Equals(prefab_road_name))
                 {
                     if (netInfo.m_color != null)
@@ -75,11 +67,7 @@ namespace RoadsUnited_Core
                         netInfo.m_color = new Color(brightness, brightness, brightness);
                 }
             }
-
         }
-
-
-
         // RoadsUnited.RoadColourChanger
         public static void ChangeColorNetExt(float brightness, string Prefab_Class_Name, string TextureDir)
         {
@@ -88,8 +76,6 @@ namespace RoadsUnited_Core
                 var netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
 
                 if (netInfo == null) continue;
-
-
                 if (netInfo.m_class.name.Contains(Prefab_Class_Name))
                 {
                     if (netInfo.m_color != null)

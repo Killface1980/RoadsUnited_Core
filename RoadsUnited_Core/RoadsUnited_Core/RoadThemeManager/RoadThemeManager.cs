@@ -9,16 +9,8 @@ namespace RoadsUnited_Core
 {
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
-
         public bool isLoaded;
-
-
-
-
         public RoadThemePack activePack;
-
-
-
 
         public RoadThemePack ActivePack
         {
@@ -33,15 +25,11 @@ namespace RoadsUnited_Core
                 {
                     ModLoader.config.texturePackPath = Singleton<RoadThemeManager>.instance.activePack.packPath;
                     ModLoader.SaveConfig();
-//                    ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
-//                    ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "APRMaps");
-
+                    //ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
+                    //ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "APRMaps");
                     Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
-
                     RoadsUnited_Core.ApplyVanillaDictionary();
-
                     RoadsUnited_Core.ReplaceNetTextures();
-
                     if (ModLoader.config.selected_pack == 0)
                     {
                     }
@@ -49,18 +37,14 @@ namespace RoadsUnited_Core
                     {
                         RoadsUnited_CoreProps.ReplacePropTextures();
                     }
-
                     return;
                 }
-
             }
         }
-
 
         public List<RoadThemePack> GetAvailablePacks()
         {
             List<RoadThemePack> list = new List<RoadThemePack>();
-
             foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
                 if (current.isEnabled)
@@ -81,9 +65,7 @@ namespace RoadsUnited_Core
                     }
                 }
             }
-
             return list;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using ColossalFramework;
+using ColossalFramework;
 using System;
 using System.IO;
 using System.Xml.Serialization;
@@ -9,12 +9,9 @@ namespace RoadsUnited_Core
     public class RoadThemePack
     {
         public string themeName;
-
         public string themeDescription;
-
         [XmlIgnore]
         public string packPath;
-
 
         public RoadThemePack()
         {
@@ -27,11 +24,9 @@ namespace RoadsUnited_Core
             this.packPath = packPath;
         }
 
-
         public void OnPostDeserialize()
         {
         }
-
 
         public static RoadThemePack Deserialize(string filePath)
         {
@@ -47,15 +42,10 @@ namespace RoadsUnited_Core
             }
             catch (Exception ex)
             {
-
                 Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message.ToString()));
-
                 result = null;
             }
             return result;
         }
-
-
     }
-
 }

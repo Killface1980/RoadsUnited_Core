@@ -23,7 +23,6 @@ namespace RoadsUnited_Core
             }
             return (Q)((object)fieldInfo.GetValue(o));
         }
-
         public static void WritePrivate<T, Q>(T o, string fieldName, object value)
         {
             FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -40,7 +39,6 @@ namespace RoadsUnited_Core
             }
             fieldInfo.SetValue(o, value);
         }
-
 
         public static string GetDescription(RoadThemePack pack)
         {

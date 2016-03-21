@@ -1,4 +1,4 @@
-﻿using ICities;
+using ICities;
 using System.IO;
 using UnityEngine;
 using RoadsUnited_Core;

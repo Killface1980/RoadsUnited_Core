@@ -175,13 +175,19 @@ namespace RoadsUnited_Core
 
         #region Config stuff
 
-        private void EventDisableOptionalArrows(bool c)
+        private void EventDisableOptionalArrow_LFR(bool c)
         {
-            ModLoader.config.disable_optional_arrows = c;
+            ModLoader.config.disable_optional_arrow_lfr = c;
             ModLoader.SaveConfig();
             RoadsUnited_CoreProps.ChangeArrowProp();
         }
 
+        private void EventDisableOptionalArrow_LR(bool c)
+        {
+            ModLoader.config.disable_optional_arrow_lr = c;
+            ModLoader.SaveConfig();
+            RoadsUnited_CoreProps.ChangeArrowProp();
+        }
 
         private void EventCheckCreateVanillaDictionary(bool c)
         {
@@ -317,8 +323,9 @@ namespace RoadsUnited_Core
 
             UIHelperBase uIHelperGeneralSettings = helper.AddGroup("General Settings");
             //            uIHelperGeneralSettings.AddCheckbox("Use mods Vanilla roads texture replacements", ModLoader.config.use_custom_textures, EventCheckUseCustomTextures);
-            uIHelperGeneralSettings.AddCheckbox("Activate the brightness sliders below. Slider to the right for a lighter color.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);
-            uIHelperGeneralSettings.AddCheckbox("Disable optional arrows and manholes on highways.", ModLoader.config.disable_optional_arrows, EventDisableOptionalArrows);
+            uIHelperGeneralSettings.AddCheckbox("Disable road arrows pointing to the left, front and right.", ModLoader.config.disable_optional_arrow_lfr, EventDisableOptionalArrow_LFR);
+            uIHelperGeneralSettings.AddCheckbox("Disable road arrows pointing left and right.", ModLoader.config.disable_optional_arrow_lr, EventDisableOptionalArrow_LR);
+
             //        uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
             //          uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
             //          uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
@@ -330,7 +337,6 @@ namespace RoadsUnited_Core
  //           uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckUseCrackedRoads);
  //           uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventCrackIntensity));
 
-            // Parking spots deactivated for now. Should use props instead.
 
             UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
             uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
@@ -344,18 +350,21 @@ namespace RoadsUnited_Core
             uIHelperParkingSpaceSettings.AddSpace(10);
 
 
+            UIHelperBase uIHelperRoadColorSettings = helper.AddGroup("Road brightness settings");
+            uIHelperRoadColorSettings.AddCheckbox("Use the road brightness sliders below. Changes only visible after next level loading.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);
+
             UIHelperBase uIHelperSmallRoads = helper.AddGroup("Small Roads");
             uIHelperSmallRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_brightness, new OnValueChanged(EventSmallRoadBrightness));
-            uIHelperSmallRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_decoration, new OnValueChanged(EventSmallRoadDecorationBrightness));
+            uIHelperSmallRoads.AddSlider("Decoration (grass and trees)", 0.2f, 0.8f, 0.05f, ModLoader.config.small_road_decoration, new OnValueChanged(EventSmallRoadDecorationBrightness));
 
 
             UIHelperBase uIHelperMediumRoads = helper.AddGroup("Medium Roads");
             uIHelperMediumRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_brightness, new OnValueChanged(EventMediumRoadBrightness));
-            uIHelperMediumRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_decoration_brightness, new OnValueChanged(EventMediumRoadDecorationBrightness));
+            uIHelperMediumRoads.AddSlider("Decoration (grass and trees)", 0.2f, 0.8f, 0.05f, ModLoader.config.medium_road_decoration_brightness, new OnValueChanged(EventMediumRoadDecorationBrightness));
 
             UIHelperBase uIHelperLargeRoads = helper.AddGroup("Large Roads");
             uIHelperLargeRoads.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.large_road_brightness, new OnValueChanged(EventLargeRoadBrightness));
-            uIHelperLargeRoads.AddSlider("Decoration", 0.2f, 0.8f, 0.05f, ModLoader.config.large_road_decoration_brightness, new OnValueChanged(EventLargeRoadDecorationBrightness));
+            uIHelperLargeRoads.AddSlider("Decoration (grass and trees)", 0.2f, 0.8f, 0.05f, ModLoader.config.large_road_decoration_brightness, new OnValueChanged(EventLargeRoadDecorationBrightness));
 
             UIHelperBase uIHelperHighways = helper.AddGroup("Highways");
             uIHelperHighways.AddSlider("Standard", 0.2f, 0.8f, 0.05f, ModLoader.config.highway_brightness, new OnValueChanged(EventHighwayBrightness));

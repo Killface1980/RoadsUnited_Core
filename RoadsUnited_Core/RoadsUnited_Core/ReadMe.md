@@ -30,3 +30,5 @@ I've been keeping quiet about it, but if you look at my imgur posts, you will se
 
 Killface:  
 - Getting rid of segment.lod render distance = -1 and implement real lod textures by default
+- adding optional tooltip textures for the texture packs
+- multiple crossings per option; might be solved by "for each ...node_int (...node_1.dds, node_2.dds) dropdown add x - can also apply to ..._parking1

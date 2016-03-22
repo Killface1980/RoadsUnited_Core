@@ -20,8 +20,6 @@ American Roads Fork:
     - enforce geometric symetry within textures to reduce incongruent nodes
     - apr/aci/maintex revisions
 
-//KF: I thought of all development effort going to the Core mod. That way, the mod stays compatible and also others can create and use and change texture paacks on the fly. By making all additional content optional, older texture packs still work in future even if abandoned. The changes you mentioned would also benefit to the Core, which was planned to not need any more mods doing the road texture replacement stuff. Also I don't want to update and maintain two mods. 
-
 Different node textures to accommodate your suggestion.
 
 Replacing individual textures on segments to allow "true" turning lanes (NExt roads) w/ solid lines.

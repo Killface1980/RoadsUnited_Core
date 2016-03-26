@@ -300,7 +300,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_MainTex.dds")))
                                         node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_MainTex.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Rural Highway") && !netInfo.name.Contains("Small"))
@@ -317,7 +317,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_MainTex.dds")))
                                         node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_MainTex.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Four-Lane Highway"))
@@ -334,7 +334,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_MainTex.dds")))
                                         node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_MainTex.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Five-Lane Highway"))
@@ -355,7 +355,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")))
                                         node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Large Highway"))
@@ -375,7 +375,7 @@ namespace RoadsUnited_Core
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")))
                                         node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region NExt Highways Nodes APRMaps
@@ -393,7 +393,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_APRMap.dds")))
                                         node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_APRMap.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Rural Highway") && !netInfo.name.Contains("Small"))
@@ -410,7 +410,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_APRMap.dds")))
                                         node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_APRMap.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Four-Lane Highway"))
@@ -427,7 +427,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_APRMap.dds")))
                                         node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_APRMap.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Five-Lane Highway"))
@@ -444,7 +444,7 @@ namespace RoadsUnited_Core
                                           if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")))
                                               node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Large Highway"))
@@ -461,7 +461,7 @@ namespace RoadsUnited_Core
                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")))
                                        node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")));
 
-                                node.m_lodRenderDistance = -1;
+                                node.m_lodRenderDistance = 2500;
                             }
                             #endregion
                         }
@@ -491,7 +491,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
 
                             }
 
@@ -511,7 +511,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Oneway4L"))
@@ -528,7 +528,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Small Avenue"))
@@ -545,7 +545,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region NExt Avenues Default
@@ -571,7 +571,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Medium Avenue") && netInfo.name.Contains("TL"))
@@ -597,7 +597,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Eight-Lane Avenue"))
@@ -619,7 +619,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region NExt Highways Default
@@ -641,7 +641,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Rural Highway") && !netInfo.name.Contains("Small"))
@@ -662,7 +662,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Four-Lane Highway"))
@@ -683,7 +683,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Five-Lane Highway"))
@@ -704,7 +704,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Large Highway"))
@@ -725,7 +725,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region NExt Busways Default
@@ -743,7 +743,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")))
                                         segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Tunnel_Segment_MainTex.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
 
                             }
                             #endregion
@@ -766,7 +766,7 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_APRMap.dds")))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_APRMap.dds")));
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Oneway3L"))
@@ -784,7 +784,7 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_APRMap.dds")))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_APRMap.dds")));
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Oneway4L"))
@@ -800,7 +800,7 @@ namespace RoadsUnited_Core
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_APRMap.dds")))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_APRMap.dds")));
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
 
                             if (netInfo.name.Contains("Small Avenue"))
@@ -817,7 +817,7 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_APRMap.dds")))
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_APRMap.dds")));
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region Avenues APRMaps
@@ -841,7 +841,7 @@ namespace RoadsUnited_Core
                                         segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_APRMap.dds")));
 
 
-                                segment.m_lodRenderDistance = -1;
+                                segment.m_lodRenderDistance = 2500;
                             }
                             #endregion
                             #region NExt Highways APRMaps
@@ -1369,7 +1369,7 @@ namespace RoadsUnited_Core
                                     segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(segmentMaterialAPRMap_name));
                             }
                         }
-                        segment.m_lodRenderDistance = -1;
+                        segment.m_lodRenderDistance = 2500;
                     }
                 }
             }

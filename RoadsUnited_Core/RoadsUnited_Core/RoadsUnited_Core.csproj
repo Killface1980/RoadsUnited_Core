@@ -58,7 +58,7 @@
     <Compile Include="PropManager.cs" />
     <Compile Include="RoadColorChanger.cs" />
     <Compile Include="RoadsUnited_Core.cs" />
-    <Compile Include="RoadThemeManager\RoadThemeManager.cs" />
+    <Compile Include="RoadThemeManager.cs" />
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
     <Compile Include="RoadThemeManager\RoadThemesUtil.cs" />
   </ItemGroup>

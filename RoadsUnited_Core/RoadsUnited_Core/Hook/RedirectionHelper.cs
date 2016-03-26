@@ -5,47 +5,70 @@ namespace RoadsUnited_Core
 {
     public static class RedirectionHelper
     {
+        /// <summary>
+        /// Redirects all calls from method 'from' to method 'to'.
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public static RedirectCallsState RedirectCalls(MethodInfo from, MethodInfo to)
         {
-            IntPtr functionPointer = from.MethodHandle.GetFunctionPointer();
-            IntPtr functionPointer2 = to.MethodHandle.GetFunctionPointer();
-            return RedirectionHelper.PatchJumpTo(functionPointer, functionPointer2);
+            // GetFunctionPointer enforces compilation of the method.
+            var fptr1 = from.MethodHandle.GetFunctionPointer();
+            var fptr2 = to.MethodHandle.GetFunctionPointer();
+            return PatchJumpTo(fptr1, fptr2);
         }
 
         public static void RevertRedirect(MethodInfo from, RedirectCallsState state)
         {
-            IntPtr functionPointer = from.MethodHandle.GetFunctionPointer();
-            RedirectionHelper.RevertJumpTo(functionPointer, state);
+            var fptr1 = from.MethodHandle.GetFunctionPointer();
+            RevertJumpTo(fptr1, state);
         }
 
-        private unsafe static RedirectCallsState PatchJumpTo(IntPtr site, IntPtr target)
+        /// <summary>
+        /// Primitive patching. Inserts a jump to 'target' at 'site'. Works even if both methods'
+        /// callers have already been compiled.
+        /// </summary>
+        /// <param name="site"></param>
+        /// <param name="target"></param>
+        private static RedirectCallsState PatchJumpTo(IntPtr site, IntPtr target)
         {
-            RedirectCallsState result = default(RedirectCallsState);
-            byte* ptr = (byte*)site.ToPointer();
-            result.a = *ptr;
-            result.b = ptr[1];
-            result.c = ptr[10];
-            result.d = ptr[11];
-            result.e = ptr[12];
-            result.f = (ulong)(*(long*)(ptr + 2));
-            *ptr = 73;
-            ptr[1] = 187;
-            *(long*)(ptr + 2) = target.ToInt64();
-            ptr[10] = 65;
-            ptr[11] = 255;
-            ptr[12] = 227;
-            return result;
+            RedirectCallsState state = new RedirectCallsState();
+
+            // R11 is volatile.
+            unsafe
+            {
+                byte* sitePtr = (byte*)site.ToPointer();
+                state.a = *sitePtr;
+                state.b = *(sitePtr + 1);
+                state.c = *(sitePtr + 10);
+                state.d = *(sitePtr + 11);
+                state.e = *(sitePtr + 12);
+                state.f = *((ulong*)(sitePtr + 2));
+
+                *sitePtr = 0x49; // mov r11, target
+                *(sitePtr + 1) = 0xBB;
+                *((ulong*)(sitePtr + 2)) = (ulong)target.ToInt64();
+                *(sitePtr + 10) = 0x41; // jmp r11
+                *(sitePtr + 11) = 0xFF;
+                *(sitePtr + 12) = 0xE3;
+            }
+
+            return state;
         }
 
-        private unsafe static void RevertJumpTo(IntPtr site, RedirectCallsState state)
+        private static void RevertJumpTo(IntPtr site, RedirectCallsState state)
         {
-            byte* ptr = (byte*)site.ToPointer();
-            *ptr = state.a;
-            ptr[1] = state.b;
-            *(long*)(ptr + 2) = (long)state.f;
-            ptr[10] = state.c;
-            ptr[11] = state.d;
-            ptr[12] = state.e;
+            unsafe
+            {
+                byte* sitePtr = (byte*)site.ToPointer();
+                *sitePtr = state.a; // mov r11, target
+                *(sitePtr + 1) = state.b;
+                *((ulong*)(sitePtr + 2)) = state.f;
+                *(sitePtr + 10) = state.c; // jmp r11
+                *(sitePtr + 11) = state.d;
+                *(sitePtr + 12) = state.e;
+            }
         }
+
     }
 }

@@ -12,7 +12,6 @@ namespace RoadsUnited_Core
     {
         public bool hookEnabled = false;
         private Dictionary<MethodInfo, RedirectCallsState> redirects = new Dictionary<MethodInfo, RedirectCallsState>();
-        public static Material invertedBridgeMat;
 
         public void Update()
         {

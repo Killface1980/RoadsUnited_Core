@@ -14,14 +14,133 @@ namespace RoadsUnited_Core
 
     {
         public static Texture2D crackRoadTex;
+
         public static Texture2D cracksTex;
+
         private static Texture2D defaultmap;
+
         private static Texture2D acimap;
+
         private static Texture2D aprmap;
+
         private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
+
         public static Configuration config;
+
         public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
-        
+
+        public static Texture2D LoadCrackTextureDDS(string fullPath)
+        {
+            RoadsUnited_Core.cracksTex = RoadsUnited_Core.LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "cracks.dds"));
+            bool use_cracked_roads = ModLoader.config.use_cracked_roads;
+            
+            if (use_cracked_roads && (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "cracks.dds"))) && (!fullPath.Contains("aci")) && (!fullPath.Contains("apr")))
+            {
+                Texture2D texture;
+                Texture2D textureFromCache;
+
+                if (textureCache.TryGetValue(fullPath + ModLoader.config.use_cracked_roads + ModLoader.config.crackIntensity, out texture)) return texture;
+
+                if (textureCache.TryGetValue(fullPath, out textureFromCache)) texture = textureFromCache;
+
+                else
+                {
+                    var numArray = File.ReadAllBytes(fullPath);
+                    var width = BitConverter.ToInt32(numArray, 16);
+                    var height = BitConverter.ToInt32(numArray, 12);
+                    texture = new Texture2D(width, height, TextureFormat.DXT5, true);
+                    var list = new List<byte>();
+                    for (int index = 0; index < numArray.Length; ++index)
+                    {
+                        if (index > (int)sbyte.MaxValue)
+                            list.Add(numArray[index]);
+                    }
+                    texture.LoadRawTextureData(list.ToArray());
+                    texture.name = Path.GetFileName(fullPath);
+                    texture.anisoLevel = 8;
+                    texture.Apply();
+                    textureCache.Add(fullPath, texture); // Neu geladene Textur in den Cache packen
+                }
+                texture.name = Path.GetFileName(fullPath) + ModLoader.config.use_cracked_roads + ModLoader.config.crackIntensity;
+
+                Color color = default(Color);
+                Texture2D texture2D = new Texture2D(texture.width, texture.height);
+                int k = 0;
+                float num = ModLoader.config.crackIntensity * 3f;
+//                float num = ModLoader.config.crackIntensity * 3f;
+                bool flag4 = texture.name.ToLower().Contains("highway");
+                if (flag4)
+                {
+                 // still needed? ->   num /= 14f;
+                }
+                while (k < 1024)
+                {
+                    int num2;
+                    for (int l = 0; l < 1024; l = num2)
+                    {
+                        Color pixel = texture.GetPixel(l, k);
+                        Color pixel2 = RoadsUnited_Core.cracksTex.GetPixel(l, k);
+                        color.r = (pixel.r * (pixel2.r * num)) / (1f + num);
+                        color.g = (pixel.g * (pixel2.g * num)) / (1f + num);
+                        color.b = (pixel.b * (pixel2.b * num)) / (1f + num);
+                      //color.r = (pixel.r + pixel2.r * num) / (1f + num);
+                      //color.g = (pixel.g + pixel2.g * num) / (1f + num);
+                      //color.b = (pixel.b + pixel2.b * num) / (1f + num);
+                        texture2D.SetPixel(l, k, color);
+                        num2 = l + 1;
+                    }
+                    num2 = k + 1;
+                    k = num2;
+                }
+                bool flag5 = texture2D.width > 1024;
+                if (flag5)
+                {
+                    int num2;
+                    for (int m = 1024; m < texture2D.width; m = num2)
+                    {
+                        for (k = 0; k < texture2D.height; k = num2)
+                        {
+                            texture2D.SetPixel(m, k, texture.GetPixel(m, k));
+                            num2 = k + 1;
+                        }
+                        num2 = m + 1;
+                    }
+                }
+                texture2D.Apply();
+                texture = texture2D;
+                texture.name = Path.GetFileName(fullPath) + ModLoader.config.use_cracked_roads + ModLoader.config.crackIntensity;
+
+                texture.anisoLevel = 8;
+                texture.Apply();
+                textureCache.Add(fullPath + ModLoader.config.use_cracked_roads + ModLoader.config.crackIntensity, texture); // Neu geladene Textur in den Cache packen
+                return texture;
+            }
+
+            else
+            {
+                // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
+                Texture2D texture;
+                if (textureCache.TryGetValue(fullPath, out texture)) return texture;
+                // Nein? Textur laden
+                var numArray = File.ReadAllBytes(fullPath);
+                var width = BitConverter.ToInt32(numArray, 16);
+                var height = BitConverter.ToInt32(numArray, 12);
+                texture = new Texture2D(width, height, TextureFormat.DXT5, true);
+                var list = new List<byte>();
+                for (int index = 0; index < numArray.Length; ++index)
+                {
+                    if (index > (int)sbyte.MaxValue)
+                        list.Add(numArray[index]);
+                }
+                texture.LoadRawTextureData(list.ToArray());
+                texture.name = Path.GetFileName(fullPath);
+                texture.anisoLevel = 8;
+                texture.Apply();
+                textureCache.Add(fullPath, texture); // Neu geladene Textur in den Cache packen
+                return texture;
+            }
+        }
+
         public static Texture2D LoadTextureDDS(string fullPath)
         {
             // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
@@ -156,7 +275,7 @@ namespace RoadsUnited_Core
                         }
                     }
                 }
-                
+
                 NetInfo.Segment[] segments = netInfo.m_segments;
                 for (int l = 0; l < segments.Length; l++)
                 {
@@ -290,15 +409,15 @@ namespace RoadsUnited_Core
                             {
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds"))) /* not an error, it uses the 2l node tex*/
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Node_MainTex.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -307,15 +426,15 @@ namespace RoadsUnited_Core
                             {
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Node_MainTex.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -324,15 +443,15 @@ namespace RoadsUnited_Core
                             {
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Node_MainTex.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -341,19 +460,19 @@ namespace RoadsUnited_Core
                             {
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -362,19 +481,19 @@ namespace RoadsUnited_Core
                             {
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_MainTex.dds")));
 
                                 if (node.m_nodeMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")))
-                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
+                                        node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Node_MainTex.dds")));
                                 node.m_lodRenderDistance = 2500;
                             }
                             #endregion
@@ -440,9 +559,9 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Elevated_Node_APRMap.dds")))
                                         node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Elevated_Node_APRMap.dds")));
 
-                                      if (node.m_nodeMaterial.GetTexture("_APRMap").name.Contains("Slope"))
-                                          if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")))
-                                              node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")));
+                                if (node.m_nodeMaterial.GetTexture("_APRMap").name.Contains("Slope"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")))
+                                        node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Node_APRMap.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -457,9 +576,9 @@ namespace RoadsUnited_Core
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Elevated_Node_APRMap.dds")))
                                         node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Elevated_Node_APRMap.dds")));
 
-                               if (node.m_nodeMaterial.GetTexture("_APRMap").name.Contains("Slope"))
-                                   if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")))
-                                       node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")));
+                                if (node.m_nodeMaterial.GetTexture("_APRMap").name.Contains("Slope"))
+                                    if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")))
+                                        node.m_nodeMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Node_APRMap.dds")));
 
                                 node.m_lodRenderDistance = 2500;
                             }
@@ -481,15 +600,15 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
 
@@ -499,17 +618,17 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     //                   if ((netInfo.name.Contains("Elevated") || (netInfo.name.Contains("Bridge"))))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Elevated_MainTex.dds")));
 
                                 //            if ((netInfo.name.Contains("Slope") || (netInfo.name.Contains("Tunnel"))))
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay3L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -518,15 +637,15 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "OneWay4L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -535,15 +654,15 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "SmallAvenue4L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -553,23 +672,23 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -578,24 +697,24 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_APRMap").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_APRMap", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds")));
 
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "MediumAvenue4LTL_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -604,20 +723,20 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Elevated_MainTex.dds")));
 
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "LargeAvenue8LM_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -627,19 +746,19 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway1L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -648,19 +767,19 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway2L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -669,19 +788,19 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Elevated_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway4L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -690,19 +809,19 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway5L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -711,19 +830,19 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Slope"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Slope_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Highway6L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
                             }
@@ -733,15 +852,15 @@ namespace RoadsUnited_Core
                             {
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Ground"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Ground_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Ground_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Ground_Segment_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Elevated"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Elevated_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Elevated_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Elevated_MainTex.dds")));
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name.Contains("Tunnel"))
                                     if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "BasicRoadTL_Tunnel_Segment_MainTex.dds")))
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Tunnel_Segment_MainTex.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Busway2L_Tunnel_Segment_MainTex.dds")));
 
                                 segment.m_lodRenderDistance = 2500;
 
@@ -975,10 +1094,10 @@ namespace RoadsUnited_Core
                             string prefab_road_name = netInfo.name.Replace(" ", "_").ToLowerInvariant().Trim();
 
                             if (File.Exists(prefab_road_name + "_" + nodeMaterialTexture_name))
-                                node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(prefab_road_name + "_" + nodeMaterialTexture_name));
+                                node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(prefab_road_name + "_" + nodeMaterialTexture_name));
 
                             if (File.Exists(nodeMaterialTexture_name))
-                                node.m_nodeMaterial.SetTexture("_MainTex", LoadTextureDDS(nodeMaterialTexture_name));
+                                node.m_nodeMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(nodeMaterialTexture_name));
 
                             node.m_lodRenderDistance = 2500;
                             node.m_lodMesh = null;
@@ -1011,17 +1130,17 @@ namespace RoadsUnited_Core
                                 {
                                     if (segment.m_mesh.name.Equals("SmallRoadSegmentBusSide") && File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusSide.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusSide.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusSide.dds")));
                                     }
 
                                     else if (segment.m_mesh.name.Equals("SmallRoadSegmentBusBoth") && File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusBoth.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusBoth.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment_BusBoth.dds")));
                                     }
 
                                     else if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallSegment.dds")));
                                     }
                                 }
 
@@ -1029,29 +1148,29 @@ namespace RoadsUnited_Core
                                 {
                                     if (segment.m_mesh.name.Equals("SmallRoadSegment2BusSide") && File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusSide.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusSide.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusSide.dds")));
                                     }
 
                                     else if (segment.m_mesh.name.Equals("SmallRoadSegment2BusBoth") && File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusBoth.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusBoth.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco_BusBoth.dds")));
                                     }
 
                                     else if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco.dds")))
                                     {
-                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco.dds")));
+                                        segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_SmallRoadSegmentDeco.dds")));
                                     }
                                 }
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "small-tunnel_d" && File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_small-tunnel_d.dds")))
                                 {
-                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_small-tunnel_d.dds")));
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_small-tunnel_d.dds")));
                                 }
 
                                 if (segment.m_segmentMaterial.GetTexture("_MainTex").name == "RoadSmallElevatedSegment" &&
                                 File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallElevatedSegment_D.dds")))
                                 {
-                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallElevatedSegment_D.dds")));
+                                    segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "Oneway_RoadSmallElevatedSegment_D.dds")));
                                 }
                                 #endregion
                                 #region Large Oneway
@@ -1343,7 +1462,7 @@ namespace RoadsUnited_Core
                             #endregion
                             //Replace the default segment textures
                             if (File.Exists(segmentMaterialTexture_name))
-                                segment.m_segmentMaterial.SetTexture("_MainTex", LoadTextureDDS(segmentMaterialTexture_name));
+                                segment.m_segmentMaterial.SetTexture("_MainTex", LoadCrackTextureDDS(segmentMaterialTexture_name));
                         }
 
                         if (segment.m_segmentMaterial.GetTexture("_APRMap") != null)
@@ -1366,7 +1485,7 @@ namespace RoadsUnited_Core
                                         segmentMaterialAPRMap_name = Path.Combine(ModLoader.currentTexturesPath_default, "RoadLargeSegment-default-apr.dds");
 
                                 if (File.Exists(segmentMaterialAPRMap_name))
-                                    segment.m_segmentMaterial.SetTexture("_APRMap", LoadTextureDDS(segmentMaterialAPRMap_name));
+                                    segment.m_segmentMaterial.SetTexture("_APRMap", LoadCrackTextureDDS(segmentMaterialAPRMap_name));
                             }
                         }
                         segment.m_lodRenderDistance = 2500;

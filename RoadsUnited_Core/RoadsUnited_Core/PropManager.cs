@@ -32,11 +32,11 @@ namespace RoadsUnited_Core
                         if (File.Exists(propLodTexture))
                         {
                             //only the m_lodMaterialCombined texture is visible
-                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(propLodTexture));
+                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadCrackTextureDDS(propLodTexture));
                         }
                         if (File.Exists(propLodACIMapTexture))
                         {
-                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(propLodACIMapTexture));
+                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadCrackTextureDDS(propLodACIMapTexture));
                         }
                     }
                 }

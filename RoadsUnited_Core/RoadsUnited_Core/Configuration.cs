@@ -13,6 +13,10 @@ namespace RoadsUnited_Core
 
         public bool use_custom_textures = true;
         public bool use_custom_colors = true;
+
+        public bool use_cracked_roads = true;
+        public float crackIntensity = 1f;
+
         public bool disable_optional_arrow_lfr = false;
         public bool disable_optional_arrow_lr = false;
 
@@ -33,14 +37,18 @@ namespace RoadsUnited_Core
         //Small Roads
         public float small_road_brightness = 0.4f;
         public float small_road_decoration = 0.4f;
+
         //Medium Rpads
         public float medium_road_brightness = 0.4f;
         public float medium_road_decoration_brightness = 0.4f;
         //Large Roads
+
         public float large_road_brightness = 0.4f;
         public float large_road_decoration_brightness = 0.4f;
         //Highways
+
         public float highway_brightness = 0.4f;
+        
         //Rural/State Highway
         public float highway_national_brightness = 0.4f;
 

@@ -43,6 +43,7 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
         #endregion
+
         #region Medium roads config
         private void EventMediumRoadBrightness(float c)
         {
@@ -56,6 +57,7 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }       
         #endregion
+
         #region Large road config
 
         private void EventLargeRoadBrightness(float c)
@@ -70,6 +72,7 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
         #endregion
+
         #region Highway config
         private void EventHighwayBrightness(float c)
         {
@@ -83,6 +86,7 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
         #endregion
+
         #region Parking marking
         private void EventSmallRoadParking(int c)
         {
@@ -148,6 +152,7 @@ namespace RoadsUnited_Core
             RoadsUnited_Core.ReplaceNetTextures();
         }
         #endregion
+
         #region Config stuff
 
         private void EventDisableOptionalArrow_LFR(bool c)
@@ -196,7 +201,21 @@ namespace RoadsUnited_Core
 
             ModLoader.SaveConfig();
         }
+
+
+        private void EventCheckCrack(bool c)
+        {
+            ModLoader.config.use_cracked_roads = c;
+            ModLoader.SaveConfig();
+        }
+
+        private void EventSlideCrack(float c)
+        {
+            ModLoader.config.crackIntensity = c;
+            ModLoader.SaveConfig();
+        }
         #endregion
+
         #region RoadThemeDropdownMenu
         public static UICheckBox checkbox = null;
         public static UICheckBox checkbox2 = null;
@@ -210,6 +229,8 @@ namespace RoadsUnited_Core
         public static List<RoadThemePack> packs;
         public static int selectedPackID = 0;
         #endregion
+
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             Debug.Log("Settings initializing");
@@ -278,9 +299,12 @@ namespace RoadsUnited_Core
 
 
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);
-            //UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
-            //uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckUseCrackedRoads);
-            //uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventCrackIntensity));
+
+            UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
+            uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckCrack);
+            uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventSlideCrack));
+            uIHelperCrackedRoadsSettings.AddButton("Apply changes. Changes take time and use additional RAM.", EventReloadTextures);
+
             UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
             uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);
             uIHelperParkingSpaceSettings.AddDropdown("Medium roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.medium_road_parking, EventMediumRoadParking);
@@ -291,7 +315,6 @@ namespace RoadsUnited_Core
             uIHelperParkingSpaceSettings.AddDropdown("Large roads buslane", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_road_bus_parking, EventLargeRoadBusParking);
             uIHelperParkingSpaceSettings.AddDropdown("Large Oneways", new string[] { "No marking", "Parking spots" }, ModLoader.config.large_oneway_parking, EventLargeOnewayParking);
             uIHelperParkingSpaceSettings.AddSpace(10);
-
 
             UIHelperBase uIHelperRoadColorSettings = helper.AddGroup("Road brightness settings");
             uIHelperRoadColorSettings.AddCheckbox("Use the road brightness sliders below. Changes only visible after next level loading.", ModLoader.config.use_custom_colors, EventCheckUseCustomColors);

@@ -1,17 +1,15 @@
 ﻿This file can be used to post ideas or planned updates. Figure sharing info would help to share pending updates.
 
 Unlawful:
-Been a while since I've tinkered, but am going to do a revision on the core mod, specifically with texture naming conventions.
-
 Going to make some heavy revisons in the core mod file.
    I finally finished the damn texture maps. Back to fun times.
 
-    New texture naming convention, will eliminate any confusion with regards to texture generation abd
-         also combine NExt roads with the rest to make things easier. The if(x.exists(yyy.zzz)) checks take care of that.
-         This came about as a need to mass produce textures with simple names. Real  keyboard macros and the 
-         Bulk Renaming Utility.
+   New texture naming convention, will eliminate any confusion with regards to texture generation abd
+also combine NExt roads with the rest to make things easier. The if(x.exists(yyy.zzz)) checks take care of that.
+This came about as a need to mass produce textures with simple names. Real  keyboard macros and the 
+Bulk Renaming Utility.
          
-         I'll upload a csv to explain the conventions, bottomline is that all the names are consistant.
+I'll upload a csv to explain the conventions, bottomline is that all the names are consistant.
          
          
 American Roads Version:

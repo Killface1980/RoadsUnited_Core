@@ -14,12 +14,66 @@ I don't see a need for new naming conventions. This mod was designed to replace 
 
 Also I think it's a bad idea mixing up the vanilla replacemants with NExt. If there's no good reason for combining those I want to keep NExt separate for easier maintenance.
 //
-
-I'll upload a csv to explain the conventions, bottomline is that all the names are consistant.
 //Killface
 If it's helping, then any changes are welcome.
 //
+Okay, I see where you are coming from. I'll just add an additional condition check for it. Here's what I have:
+	
+	RoadSize:Direction/#Lanes:LaneType:TransitStop:SubType:Node:TexType
+
+	So a Small Onewy Grass Road with two bus stops will produce the following names:
+		RoadSmallOnewayBusBothDeco_APRMap
+		RoadSmallOnewayBusBothDeco_LOD_APRMap
+		RoadSmallOnewayBusBothDeco_MainTex
+		RoadSmallOnewayBusBothDeco_LOD_MainTex
+	This way, there exists an option to change the things you want. The LODS are what neccessitated this.
+	What I mean by combining both NExt and Stock roads is that the mod only checks for replacement textures that match a set criteria. This way it is easier to sort the texture files out by size.
+
+	So,
+	RoadSize
+		RoadTiny = The tiny NExt roads
+		RoadSmall = Same with the inclusion of Small Heavy Roads
+		RoadMedium = Same + The NExt medium road additions [4 lane and the turning lane]
+		RoadLarge = Same + 8 lane ave
+		Highway=highways
+	Directions/#Lanes
+		Oneway
+		Oneway3L
+		Oneway4L
+		TurningLane
+		8LAveneue
+		Ramp
+		StateRoad
+		2L
+		3L
+		4L
+		5L
+		6L
+	LaneType
+		BusLane
+		BikeLane
+		Tram
+	TransitStop
+		BusSide
+		BusBoth
+		TramStopSide
+		BusStopTramStop
+		TramStopBoth
+	SubType
+		Ground
+		Deco
+		Elevated
+		Slope
+		Tunnel
+	TextType
+		APRMAp
+		MainTex
+		LOD_APRMap
+		LOD_MainTex
          
+This isn't a need from a programming perspective, but it is with when producing textures. RoadSize allows for subdirs for easier sorting. I'll add the change as an aside. 
+
+
 American Roads Version:
    - New Mod Name: American Infrastructure
 

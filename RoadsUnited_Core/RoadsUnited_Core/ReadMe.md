@@ -23,9 +23,9 @@ Okay, I see where you are coming from. I'll just add an additional condition che
 
 	So a Small Onewy Grass Road with two bus stops will produce the following names:
 		RoadSmallOnewayBusBothDeco_APRMap
-		RoadSmallOnewayBusBothDeco_LOD_APRMap
+		RoadSmallOnewayBusBothDeco_APRMapLOD
 		RoadSmallOnewayBusBothDeco_MainTex
-		RoadSmallOnewayBusBothDeco_LOD_MainTex
+		RoadSmallOnewayBusBothDeco_MainTexLOD
 	This way, there exists an option to change the things you want. The LODS are what neccessitated this.
 	What I mean by combining both NExt and Stock roads is that the mod only checks for replacement textures that match a set criteria. This way it is easier to sort the texture files out by size.
 

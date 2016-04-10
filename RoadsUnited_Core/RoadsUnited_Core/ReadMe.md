@@ -11,6 +11,8 @@ Bulk Renaming Utility.
 
 //Killface
 I don't see a need for new naming conventions. This mod was designed to replace the vanilla textures by name 1:1, with only exceptions made to extras added by the mod. Exceptions shouldn't become the standard. I have reworked all my PSD files which I was planing to use as a base for future texture packs to automatically generate all graphics needed - which works perfectly. There is no need for me to fiddle manually with the file names and risk faulty replacements.
+
+Also I think it's a bad idea mixing up the vanilla replacemants with NExt. If there's no good reason for combining those I want to keep NExt separate for easier maintenance.
 //
 
 I'll upload a csv to explain the conventions, bottomline is that all the names are consistant.

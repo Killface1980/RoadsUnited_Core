@@ -10,7 +10,8 @@ This came about as a need to mass produce textures with simple names. Real  keyb
 Bulk Renaming Utility.
 
 //Killface
-I don't see a need for new naming conventions. This mod was designed to replace the vanilla textures by name 1:1, with only exceptions made to extras added by the mod. Exceptions shouldn't become the standard. I have reworked all my PSD files which I was planing to use as a base for future texture packs to automatically generate all graphics needed - which works perfectly. There is no need for me to fiddle manually with the file names and risk faulty replacements.
+I just used Photoshop and Illustrator, no need for mass producing simple names or macros or bulk renaming. I also uploaded those source files.
+So I don't see a need for new naming conventions. This mod was designed to replace the vanilla textures by name 1:1, with only exceptions made to extras added by the mod. Exceptions shouldn't become the standard. I have reworked all my PSD files which I was planing to use as a base for future texture packs to automatically generate all graphics needed - which works perfectly. There is no need for me to fiddle manually with the file names and risk faulty replacements.
 
 Also I think it's a bad idea mixing up the vanilla replacemants with NExt. If there's no good reason for combining those I want to keep NExt separate for easier maintenance.
 //
@@ -28,7 +29,11 @@ Okay, I see where you are coming from. I'll just add an additional condition che
 		RoadSmallOnewayBusBothDeco_MainTexLOD
 	This way, there exists an option to change the things you want. The LODS are what neccessitated this.
 	What I mean by combining both NExt and Stock roads is that the mod only checks for replacement textures that match a set criteria. This way it is easier to sort the texture files out by size.
+//Killface
+The naming schemes are no problem, since most of the names are unique. The LOD textures also have their unique name so there is really no need for any new scheme which differs from the vanilla names. The textures do get loaded, but never displayed. The game uses a giant, self generated map with all loaded textures - which I don't know how it's generated. This is the only problem with the lods. 
 
+I still don't see the need of a new naming scheme. Everything gets replaced as intended.
+//
 	So,
 	RoadSize
 		RoadTiny = The tiny NExt roads
@@ -72,6 +77,14 @@ Okay, I see where you are coming from. I'll just add an additional condition che
 		LOD_MainTex
          
 This isn't a need from a programming perspective, but it is with when producing textures. RoadSize allows for subdirs for easier sorting. I'll add the change as an aside. 
+
+//Killface
+I don't see why I should start sorting the files again when absent directories produce bugs.
+Also, why sorting when it's purely cosmetical? The game doesn't care if files are in subdiretories.
+Maybe you should change your setup and let Photoshop generate the pngs by composition layers and automation. No need for additional software to mass produce. PS already does that trick.
+Most files titled "ground" also are used as "elevated" or "slope". This leads to double textures etc.
+Regarding NExt, I like the naming scheme as it is and wont change any of my 189 files.
+//
 
 
 American Roads Version:

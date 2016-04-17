@@ -300,10 +300,10 @@ namespace RoadsUnited_Core
 
             uIHelperGeneralSettings.AddButton("Reset all sliders and configuration next level load. ", EventResetConfig);
 
-            UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
-            uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckCrack);
-            uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventSlideCrack));
-            uIHelperCrackedRoadsSettings.AddButton("Apply changes. Changes take time and use additional RAM.", EventReloadTextures);
+          //UIHelperBase uIHelperCrackedRoadsSettings = helper.AddGroup("Cracked roads");
+          //uIHelperCrackedRoadsSettings.AddCheckbox("Use cracked roads.", ModLoader.config.use_cracked_roads, EventCheckCrack);
+          //uIHelperCrackedRoadsSettings.AddSlider("Crack intensity", 0, 1f, 0.125f, ModLoader.config.crackIntensity, new OnValueChanged(EventSlideCrack));
+          //uIHelperCrackedRoadsSettings.AddButton("Apply changes. Changes take time and use additional RAM.", EventReloadTextures);
 
             UIHelperBase uIHelperParkingSpaceSettings = helper.AddGroup("Parking space marking");
             uIHelperParkingSpaceSettings.AddDropdown("Small roads", new string[] { "No marking", "Parking spots" }, ModLoader.config.basic_road_parking, EventSmallRoadParking);

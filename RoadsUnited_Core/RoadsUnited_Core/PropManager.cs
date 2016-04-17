@@ -23,20 +23,27 @@ namespace RoadsUnited_Core
                     {
                         PropInfo propInfo = prefabs[j];
 
-                        string defaultname = propInfo.m_lodMaterialCombined.name; // only the lod material is visible. changing the m_material is not visible in-game
+                        string defaultname = null;
 
-                        // this uses the prop texture name to get the replaced txture. I want to stick to the vanilla naming conventions wherever possible.
-                        string propLodTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + ".dds");
-                        string propLodACIMapTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + "-aci.dds");
-
-                        if (File.Exists(propLodTexture))
+                        if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name != null)
                         {
-                            //only the m_lodMaterialCombined texture is visible
-                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadCrackTextureDDS(propLodTexture));
+                            defaultname = propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name;
                         }
-                        if (File.Exists(propLodACIMapTexture))
+
+                        if (defaultname != null)
                         {
-                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadCrackTextureDDS(propLodACIMapTexture));
+                            string propLodTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + ".dds");
+                            string propLodACIMapTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + "-aci.dds");
+
+                            if (File.Exists(propLodTexture))
+                            {
+                                //only the m_lodMaterialCombined texture is visible
+                                propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(propLodTexture));
+                            }
+                            if (File.Exists(propLodACIMapTexture))
+                            {
+                                propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(propLodACIMapTexture));
+                            }
                         }
                     }
                 }

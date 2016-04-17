@@ -14,9 +14,6 @@ namespace RoadsUnited_Core
         public bool use_custom_textures = true;
         public bool use_custom_colors = true;
 
-        public bool use_cracked_roads = false;
-        public float crackIntensity = 1f;
-
         public bool disable_optional_arrow_lfr = false;
         public bool disable_optional_arrow_lr = false;
 

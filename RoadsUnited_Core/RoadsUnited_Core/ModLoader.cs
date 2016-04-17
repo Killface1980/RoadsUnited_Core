@@ -48,8 +48,9 @@ namespace RoadsUnited_Core
         }
 
         public static string modPath = getModPath();
-
         public static string currentTexturesPath_default = "None";
+        public static string APRMaps_Path = Path.Combine(modPath, "APRMaps");
+
 
 
         public RoadsUnited_Core textureManager;

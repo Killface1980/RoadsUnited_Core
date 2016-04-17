@@ -202,18 +202,6 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
 
-
-        private void EventCheckCrack(bool c)
-        {
-            ModLoader.config.use_cracked_roads = c;
-            ModLoader.SaveConfig();
-        }
-
-        private void EventSlideCrack(float c)
-        {
-            ModLoader.config.crackIntensity = c;
-            ModLoader.SaveConfig();
-        }
         #endregion
 
         #region RoadThemeDropdownMenu

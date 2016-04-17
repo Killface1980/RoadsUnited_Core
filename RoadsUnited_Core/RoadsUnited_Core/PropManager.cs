@@ -32,9 +32,19 @@ namespace RoadsUnited_Core
 
                         if (defaultname != null)
                         {
-                            string propLodTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + ".dds");
-                            string propLodACIMapTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + "-aci.dds");
+                            string propLodTexture = null;
+                            string propLodACIMapTexture = null;
 
+                            if (defaultname == "BusLaneText")
+                            {
+                                propLodTexture = Path.Combine(ModLoader.currentTexturesPath_default, "BusLane.dds");
+                                propLodACIMapTexture = Path.Combine(ModLoader.currentTexturesPath_default, "BusLane-aci.dds");
+                            }
+                            else
+                            {
+                                propLodTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + ".dds");
+                                propLodACIMapTexture = Path.Combine(ModLoader.currentTexturesPath_default, defaultname + "-aci.dds");
+                            }
                             if (File.Exists(propLodTexture))
                             {
                                 //only the m_lodMaterialCombined texture is visible

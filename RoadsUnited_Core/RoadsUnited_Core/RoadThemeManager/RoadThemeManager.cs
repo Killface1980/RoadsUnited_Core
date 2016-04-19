@@ -25,9 +25,6 @@ namespace RoadsUnited_Core
                 {
                     ModLoader.config.texturePackPath = Singleton<RoadThemeManager>.instance.activePack.packPath;
                     ModLoader.SaveConfig();
-                    //ModLoader.currentTexturesPath_default = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "BaseTextures");
-                    //ModLoader.currentTexturesPath_apr_maps = Path.Combine(Singleton<RoadThemeManager>.instance.activePack.packPath, "APRMaps");
-                    Debug.Log(Singleton<RoadThemeManager>.instance.activePack.packPath);
                     RoadsUnited_Core.ApplyVanillaDictionary();
                     RoadsUnited_Core.ReplaceNetTextures();
                     if (ModLoader.config.selected_pack == 0)

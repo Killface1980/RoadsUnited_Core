@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
-    <Compile Include="Hook\Hook.cs" />
-    <Compile Include="Hook\RedirectCallsState.cs" />
-    <Compile Include="Hook\RedirectionHelper.cs" />
+    <None Include="Hook\Hook.cs" />
+    <None Include="Hook\RedirectCallsState.cs" />
+    <None Include="Hook\RedirectionHelper.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="ModLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

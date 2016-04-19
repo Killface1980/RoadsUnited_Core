@@ -10,9 +10,7 @@ namespace RoadsUnited_Core
 {
     public class RoadsUnited_CoreMod : IUserMod
     {
-        public const UInt64 workshop_id = 633547552uL;
-
-        public const String VersionName = "Alpha";
+//        public const UInt64 workshop_id = 633547552uL;
 
         public string Name
         {
@@ -88,6 +86,7 @@ namespace RoadsUnited_Core
         #endregion
 
         #region Parking marking
+
         private void EventSmallRoadParking(int c)
         {
             ModLoader.config.basic_road_parking = c;
@@ -202,6 +201,11 @@ namespace RoadsUnited_Core
             ModLoader.SaveConfig();
         }
 
+      //private void EventAtlas()
+      //{
+      //    RoadColorChanger.ReplaceLodRgbAtlas();
+      //}
+
         #endregion
 
         #region RoadThemeDropdownMenu
@@ -218,7 +222,6 @@ namespace RoadsUnited_Core
         public static int selectedPackID = 0;
         #endregion
 
-
         public void OnSettingsUI(UIHelperBase helper)
         {
             Debug.Log("Settings initializing");
@@ -231,16 +234,16 @@ namespace RoadsUnited_Core
             Debug.Log("Config loaded.");
 
             #region RoadThemSelector
-            RoadsUnited_CoreMod.packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
-            RoadsUnited_CoreMod.packNames = new List<string>();
-            RoadsUnited_CoreMod.packNames.Add("Vanilla");
-            RoadsUnited_CoreMod.packNames.AddRange(from pack in RoadsUnited_CoreMod.packs select pack.themeName);
-            RoadsUnited_CoreMod.filteredPackNames = new List<string>();
-            RoadsUnited_CoreMod.filteredPackNames = RoadsUnited_CoreMod.packNames;
+            packs = Singleton<RoadThemeManager>.instance.GetAvailablePacks();
+            packNames = new List<string>();
+            packNames.Add("Vanilla");
+            packNames.AddRange(from pack in packs select pack.themeName);
+            filteredPackNames = new List<string>();
+            filteredPackNames = packNames;
 
             UIHelperBase uIHelperBase2 = helper.AddGroup("Road Themes");
-            RoadsUnited_CoreMod.panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
-            RoadsUnited_CoreMod.dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), ModLoader.config.selected_pack, delegate (int selectedIndex)
+            panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
+            dropdown = (UIDropDown)uIHelperBase2.AddDropdown("Select Road Theme", RoadsUnited_CoreMod.filteredPackNames.ToArray(), ModLoader.config.selected_pack, delegate (int selectedIndex)
             {
                 if (selectedIndex == 0)
                 {
@@ -257,9 +260,10 @@ namespace RoadsUnited_Core
                     ModLoader.SaveConfig();
                     //RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
                     //Debug.Log("Got description");
-                    Singleton<RoadThemeManager>.instance.ActivePack = RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[selectedIndex]);
+                    Singleton<RoadThemeManager>.instance.ActivePack = packs.Find((RoadThemePack pack) => pack.themeName == filteredPackNames[selectedIndex]);
                     Debug.Log("Set active pack");
                     ModLoader.SaveConfig();
+
                     //RoadsUnited_CoreMod.panel2.isVisible = true;
                 }
                 else
@@ -282,6 +286,7 @@ namespace RoadsUnited_Core
             uIHelperGeneralSettings.AddCheckbox("Disable road arrows pointing left and right.", ModLoader.config.disable_optional_arrow_lr, EventDisableOptionalArrow_LR);
 
             //uIHelperGeneralSettings.AddCheckbox("Create Vanilla road texture backup on level load.", ModLoader.config.create_vanilla_dictionary, EventCheckCreateVanillaDictionary);
+            //uIHelperGeneralSettings.AddButton("Mess with RgbAtlas", EventAtlas);
             //uIHelperGeneralSettings.AddButton("Revert to Vanilla textures (in-game only)", EventRevertVanillaTextures);
             //uIHelperGeneralSettings.AddButton("Reload selected mod's textures (in-game only)", EventReloadTextures);
 

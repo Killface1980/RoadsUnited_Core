@@ -9,27 +9,34 @@ namespace RoadsUnited_Core
     public class RoadColorChanger : MonoBehaviour
     {
         public static Configuration config;
-        public static void ReplaceLodAprAtlas(string dir)
+
+        public static void ReplaceLodAprAtlas()
         {
             Texture2D texture2D = new Texture2D(Singleton<NetManager>.instance.m_lodAprAtlas.width, Singleton<NetManager>.instance.m_lodAprAtlas.height);
             texture2D.anisoLevel = 8;
-            for (int i = 0; i < texture2D.height; i++)
+            for (int rgb_y = 0; rgb_y < texture2D.height; rgb_y++)
             {
-                for (int j = 0; j < texture2D.width; j++)
+                for (int rgb_x = 0; rgb_x < texture2D.width; rgb_x++)
                 {
-                    if (Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(j, i).b > 0f)
+                    if (Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(rgb_x, rgb_y).b > 0f)
                     {
-                        texture2D.SetPixel(j, i, new Color(Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(j, i).r, Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(j, i).g, 1f));
+                        texture2D.SetPixel(rgb_x, rgb_y, new Color(Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(rgb_x, rgb_y).r, Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(rgb_x, rgb_y).g, 1f));
                     }
                     else
                     {
-                        texture2D.SetPixel(j, i, Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(j, i));
+                        texture2D.SetPixel(rgb_x, rgb_y, Singleton<NetManager>.instance.m_lodAprAtlas.GetPixel(rgb_x, rgb_y));
                     }
                 }
             }
             texture2D.Apply();
             Singleton<NetManager>.instance.m_lodAprAtlas = texture2D;
         }
+
+      //public static void ReplaceLodRgbAtlas()
+      //{
+      //    Singleton<NetManager>.instance.m_lodRgbAtlas.(textures);
+      //}
+
 
         public static void ChangeColor(float brightness, string prefab_road_name, string TextureDir)
         {

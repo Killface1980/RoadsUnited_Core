@@ -48,9 +48,8 @@ namespace RoadsUnited_Core
         }
 
         public static string modPath = getModPath();
-
         public static string currentTexturesPath_default = "None";
-
+        public static string APRMaps_Path = Path.Combine(modPath, "APRMaps");
 
         public RoadsUnited_Core textureManager;
         
@@ -234,7 +233,7 @@ namespace RoadsUnited_Core
 
 
 
-                RoadColorChanger.ReplaceLodAprAtlas(currentTexturesPath_default);
+                RoadColorChanger.ReplaceLodAprAtlas();
             }
             #endregion
 
@@ -265,11 +264,5 @@ namespace RoadsUnited_Core
 
         }
 
-#if Debug
-        public void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
-        {
-            RoadsUnited.ReplaceNetTextures(modPath);
-        } 
-#endif
     }
 }

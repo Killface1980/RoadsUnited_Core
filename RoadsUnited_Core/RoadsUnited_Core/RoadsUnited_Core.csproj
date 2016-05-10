@@ -62,6 +62,9 @@
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
     <Compile Include="RoadThemeManager\RoadThemesUtil.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Texturing\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\RoadsUnited_Core\$(TargetFileName)"

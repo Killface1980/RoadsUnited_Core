@@ -1,5 +1,4 @@
 using ColossalFramework.IO;
-using ColossalFramework.Steamworks;
 using ICities;
 using System.IO;
 using UnityEngine;
@@ -9,6 +8,8 @@ using ColossalFramework.Plugins;
 
 namespace RoadsUnited_Core
 {
+    using ColossalFramework.PlatformServices;
+
     public class ModLoader : LoadingExtensionBase
     {
         //GameObject hookGo;
@@ -18,16 +19,24 @@ namespace RoadsUnited_Core
 
         public static readonly string configFile = "RoadsUnitedCoreConfig.xml";
 
+        public static string Tex = "";
+
+        public static string Tex2A = "";
+
+        public static string Tex2B = "";
+
+        public static string Tex2C = "";
+
         public static string getModPath()
         {
             string text = ".";
-            PublishedFileId[] subscribedItems = Steam.workshop.GetSubscribedItems();
+            PublishedFileId[] subscribedItems = PlatformService.workshop.GetSubscribedItems();
             for (int i = 0; i < subscribedItems.Length; i++)
             {
                 PublishedFileId id = subscribedItems[i];
                 if (id.AsUInt64 == 633547552)
                 {
-                    text = Steam.workshop.GetSubscribedItemPath(id);
+                    text = PlatformService.workshop.GetSubscribedItemPath(id);
                     Debug.Log("Roads United Core: Workshop path: " + text);
                     break;
                 }

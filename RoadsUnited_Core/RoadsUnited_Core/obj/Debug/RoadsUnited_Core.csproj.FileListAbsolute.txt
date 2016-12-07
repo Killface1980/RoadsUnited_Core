@@ -1,0 +1,5 @@
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\bin\Debug\RoadsUnited_Core.dll
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\bin\Debug\RoadsUnited_Core.pdb
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core.csprojResolveAssemblyReference.cache
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core.dll
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core.pdb

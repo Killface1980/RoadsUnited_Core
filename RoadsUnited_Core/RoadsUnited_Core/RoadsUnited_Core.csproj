@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Configuration.cs" />
     <None Include="Hook\Hook.cs" />
     <None Include="Hook\RedirectCallsState.cs" />

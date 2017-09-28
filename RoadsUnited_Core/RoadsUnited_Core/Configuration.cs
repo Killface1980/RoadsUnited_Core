@@ -1,8 +1,4 @@
-﻿using ColossalFramework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 
 namespace RoadsUnited_Core
@@ -43,7 +39,7 @@ namespace RoadsUnited_Core
         public bool ShowToolbarButton = true;
         public bool FixateToolbarButton = false;
 
-        public string texturePackPath = "None";
+        public string texturePackPath = string.Empty;
 
         public void OnPreSerialize()
         {
@@ -80,6 +76,7 @@ namespace RoadsUnited_Core
             catch
             {
             }
+
             result = null;
             return result;
         }

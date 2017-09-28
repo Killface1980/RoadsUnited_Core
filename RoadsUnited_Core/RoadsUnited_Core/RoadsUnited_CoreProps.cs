@@ -9,22 +9,21 @@ namespace RoadsUnited_Core
         public static void ReplacePropTextures()
         {
             string tex = ModLoader.Tex;
-            string path = ModLoader.currentTexturesPath_default + "/PropTextures/";
+            string path = ModLoader.currentTexturesPath_default;
             PropCollection[] array = UnityEngine.Object.FindObjectsOfType<PropCollection>();
-            for (int i = 0; i < array.Length; i++)
+            foreach (PropCollection propCollection in array)
             {
-                PropCollection propCollection = array[i];
                 try
                 {
                     PropInfo[] prefabs = propCollection.m_prefabs;
-                    for (int j = 0; j < prefabs.Length; j++)
+                    foreach (PropInfo propInfo in prefabs)
                     {
-                        PropInfo propInfo = prefabs[j];
                         string defaultname = null;
                         if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name != null)
                         {
                             defaultname = propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name;
                         }
+
                         if (defaultname != null)
                         {
                             string propLodTexture;
@@ -39,11 +38,13 @@ namespace RoadsUnited_Core
                                 propLodTexture = Path.Combine(path, defaultname + ".dds");
                                 propLodACIMapTexture = Path.Combine(path, defaultname + "-aci.dds");
                             }
+
                             if (File.Exists(propLodTexture))
                             {
-                                //only the m_lodMaterialCombined texture is visible
+                                // only the m_lodMaterialCombined texture is visible
                                 propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(propLodTexture));
                             }
+
                             if (File.Exists(propLodACIMapTexture))
                             {
                                 propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(propLodACIMapTexture));
@@ -81,6 +82,7 @@ namespace RoadsUnited_Core
                             propInfo.m_minScale = 1f;
                         }
                     }
+
                     if (propInfo.name.Equals("Road Arrow LR"))
                     {
                         if (ModLoader.config.disable_optional_arrow_lr)
@@ -97,6 +99,7 @@ namespace RoadsUnited_Core
                         }
                     }
                 }
+
                 num += 1u;
             }
         }

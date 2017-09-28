@@ -1,9 +1,8 @@
-﻿using ColossalFramework;
-using ColossalFramework.Plugins;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+
+using ColossalFramework;
+using ColossalFramework.Plugins;
 
 namespace RoadsUnited_Core
 {
@@ -18,6 +17,7 @@ namespace RoadsUnited_Core
             {
                 return this.activePack;
             }
+
             set
             {
                 this.activePack = value;
@@ -34,6 +34,7 @@ namespace RoadsUnited_Core
                     {
                         RoadsUnited_CoreProps.ReplacePropTextures();
                     }
+
                     return;
                 }
             }
@@ -56,12 +57,14 @@ namespace RoadsUnited_Core
                             {
                                 RoadThemePack.themeName = current.name;
                             }
+
                             RoadThemePack.packPath = current.modPath;
                             list.Add(RoadThemePack);
                         }
                     }
                 }
             }
+
             return list;
         }
     }

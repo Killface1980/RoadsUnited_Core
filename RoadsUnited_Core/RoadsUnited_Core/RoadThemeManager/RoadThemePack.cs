@@ -1,7 +1,7 @@
-using ColossalFramework;
 using System;
 using System.IO;
 using System.Xml.Serialization;
+
 using UnityEngine;
 
 namespace RoadsUnited_Core
@@ -45,6 +45,7 @@ namespace RoadsUnited_Core
                 Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message.ToString()));
                 result = null;
             }
+
             return result;
         }
     }

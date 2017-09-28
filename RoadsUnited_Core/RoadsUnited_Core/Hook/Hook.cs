@@ -1,9 +1,11 @@
-﻿using ColossalFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
+using ColossalFramework;
+
 using UnityEngine;
 
 namespace RoadsUnited_Core
@@ -24,8 +26,8 @@ namespace RoadsUnited_Core
 
         public void EnableHook()
         {
-            var allFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
-            var method = typeof(NetSegment).GetMethods(allFlags).Single(c => c.Name == "RenderInstance" && c.GetParameters().Length == 3);
+            BindingFlags allFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
+            MethodInfo method = typeof(NetSegment).GetMethods(allFlags).Single(c => c.Name == "RenderInstance" && c.GetParameters().Length == 3);
             redirects.Add(method, RedirectionHelper.RedirectCalls(method, typeof(Hook4).GetMethod("RenderInstanceSegment", allFlags)));
 
             method = typeof(NetSegment).GetMethods(allFlags).Single(c => c.Name == "RenderLod");
@@ -46,10 +48,12 @@ namespace RoadsUnited_Core
             {
                 return;
             }
+
             foreach (var kvp in redirects)
             {
                 RedirectionHelper.RevertRedirect(kvp.Key, kvp.Value);
             }
+
             redirects.Clear();
             hookEnabled = false;
         }
@@ -69,6 +73,7 @@ namespace RoadsUnited_Core
                     return result;
                 }
             }
+
             result = null;
             return result;
         }
@@ -149,6 +154,7 @@ namespace RoadsUnited_Core
                                 num = num5;
                                 num3 = segment;
                             }
+
                             float num6 = -2f - num5;
                             bool flag5 = (double)num6 > (double)num2;
                             if (flag5)
@@ -165,6 +171,7 @@ namespace RoadsUnited_Core
                                 num2 = num5;
                                 num4 = segment;
                             }
+
                             float num7 = -2f - num5;
                             bool flag7 = (double)num7 > (double)num;
                             if (flag7)
@@ -175,8 +182,10 @@ namespace RoadsUnited_Core
                         }
                     }
                 }
+
                 num8 = i + 1;
             }
+
             bool start = netSegment.m_startNode == nodeID;
             bool flag8;
             netSegment.CalculateCorner(nodeSegment, true, start, false, out zero, out zero3, out flag8);
@@ -198,6 +207,7 @@ namespace RoadsUnited_Core
                     num9 = (float)(((double)num9 + (double)num10) * 0.5);
                     y = (float)(2.0 * (double)info.m_halfWidth / ((double)info.m_halfWidth + (double)info2.m_halfWidth));
                 }
+
                 float num11 = (float)((double)info.m_pavementWidth / (double)info.m_halfWidth * 0.5);
                 float w = 1f;
                 bool flag11 = num4 > 0;
@@ -212,6 +222,7 @@ namespace RoadsUnited_Core
                     num11 = (float)(((double)num11 + (double)num12) * 0.5);
                     w = (float)(2.0 * (double)info.m_halfWidth / ((double)info.m_halfWidth + (double)info3.m_halfWidth));
                 }
+
                 Vector3 vector3;
                 Vector3 vector4;
                 NetSegment.CalculateMiddlePoints(zero, -zero3, zero5, -zero7, true, true, out vector3, out vector4);
@@ -265,6 +276,7 @@ namespace RoadsUnited_Core
                 data.m_dataVector2 = new Vector4((float)((double)info.m_pavementWidth / (double)info.m_halfWidth * 0.5), 1f, (float)((double)info.m_pavementWidth / (double)info.m_halfWidth * 0.5), 1f);
                 data.m_extraData.m_dataVector4 = RenderManager.GetColorLocation(86016u + (uint)nodeID);
             }
+
             data.m_dataInt0 = segmentIndex;
             data.m_dataColor0 = info.m_color;
             data.m_dataColor0.a = 0f;
@@ -273,6 +285,7 @@ namespace RoadsUnited_Core
             {
                 Singleton<TerrainManager>.instance.GetSurfaceMapping(data.m_position, out data.m_dataTexture0, out data.m_dataTexture1, out data.m_dataVector3);
             }
+
             instanceIndex = (uint)data.m_nextInstance;
         }
 
@@ -307,7 +320,7 @@ namespace RoadsUnited_Core
             data.m_extraData.m_dataMatrix2 = NetSegment.CalculateControlMatrix(zero2, vector3, vector4, zero4, zero, vector, vector2, zero3, netnode.m_position, vScale);
             data.m_dataVector0 = new Vector4(0.5f / info.m_halfWidth, 1f / info.m_segmentLength, 1f, 1f);
             data.m_dataVector3 = RenderManager.GetColorLocation(86016u + (uint)nodeID);
-            data.m_dataInt0 = (8 | segmentIndex);
+            data.m_dataInt0 = 8 | segmentIndex;
             data.m_dataColor0 = info.m_color;
             data.m_dataColor0.a = 0f;
             bool requireSurfaceMaps = info.m_requireSurfaceMaps;
@@ -315,6 +328,7 @@ namespace RoadsUnited_Core
             {
                 Singleton<TerrainManager>.instance.GetSurfaceMapping(data.m_position, out data.m_dataTexture0, out data.m_dataTexture1, out data.m_dataVector1);
             }
+
             instanceIndex = (uint)data.m_nextInstance;
         }
 
@@ -334,13 +348,16 @@ namespace RoadsUnited_Core
                 {
                     num += netnode.CountSegments();
                 }
+
                 bool requireDirectRenderers = info.m_requireDirectRenderers;
                 if (requireDirectRenderers)
                 {
                     num += (int)netnode.m_connectCount;
                 }
+
                 result = num;
             }
+
             return result;
         }
 
@@ -362,6 +379,7 @@ namespace RoadsUnited_Core
                         position.y += Mathf.Max(5f, info.m_maxHeight);
                         Notification.RenderInstance(cameraInfo, netNode.m_problems, position, 1f);
                     }
+
                     bool flag4 = (layerMask & info.m_netLayers) == 0 || (netNode.m_flags & (NetNode.Flags.End | NetNode.Flags.Bend | NetNode.Flags.Junction)) == NetNode.Flags.None;
                     if (!flag4)
                     {
@@ -382,6 +400,7 @@ namespace RoadsUnited_Core
                                 return;
                             }
                         }
+
                         uint count = (uint)this.CalculateRendererCount(netNode, info);
                         RenderManager instance2 = Singleton<RenderManager>.instance;
                         uint num;
@@ -441,6 +460,7 @@ namespace RoadsUnited_Core
                     }
                 }
             }
+
             bool initialized = data.m_initialized;
             if (initialized)
             {
@@ -473,6 +493,7 @@ namespace RoadsUnited_Core
                                     {
                                         dataVector.w = data.m_dataFloat0;
                                     }
+
                                     bool flag9 = (node.m_connectGroup & NetInfo.ConnectGroup.Oneway) > NetInfo.ConnectGroup.None;
                                     if (flag9)
                                     {
@@ -488,6 +509,7 @@ namespace RoadsUnited_Core
 												continue;
                                             }
                                         }
+
                                         bool flag14 = flag10;
                                         if (flag14)
                                         {
@@ -506,10 +528,12 @@ namespace RoadsUnited_Core
 											i+=1;
 											continue;
                                             }
+
                                             dataVector2.x = -dataVector2.x;
                                             dataVector2.y = -dataVector2.y;
                                         }
                                     }
+
                                     instance2.m_materialBlock.Clear();
                                     instance2.m_materialBlock.AddMatrix(instance2.ID_LeftMatrix, data.m_dataMatrix0);
                                     instance2.m_materialBlock.AddMatrix(instance2.ID_RightMatrix, data.m_extraData.m_dataMatrix2);
@@ -523,11 +547,13 @@ namespace RoadsUnited_Core
                                         instance2.m_materialBlock.AddTexture(instance2.ID_SurfaceTexB, data.m_dataTexture1);
                                         instance2.m_materialBlock.AddVector(instance2.ID_SurfaceMapping, data.m_dataVector1);
                                     }
+
                                     NetManager var_30_3FE_cp_0_cp_0 = instance2;
                                     num = var_30_3FE_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                                     var_30_3FE_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(node.m_nodeMesh, data.m_position, data.m_rotation, node.m_nodeMaterial, node.m_layer, null, 0, instance2.m_materialBlock);
                                 }
+
 								i+=1;
                                 continue;
                             }
@@ -554,6 +580,7 @@ namespace RoadsUnited_Core
                                     {
                                         dataVector3.w = data.m_dataFloat0;
                                     }
+
                                     instance3.m_materialBlock.Clear();
                                     instance3.m_materialBlock.AddMatrix(instance3.ID_LeftMatrix, data.m_dataMatrix0);
                                     instance3.m_materialBlock.AddMatrix(instance3.ID_RightMatrix, data.m_extraData.m_dataMatrix2);
@@ -571,11 +598,13 @@ namespace RoadsUnited_Core
                                         instance3.m_materialBlock.AddTexture(instance3.ID_SurfaceTexB, data.m_dataTexture1);
                                         instance3.m_materialBlock.AddVector(instance3.ID_SurfaceMapping, data.m_dataVector3);
                                     }
+
                                     NetManager var_30_68B_cp_0_cp_0 = instance3;
                                     num = var_30_68B_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                                     var_30_68B_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(node2.m_nodeMesh, data.m_position, data.m_rotation, node2.m_nodeMaterial, node2.m_layer, null, 0, instance3.m_materialBlock);
                                 }
+
                                 num = j + 1;
                             }
                         }
@@ -600,6 +629,7 @@ namespace RoadsUnited_Core
                                 {
                                     dataVector4.w = data.m_dataFloat0;
                                 }
+
                                 instance4.m_materialBlock.Clear();
                                 instance4.m_materialBlock.AddMatrix(instance4.ID_LeftMatrix, data.m_dataMatrix0);
                                 instance4.m_materialBlock.AddMatrix(instance4.ID_RightMatrix, data.m_extraData.m_dataMatrix2);
@@ -617,11 +647,13 @@ namespace RoadsUnited_Core
                                     instance4.m_materialBlock.AddTexture(instance4.ID_SurfaceTexB, data.m_dataTexture1);
                                     instance4.m_materialBlock.AddVector(instance4.ID_SurfaceMapping, data.m_dataVector3);
                                 }
+
                                 NetManager var_30_8EF_cp_0_cp_0 = instance4;
                                 num = var_30_8EF_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                                 var_30_8EF_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                 Graphics.DrawMesh(node3.m_nodeMesh, data.m_position, data.m_rotation, node3.m_nodeMaterial, node3.m_layer, null, 0, instance4.m_materialBlock);
                             }
+
                             num = k + 1;
                         }
                     }
@@ -645,6 +677,7 @@ namespace RoadsUnited_Core
                                     {
                                         dataVector5.w = data.m_dataFloat0;
                                     }
+
                                     instance5.m_materialBlock.Clear();
                                     instance5.m_materialBlock.AddMatrix(instance5.ID_LeftMatrix, data.m_dataMatrix0);
                                     instance5.m_materialBlock.AddMatrix(instance5.ID_RightMatrix, data.m_extraData.m_dataMatrix2);
@@ -658,13 +691,16 @@ namespace RoadsUnited_Core
                                         instance5.m_materialBlock.AddTexture(instance5.ID_SurfaceTexB, data.m_dataTexture1);
                                         instance5.m_materialBlock.AddVector(instance5.ID_SurfaceMapping, data.m_dataVector1);
                                     }
+
                                     NetManager var_30_ADC_cp_0_cp_0 = instance5;
                                     num = var_30_ADC_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                                     var_30_ADC_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(segment4.m_segmentMesh, data.m_position, data.m_rotation, segment4.m_segmentMaterial, segment4.m_layer, null, 0, instance5.m_materialBlock);
                                 }
+
                                 num = l + 1;
                             }
+
                             int m = 0;
                             while (m < info.m_nodes.Length)
                             {
@@ -679,6 +715,7 @@ namespace RoadsUnited_Core
                                     {
                                         dataVector6.w = data.m_dataFloat0;
                                     }
+
                                     bool flag29 = (node4.m_connectGroup & NetInfo.ConnectGroup.Oneway) > NetInfo.ConnectGroup.None;
                                     if (flag29)
                                     {
@@ -716,6 +753,7 @@ namespace RoadsUnited_Core
                                             dataVector7.y = -dataVector7.y;
                                         }
                                     }
+
                                     instance5.m_materialBlock.Clear();
                                     instance5.m_materialBlock.AddMatrix(instance5.ID_LeftMatrix, data.m_dataMatrix0);
                                     instance5.m_materialBlock.AddMatrix(instance5.ID_RightMatrix, data.m_extraData.m_dataMatrix2);
@@ -729,11 +767,13 @@ namespace RoadsUnited_Core
                                         instance5.m_materialBlock.AddTexture(instance5.ID_SurfaceTexB, data.m_dataTexture1);
                                         instance5.m_materialBlock.AddVector(instance5.ID_SurfaceMapping, data.m_dataVector1);
                                     }
+
                                     NetManager var_30_E04_cp_0_cp_0 = instance5;
                                     num = var_30_E04_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                                     var_30_E04_cp_0_cp_0.m_drawCallData.m_defaultCalls = num;
                                     Graphics.DrawMesh(node4.m_nodeMesh, data.m_position, data.m_rotation, node4.m_nodeMaterial, node4.m_layer, null, 0, instance5.m_materialBlock);
 								}
+
 								m+=1;
 								continue;
                             }
@@ -741,6 +781,7 @@ namespace RoadsUnited_Core
                     }
                 }
             }
+
             instanceIndex = (uint)data.m_nextInstance;
         }
 
@@ -776,6 +817,7 @@ namespace RoadsUnited_Core
                         middlePosition.y += Mathf.Max(5f, info.m_maxHeight);
                         Notification.RenderInstance(cameraInfo, netSegment.m_problems, middlePosition, 1f);
                     }
+
                     bool flag4 = (layerMask & info.m_netLayers) == 0;
                     if (!flag4)
                     {
@@ -802,11 +844,12 @@ namespace RoadsUnited_Core
                 ushort endNode = instance.m_segments.m_buffer[(int)segmentID].m_endNode;
                 instance.m_segments.m_buffer[(int)segmentID].m_endNode = instance.m_segments.m_buffer[(int)segmentID].m_startNode;
                 instance.m_segments.m_buffer[(int)segmentID].m_startNode = endNode;
-                instance.m_segments.m_buffer[(int)segmentID].m_flags = (instance.m_segments.m_buffer[(int)segmentID].m_flags & ~NetSegment.Flags.Invert);
+                instance.m_segments.m_buffer[(int)segmentID].m_flags = instance.m_segments.m_buffer[(int)segmentID].m_flags & ~NetSegment.Flags.Invert;
                 Vector3 endDirection = instance.m_segments.m_buffer[(int)segmentID].m_endDirection;
                 instance.m_segments.m_buffer[(int)segmentID].m_endDirection = instance.m_segments.m_buffer[(int)segmentID].m_startDirection;
                 instance.m_segments.m_buffer[(int)segmentID].m_startDirection = endDirection;
             }
+
             bool dirty = data.m_dirty;
             if (dirty)
             {
@@ -826,11 +869,13 @@ namespace RoadsUnited_Core
                 {
                     colorLocation = RenderManager.GetColorLocation(86016u + (uint)instance.m_segments.m_buffer[(int)segmentID].m_startNode);
                 }
+
                 bool flag4 = NetNode.BlendJunction(instance.m_segments.m_buffer[(int)segmentID].m_endNode);
                 if (flag4)
                 {
                     vector = RenderManager.GetColorLocation(86016u + (uint)instance.m_segments.m_buffer[(int)segmentID].m_endNode);
                 }
+
                 data.m_dataVector3 = new Vector4(colorLocation.x, colorLocation.y, vector.x, vector.y);
                 bool flag5 = info.m_segments == null || info.m_segments.Length == 0;
                 if (flag5)
@@ -874,6 +919,7 @@ namespace RoadsUnited_Core
                                 instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_endNode].Info.m_netAI.GetNodeState(instance.m_segments.m_buffer[(int)segmentID].m_endNode, ref instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_endNode], segmentID, ref instance.m_segments.m_buffer[(int)segmentID], out flags2, out color2);
                             }
                         }
+
                         float startAngle = (float)instance.m_segments.m_buffer[(int)segmentID].m_cornerAngleStart * 0.02454369f;
                         float endAngle = (float)instance.m_segments.m_buffer[(int)segmentID].m_cornerAngleEnd * 0.02454369f;
                         int num = 0;
@@ -914,12 +960,14 @@ namespace RoadsUnited_Core
                     data.m_dataMatrix0 = NetSegment.CalculateControlMatrix(vector2, vector6, vector7, vector5, vector4, vector8, vector9, vector3, data.m_position, vScale);
                     data.m_dataMatrix1 = NetSegment.CalculateControlMatrix(vector4, vector8, vector9, vector3, vector2, vector6, vector7, vector5, data.m_position, vScale);
                 }
+
                 bool requireSurfaceMaps = info.m_requireSurfaceMaps;
                 if (requireSurfaceMaps)
                 {
                     Singleton<TerrainManager>.instance.GetSurfaceMapping(data.m_position, out data.m_dataTexture0, out data.m_dataTexture1, out data.m_dataVector1);
                 }
             }
+
             bool flag9 = info.m_segments != null;
             if (flag9)
             {
@@ -938,12 +986,14 @@ namespace RoadsUnited_Core
                         {
                             dataVector.w = data.m_dataFloat0;
                         }
+
                         bool flag12 = flag11;
                         if (flag12)
                         {
                             dataVector2.x = -dataVector2.x;
                             dataVector2.y = -dataVector2.y;
                         }
+
                         instance.m_materialBlock.Clear();
                         instance.m_materialBlock.AddMatrix(instance.ID_LeftMatrix, data.m_dataMatrix0);
                         instance.m_materialBlock.AddMatrix(instance.ID_RightMatrix, data.m_dataMatrix1);
@@ -957,14 +1007,17 @@ namespace RoadsUnited_Core
                             instance.m_materialBlock.AddTexture(instance.ID_SurfaceTexB, data.m_dataTexture1);
                             instance.m_materialBlock.AddVector(instance.ID_SurfaceMapping, data.m_dataVector1);
                         }
+
                         NetManager var_66_AE1_cp_0_cp_0 = instance;
                         num4 = var_66_AE1_cp_0_cp_0.m_drawCallData.m_defaultCalls + 1;
                         var_66_AE1_cp_0_cp_0.m_drawCallData.m_defaultCalls = num4;
                         Graphics.DrawMesh(segment.m_segmentMesh, data.m_position, data.m_rotation, segment.m_segmentMaterial, segment.m_layer, null, 0, instance.m_materialBlock);
                     }
+
                     num4 = i + 1;
                 }
             }
+
             bool flag14 = flag;
             if (flag14)
             {
@@ -972,11 +1025,12 @@ namespace RoadsUnited_Core
                 instance.m_segments.m_buffer[(int)segmentID].m_endNode = instance.m_segments.m_buffer[(int)segmentID].m_startNode;
                 instance.m_segments.m_buffer[(int)segmentID].m_startNode = endNode2;
                 NetSegment[] var_71_BC2_cp_0_cp_0 = instance.m_segments.m_buffer;
-                var_71_BC2_cp_0_cp_0[(int)segmentID].m_flags = (var_71_BC2_cp_0_cp_0[(int)segmentID].m_flags | NetSegment.Flags.Invert);
+                var_71_BC2_cp_0_cp_0[(int)segmentID].m_flags = var_71_BC2_cp_0_cp_0[(int)segmentID].m_flags | NetSegment.Flags.Invert;
                 Vector3 endDirection2 = instance.m_segments.m_buffer[(int)segmentID].m_endDirection;
                 instance.m_segments.m_buffer[(int)segmentID].m_endDirection = instance.m_segments.m_buffer[(int)segmentID].m_startDirection;
                 instance.m_segments.m_buffer[(int)segmentID].m_startDirection = endDirection2;
             }
+
             bool flag15 = info.m_lanes == null || ((layerMask & info.m_treeLayers) == 0 && !cameraInfo.CheckRenderDistance(data.m_position, info.m_maxPropDistance + 128f));
             if (!flag15)
             {
@@ -998,6 +1052,7 @@ namespace RoadsUnited_Core
                     instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_startNode].Info.m_netAI.GetNodeState(instance.m_segments.m_buffer[(int)segmentID].m_startNode, ref instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_startNode], segmentID, ref instance.m_segments.m_buffer[(int)segmentID], out startFlags, out startColor);
                     instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_endNode].Info.m_netAI.GetNodeState(instance.m_segments.m_buffer[(int)segmentID].m_endNode, ref instance.m_nodes.m_buffer[(int)instance.m_segments.m_buffer[(int)segmentID].m_endNode], segmentID, ref instance.m_segments.m_buffer[(int)segmentID], out endFlags, out endColor);
                 }
+
                 float startAngle2 = (float)instance.m_segments.m_buffer[(int)segmentID].m_cornerAngleStart * 0.02454369f;
                 float endAngle2 = (float)instance.m_segments.m_buffer[(int)segmentID].m_cornerAngleEnd * 0.02454369f;
                 Vector4 objectIndex = new Vector4(data.m_dataVector3.x, data.m_dataVector3.y, 1f, data.m_dataFloat0);
@@ -1009,6 +1064,7 @@ namespace RoadsUnited_Core
                     objectIndex.z = 0f;
                     objectIndex2.z = 0f;
                 }
+
                 int num5 = (info.m_segments == null || info.m_segments.Length == 0) ? 0 : -1;
                 uint num6 = instance.m_segments.m_buffer[(int)segmentID].m_lanes;
                 int num7 = 0;

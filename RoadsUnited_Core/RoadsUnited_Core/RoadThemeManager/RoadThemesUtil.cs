@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
+﻿using System.Reflection;
 
 namespace RoadsUnited_Core
 {
@@ -21,8 +18,10 @@ namespace RoadsUnited_Core
                     break;
                 }
             }
+
             return (Q)((object)fieldInfo.GetValue(o));
         }
+
         public static void WritePrivate<T, Q>(T o, string fieldName, object value)
         {
             FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -37,6 +36,7 @@ namespace RoadsUnited_Core
                     break;
                 }
             }
+
             fieldInfo.SetValue(o, value);
         }
 
@@ -46,6 +46,7 @@ namespace RoadsUnited_Core
             {
                 return pack.themeDescription;
             }
+
             return "No Theme Description";
         }
     }

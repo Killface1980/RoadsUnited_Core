@@ -22,6 +22,8 @@
         public static string _MainTex = "_MainTex";
 
         public static List<string> AllTex = new List<string> { _MainTex, _APRMap };
+
+        public static string _XYSMap= "_XYSMap";
     }
 
     public static class RU_CoreDicts

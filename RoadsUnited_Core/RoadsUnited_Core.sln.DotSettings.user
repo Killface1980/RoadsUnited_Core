@@ -4,4 +4,8 @@
   &lt;Assembly Path="C:\Program Files (x86)\Steam\SteamApps\workshop\content\294100\818773962\Assemblies\HugsLib.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Steam\SteamApps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
   &lt;Assembly Path="\\Mac\AllFiles\Applications\Steam Games\SteamApps\common\Cities_Skylines\Cities.app\Contents\Resources\Data\Managed\ColossalManaged.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/Coords/@EntryValue">(Doc Ln 262 Col 21)</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/FileId/@EntryValue">87DC24F2-3517-4EEB-9938-F563C9AE9B85/f:Class2.cs</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/Owner/@EntryValue">NumberedBookmarkManager</s:String></wpf:ResourceDictionary>

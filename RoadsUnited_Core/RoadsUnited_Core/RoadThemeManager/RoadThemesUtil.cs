@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core
 {
+    using System.Reflection;
+
     public static class RoadThemesUtil
     {
         public static Q ReadPrivate<T, Q>(T o, string fieldName)
@@ -19,7 +19,7 @@ namespace RoadsUnited_Core
                 }
             }
 
-            return (Q)((object)fieldInfo.GetValue(o));
+            return (Q)fieldInfo.GetValue(o);
         }
 
         public static void WritePrivate<T, Q>(T o, string fieldName, object value)

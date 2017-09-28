@@ -1,15 +1,15 @@
-using System.Collections.Generic;
-using System.Linq;
-
-using ColossalFramework;
-using ColossalFramework.UI;
-
-using ICities;
-
-using UnityEngine;
-
 namespace RoadsUnited_Core
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using ColossalFramework;
+    using ColossalFramework.UI;
+
+    using ICities;
+
+    using UnityEngine;
+
     public class RoadsUnited_CoreMod : IUserMod
     {
         // public const UInt64 workshop_id = 633547552uL;
@@ -25,7 +25,7 @@ namespace RoadsUnited_Core
         {
             get
             {
-                return "Replaces road textures and other road feature with more European ones.";
+                return "Replaces road textures and other road features.";
             }
         }
 
@@ -177,31 +177,12 @@ namespace RoadsUnited_Core
             RoadsUnited_CoreProps.ChangeArrowProp();
         }
 
-        private void EventCheckCreateVanillaDictionary(bool c)
-        {
-            ModLoader.config.create_vanilla_dictionary = c;
-            ModLoader.SaveConfig();
-        }
-
-        private void EventCheckUseCustomTextures(bool c)
-        {
-            ModLoader.config.use_custom_textures = c;
-            ModLoader.SaveConfig();
-        }
-
         private void EventCheckUseCustomColors(bool c)
         {
             ModLoader.config.use_custom_colors = c;
             ModLoader.SaveConfig();
         }
 
-        private void EventReloadTextures()
-        {
-            RoadsUnited_Core.ApplyVanillaDictionary();
-            RoadsUnited_Core.ReplaceNetTextures();
-
-            ModLoader.SaveConfig();
-        }
 
         private void EventResetConfig()
         {
@@ -218,13 +199,10 @@ namespace RoadsUnited_Core
 
         #region RoadThemeDropdownMenu
 
-        public static UICheckBox checkbox = null;
 
-        public static UICheckBox checkbox2 = null;
+        public static UIDropDown dropdown;
 
-        public static UIDropDown dropdown = null;
-
-        public static UIPanel panel1 = null;
+        public static UIPanel panel1;
 
         // public static UIPanel panel2 = null;
         public static UITextField infoText = null;
@@ -237,7 +215,7 @@ namespace RoadsUnited_Core
 
         public static List<RoadThemePack> packs;
 
-        public static int selectedPackID = 0;
+        public static int selectedPackID;
 
         #endregion
 
@@ -263,14 +241,14 @@ namespace RoadsUnited_Core
             panel1 = (UIPanel)((UIPanel)((UIHelper)uIHelperBase2).self).parent;
             dropdown = (UIDropDown)uIHelperBase2.AddDropdown(
                 "Select Road Theme",
-                RoadsUnited_CoreMod.filteredPackNames.ToArray(),
+                filteredPackNames.ToArray(),
                 ModLoader.config.selected_pack,
                 delegate(int selectedIndex)
                     {
                         if (selectedIndex == 0)
                         {
                             ModLoader.config.use_custom_textures = false;
-                            RoadsUnited_Core.ApplyVanillaDictionary();
+                            RoadsUnited_Core.ApplyVanillaDicts();
                             ModLoader.config.selected_pack = selectedIndex;
                             ModLoader.SaveConfig();
                         }
@@ -284,7 +262,7 @@ namespace RoadsUnited_Core
                             // RoadsUnited_CoreMod.infoText.text = RoadThemesUtil.GetDescription(RoadsUnited_CoreMod.packs.Find((RoadThemePack pack) => pack.themeName == RoadsUnited_CoreMod.filteredPackNames[RoadsUnited_CoreMod.dropdown.selectedIndex]));
                             // Debug.Log("Got description");
                             Singleton<RoadThemeManager>.instance.ActivePack = packs.Find(
-                                (RoadThemePack pack) => pack.themeName == filteredPackNames[selectedIndex]);
+                                pack => pack.themeName == filteredPackNames[selectedIndex]);
                             Debug.Log("Set active pack");
                             ModLoader.SaveConfig();
 
@@ -297,10 +275,10 @@ namespace RoadsUnited_Core
                             // RoadsUnited_CoreMod.panel2.isVisible = false;
                         }
 
-                        RoadsUnited_CoreMod.selectedPackID = selectedIndex;
+                        selectedPackID = selectedIndex;
                     });
-            RoadsUnited_CoreMod.dropdown.width = 600f;
-            if (RoadsUnited_CoreMod.dropdown.selectedIndex == 0)
+            dropdown.width = 600f;
+            if (dropdown.selectedIndex == 0)
             {
                 // RoadsUnited_CoreMod.panel2.isVisible = false;
             }
@@ -385,14 +363,14 @@ namespace RoadsUnited_Core
                 0.8f,
                 0.05f,
                 ModLoader.config.small_road_brightness,
-                new OnValueChanged(EventSmallRoadBrightness));
+                this.EventSmallRoadBrightness);
             uIHelperSmallRoads.AddSlider(
                 "Decoration (grass and trees)",
                 0.2f,
                 0.8f,
                 0.05f,
                 ModLoader.config.small_road_decoration,
-                new OnValueChanged(EventSmallRoadDecorationBrightness));
+                this.EventSmallRoadDecorationBrightness);
 
             UIHelperBase uIHelperMediumRoads = helper.AddGroup("Medium Roads");
             uIHelperMediumRoads.AddSlider(
@@ -401,14 +379,14 @@ namespace RoadsUnited_Core
                 0.8f,
                 0.05f,
                 ModLoader.config.medium_road_brightness,
-                new OnValueChanged(EventMediumRoadBrightness));
+                this.EventMediumRoadBrightness);
             uIHelperMediumRoads.AddSlider(
                 "Decoration (grass and trees)",
                 0.2f,
                 0.8f,
                 0.05f,
                 ModLoader.config.medium_road_decoration_brightness,
-                new OnValueChanged(EventMediumRoadDecorationBrightness));
+                this.EventMediumRoadDecorationBrightness);
 
             UIHelperBase uIHelperLargeRoads = helper.AddGroup("Large Roads");
             uIHelperLargeRoads.AddSlider(
@@ -417,14 +395,14 @@ namespace RoadsUnited_Core
                 0.8f,
                 0.05f,
                 ModLoader.config.large_road_brightness,
-                new OnValueChanged(EventLargeRoadBrightness));
+                this.EventLargeRoadBrightness);
             uIHelperLargeRoads.AddSlider(
                 "Decoration (grass and trees)",
                 0.2f,
                 0.8f,
                 0.05f,
                 ModLoader.config.large_road_decoration_brightness,
-                new OnValueChanged(EventLargeRoadDecorationBrightness));
+                this.EventLargeRoadDecorationBrightness);
 
             UIHelperBase uIHelperHighways = helper.AddGroup("Highways");
             uIHelperHighways.AddSlider(
@@ -433,14 +411,14 @@ namespace RoadsUnited_Core
                 0.8f,
                 0.05f,
                 ModLoader.config.highway_brightness,
-                new OnValueChanged(EventHighwayBrightness));
+                this.EventHighwayBrightness);
             uIHelperHighways.AddSlider(
                 "NExt National Road",
                 0.2f,
                 0.8f,
                 0.05f,
                 ModLoader.config.highway_national_brightness,
-                new OnValueChanged(EventHighwayNationalBrightness));
+                this.EventHighwayNationalBrightness);
         }
     }
 }

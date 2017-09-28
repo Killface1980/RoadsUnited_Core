@@ -55,6 +55,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Strings.cs" />
     <None Include="Hook\Hook.cs" />
     <None Include="Hook\RedirectCallsState.cs" />
     <None Include="Hook\RedirectionHelper.cs" />

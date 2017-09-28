@@ -138,13 +138,21 @@
                                 CODebugBase<LogChannel>.Error(
                                     LogChannel.Core,
                                     string.Concat(
-                                        new[] { e.m_prefabInfo.gameObject.name, ": ", e.Message, "\n", e.StackTrace }),
+                                        e.m_prefabInfo.gameObject.name,
+                                        ": ",
+                                        e.Message,
+                                        "\n",
+                                        e.StackTrace),
                                     e.m_prefabInfo.gameObject);
                                 LoadingManager expr_53B = Singleton<LoadingManager>.instance;
                                 string brokenAssets = expr_53B.m_brokenAssets;
                                 expr_53B.m_brokenAssets =
                                     string.Concat(
-                                        new[] { brokenAssets, "\n", e.m_prefabInfo.gameObject.name, ": ", e.Message });
+                                        brokenAssets,
+                                        "\n",
+                                        e.m_prefabInfo.gameObject.name,
+                                        ": ",
+                                        e.Message);
                             }
                         }
                     }
@@ -252,13 +260,21 @@
                                 CODebugBase<LogChannel>.Error(
                                     LogChannel.Core,
                                     string.Concat(
-                                        new[] { e2.m_prefabInfo.gameObject.name, ": ", e2.Message, "\n", e2.StackTrace }),
+                                        e2.m_prefabInfo.gameObject.name,
+                                        ": ",
+                                        e2.Message,
+                                        "\n",
+                                        e2.StackTrace),
                                     e2.m_prefabInfo.gameObject);
                                 LoadingManager expr_9DF = Singleton<LoadingManager>.instance;
                                 string brokenAssets = expr_9DF.m_brokenAssets;
                                 expr_9DF.m_brokenAssets =
                                     string.Concat(
-                                        new[] { brokenAssets, "\n", e2.m_prefabInfo.gameObject.name, ": ", e2.Message });
+                                        brokenAssets,
+                                        "\n",
+                                        e2.m_prefabInfo.gameObject.name,
+                                        ": ",
+                                        e2.Message);
                             }
                         }
                     }
@@ -329,12 +345,12 @@
                     PrefabException e3 = ex3;
                     CODebugBase<LogChannel>.Error(
                         LogChannel.Core,
-                        string.Concat(new[] { e3.m_prefabInfo.gameObject.name, ": ", e3.Message, "\n", e3.StackTrace }),
+                        string.Concat(e3.m_prefabInfo.gameObject.name, ": ", e3.Message, "\n", e3.StackTrace),
                         e3.m_prefabInfo.gameObject);
                     LoadingManager expr_E50 = Singleton<LoadingManager>.instance;
                     string brokenAssets = expr_E50.m_brokenAssets;
                     expr_E50.m_brokenAssets =
-                        string.Concat(new[] { brokenAssets, "\n", e3.m_prefabInfo.gameObject.name, ": ", e3.Message });
+                        string.Concat(brokenAssets, "\n", e3.m_prefabInfo.gameObject.name, ": ", e3.Message);
                 }
             }
 

@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace RoadsUnited_Core
 {
+    using UnityEngine;
+
     public class RoadColorChanger : MonoBehaviour
     {
         public static Configuration config;

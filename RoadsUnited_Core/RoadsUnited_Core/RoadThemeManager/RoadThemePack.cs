@@ -1,11 +1,11 @@
-using System;
-using System.IO;
-using System.Xml.Serialization;
-
-using UnityEngine;
-
 namespace RoadsUnited_Core
 {
+    using System;
+    using System.IO;
+    using System.Xml.Serialization;
+
+    using UnityEngine;
+
     public class RoadThemePack
     {
         public string themeName;
@@ -42,7 +42,7 @@ namespace RoadsUnited_Core
             }
             catch (Exception ex)
             {
-                Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message.ToString()));
+                Debug.Log(string.Format("[{0}]: Error Parsing {1}: {2}", filePath, ex.Message));
                 result = null;
             }
 

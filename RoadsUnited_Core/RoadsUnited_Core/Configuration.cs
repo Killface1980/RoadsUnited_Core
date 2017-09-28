@@ -1,63 +1,49 @@
-﻿using System.IO;
-using System.Xml.Serialization;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Xml.Serialization;
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "StyleCop.SA1310")]
+    [SuppressMessage("ReSharper", "StyleCop.SA1401")]
+    [SuppressMessage("ReSharper", "StyleCop.SA1307")]
     public class Configuration
     {
-        public bool create_vanilla_dictionary = true;
+        #region Public Fields
 
-        public bool use_custom_textures = true;
-        public bool use_custom_colors = true;
+        public int basic_road_parking = 0;
+        public bool create_vanilla_dictionary = true;
 
         public bool disable_optional_arrow_lfr = false;
         public bool disable_optional_arrow_lr = false;
-
-        public int selected_pack = 0;
-
-        public int basic_road_parking = 0;
-        public int medium_road_parking = 0;
-        public int medium_road_grass_parking = 0;
-        public int medium_road_trees_parking = 0;
-        public int medium_road_bus_parking = 0;
-        public int large_road_parking = 0;
-        public int large_road_bus_parking = 0;
-        public int large_oneway_parking = 0;
-
-        public float ToolbarButtonX;
-        public float ToolbarButtonY;
-
-        public float small_road_brightness = 0.4f;
-        public float small_road_decoration = 0.4f;
-        public float medium_road_brightness = 0.4f;
-        public float medium_road_decoration_brightness = 0.4f;
-        public float large_road_brightness = 0.4f;
-        public float large_road_decoration_brightness = 0.4f;
+        public bool FixateToolbarButton = false;
         public float highway_brightness = 0.4f;
         public float highway_national_brightness = 0.4f;
-
+        public int large_oneway_parking = 0;
+        public float large_road_brightness = 0.4f;
+        public int large_road_bus_parking = 0;
+        public float large_road_decoration_brightness = 0.4f;
+        public int large_road_parking = 0;
+        public float medium_road_brightness = 0.4f;
+        public int medium_road_bus_parking = 0;
+        public float medium_road_decoration_brightness = 0.4f;
+        public int medium_road_grass_parking = 0;
+        public int medium_road_parking = 0;
+        public int medium_road_trees_parking = 0;
+        public int selected_pack = 0;
         public bool ShowToolbarButton = true;
-        public bool FixateToolbarButton = false;
-
+        public float small_road_brightness = 0.4f;
+        public float small_road_decoration = 0.4f;
         public string texturePackPath = string.Empty;
+        public float ToolbarButtonX;
+        public float ToolbarButtonY;
+        public bool use_custom_colors = true;
+        public bool use_custom_textures = true;
 
-        public void OnPreSerialize()
-        {
-        }
+        #endregion Public Fields
 
-        public void OnPostDeserialize()
-        {
-        }
-
-        public static void Serialize(string filename, Configuration config)
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
-            using (StreamWriter streamWriter = new StreamWriter(filename))
-            {
-                config.OnPreSerialize();
-                xmlSerializer.Serialize(streamWriter, config);
-            }
-        }
+        #region Public Methods
 
         public static Configuration Deserialize(string filename)
         {
@@ -80,5 +66,25 @@ namespace RoadsUnited_Core
             result = null;
             return result;
         }
+
+        public static void Serialize(string filename, Configuration config)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
+            using (StreamWriter streamWriter = new StreamWriter(filename))
+            {
+                config.OnPreSerialize();
+                xmlSerializer.Serialize(streamWriter, config);
+            }
+        }
+
+        public void OnPostDeserialize()
+        {
+        }
+
+        public void OnPreSerialize()
+        {
+        }
+
+        #endregion Public Methods
     }
 }

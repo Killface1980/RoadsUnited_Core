@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-using ColossalFramework;
-using ColossalFramework.Plugins;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core
 {
+    using System.Collections.Generic;
+    using System.IO;
+
+    using ColossalFramework;
+    using ColossalFramework.Plugins;
+
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
         public bool isLoaded;
@@ -21,21 +21,24 @@ namespace RoadsUnited_Core
             set
             {
                 this.activePack = value;
-                if (this.activePack != null)
+                if (this.activePack == null)
                 {
-                    ModLoader.config.texturePackPath = Singleton<RoadThemeManager>.instance.activePack.packPath;
-                    ModLoader.SaveConfig();
-                    RoadsUnited_Core.ApplyVanillaDictionary();
-                    RoadsUnited_Core.ReplaceNetTextures();
-                    if (ModLoader.config.selected_pack == 0)
-                    {
-                    }
-                    else
-                    {
-                        RoadsUnited_CoreProps.ReplacePropTextures();
-                    }
-
                     return;
+                }
+                ModLoader.config.texturePackPath = instance.activePack.packPath;
+                ModLoader.SaveConfig();
+
+                RoadsUnited_Core.ApplyVanillaDicts();
+
+                RoadsUnited_Core.ReplaceNetTextures();
+                RoadsUnited_CoreProps.ReplacePropTextures();
+
+                if (ModLoader.config.selected_pack == 0)
+                {
+                }
+                else
+                {
+                    RoadsUnited_CoreProps.ReplacePropTextures();
                 }
             }
         }

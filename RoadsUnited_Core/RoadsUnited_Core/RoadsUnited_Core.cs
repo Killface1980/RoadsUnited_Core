@@ -12,7 +12,6 @@
     {
         public static Configuration config;
 
-        public static string ext_DDS = ".dds";
 
         public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
 
@@ -507,7 +506,7 @@
                         {
                             ReplaceNExtSegments(netInfo, segment);
 
-                            #region NExt Avenues Default
+                            
 
                             if (netInfo.name.Contains("Medium Avenue") && !netInfo.name.Contains("TL"))
                             {
@@ -661,7 +660,7 @@
                                 segment.m_lodRenderDistance = 2500;
                             }
 
-                            #endregion
+                            
 
                             #region NExt Highways Default
 
@@ -1462,7 +1461,7 @@
                                                 "Oneway_RoadSmallElevatedSegment_D" + ext_DDS)));
                                 }
 
-                                #region Large Oneway
+                                
 
                                 if (segment.m_mesh.name.Equals("LargeRoadSegmentBusSide") && File.Exists(
                                         Path.Combine(
@@ -1505,7 +1504,7 @@
                                         "RoadLargeOnewaySegment_d_BusSide" + ext_DDS);
                                 }
 
-                                #endregion
+                                
                             }
 
                             if (segment.m_mesh.name.Equals("SmallRoadSegmentBusSide"))
@@ -2036,7 +2035,7 @@
                             string segmentMaterialAPRMap_name = Path.Combine(
                                 ModLoader.currentTexturesPath_default,
                                 segment.m_segmentMaterial.GetTexture(TexType._APRMap).name + ext_DDS);
-                            Debug.Log(segmentMaterialAPRMap_name);
+
                             {
                                 // APRs!!!!!
                                 if (segment.m_segmentMaterial.GetTexture(TexType._APRMap).name

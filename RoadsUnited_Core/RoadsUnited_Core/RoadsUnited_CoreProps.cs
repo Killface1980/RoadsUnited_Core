@@ -1,16 +1,19 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core
 {
+    using System;
+    using System.IO;
+
+    using ColossalFramework;
+
+    using UnityEngine;
+
     public class RoadsUnited_CoreProps : MonoBehaviour
     {
         public static void ReplacePropTextures()
         {
             string tex = ModLoader.Tex;
             string path = ModLoader.currentTexturesPath_default;
-            PropCollection[] array = UnityEngine.Object.FindObjectsOfType<PropCollection>();
+            PropCollection[] array = FindObjectsOfType<PropCollection>();
             foreach (PropCollection propCollection in array)
             {
                 try
@@ -24,7 +27,7 @@ namespace RoadsUnited_Core
                             defaultname = propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name;
                         }
 
-                        if (defaultname != null)
+                        if (!defaultname.IsNullOrWhiteSpace())
                         {
                             string propLodTexture;
                             string propLodACIMapTexture;
@@ -42,12 +45,12 @@ namespace RoadsUnited_Core
                             if (File.Exists(propLodTexture))
                             {
                                 // only the m_lodMaterialCombined texture is visible
-                                propInfo.m_lodMaterialCombined.SetTexture("_MainTex", RoadsUnited_Core.LoadTextureDDS(propLodTexture));
+                                propInfo.m_lodMaterialCombined.SetTexture("_MainTex", propLodTexture.LoadTextureDDS());
                             }
 
                             if (File.Exists(propLodACIMapTexture))
                             {
-                                propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", RoadsUnited_Core.LoadTextureDDS(propLodACIMapTexture));
+                                propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", propLodACIMapTexture.LoadTextureDDS());
                             }
                         }
                     }
@@ -61,7 +64,7 @@ namespace RoadsUnited_Core
         public static void ChangeArrowProp()
         {
             uint num = 0u;
-            while ((ulong)num < (ulong)((long)PrefabCollection<PropInfo>.LoadedCount()))
+            while (num < (ulong)PrefabCollection<PropInfo>.LoadedCount())
             {
                 PropInfo prefab = PrefabCollection<PropInfo>.GetLoaded(num);
                 if (!(prefab == null))

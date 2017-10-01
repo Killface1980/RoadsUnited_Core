@@ -30,19 +30,7 @@ namespace RoadsUnited_Core
         public static string GetModPath()
         {
             string text = ".";
-            PublishedFileId[] subscribedItems = PlatformService.workshop.GetSubscribedItems();
-            for (int i = 0; i < subscribedItems.Length; i++)
-            {
-                PublishedFileId id = subscribedItems[i];
-                if (id.AsUInt64 == 633547552)
-                {
-                    text = PlatformService.workshop.GetSubscribedItemPath(id);
-                    Debug.Log("Roads United Core: Workshop path: " + text);
-                    break;
-                }
-            }
-
-            string path = DataLocation.modsPath + "/RoadsUnited_Core";
+            string path = DataLocation.addonsPath + "/Mods/RoadsUnitedCore";
             Debug.Log("Roads United Core: " + path);
             string result;
             if (Directory.Exists(path))
@@ -52,8 +40,22 @@ namespace RoadsUnited_Core
             }
             else
             {
+                PublishedFileId[] subscribedItems = PlatformService.workshop.GetSubscribedItems();
+                for (int i = 0; i < subscribedItems.Length; i++)
+                {
+                    PublishedFileId id = subscribedItems[i];
+                    if (id.AsUInt64 == 633547552)
+                    {
+                        text = PlatformService.workshop.GetSubscribedItemPath(id);
+                        Debug.Log("Roads United Core: Workshop path: " + text);
+                        break;
+                    }
+                }
+
                 result = text;
             }
+
+
 
             return result;
         }
@@ -63,6 +65,8 @@ namespace RoadsUnited_Core
         public static string currentTexturesPath_default = "None";
 
         public static string APRMaps_Path = Path.Combine(modPath, "APRMaps");
+
+        public static string Export_Path = Path.Combine(modPath, "Export");
 
         public static string themeName = "None";
 

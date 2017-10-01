@@ -52,7 +52,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Statics\RoadPos.cs" />
+    <Compile Include="TextureExporter.cs" />
     <None Include="Stuff\NetInfoClasses.cs" />
     <None Include="Stuff\NetInfoVersion.cs" />
     <None Include="Stuff\NetInfos.cs" />

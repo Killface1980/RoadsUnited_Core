@@ -4,6 +4,8 @@
 
     using ColossalFramework;
 
+    using JetBrains.Annotations;
+
     using UnityEngine;
 
     public class LODResetter
@@ -14,20 +16,82 @@
 
         private static Texture2D m_lodXysAtlas;
 
-        private static Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
+        private static Texture2D ScaleTexture(Texture2D sourceTex, int targetWidth, int targetHeight)
         {
-            Texture2D result = new Texture2D(targetWidth, targetHeight, source.format, true);
-            Color[] rpixels = result.GetPixels(0);
-            float incX = (1.0f / (float)targetWidth);
-            float incY = (1.0f / (float)targetHeight);
-            for (int px = 0; px < rpixels.Length; px++)
+            float warpFactorX = 1f;
+            float warpFactorY = 1f;
+            Color[] destPix;
+
+            Texture2D scaleTex = MakeReadable(sourceTex);
+
+            var destTex = new Texture2D(targetWidth, targetHeight, TextureFormat.ARGB32, false);
+            destPix = new Color[destTex.width * destTex.height];
+            int y = 0;
+            while (y < destTex.height)
             {
-                rpixels[px] = source.GetPixelBilinear(incX * ((float)px % targetWidth), incY * ((float)Mathf.Floor(px / targetWidth)));
+                int x = 0;
+                while (x < destTex.width)
+                {
+                    float xFrac = x * 1.0F / (destTex.width - 1);
+                    float yFrac = y * 1.0F / (destTex.height - 1);
+                    float warpXFrac = Mathf.Pow(xFrac, warpFactorX);
+                    float warpYFrac = Mathf.Pow(yFrac, warpFactorY);
+                    destPix[y * destTex.width + x] = scaleTex.GetPixelBilinear(warpXFrac, warpYFrac);
+                    x++;
+                }
+                y++;
             }
-            result.SetPixels(rpixels, 0);
-            result.Apply();
-            return result;
+            destTex.SetPixels(destPix);
+            destTex.Apply();
+            Object.Destroy(scaleTex);
+
+            return destTex;
+            // try
+            // {
+            //     ScaledTexDict.Add(xx, destTex);
+            // }
+            // catch (ArgumentNullException argumentNullException)
+            // {
+            // }
         }
+
+        public static Texture2D MakeReadable([CanBeNull] Texture2D sourceTex)
+        {
+            if (sourceTex == null)
+            {
+                return null;
+            }
+            // Create a temporary RenderTexture of the same size as the texture
+            RenderTexture tmp = RenderTexture.GetTemporary(
+                sourceTex.width,
+                sourceTex.height,
+                0,
+                RenderTextureFormat.Default,
+                RenderTextureReadWrite.Linear);
+
+            // Blit the pixels on texture to the RenderTexture
+            Graphics.Blit(sourceTex, tmp);
+
+            // Set the current RenderTexture to the temporary one we created
+            RenderTexture.active = tmp;
+
+            // Create a new readable Texture2D to copy the pixels to it
+            Texture2D myTexture2D = new Texture2D(sourceTex.width, sourceTex.height, TextureFormat.ARGB32, false);
+
+            // Copy the pixels from the RenderTexture to the new Texture
+            myTexture2D.ReadPixels(new Rect(0, 0, tmp.width, tmp.height), 0, 0);
+            myTexture2D.name = sourceTex.name;
+            myTexture2D.Apply();
+
+            // Reset the active RenderTexture
+            //    RenderTexture.active = previous;
+
+            // Release the temporary RenderTexture
+            RenderTexture.ReleaseTemporary(tmp);
+            return myTexture2D;
+            // "myTexture2D" now has the same pixels from "texture" and it's readable.
+        }
+
 
         // NetManager
         public static void ResetLOD()
@@ -100,6 +164,15 @@
                                         if (apr == null)
                                         {
                                             throw new PrefabException(info, "LOD apr null");
+                                        }
+
+                                        if (xys.width != rgb.width || xys.height != rgb.height)
+                                        {
+                                            segmentInfo.m_lodMaterial.SetTexture(TexType._MainTex, ScaleTexture(rgb, xys.width, xys.height));
+                                        }
+                                        if (apr.width != rgb.width || apr.height != rgb.height)
+                                        {
+                                            segmentInfo.m_lodMaterial.SetTexture(TexType._APRMap, ScaleTexture(apr, xys.width, xys.height));
                                         }
 
                                         if (xys.width != rgb.width || xys.height != rgb.height)
@@ -226,6 +299,14 @@
                                             throw new PrefabException(info, "LOD apr null");
                                         }
 
+                                        if (xys2.width != rgb2.width || xys2.height != rgb2.height)
+                                        {
+                                            nodeInfo.m_lodMaterial.SetTexture(TexType._MainTex, ScaleTexture(rgb2, xys2.width, xys2.height));
+                                        }
+                                        if (apr2.width != rgb2.width || apr2.height != rgb2.height)
+                                        {
+                                            nodeInfo.m_lodMaterial.SetTexture(TexType._APRMap, ScaleTexture(apr2, xys2.width, xys2.height));
+                                        }
 
 
                                         if (xys2.width != rgb2.width || xys2.height != rgb2.height)
@@ -287,9 +368,9 @@
                                         "\n",
                                         e2.StackTrace),
                                     e2.m_prefabInfo.gameObject);
-                                LoadingManager expr_9DF = Singleton<LoadingManager>.instance;
-                                string brokenAssets = expr_9DF.m_brokenAssets;
-                                expr_9DF.m_brokenAssets =
+                                LoadingManager instance = Singleton<LoadingManager>.instance;
+                                string brokenAssets = instance.m_brokenAssets;
+                                instance.m_brokenAssets =
                                     string.Concat(
                                         brokenAssets,
                                         "\n",

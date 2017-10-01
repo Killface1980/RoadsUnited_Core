@@ -36,11 +36,6 @@
                     "Electricity"
                 };
 
-        private static Texture2D acimapTex;
-
-        private static Texture2D aprmapTex;
-
-        private static Texture2D defaultmapTex;
         private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
 
         public static readonly string ExtDDS = ".dds";
@@ -57,82 +52,6 @@
 
         public static void ApplyVanillaPropDictionary()
         {
-            uint num = 0u;
-            while (num < (ulong)PrefabCollection<NetInfo>.LoadedCount())
-            {
-                NetInfo loaded = PrefabCollection<NetInfo>.GetLoaded(num);
-                if (loaded == null)
-                {
-                    continue;
-                }
-
-                string text = loaded.name.Replace(" ", "_").ToLowerInvariant().Trim();
-                string className = loaded.m_class.name;
-
-                NetInfo.Node[] nodes = loaded.m_nodes;
-                for (int i = 0; i < nodes.Length; i++)
-                {
-                    NetInfo.Node node = nodes[i];
-
-                    if (node.m_nodeMaterial == null)
-                    {
-                        continue;
-                    }
-
-                    if (blacklist.Any(x => className.Contains(x)))
-                    {
-                        continue;
-                    }
-
-                    if (vanillaPrefabProperties.TryGetValue(
-                        string.Concat(text, "_node_", i, "_nodeMaterial_MainTex"),
-                        out defaultmapTex))
-                    {
-                        node.m_nodeMaterial.SetTexture(TexType._MainTex, defaultmapTex);
-                    }
-
-                    if (vanillaPrefabProperties.TryGetValue(
-                        string.Concat(text, "_node_", i, "_nodeMaterial_APRMap"),
-                        out aprmapTex))
-                    {
-                        node.m_nodeMaterial.SetTexture(TexType._APRMap, aprmapTex);
-                    }
-                }
-
-                NetInfo.Segment[] segments = loaded.m_segments;
-                for (int j = 0; j < segments.Length; j++)
-                {
-                    NetInfo.Segment segment = segments[j];
-                    {
-                        if (segment.m_segmentMaterial == null)
-                        {
-                            continue;
-                        }
-
-                        if (blacklist.Any(x => className.Contains(x)))
-                        {
-                            continue;
-                        }
-
-                        if (vanillaPrefabProperties.TryGetValue(
-                            string.Concat(text, "_segment_", j, "_segmentMaterial_MainTex"),
-                            out defaultmapTex))
-                        {
-                            segment.m_segmentMaterial.SetTexture(TexType._MainTex, defaultmapTex);
-                        }
-
-                        if (vanillaPrefabProperties.TryGetValue(
-                            string.Concat(text, "_segment_", j, "_segmentMaterial_APRMap"),
-                            out aprmapTex))
-                        {
-                            segment.m_segmentMaterial.SetTexture(TexType._APRMap, aprmapTex);
-                        }
-                    }
-                }
-
-                num += 1u;
-            }
-
             PropCollection[] array = FindObjectsOfType<PropCollection>();
             foreach (PropCollection propCollection in array)
             {
@@ -152,12 +71,12 @@
                             continue;
                         }
 
-                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_MainTex", out defaultmapTex))
+                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_MainTex", out Texture2D defaultmapTex))
                         {
                             propInfo.m_lodMaterialCombined.SetTexture(TexType._MainTex, defaultmapTex);
                         }
 
-                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_ACIMap", out acimapTex))
+                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_ACIMap", out Texture2D acimapTex))
                         {
                             propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", acimapTex);
                         }
@@ -187,29 +106,47 @@
                 {
                     NetInfo.Node node = nodes[i];
 
+                    if (blacklist.Any(x => text.Contains(x)))
+                    {
+                        continue;
+                    }
                     if (node.m_nodeMaterial.GetTexture(TexType._MainTex) == null)
                     {
                         continue;
                     }
 
-                    if (blacklist.Any(x => text.Contains(x)))
-                    {
-                        continue;
-                    }
 
                     if (vanillaPrefabProperties.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_MainTex"),
-                        out defaultmapTex))
+                        out Texture2D defaultmapTex))
                     {
                         node.m_nodeMaterial.SetTexture(TexType._MainTex, defaultmapTex);
                     }
 
+
                     if (vanillaPrefabProperties.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_APRMap"),
-                        out aprmapTex))
+                        out Texture2D aprmapTex))
                     {
                         node.m_nodeMaterial.SetTexture(TexType._APRMap, aprmapTex);
                     }
+
+                    // LOD
+                    if (vanillaPrefabProperties.TryGetValue(
+                        string.Concat(text, "_node_", i, "_nodeMaterial_MainTex_lod"),
+                        out Texture2D defaultmapLodTex))
+                    {
+                        node.m_lodMaterial.SetTexture(TexType._MainTex, defaultmapLodTex);
+                    }
+
+                    if (vanillaPrefabProperties.TryGetValue(
+                        string.Concat(text, "_node_", i, "_nodeMaterial_APRMap_lod"),
+                        out Texture2D aprmapLodTex))
+                    {
+                        node.m_lodMaterial.SetTexture(TexType._APRMap, aprmapLodTex);
+                    }
+
+
                 }
 
                 NetInfo.Segment[] segments = loaded.m_segments;
@@ -228,16 +165,31 @@
 
                     if (vanillaPrefabProperties.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_MainTex"),
-                        out defaultmapTex))
+                        out Texture2D defaultmapTex))
                     {
                         segment.m_segmentMaterial.SetTexture(TexType._MainTex, defaultmapTex);
                     }
 
                     if (vanillaPrefabProperties.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_APRMap"),
-                        out aprmapTex))
+                        out Texture2D aprmapTex))
                     {
                         segment.m_segmentMaterial.SetTexture(TexType._APRMap, aprmapTex);
+                    }
+
+                    // LOD 
+                    if (vanillaPrefabProperties.TryGetValue(
+                        string.Concat(text, "_segment_", j, "_segmentMaterial_MainTex_lod"),
+                        out Texture2D defaultmapLodTex))
+                    {
+                        segment.m_lodMaterial.SetTexture(TexType._MainTex, defaultmapLodTex);
+                    }
+
+                    if (vanillaPrefabProperties.TryGetValue(
+                        string.Concat(text, "_segment_", j, "_segmentMaterial_APRMap_lod"),
+                        out Texture2D aprmapLodTex))
+                    {
+                        segment.m_lodMaterial.SetTexture(TexType._APRMap, aprmapLodTex);
                     }
                 }
 
@@ -275,15 +227,15 @@
                 {
                     NetInfo.Node node = nodes[i];
                     {
+                        if (blacklist.Any(x => className.Contains(x)))
+                        {
+                            continue;
+                        }
                         if (node.m_nodeMaterial.GetTexture(TexType._MainTex) == null)
                         {
                             continue;
                         }
 
-                        if (blacklist.Any(x => className.Contains(x)))
-                        {
-                            continue;
-                        }
 
                         vanillaPrefabProperties.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_MainTex"),
@@ -291,6 +243,16 @@
                         vanillaPrefabProperties.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_APRMap"),
                             node.m_nodeMaterial.GetTexture(TexType._APRMap) as Texture2D);
+
+                        // LOD
+                        vanillaPrefabProperties.Add(
+                            string.Concat(collectionName, "_node_", i, "_nodeMaterial_MainTex_lod"),
+                            node.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
+                        vanillaPrefabProperties.Add(
+                            string.Concat(collectionName, "_node_", i, "_nodeMaterial_APRMap_lod"),
+                            node.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
+
+
                         log += "\n" + string.Concat(collectionName, "_node_", i, "_nodeMaterial_MainTex");
                     }
                 }
@@ -316,6 +278,13 @@
                         vanillaPrefabProperties.Add(
                             string.Concat(collectionName, "_segment_", j, "_segmentMaterial_APRMap"),
                             segment.m_segmentMaterial.GetTexture(TexType._APRMap) as Texture2D);
+                        // LOD
+                        vanillaPrefabProperties.Add(
+                            string.Concat(collectionName, "_segment_", j, "_segmentMaterial_MainTex_lod"),
+                            segment.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
+                        vanillaPrefabProperties.Add(
+                            string.Concat(collectionName, "_segment_", j, "_segmentMaterial_APRMap_lod"),
+                            segment.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
                         log += "\n" + string.Concat(collectionName, "_segment_", j, "_nodeMaterial_MainTex");
                     }
                 }
@@ -377,8 +346,8 @@
             texture2D.Compress(true);
             return texture2D;
         }
-
-        public static Texture2D LoadTextureDDS(string fullPath)
+        /*
+        public static Texture2D DDSLoader.LoadDDS(string fullPath)
         {
             // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
             if (textureCache.TryGetValue(fullPath, out Texture2D texture))
@@ -390,7 +359,7 @@
             byte[] numArray = File.ReadAllBytes(fullPath);
             int width = BitConverter.ToInt32(numArray, 16);
             int height = BitConverter.ToInt32(numArray, 12);
-            texture = new Texture2D(width, height, TextureFormat.DXT5, true);
+            texture = new Texture2D(width, height, TextureFormat.DXT1, true);
             List<byte> list = new List<byte>();
             for (int index = 0; index < numArray.Length; ++index)
             {
@@ -407,7 +376,7 @@
             textureCache.Add(fullPath, texture); // Neu geladene Textur in den Cache packen
             return texture;
         }
-
+        */
         public static void ReplaceNetTextures()
         {
             if (!ModLoader.config.texturePackPath.IsNullOrWhiteSpace())
@@ -440,6 +409,8 @@
                         node => node.m_nodeMaterial.GetTexture(TexType._MainTex) != null
                                 && node.m_nodeMaterial.GetTexture(TexType._APRMap) != null))
                 {
+                    TextureExporter.ExportPrefabTextures(node);
+
                     // Just look up the name and set the textures accordingly, no magic needed
                     string nodeMatName = node.m_nodeMaterial.GetTexture(TexType._MainTex).name;
                     string nodeAprName = node.m_nodeMaterial.GetTexture(TexType._APRMap).name;
@@ -493,6 +464,9 @@
                         segment => segment.m_segmentMaterial.GetTexture(TexType._MainTex) != null
                                    && segment.m_segmentMaterial.GetTexture(TexType._APRMap) != null))
                 {
+
+                    TextureExporter.ExportPrefabTextures(segment);
+
                     string mainTexName = segment.m_segmentMaterial.GetTexture(TexType._MainTex).name;
                     string aprName = segment.m_segmentMaterial.GetTexture(TexType._APRMap).name;
 
@@ -636,12 +610,12 @@
                                     // if (segment.m_segmentMaterial.GetTexture(TexType._APRMap).name.Contains(RoadPos.Ground))
                                     // if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadBasic2-apr"+ ext_DDS)))
                                     // {
-                                    // segment.m_segmentMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadBasic2-apr"+ ext_DDS)));
+                                    // segment.m_segmentMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadBasic2-apr"+ ext_DDS)));
                                     // segment.m_lodRenderDistance = 2500;
                                     // }
                                     // else if (File.Exists(Path.Combine(ModLoader.APRMaps_Path, "RoadBasic2-apr"+ ext_DDS)))
                                     // {
-                                    // segment.m_segmentMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(Path.Combine(ModLoader.APRMaps_Path, "RoadBasic2-apr"+ ext_DDS)));
+                                    // segment.m_segmentMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(Path.Combine(ModLoader.APRMaps_Path, "RoadBasic2-apr"+ ext_DDS)));
                                     // segment.m_lodRenderDistance = 2500;
                                     // }
                                 }
@@ -1066,9 +1040,10 @@
 
             ShittyPlusFuck.ReplaceShitFuckingPlus();
             LODResetter.ResetLOD();
-          //  Singleton<NetManager>.instance.InitRenderData();
+            Singleton<NetManager>.instance.InitRenderData();
 
         }
+
 
         private static void SetSegmentDirect(SegmentSet set)
         {
@@ -1084,27 +1059,27 @@
                 {
                     segment.m_segmentMaterial.SetTexture(
                         type,
-                        LoadTextureDDS(Path.Combine(currentTextures, maintex + ExtDDS)));
+                        DDSLoader.LoadDDS(Path.Combine(currentTextures, maintex + ExtDDS)));
                     string filename_lod = Path.Combine(
                         currentTextures + "/LOD",
                         maintex + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(Path.Combine(currentTextures, maintex + type + ExtDDS)))
                 {
                     segment.m_segmentMaterial.SetTexture(
                         type,
-                        LoadTextureDDS(Path.Combine(currentTextures, maintex + type + ExtDDS)));
+                        DDSLoader.LoadDDS(Path.Combine(currentTextures, maintex + type + ExtDDS)));
 
                     string filename_lod = Path.Combine(
                         currentTextures + "/LOD",
                         maintex + type + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
 
                     // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
@@ -1125,46 +1100,46 @@
 
                 if (File.Exists(path))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, LoadTextureDDS(path));
+                    segment.m_segmentMaterial.SetTexture(type, DDSLoader.LoadDDS(path));
                     string filename_lod = Path.Combine(
                         currentTextures + "/LOD",
                         apr + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path2))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, LoadTextureDDS(path2));
+                    segment.m_segmentMaterial.SetTexture(type, DDSLoader.LoadDDS(path2));
                     string filename_lod = Path.Combine(
                         ModLoader.APRMaps_Path + "/LOD",
                         apr + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path3))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, LoadTextureDDS(path3));
+                    segment.m_segmentMaterial.SetTexture(type, DDSLoader.LoadDDS(path3));
                     string filename_lod = Path.Combine(
                         currentTextures + "/LOD",
-                        apr +type + "_lod" + ExtDDS);
+                        apr + type + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path4))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, LoadTextureDDS(path4));
+                    segment.m_segmentMaterial.SetTexture(type, DDSLoader.LoadDDS(path4));
                     string filename_lod = Path.Combine(
                         ModLoader.APRMaps_Path + "/LOD",
                         apr + type + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        segment.m_lodMaterial.SetTexture(type, LoadTextureDDS(filename_lod));
+                        segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
             }
@@ -1183,25 +1158,25 @@
                 {
                     node.m_nodeMaterial.SetTexture(
                         TexType._MainTex,
-                        LoadTextureDDS(Path.Combine(texPath, maintex + ExtDDS)));
+                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + ExtDDS)));
 
                     string filename_lod = Path.Combine(
                         texPath + "/LOD", maintex + "_lod" + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(maintex, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)))
                 {
                     node.m_nodeMaterial.SetTexture(
                         TexType._MainTex,
-                        LoadTextureDDS(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)));
+                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)));
 
                     string filename_lod = Path.Combine(texPath + "/LOD", maintex + TexType._MainTex + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(maintex, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
                     }
 
                     // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
@@ -1221,38 +1196,38 @@
 
                 if (File.Exists(path))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(path));
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path));
                     string filename_lod = Path.Combine(texPath + "/LOD", apr + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(apr, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path2))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(path2));
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path2));
                     string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(apr, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path3))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(path3));
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path3));
                     string filename_lod = Path.Combine(texPath + "/LOD", apr + TexType._APRMap + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(apr, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
                 else if (File.Exists(path4))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(path4));
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path4));
                     string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
                     if (File.Exists(filename_lod))
                     {
-                        node.m_lodMaterial.SetTexture(maintex, LoadTextureDDS(filename_lod));
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
                     }
                 }
             }
@@ -1279,29 +1254,29 @@
                             }
 
                             string filename = road.Value + "_" + roadPosition + "_" + "Node" + textype + ExtDDS;
-                            string fullPath = Path.Combine(ModLoader.currentTexturesPath_default, filename);
-                            string aprPath = Path.Combine(ModLoader.APRMaps_Path, filename);
+                            string fullPath = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads", filename);
+                            string aprPath = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads", filename);
 
                             if (node.m_nodeMaterial.GetTexture(textype).name.Contains(roadPosition))
                             {
                                 if (File.Exists(fullPath))
                                 {
-                                    node.m_nodeMaterial.SetTexture(textype, LoadTextureDDS(fullPath));
-                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/LOD", filename + "_lod" + ExtDDS);
+                                    node.m_nodeMaterial.SetTexture(textype, DDSLoader.LoadDDS(fullPath));
+                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
                                     if (File.Exists(filename_lod))
                                     {
-                                        node.m_lodMaterial.SetTexture(textype, LoadTextureDDS(filename_lod));
+                                        node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                                     }
 
                                     log += "\nNExt replacing " + textype + " - " + fullPath;
                                 }
                                 else if (textype == TexType._APRMap && File.Exists(aprPath))
                                 {
-                                    node.m_nodeMaterial.SetTexture(TexType._APRMap, LoadTextureDDS(aprPath));
-                                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", filename + "_lod" + ExtDDS);
+                                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(aprPath));
+                                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
                                     if (File.Exists(filename_lod))
                                     {
-                                        node.m_lodMaterial.SetTexture(textype, LoadTextureDDS(filename_lod));
+                                        node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                                     }
                                     log += "\nNExt replacing " + TexType._APRMap + " - " + aprPath;
                                 }
@@ -1314,6 +1289,7 @@
         }
         public static readonly Dictionary<string, string> NExtRoads = new Dictionary<string, string>
                                                                           {
+            // + busways
                                                                               { "Two-Lane Alley", "Alley2L" },
                                                                               { "BasicRoadTL", "BasicRoadTL" },
                                                                               { "One-Lane Oneway", "OneWay1L" },
@@ -1323,10 +1299,13 @@
                                                                               { "Medium Avenue", "MediumAvenue4L" },
                                                                               { "Medium Avenue TL", "MediumAvenue4LTL" },
                                                                               { "Eight-Lane Avenue", "LargeAvenue8LM" },
+                                                                              { "Small Rural Highway", "Highway1L" },
+                                                                              { "Rural Highway", "Highway2L" },
                                                                               { "Four-Lane Highway", "Highway4L" },
                                                                               { "Five-Lane Highway", "Highway5L" },
                                                                               { "Large Highway", "Highway6L" }
                                                                           };
+
 
         private static void ReplaceNExtSegments(NetInfo netInfo, NetInfo.Segment segment, ref string log)
         {
@@ -1339,35 +1318,36 @@
                         foreach (string textype in TexType.AllTex)
                         {
                             string file = road.Value + "_" + roadPosition + "_" + "Segment" + textype;
-                            string filename = Path.Combine(ModLoader.currentTexturesPath_default, file + ExtDDS);
+                            string filename = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads", file + ExtDDS);
+
                             if (segment.m_segmentMaterial.GetTexture(textype).name.Contains(roadPosition))
                             {
                                 if (File.Exists(filename))
                                 {
-                                    segment.m_segmentMaterial.SetTexture(textype, LoadTextureDDS(filename));
+                                    segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
 
-                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/LOD", file + "_lod" + ExtDDS);
+                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", file + "_lod" + ExtDDS);
                                     if (File.Exists(filename_lod))
                                     {
-                                        segment.m_lodMaterial.SetTexture(textype, LoadTextureDDS(filename_lod));
+                                        segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                                     }
                                 }
                                 else if (textype.Equals(TexType._APRMap))
                                 {
                                     // APR Maps only
-                                    filename = Path.Combine(ModLoader.APRMaps_Path, file + ExtDDS);
+                                    filename = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads", file + ExtDDS);
                                     log += "\nNExt Segments APR looking for: " + filename;
 
                                     if (File.Exists(filename))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(textype, LoadTextureDDS(filename));
+                                        segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
 
                                         string filename_lod = Path.Combine(
-                                            ModLoader.APRMaps_Path + "/LOD",
+                                            ModLoader.APRMaps_Path + "/NExt_Roads/LOD",
                                             file + "_lod" + ExtDDS);
                                         if (File.Exists(filename_lod))
                                         {
-                                            segment.m_lodMaterial.SetTexture(textype, LoadTextureDDS(filename_lod));
+                                            segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                                         }
                                     }
                                 }

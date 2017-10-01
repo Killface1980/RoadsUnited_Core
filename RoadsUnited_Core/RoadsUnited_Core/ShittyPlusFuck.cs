@@ -64,10 +64,10 @@ namespace RoadsUnited_Core
                                     tex = roadtiny + "2L" + text14;
                                     if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
                                     else
@@ -75,12 +75,12 @@ namespace RoadsUnited_Core
                                         tex = roadtiny + "1L" + text14;
                                         if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
 
@@ -93,17 +93,17 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
                                     else
                                     {
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
 
@@ -118,10 +118,10 @@ namespace RoadsUnited_Core
                                         tex = tex + elevated + text14;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -130,10 +130,10 @@ namespace RoadsUnited_Core
                                         tex = tex + slope + text14;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -142,10 +142,10 @@ namespace RoadsUnited_Core
                                         tex = tex + tunnel + text14;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -155,10 +155,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -171,10 +171,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "1L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -186,10 +186,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "1L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -201,10 +201,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "1L" + slope + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -216,10 +216,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "1L" + tunnel + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -231,10 +231,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "2L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -246,10 +246,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "2L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -262,10 +262,10 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -277,10 +277,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "2L" + tunnel + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -292,10 +292,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "4L" + text7 + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -307,10 +307,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "4L" + elevated + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -322,10 +322,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "4L" + slope + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -337,10 +337,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "4L" + tunnel + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -352,11 +352,11 @@ namespace RoadsUnited_Core
                                     tex = highway + "5L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         tex = highway + "5L" + text7 + text14;
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -368,11 +368,11 @@ namespace RoadsUnited_Core
                                     tex = highway + "5L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         tex = highway + "5L" + elevated + text14;
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -384,10 +384,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "5L" + text7 + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -400,10 +400,10 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -415,11 +415,11 @@ namespace RoadsUnited_Core
                                     tex = highway + "6L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         tex = highway + "6L" + text7 + text14;
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -431,11 +431,11 @@ namespace RoadsUnited_Core
                                     tex = highway + "6L" + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         tex = highway + "6L" + elevated + text14;
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -447,10 +447,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "6L" + text7 + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -462,10 +462,10 @@ namespace RoadsUnited_Core
                                     tex = highway + "6L" + tunnel + text14;
                                     if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                     {
-                                        node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                        node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
 
@@ -486,10 +486,10 @@ namespace RoadsUnited_Core
                                     tex = roadtiny + "2L";
                                     if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
                                     else
@@ -497,12 +497,12 @@ namespace RoadsUnited_Core
                                         tex = roadtiny + "1L";
                                         if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -513,10 +513,10 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path2, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path2, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path2, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path2, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path2, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -529,12 +529,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Elevated"))
@@ -543,12 +543,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Tunnel"))
@@ -557,12 +557,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -577,12 +577,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Elevated"))
@@ -591,12 +591,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Tunnel"))
@@ -605,12 +605,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -624,12 +624,12 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + "3L" + text7;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Elevated"))
@@ -638,12 +638,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                     else if (segment.m_segmentMaterial.GetTexture(aprmap).name.Contains("Tunnel"))
@@ -652,12 +652,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -672,12 +672,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -687,12 +687,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -702,12 +702,12 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
 
@@ -725,19 +725,19 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
                                         else if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -749,10 +749,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -762,10 +762,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -778,10 +778,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -791,10 +791,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -807,10 +807,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -820,10 +820,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -843,19 +843,19 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
                                         else if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -867,10 +867,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -880,10 +880,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -896,10 +896,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -909,10 +909,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -925,10 +925,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -938,10 +938,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -958,10 +958,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -971,10 +971,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -984,10 +984,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -997,10 +997,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1016,10 +1016,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1029,10 +1029,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1042,10 +1042,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1055,10 +1055,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1076,10 +1076,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1089,7 +1089,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Eight-Lane Avenue Tunnel"))
@@ -1098,10 +1098,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1111,10 +1111,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1128,7 +1128,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Rural Highway Slope"))
@@ -1137,7 +1137,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Rural Highway Tunnel"))
@@ -1146,7 +1146,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else
@@ -1155,7 +1155,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
 
@@ -1170,7 +1170,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Rural Highway Slope"))
@@ -1179,7 +1179,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Rural Highway Tunnel"))
@@ -1188,7 +1188,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else
@@ -1197,7 +1197,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
 
@@ -1212,7 +1212,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Four-Lane Highway Slope"))
@@ -1221,7 +1221,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Four-Lane Highway Tunnel"))
@@ -1230,7 +1230,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else
@@ -1239,7 +1239,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
 
@@ -1254,7 +1254,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Five-Lane Highway Slope"))
@@ -1263,7 +1263,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Five-Lane Highway Tunnel"))
@@ -1272,7 +1272,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else
@@ -1281,7 +1281,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
 
@@ -1296,7 +1296,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Large Highway Slope"))
@@ -1305,7 +1305,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Large Highway Tunnel"))
@@ -1314,7 +1314,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
                                     else
@@ -1323,7 +1323,7 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
                                     }
 
@@ -1338,10 +1338,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1350,10 +1350,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text6 + busside;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1362,10 +1362,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text6 + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1377,10 +1377,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1390,10 +1390,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1404,10 +1404,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1423,10 +1423,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1435,10 +1435,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text6 + deco + busside;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1447,10 +1447,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text6 + deco + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1466,10 +1466,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1478,10 +1478,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + text6 + busside;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1490,10 +1490,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + text6 + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1505,10 +1505,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1518,10 +1518,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1530,10 +1530,10 @@ namespace RoadsUnited_Core
                                             tex = roadsmall + str + text6 + tunnel;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1550,10 +1550,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1562,10 +1562,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + deco + busside;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1574,10 +1574,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + deco + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1593,10 +1593,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1605,10 +1605,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + text6 + busside;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1617,10 +1617,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + text6 + busboth;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1634,10 +1634,10 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
 
@@ -1650,10 +1650,10 @@ namespace RoadsUnited_Core
 
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
 
@@ -1665,10 +1665,10 @@ namespace RoadsUnited_Core
                                     tex = roadlarge + text6 + tunnel;
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
 
@@ -1683,10 +1683,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1695,10 +1695,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + text6 + deco + busside;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1707,10 +1707,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + text6 + deco + busboth;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1744,10 +1744,10 @@ namespace RoadsUnited_Core
                                             tex = roadsmall + elevated + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1756,10 +1756,10 @@ namespace RoadsUnited_Core
                                             tex = roadsmall + deco + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1768,10 +1768,10 @@ namespace RoadsUnited_Core
                                             tex = roadsmall + text7 + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1784,10 +1784,10 @@ namespace RoadsUnited_Core
                                             tex = tex + elevated + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1796,10 +1796,10 @@ namespace RoadsUnited_Core
                                             tex = roadsmall + str + deco + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1808,10 +1808,10 @@ namespace RoadsUnited_Core
                                             tex = tex + text7 + text14;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1821,10 +1821,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text7 + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1833,10 +1833,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str2 + elevated + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1848,10 +1848,10 @@ namespace RoadsUnited_Core
                                             tex = tex + elevated + text14;
                                             if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1860,10 +1860,10 @@ namespace RoadsUnited_Core
                                             tex = roadmedium + deco + text14;
                                             if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1872,10 +1872,10 @@ namespace RoadsUnited_Core
                                             tex = tex + text7 + text14;
                                             if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1885,10 +1885,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + str2 + elevated + text14;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1900,10 +1900,10 @@ namespace RoadsUnited_Core
                                             tex = tex + elevated + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1912,10 +1912,10 @@ namespace RoadsUnited_Core
                                             tex = roadlarge + deco + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1924,10 +1924,10 @@ namespace RoadsUnited_Core
                                             tex = tex + text7 + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1937,10 +1937,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + str2 + elevated + text14;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -1952,10 +1952,10 @@ namespace RoadsUnited_Core
                                             tex = tex + elevated + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1964,10 +1964,10 @@ namespace RoadsUnited_Core
                                             tex = roadlarge + str + deco + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1976,10 +1976,10 @@ namespace RoadsUnited_Core
                                             tex = roadlarge + str + slope + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -1988,10 +1988,10 @@ namespace RoadsUnited_Core
                                             tex = tex + text7 + text14;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2003,10 +2003,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "Ramp" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2015,10 +2015,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "Ramp" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2027,10 +2027,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "Ramp" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2039,10 +2039,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "3L" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2051,10 +2051,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "3L" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2063,10 +2063,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "3L" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2075,10 +2075,10 @@ namespace RoadsUnited_Core
                                             tex = highway + "3L" + text14;
                                             if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                                node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                                 {
-                                                    node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                    node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2088,10 +2088,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text7 + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2100,10 +2100,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + elevated + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2112,10 +2112,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + text7 + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2124,10 +2124,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + text7 + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2136,10 +2136,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + elevated + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2148,10 +2148,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + text7 + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2160,10 +2160,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + str3 + text7 + text14;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2172,10 +2172,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + str3 + elevated + text14;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2184,10 +2184,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + str3 + text7 + text14;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2196,10 +2196,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2208,10 +2208,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + elevated + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2220,10 +2220,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2232,10 +2232,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2244,10 +2244,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + elevated + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2256,10 +2256,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco + text14;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            node.m_nodeMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            node.m_nodeMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                node.m_nodeMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                node.m_nodeMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2282,10 +2282,10 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2295,10 +2295,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2308,10 +2308,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2322,10 +2322,10 @@ namespace RoadsUnited_Core
                                             tex += elevated;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2334,10 +2334,10 @@ namespace RoadsUnited_Core
                                             tex += slope;
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2353,10 +2353,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2366,10 +2366,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2379,10 +2379,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2394,10 +2394,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2407,10 +2407,10 @@ namespace RoadsUnited_Core
 
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2424,10 +2424,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str2 + text7;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2438,10 +2438,10 @@ namespace RoadsUnited_Core
                                         {
                                             if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2451,10 +2451,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str2 + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2465,10 +2465,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str2 + elevated;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -2480,10 +2480,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2492,10 +2492,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + deco + busside;
  if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2505,10 +2505,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2522,10 +2522,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2535,10 +2535,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2548,10 +2548,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2565,10 +2565,10 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2578,10 +2578,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2591,10 +2591,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2605,15 +2605,15 @@ namespace RoadsUnited_Core
                                             tex += elevated;
                                             if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                                 }
 
                                                 if (File.Exists(Path.Combine(path4, tex + lodMaintexDds)))
                                                 {
-                                                    segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + lodMaintexDds)));
+                                                    segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + lodMaintexDds)));
                                                 }
                                             }
                                         }
@@ -2623,10 +2623,10 @@ namespace RoadsUnited_Core
                                             tex += slope;
                                             if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2640,10 +2640,10 @@ namespace RoadsUnited_Core
                                     {
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2653,10 +2653,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2666,10 +2666,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2683,10 +2683,10 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2695,10 +2695,10 @@ namespace RoadsUnited_Core
                                         tex += busside;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2707,10 +2707,10 @@ namespace RoadsUnited_Core
                                         tex += busboth;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2721,10 +2721,10 @@ namespace RoadsUnited_Core
                                     tex = roadmedium + str2 + elevated;
                                     if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -2737,10 +2737,10 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2750,10 +2750,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2763,10 +2763,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -2777,10 +2777,10 @@ namespace RoadsUnited_Core
                                             tex += elevated;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2790,10 +2790,10 @@ namespace RoadsUnited_Core
                                             tex += slope;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
                                             }
                                         }
@@ -2807,15 +2807,15 @@ namespace RoadsUnited_Core
                                     {
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2825,15 +2825,15 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2843,15 +2843,15 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2865,15 +2865,15 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2882,15 +2882,15 @@ namespace RoadsUnited_Core
                                         tex += busside;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2899,15 +2899,15 @@ namespace RoadsUnited_Core
                                         tex += busboth;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2918,15 +2918,15 @@ namespace RoadsUnited_Core
                                     tex = roadlarge + str2 + elevated;
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                         {
-                                            segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                            segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                         }
                                     }
                                 }
@@ -2939,15 +2939,15 @@ namespace RoadsUnited_Core
                                         tex += text7;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2957,15 +2957,15 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2975,15 +2975,15 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
 
                                             if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                             {
-                                                segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                             }
                                         }
                                     }
@@ -2994,15 +2994,15 @@ namespace RoadsUnited_Core
                                             tex += elevated;
                                             if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                                segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                                 if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                                 {
-                                                    segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                    segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                                 }
 
                                                 if (File.Exists(Path.Combine(path5, tex + lodMaintexDds)))
                                                 {
-                                                    segment.m_lodMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + lodMaintexDds)));
+                                                    segment.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + lodMaintexDds)));
                                                 }
                                             }
                                         }
@@ -3014,10 +3014,10 @@ namespace RoadsUnited_Core
                                     tex = roadlarge + str + slope;
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3029,10 +3029,10 @@ namespace RoadsUnited_Core
                                     {
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3043,10 +3043,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3056,10 +3056,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3071,12 +3071,12 @@ namespace RoadsUnited_Core
                                         tex = highway + "Ramp";
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("HighwayRamp Slope"))
@@ -3084,12 +3084,12 @@ namespace RoadsUnited_Core
                                         tex = highway + "Ramp" + slope;
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Highway Barrier"))
@@ -3097,12 +3097,12 @@ namespace RoadsUnited_Core
                                         tex = highway + "3L";
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                         }
 
                                         if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                         }
                                     }
                                     else if (loaded.name.Equals("Highway Elevated") || segment.m_mesh.name.Equals("HighwayBridgeSegment") || segment.m_mesh.name.Equals("HighwayBaseSegment") || segment.m_mesh.name.Equals("HighwayBarrierSegment"))
@@ -3110,10 +3110,10 @@ namespace RoadsUnited_Core
                                         tex = highway + "3L";
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3122,10 +3122,10 @@ namespace RoadsUnited_Core
                                         tex = highway + "3L" + slope;
                                         if (File.Exists(Path.Combine(path6, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path6, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path6, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path6, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path6, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3138,10 +3138,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3150,10 +3150,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3162,10 +3162,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3175,10 +3175,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + elevated;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3187,10 +3187,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + slope;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3202,10 +3202,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3214,10 +3214,10 @@ namespace RoadsUnited_Core
                                         tex = roadsmall + str + busboth;
                                         if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3227,10 +3227,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + elevated;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3239,10 +3239,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + slope;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3253,10 +3253,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + str3 + text7;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3266,10 +3266,10 @@ namespace RoadsUnited_Core
                                     tex = roadmedium + str3 + elevated;
                                     if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3278,10 +3278,10 @@ namespace RoadsUnited_Core
                                     tex = roadmedium + str3 + slope;
                                     if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3290,10 +3290,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + deco;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3302,10 +3302,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + elevated;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3314,10 +3314,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + slope;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3326,10 +3326,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + deco;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3338,10 +3338,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + elevated;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3350,10 +3350,10 @@ namespace RoadsUnited_Core
                                     tex = roadsmall + str + slope;
                                     if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path3, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path3, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3364,10 +3364,10 @@ namespace RoadsUnited_Core
                                         tex = roadmedium + text6 + text7;
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3377,10 +3377,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3390,10 +3390,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3403,10 +3403,10 @@ namespace RoadsUnited_Core
                                     tex = roadmedium + text6 + elevated;
                                     if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3415,10 +3415,10 @@ namespace RoadsUnited_Core
                                     tex = roadmedium + text6 + slope;
                                     if (File.Exists(Path.Combine(path4, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path4, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path4, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path4, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path4, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3429,10 +3429,10 @@ namespace RoadsUnited_Core
                                         tex = roadlarge + text6 + text7;
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3442,10 +3442,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3455,10 +3455,10 @@ namespace RoadsUnited_Core
 
                                         if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                            segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                             {
-                                                segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                                segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                             }
                                         }
                                     }
@@ -3468,10 +3468,10 @@ namespace RoadsUnited_Core
                                     tex = roadlarge + text6 + elevated;
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
                                 }
@@ -3480,10 +3480,10 @@ namespace RoadsUnited_Core
                                     tex = roadlarge + text6 + slope;
                                     if (File.Exists(Path.Combine(path5, tex + maintexDds)))
                                     {
-                                        segment.m_segmentMaterial.SetTexture(maintex, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + maintexDds)));
+                                        segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path5, tex + maintexDds)));
                                         if (File.Exists(Path.Combine(path5, tex + aprmapDds)))
                                         {
-                                            segment.m_segmentMaterial.SetTexture(aprmap, RoadsUnited_Core.LoadTextureDDS(Path.Combine(path5, tex + aprmapDds)));
+                                            segment.m_segmentMaterial.SetTexture(aprmap, DDSLoader.LoadDDS(Path.Combine(path5, tex + aprmapDds)));
                                         }
                                     }
                                 }

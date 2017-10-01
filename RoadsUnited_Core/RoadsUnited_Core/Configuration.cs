@@ -36,6 +36,7 @@
         public float small_road_brightness = 0.4f;
         public float small_road_decoration = 0.4f;
         public string texturePackPath = string.Empty;
+        public string themeName = string.Empty;
         public float ToolbarButtonX;
         public float ToolbarButtonY;
         public bool use_custom_colors = true;

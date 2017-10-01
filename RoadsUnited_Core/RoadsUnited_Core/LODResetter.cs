@@ -14,6 +14,21 @@
 
         private static Texture2D m_lodXysAtlas;
 
+        private static Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
+        {
+            Texture2D result = new Texture2D(targetWidth, targetHeight, source.format, true);
+            Color[] rpixels = result.GetPixels(0);
+            float incX = (1.0f / (float)targetWidth);
+            float incY = (1.0f / (float)targetHeight);
+            for (int px = 0; px < rpixels.Length; px++)
+            {
+                rpixels[px] = source.GetPixelBilinear(incX * ((float)px % targetWidth), incY * ((float)Mathf.Floor(px / targetWidth)));
+            }
+            result.SetPixels(rpixels, 0);
+            result.Apply();
+            return result;
+        }
+
         // NetManager
         public static void ResetLOD()
         {
@@ -89,12 +104,14 @@
 
                                         if (xys.width != rgb.width || xys.height != rgb.height)
                                         {
-                                            throw new PrefabException(info, "LOD xys size doesnt match diffuse size");
+                                            throw new PrefabException(info, "LOD xys size " + xys.width + "x" + xys.height + " doesnt match diffuse size " + rgb.width + "x" + rgb.height);
+                                            // rgb = ScaleTexture(rgb, xys.width, xys.height);
                                         }
 
                                         if (apr.width != rgb.width || apr.height != rgb.height)
                                         {
                                             throw new PrefabException(info, "LOD aci size doesnt match diffuse size");
+                                            // apr = ScaleTexture(apr, rgb.width, rgb.height);
                                         }
 
                                         try
@@ -209,14 +226,18 @@
                                             throw new PrefabException(info, "LOD apr null");
                                         }
 
+
+
                                         if (xys2.width != rgb2.width || xys2.height != rgb2.height)
                                         {
-                                            throw new PrefabException(info, "LOD xys size doesnt match diffuse size");
+                                            throw new PrefabException(info, "LOD xys size " + xys2.width + "x" + xys2.height + " doesnt match diffuse size " + rgb2.width + "x" + rgb2.height);
+                                            //   rgb2 = ScaleTexture(rgb2, xys2.width, xys2.height);
                                         }
 
                                         if (apr2.width != rgb2.width || apr2.height != rgb2.height)
                                         {
                                             throw new PrefabException(info, "LOD aci size doesnt match diffuse size");
+                                            //   apr2 = ScaleTexture(apr2, rgb2.width, rgb2.height);
                                         }
 
                                         try
@@ -286,10 +307,10 @@
             {
                 m_lodRgbAtlas =
                     new Texture2D(1024, 1024, TextureFormat.DXT1, true, false)
-                        {
-                            filterMode = FilterMode.Trilinear,
-                            anisoLevel = 8
-                        };
+                    {
+                        filterMode = FilterMode.Trilinear,
+                        anisoLevel = 8
+                    };
             }
 
             // if (m_lodXysAtlas == null)
@@ -297,10 +318,10 @@
             {
                 m_lodXysAtlas =
                     new Texture2D(1024, 1024, TextureFormat.DXT1, true, true)
-                        {
-                            filterMode = FilterMode.Trilinear,
-                            anisoLevel = 8
-                        };
+                    {
+                        filterMode = FilterMode.Trilinear,
+                        anisoLevel = 8
+                    };
             }
 
             // if (m_lodAprAtlas == null)
@@ -317,24 +338,24 @@
             m_lodXysAtlas.PackTextures(xysTextures.ToArray(), 0, 4096, false);
             m_lodAprAtlas.PackTextures(aprTextures.ToArray(), 0, 4096, false);
 
-            for (int l = 0; l < segments.m_size; l++)
+            for (int k = 0; k < segments.m_size; k++)
             {
                 try
                 {
-                    if (segments.m_buffer[l].Value != null)
+                    if (segments.m_buffer[k].Value != null)
                     {
-                        segments.m_buffer[l].Key.InitMeshData(
-                            segments.m_buffer[l].Value,
-                            rect[l],
+                        segments.m_buffer[k].Key.InitMeshData(
+                            segments.m_buffer[k].Value,
+                            rect[k],
                             m_lodRgbAtlas,
                             m_lodXysAtlas,
                             m_lodAprAtlas);
                     }
                     else
                     {
-                        nodes.m_buffer[l].Key.InitMeshData(
-                            nodes.m_buffer[l].Value,
-                            rect[l],
+                        nodes.m_buffer[k].Key.InitMeshData(
+                            nodes.m_buffer[k].Value,
+                            rect[k],
                             m_lodRgbAtlas,
                             m_lodXysAtlas,
                             m_lodAprAtlas);
@@ -347,9 +368,9 @@
                         LogChannel.Core,
                         string.Concat(e3.m_prefabInfo.gameObject.name, ": ", e3.Message, "\n", e3.StackTrace),
                         e3.m_prefabInfo.gameObject);
-                    LoadingManager expr_E50 = Singleton<LoadingManager>.instance;
-                    string brokenAssets = expr_E50.m_brokenAssets;
-                    expr_E50.m_brokenAssets =
+                    LoadingManager instance = Singleton<LoadingManager>.instance;
+                    string brokenAssets = instance.m_brokenAssets;
+                    instance.m_brokenAssets =
                         string.Concat(brokenAssets, "\n", e3.m_prefabInfo.gameObject.name, ": ", e3.Message);
                 }
             }

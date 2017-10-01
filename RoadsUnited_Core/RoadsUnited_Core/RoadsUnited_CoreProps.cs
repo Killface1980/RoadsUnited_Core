@@ -11,8 +11,8 @@
     {
         public static void ReplacePropTextures()
         {
-            string tex = ModLoader.Tex;
             string path = ModLoader.currentTexturesPath_default;
+            string path2 = ModLoader.currentTexturesPath_default+ "/PropTextures";
             PropCollection[] array = FindObjectsOfType<PropCollection>();
             foreach (PropCollection propCollection in array)
             {
@@ -21,37 +21,49 @@
                     PropInfo[] prefabs = propCollection.m_prefabs;
                     foreach (PropInfo propInfo in prefabs)
                     {
-                        string defaultname = null;
-                        if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name != null)
+                        if (propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name.IsNullOrWhiteSpace())
                         {
-                            defaultname = propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name;
+                            continue;
                         }
 
-                        if (!defaultname.IsNullOrWhiteSpace())
+                        string  defaultname = propInfo.m_lodMaterialCombined.GetTexture("_MainTex").name;
+
+                        if (defaultname.IsNullOrWhiteSpace())
                         {
-                            string propLodTexture;
-                            string propLodACIMapTexture;
-                            if (defaultname == "BusLaneText")
-                            {
-                                propLodTexture = Path.Combine(path, "BusLane.dds");
-                                propLodACIMapTexture = Path.Combine(path, "BusLane-aci.dds");
-                            }
-                            else
-                            {
-                                propLodTexture = Path.Combine(path, defaultname + ".dds");
-                                propLodACIMapTexture = Path.Combine(path, defaultname + "-aci.dds");
-                            }
+                        }
 
-                            if (File.Exists(propLodTexture))
-                            {
-                                // only the m_lodMaterialCombined texture is visible
-                                propInfo.m_lodMaterialCombined.SetTexture("_MainTex", propLodTexture.LoadTextureDDS());
-                            }
+                        string propLodTexture = Path.Combine(path, defaultname + ".dds");
+                        string propLodACIMapTexture = Path.Combine(path, defaultname + "-aci.dds");
+                        string propLodTexture2 = Path.Combine(path2, defaultname + ".dds");
+                        string propLodACIMapTexture2 = Path.Combine(path2, defaultname + "-aci.dds");
 
-                            if (File.Exists(propLodACIMapTexture))
-                            {
-                                propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", propLodACIMapTexture.LoadTextureDDS());
-                            }
+                        if (defaultname == "BusLaneText")
+                        {
+                            propLodTexture = Path.Combine(path, "BusLane.dds");
+                            propLodACIMapTexture = Path.Combine(path, "BusLane-aci.dds");
+                            propLodTexture2 = Path.Combine(path2, "BusLane.dds");
+                            propLodACIMapTexture2 = Path.Combine(path2, "BusLane-aci.dds");
+                        }
+
+
+                        if (File.Exists(propLodTexture))
+                        {
+                            // only the m_lodMaterialCombined texture is visible
+                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", propLodTexture.LoadTextureDDS());
+                        }
+                        else if (File.Exists(propLodTexture2))
+                        {
+                            // only the m_lodMaterialCombined texture is visible
+                            propInfo.m_lodMaterialCombined.SetTexture("_MainTex", propLodTexture2.LoadTextureDDS());
+                        }
+
+                        if (File.Exists(propLodACIMapTexture))
+                        {
+                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", propLodACIMapTexture.LoadTextureDDS());
+                        }
+                        else if (File.Exists(propLodACIMapTexture2))
+                        {
+                            propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", propLodACIMapTexture2.LoadTextureDDS());
                         }
                     }
                 }
@@ -66,43 +78,51 @@
             uint num = 0u;
             while (num < (ulong)PrefabCollection<PropInfo>.LoadedCount())
             {
-                PropInfo prefab = PrefabCollection<PropInfo>.GetLoaded(num);
-                if (!(prefab == null))
+                PropInfo propInfo = PrefabCollection<PropInfo>.GetLoaded(num);
+                if (propInfo == null)
                 {
-                    PropInfo propInfo = prefab;
-                    if (propInfo.name.Equals("Road Arrow LFR"))
-                    {
-                        if (ModLoader.config.disable_optional_arrow_lfr)
-                        {
-                            propInfo.m_maxRenderDistance = 0f;
-                            propInfo.m_maxScale = 0f;
-                            propInfo.m_minScale = 0f;
-                        }
-                        else
-                        {
-                            propInfo.m_maxRenderDistance = 1000f;
-                            propInfo.m_maxScale = 1f;
-                            propInfo.m_minScale = 1f;
-                        }
-                    }
+                    continue;
+                }
+                bool flag  = false;
+                bool flag2 = false;
 
-                    if (propInfo.name.Equals("Road Arrow LR"))
+                if (propInfo.name.Equals("Road Arrow LFR"))
+                {
+                    if (ModLoader.config.disable_optional_arrow_lfr)
                     {
-                        if (ModLoader.config.disable_optional_arrow_lr)
-                        {
-                            propInfo.m_maxRenderDistance = 0f;
-                            propInfo.m_maxScale = 0f;
-                            propInfo.m_minScale = 0f;
-                        }
-                        else
-                        {
-                            propInfo.m_maxRenderDistance = 1000f;
-                            propInfo.m_maxScale = 1f;
-                            propInfo.m_minScale = 1f;
-                        }
+                        propInfo.m_maxRenderDistance = 0f;
+                        propInfo.m_maxScale = 0f;
+                        propInfo.m_minScale = 0f;
                     }
+                    else
+                    {
+                        propInfo.m_maxRenderDistance = 1000f;
+                        propInfo.m_maxScale = 1f;
+                        propInfo.m_minScale = 1f;
+                    }
+                    flag = true;
                 }
 
+                if (propInfo.name.Equals("Road Arrow LR"))
+                {
+                    if (ModLoader.config.disable_optional_arrow_lr)
+                    {
+                        propInfo.m_maxRenderDistance = 0f;
+                        propInfo.m_maxScale = 0f;
+                        propInfo.m_minScale = 0f;
+                    }
+                    else
+                    {
+                        propInfo.m_maxRenderDistance = 1000f;
+                        propInfo.m_maxScale = 1f;
+                        propInfo.m_minScale = 1f;
+                    }
+                    flag2 = true;
+                }
+                if (flag && flag2)
+                {
+                    return;
+                }
                 num += 1u;
             }
         }

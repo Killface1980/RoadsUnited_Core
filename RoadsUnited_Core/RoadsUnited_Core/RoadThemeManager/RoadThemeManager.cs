@@ -9,14 +9,11 @@
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
         public bool isLoaded;
-        public RoadThemePack activePack;
+        private RoadThemePack activePack;
 
         public RoadThemePack ActivePack
         {
-            get
-            {
-                return this.activePack;
-            }
+            get => this.activePack;
 
             set
             {
@@ -25,7 +22,9 @@
                 {
                     return;
                 }
+
                 ModLoader.config.texturePackPath = instance.activePack.packPath;
+                ModLoader.config.themeName = instance.activePack.themeName;
                 ModLoader.SaveConfig();
 
                 RoadsUnited_Core.ApplyVanillaDicts();
@@ -48,7 +47,7 @@
             List<RoadThemePack> list = new List<RoadThemePack>();
             foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
-                if (current.isEnabled)
+              //  if (current.isEnabled)
                 {
                     string text = Path.Combine(current.modPath, "RoadsUnitedTheme.xml");
                     if (File.Exists(text))

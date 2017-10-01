@@ -17,7 +17,7 @@ namespace RoadsUnited_Core
         {
             get
             {
-                return "Roads United Core";
+                return "Roads United Core 2.0";
             }
         }
 

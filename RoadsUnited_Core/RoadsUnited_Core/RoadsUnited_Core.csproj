@@ -52,11 +52,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
+    <Compile Include="Statics\RoadPos.cs" />
+    <None Include="Stuff\NetInfoClasses.cs" />
+    <None Include="Stuff\NetInfoVersion.cs" />
+    <None Include="Stuff\NetInfos.cs" />
+    <None Include="RU_CoreDicts.cs" />
+    <Compile Include="Statics\TexType.cs" />
+    <None Include="Class2.cs" />
+    <None Include="Class3.cs" />
+    <Compile Include="Statics\NodeSet.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Helpers.cs" />
-    <Compile Include="Strings.cs" />
+    <Compile Include="Statics\SegmentSet.cs" />
+    <Compile Include="ShittyPlusFuck.cs" />
+    <None Include="Strings.cs" />
     <None Include="Hook\Hook.cs" />
     <None Include="Hook\RedirectCallsState.cs" />
     <None Include="Hook\RedirectionHelper.cs" />
@@ -66,14 +75,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoadsUnited_CoreProps.cs" />
     <Compile Include="RoadColorChanger.cs" />
-    <None Include="RoadsUnited_Core.cs" />
+    <Compile Include="RoadsUnited_Core.cs" />
     <Compile Include="RoadThemeManager\RoadThemeManager.cs" />
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
     <Compile Include="RoadThemeManager\RoadThemesUtil.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Texturing\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

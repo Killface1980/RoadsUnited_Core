@@ -21,23 +21,11 @@ namespace RoadsUnited_Core
             modPath = GetModPath();
             currentTexturesPath_default = "None";
             APRMaps_Path = Path.Combine(modPath, "APRMaps");
-            Tex = string.Empty;
-            Tex2A = string.Empty;
-            Tex2B = string.Empty;
-            Tex2C = string.Empty;
         }
 
         public static Configuration config;
 
         public static readonly string configFile = "RoadsUnitedCoreConfig.xml";
-
-        public static string Tex = string.Empty;
-
-        public static string Tex2A = string.Empty;
-
-        public static string Tex2B = string.Empty;
-
-        public static string Tex2C = string.Empty;
 
         public static string GetModPath()
         {
@@ -71,8 +59,12 @@ namespace RoadsUnited_Core
         }
 
         public static string modPath = GetModPath();
+
         public static string currentTexturesPath_default = "None";
+
         public static string APRMaps_Path = Path.Combine(modPath, "APRMaps");
+
+        public static string themeName = "None";
 
         public RoadsUnited_Core textureManager;
 

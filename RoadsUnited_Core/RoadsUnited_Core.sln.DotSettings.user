@@ -1,9 +1,8 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
-  &lt;Assembly Path="C:\Program Files (x86)\Steam\SteamApps\workshop\content\294100\729577707\Assemblies\Community Core Library.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Program Files (x86)\Steam\SteamApps\workshop\content\294100\818773962\Assemblies\HugsLib.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Program Files (x86)\Steam\SteamApps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
   &lt;Assembly Path="\\Mac\AllFiles\Applications\Steam Games\SteamApps\common\Cities_Skylines\Cities.app\Contents\Resources\Data\Managed\ColossalManaged.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Windows\assembly\GAC_32\mscorlib\2.0.0.0__b77a5c561934e089\mscorlib.dll" /&gt;&#xD;
+  &lt;Assembly Path="\\Mac\AllFiles\Applications\Steam Games\SteamApps\common\Cities_Skylines\Cities.app\Contents\Resources\Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark6/Coords/@EntryValue">(Doc Ln 262 Col 21)</s:String>

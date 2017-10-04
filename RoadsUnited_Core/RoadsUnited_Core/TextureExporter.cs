@@ -12,13 +12,17 @@ namespace RoadsUnited_Core
 
         #region Private Fields
 
-        private static readonly string Aprmaps;
-        private static readonly string AprmapsLod;
-        private static readonly string Maintex;
-        private static readonly string MaintexLod;
-        private static readonly string NodeString;
+        private const string Aprmaps = "/APRMaps";
+        private const string AprmapsLod = "/APRMaps/lod";
+        private const string Maintex = "/MainTex";
+        private const string MaintexLod = "/MainTex/lod";
+
+        private const string NodeString = "/Nodes";
+
+        private const string SegmentString = "/Segments";
+
         private static readonly List<string> Paths;
-        private static readonly string SegmentString;
+
         private static bool pathsChecked;
 
         #endregion Private Fields
@@ -27,18 +31,6 @@ namespace RoadsUnited_Core
 
         static TextureExporter()
         {
-            Maintex = "/MainTex";
-
-            MaintexLod = "/MainTex/lod";
-
-            Aprmaps = "/APRMaps";
-
-            AprmapsLod = "/APRMaps/lod";
-
-            SegmentString = "/Segments";
-
-            NodeString = "/Nodes";
-
             Paths = new List<string>
                                      {
                                          ModLoader.Export_Path + SegmentString + MaintexLod,
@@ -54,7 +46,7 @@ namespace RoadsUnited_Core
 
         public static void ExportPrefabTextures(object part)
         {
-            // deactivated, all textures created
+            // deactivated, all textures created (way too dark, what's wrong?!?)
             if (true)
             {
                 return;

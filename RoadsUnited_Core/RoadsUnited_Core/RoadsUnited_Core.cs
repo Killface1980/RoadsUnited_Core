@@ -12,14 +12,47 @@
     {
         #region Public Fields
 
-        public static Configuration config;
-        public static Dictionary<string, Texture2D> vanillaPrefabProperties = new Dictionary<string, Texture2D>();
+        private const string ExtDDS = ".dds";
+
+        private static readonly Dictionary<string, string> NExtRoads = new Dictionary<string, string>
+                                                                          {
+                                                                              { "Two-Lane Alley", "Alley2L" },
+                                                                              { "One-Lane Oneway", "OneWay1L" },
+                                                                              { "One-Lane Oneway With Parking", "OneWay1Lp" },
+                                                                              { "PlainStreet2L", "PlainStreet2L" },
+                                                                              { "BasicRoadPntMdn", "BasicRoadPntMdn" }, // todo el, br, t, sl?
+                                                                              { "BasicRoadTL", "BasicRoadTL" },
+                                                                              { "AsymRoadL1R2", "AsymRoadL1R2" }, // todo el, br, t, sl?
+                                                                              { "BasicRoadMdn", "BasicRoadMdn" }, // todo el, br, t, sl, deco gr, t?
+                                                                              { "Oneway3L", "Oneway3L" },
+                                                                              { "Small Avenue", "SmallAvenue4L" },
+                                                                              { "AsymAvenueL2R4", "AsymAvenueL2R4" }, // todo el, br, t, sl?
+                                                                              { "AsymAvenueL2R3", "AsymAvenueL2R3" }, // todo el, br, t, sl?
+                                                                              { "AsymRoadL1R3", "AsymRoadL1R3" }, // todo el, br, t, sl?
+                                                                              { "Oneway4L", "Oneway4L" },
+                                                                              { "Medium Avenue", "MediumAvenue4L" },
+                                                                              { "Medium Avenue TL", "MediumAvenue4LTL" },
+                                                                              { "Eight-Lane Avenue", "LargeAvenue8LM" },
+                                                                              { "Small Rural Highway", "Highway1L" },
+                                                                              { "Rural Highway", "Highway2L" },
+                                                                              { "Four-Lane Highway", "Highway4L" },
+                                                                              { "Five-Lane Highway", "Highway5L" },
+                                                                              { "Large Highway", "Highway6L" }
+                                                                              // Small Busway handled with exceptions
+                                                                              // also Large Road With Bus
+                                                                              // and Medium Avenue ...?
+                                                                          };
+
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private static readonly List<string> blacklist =
+        public static Dictionary<string, Texture2D> VanillaPrefabs = new Dictionary<string, Texture2D>();
+
+        private const string NextRoadsPath = "/NExt_Roads";
+
+        private static readonly List<string> Blacklist =
             new List<string>
                 {
                     "Heating Pipe",
@@ -36,9 +69,7 @@
                     "Electricity"
                 };
 
-        private static Dictionary<string, Texture2D> textureCache = new Dictionary<string, Texture2D>();
-
-        public static readonly string ExtDDS = ".dds";
+        private static float newLodRenderDistance = 7000f;
 
         #endregion Private Fields
 
@@ -50,7 +81,7 @@
             ApplyVanillaRoadDictionary();
         }
 
-        public static void ApplyVanillaPropDictionary()
+        private static void ApplyVanillaPropDictionary()
         {
             PropCollection[] array = FindObjectsOfType<PropCollection>();
             foreach (PropCollection propCollection in array)
@@ -71,12 +102,12 @@
                             continue;
                         }
 
-                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_MainTex", out Texture2D defaultmapTex))
+                        if (VanillaPrefabs.TryGetValue(name + "_prop_MainTex", out Texture2D defaultmapTex))
                         {
                             propInfo.m_lodMaterialCombined.SetTexture(TexType._MainTex, defaultmapTex);
                         }
 
-                        if (vanillaPrefabProperties.TryGetValue(name + "_prop_ACIMap", out Texture2D acimapTex))
+                        if (VanillaPrefabs.TryGetValue(name + "_prop_ACIMap", out Texture2D acimapTex))
                         {
                             propInfo.m_lodMaterialCombined.SetTexture("_ACIMap", acimapTex);
                         }
@@ -106,7 +137,7 @@
                 {
                     NetInfo.Node node = nodes[i];
 
-                    if (blacklist.Any(x => text.Contains(x)))
+                    if (Blacklist.Any(x => text.Contains(x)))
                     {
                         continue;
                     }
@@ -116,7 +147,7 @@
                     }
 
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_MainTex"),
                         out Texture2D defaultmapTex))
                     {
@@ -124,7 +155,7 @@
                     }
 
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_APRMap"),
                         out Texture2D aprmapTex))
                     {
@@ -132,14 +163,14 @@
                     }
 
                     // LOD
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_MainTex_lod"),
                         out Texture2D defaultmapLodTex))
                     {
                         node.m_lodMaterial.SetTexture(TexType._MainTex, defaultmapLodTex);
                     }
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_node_", i, "_nodeMaterial_APRMap_lod"),
                         out Texture2D aprmapLodTex))
                     {
@@ -158,19 +189,19 @@
                         continue;
                     }
 
-                    if (blacklist.Any(x => text.Contains(x)))
+                    if (Blacklist.Any(x => text.Contains(x)))
                     {
                         continue;
                     }
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_MainTex"),
                         out Texture2D defaultmapTex))
                     {
                         segment.m_segmentMaterial.SetTexture(TexType._MainTex, defaultmapTex);
                     }
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_APRMap"),
                         out Texture2D aprmapTex))
                     {
@@ -178,14 +209,14 @@
                     }
 
                     // LOD 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_MainTex_lod"),
                         out Texture2D defaultmapLodTex))
                     {
                         segment.m_lodMaterial.SetTexture(TexType._MainTex, defaultmapLodTex);
                     }
 
-                    if (vanillaPrefabProperties.TryGetValue(
+                    if (VanillaPrefabs.TryGetValue(
                         string.Concat(text, "_segment_", j, "_segmentMaterial_APRMap_lod"),
                         out Texture2D aprmapLodTex))
                     {
@@ -199,7 +230,7 @@
 
         public static void CreateVanillaDictionary()
         {
-            if (vanillaPrefabProperties.Any())
+            if (VanillaPrefabs.Any())
             {
                 return;
             }
@@ -227,7 +258,7 @@
                 {
                     NetInfo.Node node = nodes[i];
                     {
-                        if (blacklist.Any(x => className.Contains(x)))
+                        if (Blacklist.Any(x => className.Contains(x)))
                         {
                             continue;
                         }
@@ -237,18 +268,18 @@
                         }
 
 
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_MainTex"),
                             node.m_nodeMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_APRMap"),
                             node.m_nodeMaterial.GetTexture(TexType._APRMap) as Texture2D);
 
                         // LOD
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_MainTex_lod"),
                             node.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_node_", i, "_nodeMaterial_APRMap_lod"),
                             node.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
 
@@ -267,22 +298,22 @@
                             continue;
                         }
 
-                        if (blacklist.Any(x => className.Contains(x)))
+                        if (Blacklist.Any(x => className.Contains(x)))
                         {
                             continue;
                         }
 
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_segment_", j, "_segmentMaterial_MainTex"),
                             segment.m_segmentMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_segment_", j, "_segmentMaterial_APRMap"),
                             segment.m_segmentMaterial.GetTexture(TexType._APRMap) as Texture2D);
                         // LOD
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_segment_", j, "_segmentMaterial_MainTex_lod"),
                             segment.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             string.Concat(collectionName, "_segment_", j, "_segmentMaterial_APRMap_lod"),
                             segment.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
                         log += "\n" + string.Concat(collectionName, "_segment_", j, "_nodeMaterial_MainTex");
@@ -313,10 +344,10 @@
                             continue;
                         }
 
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             name + "_prop_MainTex",
                             propInfo.m_lodMaterialCombined.GetTexture(TexType._MainTex) as Texture2D);
-                        vanillaPrefabProperties.Add(
+                        VanillaPrefabs.Add(
                             name + "_prop_ACIMap",
                             propInfo.m_lodMaterialCombined.GetTexture("_ACIMap") as Texture2D);
                         log += "\n" + name + "_prop_MainTex";
@@ -332,10 +363,11 @@
         }
 
         // deactivated for now
+        /*
         public static Texture2D LoadTexture(string fullPath)
         {
             Texture2D texture2D = new Texture2D(1, 1);
-            if (textureCache.TryGetValue(fullPath, out texture2D))
+            if (TextureCache.TryGetValue(fullPath, out texture2D))
             {
                 return texture2D;
             }
@@ -346,7 +378,6 @@
             texture2D.Compress(true);
             return texture2D;
         }
-        /*
         public static Texture2D DDSLoader.LoadDDS(string fullPath)
         {
             // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
@@ -377,6 +408,7 @@
             return texture;
         }
         */
+
         public static void ReplaceNetTextures()
         {
             if (!ModLoader.config.texturePackPath.IsNullOrWhiteSpace())
@@ -391,9 +423,10 @@
             string allNodes = "All nodes:";
             string allSegments = "All segments:";
 
-            for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+            uint num = 0u;
+            while ((ulong)num < (ulong)((long)PrefabCollection<NetInfo>.LoadedCount()))
             {
-                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
+                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(num);
                 if (netInfo == null)
                 {
                     continue;
@@ -404,7 +437,7 @@
                 string className = netInfo.m_class.name;
 
                 NetInfo.Node[] nodes = netInfo.m_nodes;
-                foreach (NetInfo.Node node in nodes.Where(node => !blacklist.Any(x => className.Contains(x)))
+                foreach (NetInfo.Node node in nodes.Where(node => !Blacklist.Any(x => className.Contains(x)))
                     .Where(
                         node => node.m_nodeMaterial.GetTexture(TexType._MainTex) != null
                                 && node.m_nodeMaterial.GetTexture(TexType._APRMap) != null))
@@ -414,53 +447,53 @@
                     // Just look up the name and set the textures accordingly, no magic needed
                     string nodeMatName = node.m_nodeMaterial.GetTexture(TexType._MainTex).name;
                     string nodeAprName = node.m_nodeMaterial.GetTexture(TexType._APRMap).name;
+
+                    allNodes += "\n" + className + " | " + netInfo.name + " | " + nodeMatName + " | "
+                                + node.m_nodeMesh.name;
+                    allNodes += "\n" + nodeAprName;
+
+                    #region NExt nodes
+
+                    ReplaceNExtNodes(netInfo, node, ref nextLog);
+
+                    if (netInfo.name.Contains("Rural Highway"))
                     {
-                        allNodes += "\n" + className + " | " + netInfo.name + " | " + nodeMatName + " | "
-                                    + node.m_nodeMesh.name;
-                        allNodes += "\n" + nodeAprName;
-
-                        #region NExt nodes
-
-                        ReplaceNExtNodes(netInfo, node, ref nextLog);
-                        if (netInfo.name.Contains("Rural Highway"))
+                        if (netInfo.name.Contains("Small"))
                         {
-                            if (netInfo.name.Contains("Small"))
+                            if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
                             {
-                                if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
-                                {
-                                    // not an error, use the 2l node tex
-                                    nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node", "Highway1L_Ground_Node"));
-                                }
-
-                                if (nodeMatName.Contains(RoadPos.Slope))
-                                {
-                                    nodeList.Add(new NodeSet(node, "Highway1L_Slope_Node"));
-                                }
+                                // not an error, use the 2l node tex
+                                nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node", "Highway1L_Ground_Node"));
                             }
-                            else
-                            {
-                                if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
-                                {
-                                    nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node"));
-                                }
 
-                                if (nodeMatName.Contains(RoadPos.Slope))
-                                {
-                                    nodeList.Add(new NodeSet(node, "Highway2L_Slope_Node"));
-                                }
+                            if (nodeMatName.Contains(RoadPos.Slope))
+                            {
+                                nodeList.Add(new NodeSet(node, "Highway1L_Slope_Node"));
                             }
                         }
+                        else
+                        {
+                            if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
+                            {
+                                nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node"));
+                            }
 
-                        #endregion
-
-                        nodeList.Add(new NodeSet(node, nodeMatName, nodeAprName));
+                            if (nodeMatName.Contains(RoadPos.Slope))
+                            {
+                                nodeList.Add(new NodeSet(node, "Highway2L_Slope_Node"));
+                            }
+                        }
                     }
+
+                    #endregion
+
+                    nodeList.Add(new NodeSet(node, nodeMatName, nodeAprName));
                 }
 
                 // Look for segments
                 NetInfo.Segment[] segments = netInfo.m_segments;
                 foreach (NetInfo.Segment segment in segments
-                    .Where(segment => !blacklist.Any(x => className.Contains(x))).Where(
+                    .Where(segment => !Blacklist.Any(x => className.Contains(x))).Where(
                         segment => segment.m_segmentMaterial.GetTexture(TexType._MainTex) != null
                                    && segment.m_segmentMaterial.GetTexture(TexType._APRMap) != null))
                 {
@@ -474,21 +507,18 @@
 
                     #region NExt
 
+                    allSegments += "\n" + className + " | " + netInfo.name + " | " + mainTexName + " | "
+                                   + segment.m_segmentMesh.name;
+
+                    string meshName = segment.m_mesh.name;
+
                     ReplaceNExtSegments(netInfo, segment, ref nextLog);
 
                     if (netInfo.name.Contains("Medium Avenue"))
                     {
                         if (netInfo.name.Contains("TL"))
                         {
-                            if (netInfo.name.Contains(RoadPos.Ground))
-                            {
-                                segList.Add(
-                                    new SegmentSet(
-                                        segment,
-                                        "MediumAvenue4LTL_Ground_Segment",
-                                        "RoadLargeSegment-default-apr"));
-                            }
-                            else if (netInfo.name.Contains(RoadPos.Elevated))
+                            if (netInfo.name.Contains(RoadPos.Elevated))
                             {
                                 segList.Add(new SegmentSet(segment, "MediumAvenue4LTL_Elevated_Segment"));
                             }
@@ -500,18 +530,18 @@
                             {
                                 segList.Add(new SegmentSet(segment, "MediumAvenue4LTL_Tunnel_Segment"));
                             }
-                        }
-                        else
-                        {
-                            if (netInfo.name.Contains(RoadPos.Ground))
+                            else
                             {
                                 segList.Add(
                                     new SegmentSet(
                                         segment,
-                                        "MediumAvenue4L_Ground_Segment",
+                                        "MediumAvenue4LTL_Ground_Segment",
                                         "RoadLargeSegment-default-apr"));
                             }
-                            else if (netInfo.name.Contains(RoadPos.Elevated))
+                        }
+                        else
+                        {
+                            if (netInfo.name.Contains(RoadPos.Elevated))
                             {
                                 segList.Add(new SegmentSet(segment, "MediumAvenue4L_Elevated_Segment"));
                             }
@@ -523,48 +553,50 @@
                             {
                                 segList.Add(new SegmentSet(segment, "MediumAvenue4L_Tunnel_Segment"));
                             }
+                            else
+                            {
+                                segList.Add(
+                                    new SegmentSet(
+                                        segment,
+                                        "MediumAvenue4L_Ground_Segment",
+                                        "RoadLargeSegment-default-apr"));
+                            }
                         }
                     }
-
-                    if (netInfo.name.Contains("Rural Highway"))
+                    else if (netInfo.name.Contains("Rural Highway"))
                     {
                         if (netInfo.name.Contains("Small"))
                         {
-                            if (mainTexName.Contains(RoadPos.Ground) || mainTexName.Contains(RoadPos.Elevated))
-                            {
-                                segList.Add(new SegmentSet(segment, "Highway1L_Ground_Segment"));
-                            }
-
                             if (mainTexName.Contains(RoadPos.Slope))
                             {
                                 segList.Add(new SegmentSet(segment, "Highway1L_Slope_Segment"));
                             }
-
-                            if (mainTexName.Contains(RoadPos.Tunnel))
+                            else if (mainTexName.Contains(RoadPos.Tunnel))
                             {
                                 segList.Add(new SegmentSet(segment, "Highway1L_Tunnel_Segment"));
+                            }
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "Highway1L_Ground_Segment"));
                             }
                         }
                         else
                         {
-                            if (mainTexName.Contains(RoadPos.Ground) || mainTexName.Contains(RoadPos.Elevated))
-                            {
-                                segList.Add(new SegmentSet(segment, "Highway2L_Ground_Segment"));
-                            }
-
                             if (mainTexName.Contains(RoadPos.Slope))
                             {
                                 segList.Add(new SegmentSet(segment, "Highway2L_Slope_Segment"));
                             }
-
-                            if (mainTexName.Contains(RoadPos.Tunnel))
+                            else if (mainTexName.Contains(RoadPos.Tunnel))
                             {
                                 segList.Add(new SegmentSet(segment, "Highway2L_Tunnel_Segment"));
                             }
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "Highway2L_Ground_Segment"));
+                            }
                         }
                     }
-
-                    if (netInfo.name.Contains("Small Busway"))
+                    else if (netInfo.name.Contains("Small Busway"))
                     {
                         if (netInfo.name.Contains("Oneway"))
                         {
@@ -639,8 +671,7 @@
                             }
                         }
                     }
-
-                    if (netInfo.name.Contains("Large Road") && netInfo.name.Contains("Bus Lanes"))
+                    else if (netInfo.name.Contains("Large Road") && netInfo.name.Contains("Bus Lanes"))
                     {
                         if (netInfo.name.Contains("Grass") || netInfo.name.Contains("Trees"))
                         {
@@ -677,18 +708,7 @@
                             }
                         }
                     }
-
-                    #endregion
-
-                    allSegments += "\n" + className + " | " + netInfo.name + " | " + mainTexName + " | "
-                                   + segment.m_segmentMesh.name;
-
-                    // I'm combining cofiguration with this region to sort each item by Network Type/Class
-                    // Also combining if statements where && is appropriate
-                    // Killface: won't use your code as it's bloated. don't want 10,000 lines of a crappy forced naming scheme which breaks working functions
-                    // #region Oneways
-                    string meshName = segment.m_mesh.name;
-                    if (netInfo.name.Contains("Oneway"))
+                    else if (netInfo.name.Contains("Oneway"))
                     {
                         if (mainTexName.Equals("RoadSmallSegment"))
                         {
@@ -721,7 +741,7 @@
                             segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco"));
                         }
 
-                        if (mainTexName == "small-tunnel_d")
+                        if (mainTexName.Equals("small-tunnel_d"))
                         {
                             segList.Add(new SegmentSet(segment, "Oneway_small-tunnel_d"));
                         }
@@ -741,71 +761,7 @@
                             segList.Add(new SegmentSet(segment, "RoadLargeOnewaySegment_d_BusBoth"));
                         }
                     }
-
-                    if (meshName.Equals("SmallRoadSegmentBusSide"))
-                    {
-                        if (!netInfo.name.Contains("Bicycle"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadSmall_D_BusSide"));
-                        }
-                        else
-                        {
-                            segList.Add(new SegmentSet(segment, "SmallRoadSegmentDeco_BusSide"));
-                        }
-                    }
-
-                    if (meshName.Equals("SmallRoadSegmentBusBoth"))
-                    {
-                        if (!netInfo.name.Contains("Bicycle"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadSmall_D_BusBoth"));
-                        }
-                    }
-
-                    if (meshName.Equals("SmallRoadSegment2BusBoth"))
-                    {
-                        segList.Add(new SegmentSet(segment, "SmallRoadSegmentDeco_BusBoth"));
-                    }
-
-                    if (meshName.Equals("RoadMediumSegmentBusSide"))
-                    {
-                        if (netInfo.name.Contains("Trees"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_BusSide"));
-                            if (netInfo.name.Contains("Bus"))
-                            {
-                                segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusSide"));
-                            }
-
-                            if (!netInfo.name.Contains("Bicycle"))
-                            {
-                                segList.Add(new SegmentSet(segment, "RoadMedium_D_BusSide"));
-                            }
-                        }
-
-                        goto configsettings;
-                    }
-
-                    if (meshName.Equals("RoadMediumSegmentBusBoth"))
-                    {
-                        if (netInfo.name.Contains("Trees"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_BusBoth"));
-                            if (netInfo.name.Contains("Bus"))
-                            {
-                                segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusBoth"));
-                            }
-
-                            if (!netInfo.name.Contains("Bicycle"))
-                            {
-                                segList.Add(new SegmentSet(segment, "RoadMedium_D_BusBoth"));
-                            }
-                        }
-
-                        goto configsettings;
-                    }
-
-                    if (!(netInfo.name.Contains("Bicycle") || netInfo.name.Contains("Oneway")))
+                    else if (!(netInfo.name.Contains("Bicycle")))
                     {
                         if (meshName.Equals("LargeRoadSegmentBusSide"))
                         {
@@ -833,7 +789,63 @@
                         }
                     }
 
-                    configsettings:
+                    #endregion
+
+                    if (meshName.Equals("SmallRoadSegmentBusSide"))
+                    {
+                        if (!netInfo.name.Contains("Bicycle"))
+                        {
+                            segList.Add(new SegmentSet(segment, "RoadSmall_D_BusSide"));
+                        }
+                        else
+                        {
+                            segList.Add(new SegmentSet(segment, "SmallRoadSegmentDeco_BusSide"));
+                        }
+                    }
+                    else if (meshName.Equals("SmallRoadSegmentBusBoth"))
+                    {
+                        if (!netInfo.name.Contains("Bicycle"))
+                        {
+                            segList.Add(new SegmentSet(segment, "RoadSmall_D_BusBoth"));
+                        }
+                    }
+                    else if (meshName.Equals("SmallRoadSegment2BusBoth"))
+                    {
+                        segList.Add(new SegmentSet(segment, "SmallRoadSegmentDeco_BusBoth"));
+                    }
+                    else if (meshName.Equals("RoadMediumSegmentBusSide"))
+                    {
+                        if (netInfo.name.Contains("Trees"))
+                        {
+                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_BusSide"));
+                            if (netInfo.name.Contains("Bus"))
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusSide"));
+                            }
+
+                            if (!netInfo.name.Contains("Bicycle"))
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMedium_D_BusSide"));
+                            }
+                        }
+                    }
+                    else if (meshName.Equals("RoadMediumSegmentBusBoth"))
+                    {
+                        if (netInfo.name.Contains("Trees"))
+                        {
+                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_BusBoth"));
+                            if (netInfo.name.Contains("Bus"))
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusBoth"));
+                            }
+
+                            if (!netInfo.name.Contains("Bicycle"))
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMedium_D_BusBoth"));
+                            }
+                        }
+                    }
+
 
                     if (ModLoader.config.basic_road_parking == 1)
                     {
@@ -842,7 +854,7 @@
                             segList.Add(new SegmentSet(segment, "RoadSmall_D_parking1"));
                         }
 
-                        if (mainTexName.Equals("RoadSmall_D_BusSide"))
+                        else if (mainTexName.Equals("RoadSmall_D_BusSide"))
                         {
                             segList.Add(new SegmentSet(segment, "RoadSmall_D_BusSide_parking1"));
                         }
@@ -852,150 +864,131 @@
                     {
                         if (!(netInfo.name.Contains("Grass") || netInfo.name.Contains("Trees")))
                         {
-                            if (meshName.Equals("RoadMediumSegmentBusSide"))
+                            if (mainTexName.Equals("RoadMediumSegment_d") || mainTexName.Equals("RoadMedium_D"))
                             {
-                                if (mainTexName.Equals("RoadMediumSegment_d"))
+                                if (meshName.Equals("RoadMediumSegmentBusSide"))
                                 {
                                     segList.Add(new SegmentSet(segment, "RoadMedium_D_BusSide_parking1"));
                                 }
-                            }
-                            else if (meshName.Equals("RoadMediumSegmentBusBoth"))
-                            {
-                                if (mainTexName.Equals("RoadMediumSegment_d"))
+                                else if (meshName.Equals("RoadMediumSegmentBusBoth"))
                                 {
                                     segList.Add(new SegmentSet(segment, "RoadMedium_D_BusBoth_parking1"));
                                 }
-                            }
-                            else if (mainTexName.Equals("RoadMediumSegment_d") || mainTexName.Equals("RoadMedium_D"))
-                            {
-                                segList.Add(new SegmentSet(segment, "RoadMedium_D_parking1"));
+                                else
+                                {
+                                    segList.Add(new SegmentSet(segment, "RoadMedium_D_parking1"));
+                                }
                             }
                         }
                     }
 
                     if (ModLoader.config.medium_road_grass_parking == 1 && netInfo.name.Contains("Grass"))
                     {
-                        if (meshName.Equals("RoadMediumSegmentBusSide"))
+                        if (mainTexName.Equals("RoadMedium_D") || mainTexName.Equals("RoadMediumSegment_d"))
                         {
-                            if (mainTexName.Equals("RoadMedium_D"))
+                            if (meshName.Equals("RoadMediumSegmentBusSide"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadMedium_D_BusSide_parking1"));
                             }
-                        }
-                        else if (meshName.Equals("RoadMediumSegmentBusBoth"))
-                        {
-                            if (mainTexName.Equals("RoadMedium_D"))
+                            else if (meshName.Equals("RoadMediumSegmentBusBoth"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadMedium_D_BusBoth_parking1"));
                             }
-                        }
-                        else if (mainTexName.Equals("RoadMediumSegment_d"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMedium_D_parking1"));
-                        }
-                        else if (mainTexName.Equals("RoadMedium_D"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMedium_D_parking1"));
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMedium_D_parking1"));
+                            }
                         }
                     }
 
                     if (ModLoader.config.medium_road_trees_parking == 1 && netInfo.name.Contains("Trees"))
                     {
-                        if (meshName.Equals("RoadMediumSegmentBusSide"))
+                        if (mainTexName.Equals("RoadMediumDeco_d"))
                         {
-                            if (mainTexName.Equals("RoadMediumDeco_d"))
+                            if (meshName.Equals("RoadMediumSegmentBusSide"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_BusSide_parking1"));
                             }
-                        }
-                        else if (meshName.Equals("RoadMediumSegmentBusBoth"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d"));
-                        }
-                        else if (mainTexName.Equals("RoadMediumDeco_d"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_parking1"));
+                            else if (meshName.Equals("RoadMediumSegmentBusBoth"))
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMediumDeco_d"));
+                            }
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMediumDeco_d_parking1"));
+                            }
                         }
                     }
 
                     if (ModLoader.config.medium_road_bus_parking == 1)
                     {
-                        if (meshName.Equals("RoadMediumSegmentBusSide"))
+                        if (mainTexName.Equals("RoadMediumBusLane"))
                         {
-                            if (mainTexName.Equals("RoadMediumBusLane"))
+                            if (meshName.Equals("RoadMediumSegmentBusSide"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusSide_parking1"));
                             }
-                        }
-                        else if (meshName.Equals("RoadMediumSegmentBusBoth"))
-                        {
-                            if (mainTexName.Equals("RoadMediumBusLane"))
+                            else if (meshName.Equals("RoadMediumSegmentBusBoth"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadMediumBusLane_BusBoth_parking1"));
                             }
-                        }
-                        else if (mainTexName.Equals("RoadMediumBusLane"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadMediumBusLane_parking1"));
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadMediumBusLane_parking1"));
+                            }
                         }
                     }
 
                     if (ModLoader.config.large_road_parking == 1)
                     {
-                        if (meshName.Equals("LargeRoadSegmentBusSide"))
+                        if (mainTexName.Equals("RoadLargeSegment_d"))
                         {
-                            if (mainTexName.Equals("RoadLargeSegment_d"))
+                            if (meshName.Equals("LargeRoadSegmentBusSide"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadLargeSegment_d_BusSide_parking1"));
                             }
-                        }
-                        else if (meshName.Equals("LargeRoadSegmentBusBoth"))
-                        {
-                            if (mainTexName.Equals("RoadLargeSegment_d"))
+                            else if (meshName.Equals("LargeRoadSegmentBusBoth"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadLargeSegment_d_BusBoth_parking1"));
                             }
-                        }
-                        else if (mainTexName.Equals("RoadLargeSegment_d"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadLargeSegment_d_parking1"));
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadLargeSegment_d_parking1"));
+                            }
                         }
                     }
 
                     if (ModLoader.config.large_oneway_parking == 1)
                     {
-                        if (meshName.Equals("LargeRoadSegmentBusSide"))
+                        if (mainTexName.Equals("RoadLargeOnewaySegment_d"))
                         {
-                            if (mainTexName.Equals("RoadLargeOnewaySegment_d"))
+                            if (meshName.Equals("LargeRoadSegmentBusSide"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadLargeOnewaySegment_d_BusSide_parking1"));
                             }
-                        }
-                        else if (mainTexName.Equals("RoadLargeOnewaySegment_d"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadLargeOnewaySegment_d_parking1"));
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadLargeOnewaySegment_d_parking1"));
+                            }
                         }
                     }
 
                     if (ModLoader.config.large_road_bus_parking == 1)
                     {
-                        if (meshName.Equals("LargeRoadSegmentBusSideBusLane"))
+                        if (mainTexName.Equals("RoadLargeBuslane_D"))
                         {
-                            if (mainTexName.Equals("RoadLargeBuslane_D"))
+                            if (meshName.Equals("LargeRoadSegmentBusSideBusLane"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D_BusSide_parking1"));
                             }
-                        }
-                        else if (meshName.Equals("LargeRoadSegmentBusBothBusLane"))
-                        {
-                            if (mainTexName.Equals("RoadLargeBuslane_D"))
+                            else if (meshName.Equals("LargeRoadSegmentBusBothBusLane"))
                             {
                                 segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D_BusBoth_parking1"));
                             }
-                        }
-                        else if (mainTexName.Equals("RoadLargeBuslane_D"))
-                        {
-                            segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D_parking1"));
+                            else
+                            {
+                                segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D_parking1"));
+                            }
                         }
                     }
 
@@ -1006,13 +999,14 @@
                     {
                         segList.Add(new SegmentSet(segment, null, "RoadLargeSegment-BikeLane-apr"));
                     }
-
-                    if (aprName.Equals("LargeRoadSegmentBusSide-LargeRoadSegmentBusSide-apr")
-                        || aprName.Equals("LargeRoadSegmentBusBoth-LargeRoadSegmentBusBoth-apr"))
+                    else if (aprName.Equals("LargeRoadSegmentBusSide-LargeRoadSegmentBusSide-apr")
+                             || aprName.Equals("LargeRoadSegmentBusBoth-LargeRoadSegmentBusBoth-apr"))
                     {
                         segList.Add(new SegmentSet(segment, null, "RoadLargeSegment-default-apr"));
                     }
                 }
+                num += 1u;
+
             }
 
             foreach (SegmentSet set in segList)
@@ -1029,21 +1023,127 @@
 
             Debug.Log(log);
 
-            // Debug.Log(allNodes);
-            // Debug.Log(allSegments);
             Debug.Log(nextLog);
-
-            // Singleton<NetManager>.instance.m_lodAprAtlas = null;
-
 
             // Debug.Log(log);
 
             ShittyPlusFuck.ReplaceShitFuckingPlus();
-            LODResetter.ResetLOD();
-            Singleton<NetManager>.instance.InitRenderData();
+           // LODResetter.ResetLOD();
+           // Singleton<NetManager>.instance.InitRenderData();
 
         }
 
+        private static void SetNodeDirect(NodeSet set)
+        {
+            NetInfo.Node node = set.node;
+            string maintex = set.MainTex;
+            string apr = set.APRMap;
+
+            string texPath = ModLoader.currentTexturesPath_default;
+            if (!maintex.IsNullOrWhiteSpace())
+            {
+                if (File.Exists(Path.Combine(texPath, maintex + ExtDDS)))
+                {
+                    node.m_nodeMaterial.SetTexture(
+                        TexType._MainTex,
+                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + ExtDDS)));
+
+                    string filename_lod = Path.Combine(
+                        texPath + "/LOD", maintex + "_lod" + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+                }
+                else if (File.Exists(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)))
+                {
+                    node.m_nodeMaterial.SetTexture(
+                        TexType._MainTex,
+                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)));
+
+                    string filename_lod = Path.Combine(texPath + "/LOD", maintex + TexType._MainTex + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+
+                    // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
+                    if (apr.IsNullOrWhiteSpace())
+                    {
+                        apr = maintex;
+                    }
+                }
+            }
+
+            if (!apr.IsNullOrWhiteSpace())
+            {
+                string path = Path.Combine(texPath, apr + ExtDDS);
+                string path2 = Path.Combine(ModLoader.APRMaps_Path, apr + ExtDDS);
+                string path3 = Path.Combine(texPath, apr + TexType._APRMap + ExtDDS);
+                string path4 = Path.Combine(ModLoader.APRMaps_Path, apr + TexType._APRMap + ExtDDS);
+
+                if (File.Exists(path))
+                {
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path));
+                    string filename_lod = Path.Combine(texPath + "/LOD", apr + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+                }
+                else if (File.Exists(path2))
+                {
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path2));
+                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+                }
+                else if (File.Exists(path3))
+                {
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path3));
+                    string filename_lod = Path.Combine(texPath + "/LOD", apr + TexType._APRMap + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+                }
+                else if (File.Exists(path4))
+                {
+                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path4));
+                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
+                    if (File.Exists(filename_lod))
+                    {
+                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        node.m_lodRenderDistance = newLodRenderDistance;
+                    }
+                }
+            }
+        }
 
         private static void SetSegmentDirect(SegmentSet set)
         {
@@ -1067,6 +1167,10 @@
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
+                    else
+                    {
+                        segment.m_lodRenderDistance = newLodRenderDistance;
+                    }
                 }
                 else if (File.Exists(Path.Combine(currentTextures, maintex + type + ExtDDS)))
                 {
@@ -1080,6 +1184,10 @@
                     if (File.Exists(filename_lod))
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        segment.m_lodRenderDistance = newLodRenderDistance;
                     }
 
                     // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
@@ -1108,6 +1216,10 @@
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
+                    else
+                    {
+                        segment.m_lodRenderDistance = newLodRenderDistance;
+                    }
                 }
                 else if (File.Exists(path2))
                 {
@@ -1118,6 +1230,10 @@
                     if (File.Exists(filename_lod))
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
+                    }
+                    else
+                    {
+                        segment.m_lodRenderDistance = newLodRenderDistance;
                     }
                 }
                 else if (File.Exists(path3))
@@ -1130,6 +1246,10 @@
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
+                    else
+                    {
+                        segment.m_lodRenderDistance = newLodRenderDistance;
+                    }
                 }
                 else if (File.Exists(path4))
                 {
@@ -1141,98 +1261,13 @@
                     {
                         segment.m_lodMaterial.SetTexture(type, DDSLoader.LoadDDS(filename_lod));
                     }
-                }
-            }
-        }
-
-        private static void SetNodeDirect(NodeSet set)
-        {
-            NetInfo.Node node = set.node;
-            string maintex = set.MainTex;
-            string apr = set.APRMap;
-
-            string texPath = ModLoader.currentTexturesPath_default;
-            if (!maintex.IsNullOrWhiteSpace())
-            {
-                if (File.Exists(Path.Combine(texPath, maintex + ExtDDS)))
-                {
-                    node.m_nodeMaterial.SetTexture(
-                        TexType._MainTex,
-                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + ExtDDS)));
-
-                    string filename_lod = Path.Combine(
-                        texPath + "/LOD", maintex + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
+                    else
                     {
-                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
-                    }
-                }
-                else if (File.Exists(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)))
-                {
-                    node.m_nodeMaterial.SetTexture(
-                        TexType._MainTex,
-                        DDSLoader.LoadDDS(Path.Combine(texPath, maintex + TexType._MainTex + ExtDDS)));
-
-                    string filename_lod = Path.Combine(texPath + "/LOD", maintex + TexType._MainTex + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
-                    }
-
-                    // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
-                    if (apr.IsNullOrWhiteSpace())
-                    {
-                        apr = maintex;
-                    }
-                }
-            }
-
-            if (!apr.IsNullOrWhiteSpace())
-            {
-                string path = Path.Combine(texPath, apr + ExtDDS);
-                string path2 = Path.Combine(ModLoader.APRMaps_Path, apr + ExtDDS);
-                string path3 = Path.Combine(texPath, apr + TexType._APRMap + ExtDDS);
-                string path4 = Path.Combine(ModLoader.APRMaps_Path, apr + TexType._APRMap + ExtDDS);
-
-                if (File.Exists(path))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path));
-                    string filename_lod = Path.Combine(texPath + "/LOD", apr + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
-                    }
-                }
-                else if (File.Exists(path2))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path2));
-                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
-                    }
-                }
-                else if (File.Exists(path3))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path3));
-                    string filename_lod = Path.Combine(texPath + "/LOD", apr + TexType._APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, DDSLoader.LoadDDS(filename_lod));
-                    }
-                }
-                else if (File.Exists(path4))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(path4));
-                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType._APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(maintex, DDSLoader.LoadDDS(filename_lod));
+                        segment.m_lodRenderDistance = newLodRenderDistance;
                     }
                 }
             }
         }
-
 
         #endregion Public Methods
 
@@ -1242,114 +1277,98 @@
         {
             foreach (KeyValuePair<string, string> road in NExtRoads)
             {
-                if (netInfo.name.Contains(road.Key))
+                if (!netInfo.name.Contains(road.Key))
                 {
-                    foreach (string roadPosition in RoadPos.AllPositions)
+                    continue;
+                }
+                foreach (string roadPosition in RoadPos.AllPositions)
+                {
+                    foreach (string textype in TexType.AllTex)
                     {
-                        foreach (string textype in TexType.AllTex)
+                        if (node.m_nodeMaterial.GetTexture(textype) == null)
                         {
-                            if (node.m_nodeMaterial.GetTexture(textype) == null)
+                            continue;
+                        }
+
+                        string filename = road.Value + "_" + roadPosition + "_" + "Node" + textype + ExtDDS;
+                        string fullPath = Path.Combine(ModLoader.currentTexturesPath_default + NextRoadsPath, filename);
+                        string aprPath = Path.Combine(ModLoader.APRMaps_Path + NextRoadsPath, filename);
+
+                        if (!node.m_nodeMaterial.GetTexture(textype).name.Contains(roadPosition))
+                        {
+                            continue;
+                        }
+                        if (File.Exists(fullPath))
+                        {
+                            node.m_nodeMaterial.SetTexture(textype, DDSLoader.LoadDDS(fullPath));
+                            string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
+                            if (File.Exists(filename_lod))
                             {
-                                continue;
+                                node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                             }
 
-                            string filename = road.Value + "_" + roadPosition + "_" + "Node" + textype + ExtDDS;
-                            string fullPath = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads", filename);
-                            string aprPath = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads", filename);
-
-                            if (node.m_nodeMaterial.GetTexture(textype).name.Contains(roadPosition))
+                            log += "\nNExt replacing " + textype + " - " + fullPath;
+                        }
+                        else if (textype == TexType._APRMap && File.Exists(aprPath))
+                        {
+                            node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(aprPath));
+                            string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
+                            if (File.Exists(filename_lod))
                             {
-                                if (File.Exists(fullPath))
-                                {
-                                    node.m_nodeMaterial.SetTexture(textype, DDSLoader.LoadDDS(fullPath));
-                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
-                                    if (File.Exists(filename_lod))
-                                    {
-                                        node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                                    }
-
-                                    log += "\nNExt replacing " + textype + " - " + fullPath;
-                                }
-                                else if (textype == TexType._APRMap && File.Exists(aprPath))
-                                {
-                                    node.m_nodeMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(aprPath));
-                                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
-                                    if (File.Exists(filename_lod))
-                                    {
-                                        node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                                    }
-                                    log += "\nNExt replacing " + TexType._APRMap + " - " + aprPath;
-                                }
-
+                                node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                             }
+                            log += "\nNExt replacing " + TexType._APRMap + " - " + aprPath;
                         }
                     }
                 }
             }
         }
-        public static readonly Dictionary<string, string> NExtRoads = new Dictionary<string, string>
-                                                                          {
-            // + busways
-                                                                              { "Two-Lane Alley", "Alley2L" },
-                                                                              { "BasicRoadTL", "BasicRoadTL" },
-                                                                              { "One-Lane Oneway", "OneWay1L" },
-                                                                              { "Oneway3L", "Oneway3L" },
-                                                                              { "Oneway4L", "Oneway4L" },
-                                                                              { "Small Avenue", "SmallAvenue4L" },
-                                                                              { "Medium Avenue", "MediumAvenue4L" },
-                                                                              { "Medium Avenue TL", "MediumAvenue4LTL" },
-                                                                              { "Eight-Lane Avenue", "LargeAvenue8LM" },
-                                                                              { "Small Rural Highway", "Highway1L" },
-                                                                              { "Rural Highway", "Highway2L" },
-                                                                              { "Four-Lane Highway", "Highway4L" },
-                                                                              { "Five-Lane Highway", "Highway5L" },
-                                                                              { "Large Highway", "Highway6L" }
-                                                                          };
-
 
         private static void ReplaceNExtSegments(NetInfo netInfo, NetInfo.Segment segment, ref string log)
         {
             foreach (KeyValuePair<string, string> road in NExtRoads)
             {
-                if (netInfo.name.Contains(road.Key))
+                if (!netInfo.name.Contains(road.Key))
                 {
-                    foreach (string roadPosition in RoadPos.AllPositions)
+                    continue;
+                }
+                foreach (string roadPosition in RoadPos.AllPositions)
+                {
+                    foreach (string textype in TexType.AllTex)
                     {
-                        foreach (string textype in TexType.AllTex)
+                        string file = road.Value + "_" + roadPosition + "_" + "Segment" + textype;
+                        string filename = Path.Combine(ModLoader.currentTexturesPath_default + NextRoadsPath, file + ExtDDS);
+
+                        if (!segment.m_segmentMaterial.GetTexture(textype).name.Contains(roadPosition))
                         {
-                            string file = road.Value + "_" + roadPosition + "_" + "Segment" + textype;
-                            string filename = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads", file + ExtDDS);
+                            continue;
+                        }
+                        if (File.Exists(filename))
+                        {
+                            segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
 
-                            if (segment.m_segmentMaterial.GetTexture(textype).name.Contains(roadPosition))
+                            string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", file + "_lod" + ExtDDS);
+                            if (File.Exists(filename_lod))
                             {
-                                if (File.Exists(filename))
+                                segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
+                            }
+                        }
+                        else if (textype.Equals(TexType._APRMap))
+                        {
+                            // APR Maps only
+                            filename = Path.Combine(ModLoader.APRMaps_Path + NextRoadsPath, file + ExtDDS);
+                            log += "\nNExt Segments APR looking for: " + filename;
+
+                            if (File.Exists(filename))
+                            {
+                                segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
+
+                                string filename_lod = Path.Combine(
+                                    ModLoader.APRMaps_Path + "/NExt_Roads/LOD",
+                                    file + "_lod" + ExtDDS);
+                                if (File.Exists(filename_lod))
                                 {
-                                    segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
-
-                                    string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", file + "_lod" + ExtDDS);
-                                    if (File.Exists(filename_lod))
-                                    {
-                                        segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                                    }
-                                }
-                                else if (textype.Equals(TexType._APRMap))
-                                {
-                                    // APR Maps only
-                                    filename = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads", file + ExtDDS);
-                                    log += "\nNExt Segments APR looking for: " + filename;
-
-                                    if (File.Exists(filename))
-                                    {
-                                        segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
-
-                                        string filename_lod = Path.Combine(
-                                            ModLoader.APRMaps_Path + "/NExt_Roads/LOD",
-                                            file + "_lod" + ExtDDS);
-                                        if (File.Exists(filename_lod))
-                                        {
-                                            segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                                        }
-                                    }
+                                    segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
                                 }
                             }
                         }
@@ -1359,5 +1378,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

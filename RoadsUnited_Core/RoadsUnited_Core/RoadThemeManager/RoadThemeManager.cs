@@ -25,6 +25,8 @@
 
                 ModLoader.config.texturePackPath = instance.activePack.packPath;
                 ModLoader.config.themeName = instance.activePack.themeName;
+                ModLoader.config.supportsParkingLots = instance.activePack.supportsParkingLots;
+
                 ModLoader.SaveConfig();
 
                 RoadsUnited_Core.ApplyVanillaDicts();

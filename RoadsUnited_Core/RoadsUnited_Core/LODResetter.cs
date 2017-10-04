@@ -24,7 +24,7 @@
 
             Texture2D scaleTex = MakeReadable(sourceTex);
 
-            var destTex = new Texture2D(targetWidth, targetHeight, TextureFormat.ARGB32, false);
+            Texture2D destTex = new Texture2D(targetWidth, targetHeight, TextureFormat.ARGB32, false);
             destPix = new Color[destTex.width * destTex.height];
             int y = 0;
             while (y < destTex.height)

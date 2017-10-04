@@ -10,18 +10,14 @@ namespace RoadsUnited_Core
     {
         public string themeName;
         public string themeDescription;
+
+        public bool supportsParkingLots;
+
         [XmlIgnore]
         public string packPath;
 
         public RoadThemePack()
         {
-        }
-
-        public RoadThemePack(string name, string themeDescription, string packPath)
-        {
-            this.themeName = name;
-            this.themeDescription = themeDescription;
-            this.packPath = packPath;
         }
 
         public void OnPostDeserialize()

@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>Y:\Library\Application Support\Colossal Order\Cities_Skylines\Addons\Mods\RoadsUnitedCore\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -52,7 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DDSLoader.cs" />
     <Compile Include="Statics\RoadPos.cs" />
     <Compile Include="TextureExporter.cs" />
     <None Include="Stuff\NetInfoClasses.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="RoadsUnited_Core.cs" />
     <Compile Include="RoadThemeManager\RoadThemeManager.cs" />
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
-    <Compile Include="RoadThemeManager\RoadThemesUtil.cs" />
+    <None Include="RoadThemeManager\RoadThemesUtil.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

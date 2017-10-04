@@ -60,7 +60,7 @@ namespace RoadsUnited_Core
             return result;
         }
 
-        public static string modPath = GetModPath();
+        private static string modPath = GetModPath();
 
         public static string currentTexturesPath_default = "None";
 
@@ -87,7 +87,6 @@ namespace RoadsUnited_Core
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
-            string modPath = GetModPath();
 
             // hookGo = new GameObject("RoadsUnited_Core hook");
             // hook = hookGo.AddComponent<Hook4>();
@@ -95,7 +94,7 @@ namespace RoadsUnited_Core
             {
                 bool isEmpty;
                 using (Dictionary<string, Texture2D>.Enumerator dictionaryEnum =
-                    RoadsUnited_Core.vanillaPrefabProperties.GetEnumerator())
+                    RoadsUnited_Core.VanillaPrefabs.GetEnumerator())
                 {
                     isEmpty = !dictionaryEnum.MoveNext();
                 }
@@ -554,7 +553,7 @@ namespace RoadsUnited_Core
         {
             base.OnLevelUnloading();
             RoadsUnited_Core.ApplyVanillaDicts();
-            RoadsUnited_Core.vanillaPrefabProperties.Clear();
+            RoadsUnited_Core.VanillaPrefabs.Clear();
 
             // hook.DisableHook();
             // GameObject.Destroy(hookGo);

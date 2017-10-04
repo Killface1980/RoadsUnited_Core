@@ -214,6 +214,8 @@ namespace RoadsUnited_Core
               //  texture = new Texture2D(dwWidth, dwHeight, textureFormat, dwMipMapCount > 1);
                 texture = new Texture2D(dwWidth, dwHeight, textureFormat, true);
                 texture.LoadRawTextureData(dxtBytes);
+
+
                 if (apply)
                 {
                     texture.Apply(false, !keepReadable);
@@ -224,6 +226,7 @@ namespace RoadsUnited_Core
                     QualitySettings.masterTextureLimit = quality;
                 }
 
+                texture.name = Path.GetFileName(path);
                 textureCache.Add(path, texture); // Neu geladene Textur in den Cache packen
                 return texture;
             }

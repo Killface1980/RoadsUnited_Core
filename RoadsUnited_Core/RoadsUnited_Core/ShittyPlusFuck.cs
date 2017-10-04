@@ -1,5 +1,5 @@
 ﻿using System.IO;
-
+using System.Linq;
 using UnityEngine;
 
 namespace RoadsUnited_Core
@@ -84,7 +84,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("One-Lane Oneway"))
@@ -107,7 +107,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Contains("Eight-Lane Avenue"))
@@ -163,7 +163,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Contains("Small Rural Highway"))
@@ -178,7 +178,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Small Rural Highway Elevated"))
@@ -193,7 +193,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Small Rural Highway Slope") && loaded.name.Contains("Small"))
@@ -208,7 +208,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Small Rural Highway Tunnel"))
@@ -223,7 +223,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Rural Highway"))
@@ -238,7 +238,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Rural Highway Elevated"))
@@ -253,7 +253,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Rural Highway Slope"))
@@ -269,7 +269,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Rural Highway Tunnel"))
@@ -284,7 +284,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Four-Lane Highway"))
@@ -299,7 +299,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Four-Lane Highway Elevated"))
@@ -314,7 +314,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Four-Lane Highway Slope"))
@@ -329,7 +329,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Four-Lane Highway Tunnel"))
@@ -344,7 +344,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Five-Lane Highway"))
@@ -360,7 +360,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Five-Lane Highway Elevated"))
@@ -376,7 +376,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Five-Lane Highway Slope"))
@@ -391,7 +391,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Five-Lane Highway Tunnel"))
@@ -407,7 +407,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Large Highway"))
@@ -423,7 +423,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Large Highway Elevated"))
@@ -439,7 +439,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Large Highway Slope"))
@@ -454,7 +454,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                                 if (loaded.name.Equals("Large Highway Tunnel"))
@@ -469,7 +469,7 @@ namespace RoadsUnited_Core
                                         }
                                     }
 
-    
+
                                 }
 
                             }
@@ -2490,7 +2490,7 @@ namespace RoadsUnited_Core
                                     else if (segment.m_mesh.name.Equals("SmallRoadSegment2BusSide"))
                                     {
                                         tex = roadsmall + deco + busside;
- if (File.Exists(Path.Combine(path3, tex + maintexDds)))
+                                        if (File.Exists(Path.Combine(path3, tex + maintexDds)))
                                         {
                                             segment.m_segmentMaterial.SetTexture(maintex, DDSLoader.LoadDDS(Path.Combine(path3, tex + maintexDds)));
                                             if (File.Exists(Path.Combine(path3, tex + aprmapDds)))
@@ -3491,10 +3491,10 @@ namespace RoadsUnited_Core
                         }
                     }
                 }
-
                 num += 1u;
             }
         }
 
     }
 }
+

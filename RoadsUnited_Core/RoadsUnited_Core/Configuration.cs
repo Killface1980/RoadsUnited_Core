@@ -42,6 +42,8 @@
         public bool use_custom_colors = true;
         public bool use_custom_textures = true;
 
+        public bool supportsParkingLots = false;
+
         #endregion Public Fields
 
         #region Public Methods

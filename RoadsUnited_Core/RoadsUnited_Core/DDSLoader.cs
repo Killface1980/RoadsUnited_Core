@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using UnityEngine;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+
+    using UnityEngine;
+
     public static class DDSLoader
     {
         private const uint DDSD_MIPMAPCOUNT_BIT = 0x00020000;
@@ -27,7 +26,7 @@ namespace RoadsUnited_Core
         // http://msdn.microsoft.com/en-us/library/bb943992.aspx
         // http://msdn.microsoft.com/en-us/library/windows/desktop/bb205578(v=vs.85).aspx
         // mipmapBias limits the number of mipmap when > 0
-        public static Texture2D LoadDDS(string path, bool keepReadable = false, bool asNormal = false, int mipmapBias = -1, bool apply = true)
+        public static Texture2D LoadDDS(this string path, bool keepReadable = false, bool asNormal = false, int mipmapBias = -1, bool apply = true)
         {
             // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
             if (textureCache.TryGetValue(path, out Texture2D texture))
@@ -36,12 +35,12 @@ namespace RoadsUnited_Core
             }
 
             // Nein? Textur laden
-
             if (!File.Exists(path))
             {
                 error = "File does not exist";
                 return null;
             }
+
             using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open, FileAccess.Read)))
             {
                 byte[] dwMagic = reader.ReadBytes(4);
@@ -54,7 +53,7 @@ namespace RoadsUnited_Core
 
                 int dwSize = (int)reader.ReadUInt32();
 
-                //this header byte should be 124 for DDS image files
+                // this header byte should be 124 for DDS image files
                 if (dwSize != 124)
                 {
                     error = "Invalid header size";
@@ -164,21 +163,18 @@ namespace RoadsUnited_Core
                 // {
                 // int bias = 5;// isNormalMap ? Settings.NormalMipmapBias : Settings.MipmapBias;
                 // if (mipmapBias > 0)
-                //     bias = mipmapBias;
+                // bias = mipmapBias;
                 // int blockSize = textureFormat == TextureFormat.DXT1 ? 8 : 16;
                 // int levels = Math.Min(bias, dwMipMapCount - 1);
-                //
                 // for (int k = 0; k < levels; ++k)
                 // {
-                //     dataBias += isCompressed
-                //                     ? ((dwWidth + 3) / 4) * ((dwHeight + 3) / 4) * blockSize
-                //                     : dwWidth * dwHeight * pixelSize;
-                //
-                //     dwWidth = Math.Max(1, dwWidth / 2);
-                //     dwHeight = Math.Max(1, dwHeight / 2);
+                // dataBias += isCompressed
+                // ? ((dwWidth + 3) / 4) * ((dwHeight + 3) / 4) * blockSize
+                // : dwWidth * dwHeight * pixelSize;
+                // dwWidth = Math.Max(1, dwWidth / 2);
+                // dwHeight = Math.Max(1, dwHeight / 2);
                 // }
                 // }
-
                 long dxtBytesLength = reader.BaseStream.Length - dataBias;
                 reader.BaseStream.Seek(dataBias, SeekOrigin.Begin);
                 byte[] dxtBytes = reader.ReadBytes((int)dxtBytesLength);
@@ -202,7 +198,6 @@ namespace RoadsUnited_Core
                 // and dwWidth and dwHeight divided by 2 (or 4 for quarter rez) are not a multiple of 4 
                 // and we are creating a DXT5 or DXT1 texture
                 // Then you get an Unity error on the "new Texture"
-
                 int quality = QualitySettings.masterTextureLimit;
 
                 // If the bug conditions are present then switch to full quality
@@ -211,7 +206,7 @@ namespace RoadsUnited_Core
                     QualitySettings.masterTextureLimit = 0;
                 }
 
-              //  texture = new Texture2D(dwWidth, dwHeight, textureFormat, dwMipMapCount > 1);
+              // texture = new Texture2D(dwWidth, dwHeight, textureFormat, dwMipMapCount > 1);
                 texture = new Texture2D(dwWidth, dwHeight, textureFormat, true);
                 texture.LoadRawTextureData(dxtBytes);
 

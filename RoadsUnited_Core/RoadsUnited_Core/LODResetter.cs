@@ -1,10 +1,12 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2
 {
     using System.Collections.Generic;
 
     using ColossalFramework;
 
     using JetBrains.Annotations;
+
+    using RoadsUnited_Core2.Statics;
 
     using UnityEngine;
 
@@ -39,16 +41,19 @@
                     destPix[y * destTex.width + x] = scaleTex.GetPixelBilinear(warpXFrac, warpYFrac);
                     x++;
                 }
+
                 y++;
             }
+
             destTex.SetPixels(destPix);
             destTex.Apply();
-            Object.Destroy(scaleTex);
+            UnityEngine.Object.Destroy(scaleTex);
 
             return destTex;
+
             // try
             // {
-            //     ScaledTexDict.Add(xx, destTex);
+            // ScaledTexDict.Add(xx, destTex);
             // }
             // catch (ArgumentNullException argumentNullException)
             // {
@@ -61,6 +66,7 @@
             {
                 return null;
             }
+
             // Create a temporary RenderTexture of the same size as the texture
             RenderTexture tmp = RenderTexture.GetTemporary(
                 sourceTex.width,
@@ -84,14 +90,14 @@
             myTexture2D.Apply();
 
             // Reset the active RenderTexture
-            //    RenderTexture.active = previous;
+            // RenderTexture.active = previous;
 
             // Release the temporary RenderTexture
             RenderTexture.ReleaseTemporary(tmp);
             return myTexture2D;
+
             // "myTexture2D" now has the same pixels from "texture" and it's readable.
         }
-
 
         // NetManager
         public static void ResetLOD()
@@ -128,21 +134,21 @@
                                 else
                                 {
                                     Texture2D rgb = null;
-                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType._MainTex) != null)
+                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType.MainTex) != null)
                                     {
-                                        rgb = segmentInfo.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D;
+                                        rgb = segmentInfo.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D;
                                     }
 
                                     Texture2D xys = null;
-                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType._XYSMap) != null)
+                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType.XYSMap) != null)
                                     {
-                                        xys = segmentInfo.m_lodMaterial.GetTexture(TexType._XYSMap) as Texture2D;
+                                        xys = segmentInfo.m_lodMaterial.GetTexture(TexType.XYSMap) as Texture2D;
                                     }
 
                                     Texture2D apr = null;
-                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType._APRMap) != null)
+                                    if (segmentInfo.m_lodMaterial.GetTexture(TexType.APRMap) != null)
                                     {
-                                        apr = segmentInfo.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D;
+                                        apr = segmentInfo.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D;
                                     }
 
                                     if (rgb == null && xys == null && apr == null)
@@ -168,22 +174,28 @@
 
                                         if (xys.width != rgb.width || xys.height != rgb.height)
                                         {
-                                            segmentInfo.m_lodMaterial.SetTexture(TexType._MainTex, ScaleTexture(rgb, xys.width, xys.height));
+                                            segmentInfo.m_lodMaterial.SetTexture(TexType.MainTex, ScaleTexture(rgb, xys.width, xys.height));
                                         }
+
                                         if (apr.width != rgb.width || apr.height != rgb.height)
                                         {
-                                            segmentInfo.m_lodMaterial.SetTexture(TexType._APRMap, ScaleTexture(apr, xys.width, xys.height));
+                                            segmentInfo.m_lodMaterial.SetTexture(TexType.APRMap, ScaleTexture(apr, xys.width, xys.height));
                                         }
 
                                         if (xys.width != rgb.width || xys.height != rgb.height)
                                         {
-                                            throw new PrefabException(info, "LOD xys size " + xys.width + "x" + xys.height + " doesnt match diffuse size " + rgb.width + "x" + rgb.height);
+                                            throw new PrefabException(
+                                                info,
+                                                "LOD xys size " + xys.width + "x" + xys.height
+                                                + " doesnt match diffuse size " + rgb.width + "x" + rgb.height);
+
                                             // rgb = ScaleTexture(rgb, xys.width, xys.height);
                                         }
 
                                         if (apr.width != rgb.width || apr.height != rgb.height)
                                         {
                                             throw new PrefabException(info, "LOD aci size doesnt match diffuse size");
+
                                             // apr = ScaleTexture(apr, rgb.width, rgb.height);
                                         }
 
@@ -261,21 +273,21 @@
                                 else
                                 {
                                     Texture2D rgb2 = null;
-                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType._MainTex))
+                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType.MainTex))
                                     {
-                                        rgb2 = nodeInfo.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D;
+                                        rgb2 = nodeInfo.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D;
                                     }
 
                                     Texture2D xys2 = null;
-                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType._XYSMap))
+                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType.XYSMap))
                                     {
-                                        xys2 = nodeInfo.m_lodMaterial.GetTexture(TexType._XYSMap) as Texture2D;
+                                        xys2 = nodeInfo.m_lodMaterial.GetTexture(TexType.XYSMap) as Texture2D;
                                     }
 
                                     Texture2D apr2 = null;
-                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType._APRMap))
+                                    if (nodeInfo.m_lodMaterial.GetTexture(TexType.APRMap))
                                     {
-                                        apr2 = nodeInfo.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D;
+                                        apr2 = nodeInfo.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D;
                                     }
 
                                     if (rgb2 == null && xys2 == null && apr2 == null)
@@ -301,24 +313,30 @@
 
                                         if (xys2.width != rgb2.width || xys2.height != rgb2.height)
                                         {
-                                            nodeInfo.m_lodMaterial.SetTexture(TexType._MainTex, ScaleTexture(rgb2, xys2.width, xys2.height));
+                                            nodeInfo.m_lodMaterial.SetTexture(TexType.MainTex, ScaleTexture(rgb2, xys2.width, xys2.height));
                                         }
+
                                         if (apr2.width != rgb2.width || apr2.height != rgb2.height)
                                         {
-                                            nodeInfo.m_lodMaterial.SetTexture(TexType._APRMap, ScaleTexture(apr2, xys2.width, xys2.height));
+                                            nodeInfo.m_lodMaterial.SetTexture(TexType.APRMap, ScaleTexture(apr2, xys2.width, xys2.height));
                                         }
 
 
                                         if (xys2.width != rgb2.width || xys2.height != rgb2.height)
                                         {
-                                            throw new PrefabException(info, "LOD xys size " + xys2.width + "x" + xys2.height + " doesnt match diffuse size " + rgb2.width + "x" + rgb2.height);
-                                            //   rgb2 = ScaleTexture(rgb2, xys2.width, xys2.height);
+                                            throw new PrefabException(
+                                                info,
+                                                "LOD xys size " + xys2.width + "x" + xys2.height
+                                                + " doesnt match diffuse size " + rgb2.width + "x" + rgb2.height);
+
+                                            // rgb2 = ScaleTexture(rgb2, xys2.width, xys2.height);
                                         }
 
                                         if (apr2.width != rgb2.width || apr2.height != rgb2.height)
                                         {
                                             throw new PrefabException(info, "LOD aci size doesnt match diffuse size");
-                                            //   apr2 = ScaleTexture(apr2, rgb2.width, rgb2.height);
+
+                                            // apr2 = ScaleTexture(apr2, rgb2.width, rgb2.height);
                                         }
 
                                         try

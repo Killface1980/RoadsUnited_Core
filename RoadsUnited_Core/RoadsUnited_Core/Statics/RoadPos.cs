@@ -1,4 +1,4 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2.Statics
 {
     using System.Collections.Generic;
 

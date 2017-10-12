@@ -1,4 +1,4 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2.Statics
 {
     using System.Collections.Generic;
 
@@ -6,17 +6,19 @@
     {
         #region Public Fields
 
-        public static string _APRMap = "_APRMap";
+        public const string APRMap = "_APRMap";
 
-        public static string _MainTex = "_MainTex";
+        public const string MainTex = "_MainTex";
 
-        public static string _XYSMap = "_XYSMap";
+        public const string ACIMap = "_ACIMap";
+
+        public const string XYSMap = "_XYSMap";
 
         public static List<string> AllTex = new List<string>();
 
         static TexType()
         {
-            AllTex = new List<string> { _MainTex, _APRMap /* no , _XYSMap for now => null reference!!! */};
+            AllTex = new List<string> { MainTex, APRMap /* no , _XYSMap for now => null reference!!! */};
         }
 
         #endregion Public Fields

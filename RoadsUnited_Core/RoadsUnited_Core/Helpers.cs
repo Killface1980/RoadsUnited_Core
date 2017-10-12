@@ -1,4 +1,4 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@
         #region Public Methods
 
 
-        public static Texture2D LoadTextureDDS(this string fullPath)
+        public static Texture2D LoadTextureDDS(string fullPath)
         {
             Texture2D result;
             if (textureCache.TryGetValue(fullPath, out Texture2D texture2D))

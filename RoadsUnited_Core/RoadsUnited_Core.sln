@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadsUnited_Core", "RoadsUnited_Core\RoadsUnited_Core.csproj", "{87DC24F2-3517-4EEB-9938-F563C9AE9B85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadsUnited_Core2", "RoadsUnited_Core\RoadsUnited_Core2.csproj", "{87DC24F2-3517-4EEB-9938-F563C9AE9B85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C30FE29D-444E-4911-B2FE-CE17E57B0DF2}
 	EndGlobalSection
 EndGlobal

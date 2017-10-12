@@ -96,7 +96,7 @@ namespace Transit.Framework.Network
                         }
 
                     case ROAD_2L_BIKE:
-                        var template = "Basic Road {0} Bike";
+                        string template = "Basic Road {0} Bike";
                         switch (version)
                         {
                             case NetInfoVersion.Ground:

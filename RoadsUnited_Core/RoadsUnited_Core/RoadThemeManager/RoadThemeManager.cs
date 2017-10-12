@@ -1,10 +1,12 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2.RoadThemeManager
 {
     using System.Collections.Generic;
     using System.IO;
 
     using ColossalFramework;
     using ColossalFramework.Plugins;
+
+    using RoadsUnited_Core;
 
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
@@ -23,24 +25,12 @@
                     return;
                 }
 
-                ModLoader.config.texturePackPath = instance.activePack.packPath;
-                ModLoader.config.themeName = instance.activePack.themeName;
-                ModLoader.config.supportsParkingLots = instance.activePack.supportsParkingLots;
+                ModLoader.Config.texturePackPath = instance.activePack.packPath;
+                ModLoader.Config.themeName = instance.activePack.themeName;
+                ModLoader.Config.supportsParkingLots = instance.activePack.supportsParkingLots;
+                ModLoader.Config.currentTexturesPath_default = Path.Combine(instance.activePack.packPath, "BaseTextures");
 
                 ModLoader.SaveConfig();
-
-                RoadsUnited_Core.ApplyVanillaDicts();
-
-                RoadsUnited_Core.ReplaceNetTextures();
-                RoadsUnited_CoreProps.ReplacePropTextures();
-
-                if (ModLoader.config.selected_pack == 0)
-                {
-                }
-                else
-                {
-                    RoadsUnited_CoreProps.ReplacePropTextures();
-                }
             }
         }
 
@@ -49,8 +39,8 @@
             List<RoadThemePack> list = new List<RoadThemePack>();
             foreach (PluginManager.PluginInfo current in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
-              //  if (current.isEnabled)
                 {
+                    // if (current.isEnabled)
                     string text = Path.Combine(current.modPath, "RoadsUnitedTheme.xml");
                     if (File.Exists(text))
                     {

@@ -10,7 +10,7 @@ namespace Transit.Framework
     [Flags]
     public enum NetInfoVersion
     {
-        Ground = 0, //By default
+        Ground = 0, // By default
         Elevated = 1,
         Bridge = 2,
         Tunnel = 4,

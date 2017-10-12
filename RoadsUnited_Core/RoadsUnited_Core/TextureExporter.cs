@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2
 {
+    using System.Collections.Generic;
     using System.IO;
+
+    using RoadsUnited_Core2.Statics;
 
     using UnityEngine;
 
@@ -51,6 +51,7 @@ namespace RoadsUnited_Core
             {
                 return;
             }
+
             Texture2D texMain = null;
             Texture2D texAPR = null;
             Texture2D texMainLod = null;
@@ -62,23 +63,24 @@ namespace RoadsUnited_Core
 
             if (segment != null)
             {
-                texMain = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                texAPR = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType._APRMap) as Texture2D);
-                texMainLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                texAPRLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
+                texMain = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType.MainTex) as Texture2D);
+                texAPR = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType.APRMap) as Texture2D);
+                texMainLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D);
+                texAPRLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D);
                 isSegment = true;
             }
             else if (node != null)
             {
-                texMain = LODResetter.MakeReadable(node.m_nodeMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                texAPR = LODResetter.MakeReadable(node.m_nodeMaterial.GetTexture(TexType._APRMap) as Texture2D);
-                texMainLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType._MainTex) as Texture2D);
-                texAPRLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType._APRMap) as Texture2D);
+                texMain = LODResetter.MakeReadable(node.m_nodeMaterial.GetTexture(TexType.MainTex) as Texture2D);
+                texAPR = LODResetter.MakeReadable(node.m_nodeMaterial.GetTexture(TexType.APRMap) as Texture2D);
+                texMainLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D);
+                texAPRLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D);
             }
             else
             {
                 return;
             }
+
             if (!pathsChecked)
             {
                 CheckDirectories();
@@ -93,6 +95,7 @@ namespace RoadsUnited_Core
                     byte[] bytes = texMain.EncodeToPNG();
                     File.WriteAllBytes(path, bytes);
                 }
+
                 string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + MaintexLod, texMainLod.name + ".png");
                 if (!File.Exists(pathLod))
                 {
@@ -109,6 +112,7 @@ namespace RoadsUnited_Core
                     byte[] bytes = texAPR.EncodeToPNG();
                     File.WriteAllBytes(path, bytes);
                 }
+
                 string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + AprmapsLod, texAPRLod.name + ".png");
                 if (!File.Exists(pathLod))
                 {
@@ -125,10 +129,13 @@ namespace RoadsUnited_Core
         private static void CheckDirectories()
         {
 
-            foreach (string path in Paths.Where(path => !Directory.Exists(path)))
+            foreach (string path in Paths)
             {
-                Directory.CreateDirectory(path);
-                Debug.Log("RU Core Exporter created directory: " + ModLoader.Export_Path + MaintexLod);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                    Debug.Log("RU Core Exporter created directory: " + ModLoader.Export_Path + MaintexLod);
+                }
             }
         }
 

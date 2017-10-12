@@ -1,4 +1,4 @@
-namespace RoadsUnited_Core
+namespace RoadsUnited_Core2
 {
     using UnityEngine;
 
@@ -6,77 +6,81 @@ namespace RoadsUnited_Core
     {
         public static Configuration config;
 
-        public static void ChangeColor(float brightness, string prefab_road_name, string TextureDir)
+        public static void ChangeColor(float brightness, string prefab_road_name)
         {
-            for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+            Debug.Log("RU Core2 changing colour of: " + prefab_road_name);
+            uint num = 0u;
+            while ((ulong)num < (ulong)((long)PrefabCollection<NetInfo>.LoadedCount()))
             {
-                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
-                if (netInfo == null)
+                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(num);
+                if (!(netInfo == null))
                 {
-                    continue;
-                }
-
-                if (netInfo.name.Equals(prefab_road_name))
-                {
-                    if (netInfo.m_color != null)
+                    if (netInfo.name.Equals(prefab_road_name))
                     {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
+                    }
+
+                    if (netInfo.name.Equals(prefab_road_name + " Slope"))
+                    {
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
+                    }
+
+                    if (netInfo.name.Equals(prefab_road_name + " Tunnel"))
+                    {
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
+                    }
+
+                    if (netInfo.name.Equals(prefab_road_name + " Elevated"))
+                    {
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
+                    }
+
+                    if (netInfo.name.Equals(prefab_road_name + " Bridge"))
+                    {
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
                     }
                 }
 
-                if (netInfo.name.Equals(prefab_road_name + " Slope"))
-                {
-                    if (netInfo.m_color != null)
-                    {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
-                    }
-                }
-
-                if (netInfo.name.Equals(prefab_road_name + " Tunnel"))
-                {
-                    if (netInfo.m_color != null)
-                    {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
-                    }
-                }
-
-                if (netInfo.name.Equals(prefab_road_name + " Elevated"))
-                {
-                    if (netInfo.m_color != null)
-                    {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
-                    }
-                }
-
-                if (netInfo.name.Equals(prefab_road_name + " Bridge"))
-                {
-                    if (netInfo.m_color != null)
-                    {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
-                    }
-                }
+                num += 1u;
             }
         }
 
         // RoadsUnited.RoadColourChanger
-        public static void ChangeColorNetExt(float brightness, string prefabClassName, string textureDir)
+        public static void ChangeColorNetExt(float brightness, string prefabClassName)
         {
-            for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+            Debug.Log("RU Core2 changing NExt road colors if needed ...");
+            uint num = 0u;
+            while ((ulong)num < (ulong)((long)PrefabCollection<NetInfo>.LoadedCount()))
             {
-                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
+                NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(num);
 
-                if (netInfo == null)
+                if (!(netInfo == null))
                 {
-                    continue;
-                }
-
-                if (netInfo.m_class.name.Contains(prefabClassName))
-                {
-                    if (netInfo.m_color != null)
+                    if (netInfo.m_class.name.Contains(prefabClassName))
                     {
-                        netInfo.m_color = new Color(brightness, brightness, brightness);
+                        if (netInfo.m_color != null)
+                        {
+                            netInfo.m_color = new Color(brightness, brightness, brightness);
+                        }
                     }
                 }
+
+                num += 1u;
             }
         }
     }

@@ -1,13 +1,12 @@
-﻿namespace RoadsUnited_Core
+﻿namespace RoadsUnited_Core2
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Xml.Serialization;
 
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
-    [SuppressMessage("ReSharper", "StyleCop.SA1310")]
-    [SuppressMessage("ReSharper", "StyleCop.SA1401")]
-    [SuppressMessage("ReSharper", "StyleCop.SA1307")]
+    using UnityEngine;
+
     public class Configuration
     {
         #region Public Fields
@@ -36,11 +35,11 @@
         public float small_road_brightness = 0.4f;
         public float small_road_decoration = 0.4f;
         public string texturePackPath = string.Empty;
+        public string currentTexturesPath_default = string.Empty;
         public string themeName = string.Empty;
         public float ToolbarButtonX;
         public float ToolbarButtonY;
         public bool use_custom_colors = true;
-        public bool use_custom_textures = true;
 
         public bool supportsParkingLots = false;
 
@@ -50,43 +49,43 @@
 
         public static Configuration Deserialize(string filename)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
-            Configuration result;
-            try
+            if (!File.Exists(filename))
             {
-                using (StreamReader streamReader = new StreamReader(filename))
-                {
-                    Configuration configuration = (Configuration)xmlSerializer.Deserialize(streamReader);
-                    configuration.OnPostDeserialize();
-                    result = configuration;
-                    return result;
-                }
-            }
-            catch
-            {
+                return null;
             }
 
-            result = null;
-            return result;
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
+            try
+            {
+                using (StreamReader streamReader = new System.IO.StreamReader(filename))
+                {
+                    return (Configuration)xmlSerializer.Deserialize(streamReader);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Couldn't load configuration (XML malformed?)");
+                throw e;
+            }
         }
 
         public static void Serialize(string filename, Configuration config)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
-            using (StreamWriter streamWriter = new StreamWriter(filename))
+            try
             {
-                config.OnPreSerialize();
-                xmlSerializer.Serialize(streamWriter, config);
+                using (StreamWriter streamWriter = new System.IO.StreamWriter(filename))
+                {
+                    xmlSerializer.Serialize(streamWriter, config);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Couldn't create configuration file at \"" + Directory.GetCurrentDirectory() + "\"");
+                throw e;
             }
         }
 
-        public void OnPostDeserialize()
-        {
-        }
-
-        public void OnPreSerialize()
-        {
-        }
 
         #endregion Public Methods
     }

@@ -4,9 +4,5 @@
 
     public static class RU_CoreDicts
     {
-        #region Public Fields
-
-
-        #endregion Public Fields
     }
 }

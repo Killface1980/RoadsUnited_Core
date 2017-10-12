@@ -7,8 +7,8 @@
     <ProjectGuid>{87DC24F2-3517-4EEB-9938-F563C9AE9B85}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoadsUnited_Core</RootNamespace>
-    <AssemblyName>RoadsUnited_Core</AssemblyName>
+    <RootNamespace>RoadsUnited_Core2</RootNamespace>
+    <AssemblyName>RoadsUnited_Core2</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -16,12 +16,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>Y:\Library\Application Support\Colossal Order\Cities_Skylines\Addons\Mods\RoadsUnitedCore\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +45,10 @@
       <HintPath>\\Mac\AllFiles\Applications\Steam Games\SteamApps\common\Cities_Skylines\Cities.app\Contents\Resources\Data\Managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PrefabHook">
+      <HintPath>Z:\Applications\Steam Games\SteamApps\workshop\content\255710\530771650\PrefabHook.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="UnityEngine">
@@ -52,7 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Class1.cs" />
     <Compile Include="DDSLoader.cs" />
+    <None Include="Statics\Class1.cs" />
     <Compile Include="Statics\RoadPos.cs" />
     <Compile Include="TextureExporter.cs" />
     <None Include="Stuff\NetInfoClasses.cs" />
@@ -60,11 +67,9 @@
     <None Include="Stuff\NetInfos.cs" />
     <None Include="RU_CoreDicts.cs" />
     <Compile Include="Statics\TexType.cs" />
-    <None Include="Class2.cs" />
-    <None Include="Class3.cs" />
     <Compile Include="Statics\NodeSet.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Helpers.cs" />
+    <None Include="Helpers.cs" />
     <Compile Include="Statics\SegmentSet.cs" />
     <Compile Include="ShittyPlusFuck.cs" />
     <None Include="Strings.cs" />
@@ -72,12 +77,11 @@
     <None Include="Hook\RedirectCallsState.cs" />
     <None Include="Hook\RedirectionHelper.cs" />
     <Compile Include="LODResetter.cs" />
-    <Compile Include="ModInfo.cs" />
-    <Compile Include="ModLoader.cs" />
+    <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoadsUnited_CoreProps.cs" />
+    <None Include="RoadsUnited_CoreProps.cs" />
     <Compile Include="RoadColorChanger.cs" />
-    <Compile Include="RoadsUnited_Core.cs" />
+    <Compile Include="RoadsUnitedCore2.cs" />
     <Compile Include="RoadThemeManager\RoadThemeManager.cs" />
     <Compile Include="RoadThemeManager\RoadThemePack.cs" />
     <None Include="RoadThemeManager\RoadThemesUtil.cs" />

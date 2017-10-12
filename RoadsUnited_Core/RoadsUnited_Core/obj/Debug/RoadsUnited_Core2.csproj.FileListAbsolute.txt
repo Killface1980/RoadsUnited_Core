@@ -1,0 +1,4 @@
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core2.csproj.CoreCompileInputs.cache
+Y:\Library\Application Support\Colossal Order\Cities_Skylines\Addons\Mods\RoadsUnitedCore\RoadsUnited_Core2.dll
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core2.dll
+C:\Users\thomasgaertner\Source\Repos\RoadsUnited_Core\RoadsUnited_Core\RoadsUnited_Core\obj\Debug\RoadsUnited_Core2.csprojResolveAssemblyReference.cache

@@ -6,13 +6,13 @@
     {
         #region Public Fields
 
-        public static string Elevated = "Elevated";
+        public const string Elevated = "Elevated";
 
-        public static string Ground = "Ground";
+        public const string Ground = "Ground";
 
-        public static string Slope = "Slope";
+        public const string Slope = "Slope";
 
-        public static string Tunnel = "Tunnel";
+        public const string Tunnel = "Tunnel";
 
         public static readonly List<string> AllPositions;
 

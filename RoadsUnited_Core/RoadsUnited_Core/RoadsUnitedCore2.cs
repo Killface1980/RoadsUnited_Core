@@ -1,27 +1,23 @@
 ﻿namespace RoadsUnited_Core
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
     using ColossalFramework;
 
-    using PrefabHook;
+    using JetBrains.Annotations;
 
     using RoadsUnited_Core2;
     using RoadsUnited_Core2.Statics;
 
     using UnityEngine;
 
-    public class RoadsUnitedCore2 : MonoBehaviour
+    public partial class RoadsUnitedCore2 : MonoBehaviour
     {
-
-        #region Private Fields
-
         private const string ExtDDS = ".dds";
 
-        private const string NextRoadsPath = "/NExt_Roads";
+        private const float NewLodRenderDistance = 7000f;
 
         private static readonly List<string> Blacklist =
             new List<string>
@@ -78,7 +74,7 @@
                                                                                {
                                                                                    // todo el, br, t, sl, deco gr, t?
                                                                                    "Oneway3L",
-                                                                                   "Oneway3L"
+                                                                                   "OneWay3L"
                                                                                },
                                                                                {
                                                                                    "Small Avenue",
@@ -101,7 +97,7 @@
                                                                                {
                                                                                    // todo el, br, t, sl?
                                                                                    "Oneway4L",
-                                                                                   "Oneway4L"
+                                                                                   "OneWay4L"
                                                                                },
                                                                                {
                                                                                    "Medium Avenue",
@@ -141,62 +137,16 @@
                                                                                // also Large Road With Bus
                                                                                // and Medium Avenue ...?
                                                                            };
-        private static List<ReplacementStateNode> nodeChanges = new List<ReplacementStateNode>();
-        private static List<ReplacementStateProp> propChanges = new List<ReplacementStateProp>();
-        private static List<ReplacementStateSegment> segmentChanges = new List<ReplacementStateSegment>();
-        private static float newLodRenderDistance = 7000f;
 
-        #endregion Private Fields
+        private static bool isDirty = true;
 
-        // deactivated for now
-        /*
-        public static Texture2D LoadTexture(string fullPath)
-        {
-            Texture2D texture2D = new Texture2D(1, 1);
-            if (TextureCache.TryGetValue(fullPath, out texture2D))
-            {
-                return texture2D;
-            }
+        private static readonly List<ReplacementStateNode> nodeChanges = new List<ReplacementStateNode>();
 
-            texture2D.LoadImage(File.ReadAllBytes(fullPath));
-            texture2D.name = Path.GetFileName(fullPath);
-            texture2D.anisoLevel = 8;
-            texture2D.Compress(true);
-            return texture2D;
-        }
-        public static Texture2D DDSLoader.LoadDDS(string fullPath)
-        {
-            // Testen ob Textur bereits geladen, in dem Fall geladene Textur zurückgeben
-            if (textureCache.TryGetValue(fullPath, out Texture2D texture))
-            {
-                return texture;
-            }
+        private static readonly List<ReplacementStateProp> propChanges = new List<ReplacementStateProp>();
 
-            // Nein? Textur laden
-            byte[] numArray = File.ReadAllBytes(fullPath);
-            int width = BitConverter.ToInt32(numArray, 16);
-            int height = BitConverter.ToInt32(numArray, 12);
-            texture = new Texture2D(width, height, TextureFormat.DXT1, true);
-            List<byte> list = new List<byte>();
-            for (int index = 0; index < numArray.Length; ++index)
-            {
-                if (index > (int)sbyte.MaxValue)
-                {
-                    list.Add(numArray[index]);
-                }
-            }
+        private static readonly List<ReplacementStateSegment> segmentChanges = new List<ReplacementStateSegment>();
 
-            texture.LoadRawTextureData(list.ToArray());
-            texture.name = Path.GetFileName(fullPath);
-            texture.anisoLevel = 8;
-            texture.Apply();
-            textureCache.Add(fullPath, texture); // Neu geladene Textur in den Cache packen
-            return texture;
-        }
-        */
-        #region Public Methods
-
-        public static void ChangeArrowProp(PropInfo propInfo)
+        public static void ChangeArrowProp([CanBeNull] PropInfo propInfo)
         {
             if (propInfo == null)
             {
@@ -239,15 +189,51 @@
             }
         }
 
-        public static void ReplaceNetTextures(NetInfo netInfo)
+        public static void MarkFilelistDirty()
+        {
+            isDirty = true;
+        }
+
+        public static void ReplaceNetTextures(NetInfo netInfo, bool parkingReset = false)
         {
             if (netInfo == null)
             {
                 return;
             }
 
+            if (isDirty)
+            {
+                ModLoader.AllTexturesAvailable.Clear();
+
+                DirectoryInfo directory = new DirectoryInfo(ModLoader.Config.currentTexturesPath_default);
+                DirectoryInfo directory3 = new DirectoryInfo(ModLoader.APRMaps_Path);
+
+                IEnumerable<FileInfo> files = directory.GetFiles("*.dds", SearchOption.AllDirectories);
+                IEnumerable<FileInfo> extraApr = directory3.GetFiles("*.dds", SearchOption.AllDirectories);
+
+                List<FileInfo> allfiles = files.Concat(extraApr).ToList();
+
+                // string name = "RoadLargeSegment-default-apr" + ExtDDS;
+                // var test = allfiles.Any(x => x.Name == name);
+                // if (test)
+                // {
+                // Debug.Log("RoadLargeSegment-default-apr EXISTS! " + allfiles.Where(x => x.Name.Equals(name)).FirstOrDefault().Name);
+                // }
+                string names = "RU Core 2: files";
+                foreach (FileInfo s in allfiles)
+                {
+                    names += "\n" + s;
+                }
+
+                Debug.Log(names);
+
+                ModLoader.AllTexturesAvailable = allfiles;
+                isDirty = false;
+            }
+
             List<SegmentSet> segList = new List<SegmentSet>();
             List<NodeSet> nodeList = new List<NodeSet>();
+
             string log = "RU Core replacing: ";
             string nextLog = "Next Replacements: ";
             string allNodes = "All nodes:";
@@ -257,55 +243,45 @@
             allSegments += "\nNExt segments: ";
             string className = netInfo.m_class.name;
 
-            NetInfo.Node[] nodes = netInfo.m_nodes;
-            foreach (NetInfo.Node node in nodes.Where(node => !Blacklist.Any(x => className.Contains(x))).Where(
-                node => node.m_nodeMaterial.GetTexture(TexType.MainTex) != null
-                        && node.m_nodeMaterial.GetTexture(TexType.APRMap) != null))
+            if (!parkingReset)
             {
-                TextureExporter.ExportPrefabTextures(node);
-
-                // Just look up the name and set the textures accordingly, no magic needed
-                string nodeMatName = node.m_nodeMaterial.GetTexture(TexType.MainTex).name;
-                string nodeAprName = node.m_nodeMaterial.GetTexture(TexType.APRMap).name;
-
-                allNodes += "\n" + className + " | " + netInfo.name + " | " + nodeMatName + " | "
-                            + node.m_nodeMesh.name;
-                allNodes += "\n" + nodeAprName;
-
-                ReplaceNExtNodes(netInfo, node, ref nextLog, ref nodeList);
-
-                if (netInfo.name.Contains("Rural Highway"))
+                NetInfo.Node[] nodes = netInfo.m_nodes;
+                foreach (NetInfo.Node node in nodes.Where(node => !Blacklist.Any(x => className.Contains(x)))
+                    .Where(
+                        node => node.m_nodeMaterial.GetTexture(TexType.MainTex) != null
+                                && node.m_nodeMaterial.GetTexture(TexType.APRMap) != null))
                 {
-                    if (netInfo.name.Contains("Small"))
-                    {
-                        if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
-                        {
-                            // not an error, use the 2l node tex
-                            nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node", "Highway1L_Ground_Node"));
-                        }
+                    TextureExporter.ExportPrefabTextures(node);
 
-                        if (nodeMatName.Contains(RoadPos.Slope))
+                    // Just look up the name and set the textures accordingly, no magic needed
+                    string nodeMatName = node.m_nodeMaterial.GetTexture(TexType.MainTex).name;
+                    string nodeAprName = node.m_nodeMaterial.GetTexture(TexType.APRMap).name;
+
+                    allNodes += "\n" + className + " | " + netInfo.name + " | " + nodeMatName + " | "
+                                + node.m_nodeMesh.name;
+                    allNodes += "\n" + nodeAprName;
+
+                    ReplaceNExtNodes(netInfo, node, ref nextLog, ref nodeList);
+
+                    if (netInfo.name.Contains("Rural Highway"))
+                    {
+                        if (netInfo.name.Contains("Small"))
                         {
-                            nodeList.Add(new NodeSet(node, "Highway1L_Slope_Node"));
+                            if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
+                            {
+                                // not an error, use the 2l node tex
+                                nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node", "Highway2L_Ground_Node"));
+                            }
+
+                            if (nodeMatName.Contains(RoadPos.Slope))
+                            {
+                                nodeList.Add(new NodeSet(node, "Highway1L_Slope_Node"));
+                            }
                         }
                     }
-                    else
-                    {
-                        if (nodeMatName.Contains(RoadPos.Ground) || nodeMatName.Contains(RoadPos.Elevated))
-                        {
-                            nodeList.Add(new NodeSet(node, "Highway2L_Ground_Node"));
-                        }
 
-                        if (nodeMatName.Contains(RoadPos.Slope))
-                        {
-                            nodeList.Add(new NodeSet(node, "Highway2L_Slope_Node"));
-                        }
-                    }
+                    nodeList.Add(new NodeSet(node, nodeMatName, nodeAprName));
                 }
-
-
-
-                nodeList.Add(new NodeSet(node, nodeMatName, nodeAprName));
             }
 
             // Look for segments
@@ -322,98 +298,19 @@
 
                 segList.Add(new SegmentSet(segment, mainTexName, aprName));
 
-
-
                 allSegments += "\n" + className + " | " + netInfo.name + " | " + mainTexName + " | "
                                + segment.m_segmentMesh.name;
 
                 string meshName = segment.m_mesh.name;
 
-                ReplaceNExtSegments(netInfo, segment, ref nextLog, ref segList);
+                ReplaceNExtSegment(netInfo, segment, ref nextLog, ref segList);
 
                 if (netInfo.name.Contains("Medium Avenue"))
                 {
-                    if (netInfo.name.Contains("TL"))
-                    {
-                        if (netInfo.name.Contains(RoadPos.Elevated))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4LTL_Elevated_Segment"));
-                        }
-                        else if (netInfo.name.Contains(RoadPos.Slope))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4LTL_Slope_Segment"));
-                        }
-                        else if (netInfo.name.Contains(RoadPos.Tunnel))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4LTL_Tunnel_Segment"));
-                        }
-                        else
-                        {
-                            segList.Add(
-                                new SegmentSet(
-                                    segment,
-                                    "MediumAvenue4LTL_Ground_Segment",
-                                    "RoadLargeSegment-default-apr"));
-                        }
-                    }
-                    else
-                    {
-                        if (netInfo.name.Contains(RoadPos.Elevated))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4L_Elevated_Segment"));
-                        }
-                        else if (netInfo.name.Contains(RoadPos.Slope))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4L_Slope_Segment"));
-                        }
-                        else if (netInfo.name.Contains(RoadPos.Tunnel))
-                        {
-                            segList.Add(new SegmentSet(segment, "MediumAvenue4L_Tunnel_Segment"));
-                        }
-                        else
-                        {
-                            segList.Add(
-                                new SegmentSet(
-                                    segment,
-                                    "MediumAvenue4L_Ground_Segment",
-                                    "RoadLargeSegment-default-apr"));
-                        }
-                    }
+                    segList.Add(new SegmentSet(segment, null, "RoadLargeSegment-default-apr"));
                 }
-                else if (netInfo.name.Contains("Rural Highway"))
-                {
-                    if (netInfo.name.Contains("Small"))
-                    {
-                        if (mainTexName.Contains(RoadPos.Slope))
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway1L_Slope_Segment"));
-                        }
-                        else if (mainTexName.Contains(RoadPos.Tunnel))
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway1L_Tunnel_Segment"));
-                        }
-                        else
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway1L_Ground_Segment"));
-                        }
-                    }
-                    else
-                    {
-                        if (mainTexName.Contains(RoadPos.Slope))
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway2L_Slope_Segment"));
-                        }
-                        else if (mainTexName.Contains(RoadPos.Tunnel))
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway2L_Tunnel_Segment"));
-                        }
-                        else
-                        {
-                            segList.Add(new SegmentSet(segment, "Highway2L_Ground_Segment"));
-                        }
-                    }
-                }
-                else if (netInfo.name.Contains("Small Busway"))
+
+                if (netInfo.name.Contains("Small Busway"))
                 {
                     if (netInfo.name.Contains("Oneway"))
                     {
@@ -821,19 +718,23 @@
 
             ShittyPlusFuck.ReplacePlus(netInfo, ref segList, ref nodeList);
 
-
             foreach (SegmentSet set in segList)
             {
                 if (!segmentChanges.Any(x => x.segment.Equals(set.segment)))
                 {
-                    segmentChanges.Add(new ReplacementStateSegment()
-                    {
-                        segment = set.segment,
-                        mainTex = set.segment.m_segmentMaterial.GetTexture(TexType.MainTex) as Texture2D,
-                        aprMap = set.segment.m_segmentMaterial.GetTexture(TexType.APRMap) as Texture2D,
-                        m_lodMaterial = set.segment.m_lodMaterial,
-                        m_lodRenderDistance = set.segment.m_lodRenderDistance
-                    });
+                    segmentChanges.Add(
+                        new ReplacementStateSegment
+                            {
+                                segment = set.segment,
+                                mainTex =
+                                    set.segment.m_segmentMaterial
+                                        .GetTexture(TexType.MainTex) as Texture2D,
+                                aprMap =
+                                    set.segment.m_segmentMaterial
+                                        .GetTexture(TexType.APRMap) as Texture2D,
+                                m_lodMaterial = set.segment.m_lodMaterial,
+                                m_lodRenderDistance = set.segment.m_lodRenderDistance
+                            });
                 }
 
                 SetSegmentDirect(set);
@@ -844,14 +745,19 @@
             {
                 if (!nodeChanges.Any(x => x.node.Equals(set.node)))
                 {
-                    nodeChanges.Add(new ReplacementStateNode()
-                    {
-                        node = set.node,
-                        mainTex = set.node.m_nodeMaterial.GetTexture(TexType.MainTex) as Texture2D,
-                        aprMap = set.node.m_nodeMaterial.GetTexture(TexType.APRMap) as Texture2D,
-                        m_lodMaterial = set.node.m_lodMaterial,
-                        m_lodRenderDistance = set.node.m_lodRenderDistance
-                    });
+                    nodeChanges.Add(
+                        new ReplacementStateNode
+                            {
+                                node = set.node,
+                                mainTex =
+                                    set.node.m_nodeMaterial
+                                        .GetTexture(TexType.MainTex) as Texture2D,
+                                aprMap =
+                                    set.node.m_nodeMaterial
+                                        .GetTexture(TexType.APRMap) as Texture2D,
+                                m_lodMaterial = set.node.m_lodMaterial,
+                                m_lodRenderDistance = set.node.m_lodRenderDistance
+                            });
                 }
 
                 SetNodeDirect(set);
@@ -868,7 +774,7 @@
             // Singleton<NetManager>.instance.InitRenderData();
         }
 
-        public static void ReplacePropTextures(PropInfo propInfo, string path)
+        public static void ReplacePropTextures([CanBeNull] PropInfo propInfo, string path)
         {
             if (propInfo == null)
             {
@@ -904,7 +810,6 @@
             string propLodACIMapTexture = Path.Combine(path, defaultname + "-aci" + ExtDDS);
             string propLodACIMapTexture2 = Path.Combine(path2, defaultname + "-aci" + ExtDDS);
 
-
             if (File.Exists(propLodTexture))
             {
                 UpdatePropChanges(propInfo);
@@ -928,20 +833,6 @@
             {
                 propInfo.m_lodMaterialCombined.SetTexture(TexType.ACIMap, propLodACIMapTexture2.LoadDDS());
             }
-        }
-
-        private static void UpdatePropChanges(PropInfo propInfo)
-        {
-            propChanges.Add(
-                new ReplacementStateProp
-                    {
-                        propInfo = propInfo,
-                        mainTex =
-                            propInfo.m_lodMaterialCombined
-                                .GetTexture(TexType.MainTex) as Texture2D,
-                        aciMap =
-                            propInfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap) as Texture2D,
-                    });
         }
 
         public static void RevertNodes()
@@ -978,244 +869,160 @@
             }
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private static void ReplaceNExtNodes(NetInfo netInfo, NetInfo.Node node, ref string log, ref List<NodeSet> nodeList)
+        private static void ReplaceNExtNodes(
+            NetInfo netInfo,
+            NetInfo.Node node,
+            ref string log,
+            ref List<NodeSet> nodeList)
         {
+            if (node.m_nodeMaterial.GetTexture(TexType.MainTex) == null)
+            {
+                return;
+            }
+
+            string texname = node.m_nodeMaterial.GetTexture(TexType.MainTex).name;
             foreach (KeyValuePair<string, string> road in NExtRoads)
             {
-                if (!netInfo.name.Contains(road.Key))
+                if (!netInfo.name.StartsWith(road.Key))
                 {
                     continue;
                 }
 
-                foreach (string roadPosition in RoadPos.AllPositions)
+                string roadPosition = RoadPos.Ground;
+
+                if (texname.Contains(RoadPos.Slope))
                 {
-                    foreach (string textype in TexType.AllTex)
-                    {
-                        if (node.m_nodeMaterial.GetTexture(textype) == null)
-                        {
-                            continue;
-                        }
-
-                        string filename = road.Value + "_" + roadPosition + "_" + "Node" + textype + ExtDDS;
-                        string fullPath = Path.Combine(ModLoader.Config.currentTexturesPath_default + NextRoadsPath, filename);
-                        string aprPath = Path.Combine(ModLoader.APRMaps_Path + NextRoadsPath, filename);
-
-                        if (!node.m_nodeMaterial.GetTexture(textype).name.Contains(roadPosition))
-                        {
-                            continue;
-                        }
-
-                        // ToDo: add lod material
-                        nodeList.Add(new NodeSet(node, fullPath, aprPath));
-                        if (File.Exists(fullPath))
-                        {
-                            // string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
-                            // if (File.Exists(filename_lod))
-                            // {
-                            // node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                            // }
-                            log += "\nNExt replacing " + textype + " - " + fullPath;
-                        }
-                        else if (textype == TexType.APRMap && File.Exists(aprPath))
-                        {
-                            // string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/NExt_Roads/LOD", filename + "_lod" + ExtDDS);
-                            // if (File.Exists(filename_lod))
-                            // {
-                            // node.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                            // }
-                            // log += "\nNExt replacing " + TexType._APRMap + " - " + aprPath;
-                        }
-                    }
+                    roadPosition = RoadPos.Slope;
                 }
+
+                if (texname.Contains(RoadPos.Tunnel))
+                {
+                    roadPosition = RoadPos.Tunnel;
+                }
+
+                if (texname.Contains(RoadPos.Elevated))
+                {
+                    roadPosition = RoadPos.Elevated;
+                }
+
+                string filename = road.Value + "_" + roadPosition + "_" + "Node";
+
+                string[] arr = node.m_nodeMaterial.GetTexture(TexType.MainTex).name.Split('_');
+
+                // ToDo: add lod material
+                nodeList.Add(new NodeSet(node, filename + TexType.MainTex, filename + TexType.APRMap));
             }
         }
 
-        private static void ReplaceNExtSegments(NetInfo netInfo, NetInfo.Segment segment, ref string log, ref List<SegmentSet> segList)
+        private static void ReplaceNExtSegment(
+            NetInfo netInfo,
+            NetInfo.Segment segment,
+            ref string log,
+            ref List<SegmentSet> segList)
         {
+            if (segment.m_segmentMaterial.GetTexture(TexType.MainTex) == null)
+            {
+                return;
+            }
+
+            string texname = segment.m_segmentMaterial.GetTexture(TexType.MainTex).name;
+
             foreach (KeyValuePair<string, string> road in NExtRoads)
             {
-                if (!netInfo.name.Contains(road.Key))
+                if (!netInfo.name.StartsWith(road.Key))
                 {
                     continue;
                 }
 
-                foreach (string roadPosition in RoadPos.AllPositions)
+                string roadPosition = RoadPos.Ground;
+
+                if (texname.Contains(RoadPos.Slope))
                 {
-                    foreach (string textype in TexType.AllTex)
-                    {
-                        string file = road.Value + "_" + roadPosition + "_" + "Segment" + textype;
-                        string mainTex = Path.Combine(
-                            ModLoader.Config.currentTexturesPath_default + NextRoadsPath,
-                            file + ExtDDS);
-                        string aprMap = Path.Combine(ModLoader.APRMaps_Path + NextRoadsPath, file + ExtDDS);
-
-                        if (!segment.m_segmentMaterial.GetTexture(textype).name.Contains(roadPosition))
-                        {
-                            continue;
-                        }
-
-                        segList.Add(new SegmentSet(segment, mainTex, aprMap));
-
-                        // ToDo: add lod
-
-                        // if (File.Exists(filename))
-                        // {
-                        // segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
-                        // string filename_lod = Path.Combine(ModLoader.currentTexturesPath_default + "/NExt_Roads/LOD", file + "_lod" + ExtDDS);
-                        // if (File.Exists(filename_lod))
-                        // {
-                        // segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                        // }
-                        // }
-                        // else if (textype.Equals(TexType._APRMap))
-                        // {
-                        // // APR Maps only
-                        // filename = Path.Combine(ModLoader.APRMaps_Path + NextRoadsPath, file + ExtDDS);
-                        // log += "\nNExt Segments APR looking for: " + filename;
-                        // if (File.Exists(filename))
-                        // {
-                        // segment.m_segmentMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename));
-                        // string filename_lod = Path.Combine(
-                        // ModLoader.APRMaps_Path + "/NExt_Roads/LOD",
-                        // file + "_lod" + ExtDDS);
-                        // if (File.Exists(filename_lod))
-                        // {
-                        // segment.m_lodMaterial.SetTexture(textype, DDSLoader.LoadDDS(filename_lod));
-                        // }
-                        // }
-                        // }
-                    }
+                    roadPosition = RoadPos.Slope;
                 }
+
+                if (texname.Contains(RoadPos.Tunnel))
+                {
+                    roadPosition = RoadPos.Tunnel;
+                }
+
+                if (texname.Contains(RoadPos.Elevated))
+                {
+                    roadPosition = RoadPos.Elevated;
+                }
+
+                string file = road.Value + "_" + roadPosition + "_" + "Segment";
+
+                string[] arr = segment.m_segmentMaterial.GetTexture(TexType.MainTex).name.Split('_');
+
+                if (arr.Contains("Inverted"))
+                {
+                    file += "_Inverted";
+                }
+
+                segList.Add(new SegmentSet(segment, file + TexType.MainTex, file + TexType.APRMap));
             }
+        }
+
+        private static bool SetMatWithFileList(string filename, Material mat, string type)
+        {
+            string fullName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(filename + ExtDDS))
+                ?.FullName;
+            if (!fullName.IsNullOrWhiteSpace())
+            {
+                mat.SetTexture(type, fullName?.LoadDDS());
+                Debug.Log("Set with file list: " + fullName);
+                return true;
+            }
+
+            // Debug.Log("Requested file " + filename + " for " + mat + " not found.");
+            return false;
         }
 
         private static void SetNodeDirect(NodeSet set)
         {
             NetInfo.Node node = set.node;
-            string maintex = set.MainTex;
-            string apr = set.APRMap;
-            bool isPlus = !set.path.IsNullOrWhiteSpace();
+            string mainTex = set.MainTex;
+            string aprMap = set.APRMap;
 
-            string currentTextures = isPlus ? set.path : ModLoader.Config.currentTexturesPath_default;
-            if (!maintex.IsNullOrWhiteSpace())
+            if (!mainTex.IsNullOrWhiteSpace())
             {
-                if (File.Exists(Path.Combine(currentTextures, maintex + ExtDDS)))
+                string type = TexType.MainTex;
+
+                if (!SetMatWithFileList(mainTex, node.m_nodeMaterial, type) && mainTex.Contains(RoadPos.Elevated))
                 {
-                    node.m_nodeMaterial.SetTexture(
-                        TexType.MainTex,
-                        Path.Combine(currentTextures, maintex + ExtDDS).LoadDDS());
-
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD", maintex + "_lod" + ExtDDS);
-
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(maintex, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
+                    mainTex = mainTex.Replace(RoadPos.Elevated, RoadPos.Ground);
+                    SetMatWithFileList(mainTex, node.m_nodeMaterial, type);
                 }
-                else if (File.Exists(Path.Combine(currentTextures, maintex + TexType.MainTex + ExtDDS)))
+
+                string lodMainTex = node.m_lodMaterial.GetTexture(TexType.MainTex).name;
+                if (!SetMatWithFileList(lodMainTex, node.m_lodMaterial, type))
                 {
-                    node.m_nodeMaterial.SetTexture(
-                        TexType.MainTex,
-                        Path.Combine(currentTextures, maintex + TexType.MainTex + ExtDDS).LoadDDS());
-
-                    string filename_lod = Path.Combine(currentTextures + "/LOD", maintex + TexType.MainTex + ExtDDS);
-                    if (File.Exists(filename_lod))
+                    lodMainTex = mainTex + "_lod";
+                    if (!SetMatWithFileList(lodMainTex, node.m_lodMaterial, type))
                     {
-                        node.m_lodMaterial.SetTexture(maintex, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
-
-                    // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
-                    if (apr.IsNullOrWhiteSpace())
-                    {
-                        apr = maintex;
+                        node.m_lodRenderDistance = NewLodRenderDistance;
                     }
                 }
             }
 
-            if (!apr.IsNullOrWhiteSpace())
+            if (!aprMap.IsNullOrWhiteSpace())
             {
-                string path = Path.Combine(currentTextures, apr + ExtDDS);
-                string path2 = Path.Combine(ModLoader.APRMaps_Path, apr + ExtDDS);
-                string path3 = Path.Combine(currentTextures, apr + TexType.APRMap + ExtDDS);
-                string path4 = Path.Combine(ModLoader.APRMaps_Path, apr + TexType.APRMap + ExtDDS);
-                string path5 = Path.Combine(currentTextures + "/APR", apr + ExtDDS);
+                string type = TexType.APRMap;
 
-                if (File.Exists(path5))
+                if (!SetMatWithFileList(aprMap, node.m_nodeMaterial, type) && aprMap.Contains(RoadPos.Elevated))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType.APRMap, path5.LoadDDS());
-                    string filename_lod = Path.Combine(currentTextures + "/LOD", apr + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
+                    aprMap = aprMap.Replace(RoadPos.Elevated, RoadPos.Ground);
+                    SetMatWithFileList(aprMap, node.m_nodeMaterial, type);
                 }
-                else if (File.Exists(path))
+
+                string lodAprTex = node.m_lodMaterial.GetTexture(TexType.APRMap).name;
+                if (!SetMatWithFileList(lodAprTex, node.m_lodMaterial, type))
                 {
-                    node.m_nodeMaterial.SetTexture(TexType.APRMap, path.LoadDDS());
-                    string filename_lod = Path.Combine(currentTextures + "/LOD", apr + ExtDDS);
-                    if (File.Exists(filename_lod))
+                    lodAprTex = aprMap + "_lod";
+                    if (!SetMatWithFileList(lodAprTex, node.m_lodMaterial, type))
                     {
-                        node.m_lodMaterial.SetTexture(apr, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path2))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType.APRMap, path2.LoadDDS());
-                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType.APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path3))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType.APRMap, path3.LoadDDS());
-                    string filename_lod = Path.Combine(currentTextures + "/LOD", apr + TexType.APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(apr, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path4))
-                {
-                    node.m_nodeMaterial.SetTexture(TexType.APRMap, path4.LoadDDS());
-                    string filename_lod = Path.Combine(ModLoader.APRMaps_Path + "/LOD", apr + TexType.APRMap + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        node.m_lodMaterial.SetTexture(maintex, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        node.m_lodRenderDistance = newLodRenderDistance;
+                        node.m_lodRenderDistance = NewLodRenderDistance;
                     }
                 }
             }
@@ -1224,194 +1031,83 @@
         private static void SetSegmentDirect(SegmentSet set)
         {
             NetInfo.Segment segment = set.segment;
-            string maintex = set.MainTex;
-            string apr = set.APRMap;
-            bool isPlus = !set.path.IsNullOrWhiteSpace();
+            string mainTex = set.MainTex;
+            string aprMap = set.APRMap;
 
-            string currentTextures = isPlus ? set.path : ModLoader.Config.currentTexturesPath_default;
-
-            if (!maintex.IsNullOrWhiteSpace())
+            if (!mainTex.IsNullOrWhiteSpace())
             {
                 string type = TexType.MainTex;
-                if (File.Exists(Path.Combine(currentTextures, maintex + ExtDDS)))
+
+                if (!SetMatWithFileList(mainTex, segment.m_segmentMaterial, type) && mainTex.Contains(RoadPos.Elevated))
                 {
-                    segment.m_segmentMaterial.SetTexture(
-                        type,
-                        Path.Combine(currentTextures, maintex + ExtDDS).LoadDDS());
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD",
-                        maintex + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
+                    mainTex = mainTex.Replace(RoadPos.Elevated, RoadPos.Ground);
+                    SetMatWithFileList(mainTex, segment.m_segmentMaterial, type);
                 }
-                else if (File.Exists(Path.Combine(currentTextures, maintex + type + ExtDDS)))
+
+                string lodMainTex = segment.m_lodMaterial.GetTexture(TexType.MainTex).name;
+                if (!SetMatWithFileList(lodMainTex, segment.m_lodMaterial, type))
                 {
-                    segment.m_segmentMaterial.SetTexture(
-                        type,
-                        Path.Combine(currentTextures, maintex + type + ExtDDS).LoadDDS());
-
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD",
-                        maintex + type + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
+                    lodMainTex = mainTex + "_lod";
+                    if (!SetMatWithFileList(lodMainTex, segment.m_lodMaterial, type))
                     {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
-
-                    // if the mod has to add the _MainTex, use the name for the APRs => only applies to NExt or custom tex
-                    if (apr.IsNullOrWhiteSpace())
-                    {
-                        apr = maintex;
+                        segment.m_lodRenderDistance = NewLodRenderDistance;
                     }
                 }
             }
 
-            if (!apr.IsNullOrWhiteSpace())
+            if (!aprMap.IsNullOrWhiteSpace())
             {
                 string type = TexType.APRMap;
-                string path = Path.Combine(currentTextures, apr + ExtDDS);
-                string path2 = Path.Combine(ModLoader.APRMaps_Path, apr + ExtDDS);
-                string path3 = Path.Combine(currentTextures, apr + type + ExtDDS);
-                string path4 = Path.Combine(ModLoader.APRMaps_Path, apr + type + ExtDDS);
-                string path5 = Path.Combine(currentTextures + "/APR", apr + ExtDDS);
 
-                 if (File.Exists(path5))
+                if (!SetMatWithFileList(aprMap, segment.m_segmentMaterial, type) && aprMap.Contains(RoadPos.Elevated))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, path5.LoadDDS());
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD",
-                        apr + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
+                    aprMap = aprMap.Replace(RoadPos.Elevated, RoadPos.Ground);
+                    SetMatWithFileList(aprMap, segment.m_segmentMaterial, type);
                 }
-                else if (File.Exists(path))
+
+                string lodAprTex = segment.m_lodMaterial.GetTexture(TexType.APRMap).name;
+                if (!SetMatWithFileList(lodAprTex, segment.m_lodMaterial, type))
                 {
-                    segment.m_segmentMaterial.SetTexture(type, path.LoadDDS());
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD",
-                        apr + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
+                    lodAprTex = aprMap + "_lod";
+                    if (!SetMatWithFileList(lodAprTex, segment.m_lodMaterial, type))
                     {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path2))
-                {
-                    segment.m_segmentMaterial.SetTexture(type, path2.LoadDDS());
-                    string filename_lod = Path.Combine(
-                        ModLoader.APRMaps_Path + "/LOD",
-                        apr + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path3))
-                {
-                    segment.m_segmentMaterial.SetTexture(type, path3.LoadDDS());
-                    string filename_lod = Path.Combine(
-                        currentTextures + "/LOD",
-                        apr + type + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
-                    }
-                }
-                else if (File.Exists(path4))
-                {
-                    segment.m_segmentMaterial.SetTexture(type, path4.LoadDDS());
-                    string filename_lod = Path.Combine(
-                        ModLoader.APRMaps_Path + "/LOD",
-                        apr + type + "_lod" + ExtDDS);
-                    if (File.Exists(filename_lod))
-                    {
-                        segment.m_lodMaterial.SetTexture(type, filename_lod.LoadDDS());
-                    }
-                    else
-                    {
-                        segment.m_lodRenderDistance = newLodRenderDistance;
+                        segment.m_lodRenderDistance = NewLodRenderDistance;
                     }
                 }
             }
-
         }
 
-        #endregion Private Methods
-
-        #region Private Structs
+        private static void UpdatePropChanges([NotNull] PropInfo propInfo)
+        {
+            propChanges.Add(
+                new ReplacementStateProp
+                    {
+                        propInfo = propInfo,
+                        mainTex =
+                            propInfo.m_lodMaterialCombined
+                                .GetTexture(TexType.MainTex) as Texture2D,
+                        aciMap =
+                            propInfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap) as Texture2D
+                    });
+        }
 
         private struct ReplacementStateNode
         {
             #region Public Fields
 
             public Texture2D aprMap;
+
             public Material m_lodMaterial;
+
             public float m_lodRenderDistance;
+
             public Texture2D mainTex;
+
             public NetInfo.Node node;
 
             #endregion Public Fields
         }
 
-        private struct ReplacementStateProp
-        {
-            #region Public Fields
 
-            public int laneIndex;
-            public Texture2D mainTex;
-            public float originalAngle;
-            public PropInfo originalProp;
-            public int propIndex;
-            public PropInfo propInfo;
-            public PropInfo replacementProp;
-
-            public Texture2D aciMap;
-
-            #endregion Public Fields
-        }
-
-        private struct ReplacementStateSegment
-        {
-            #region Public Fields
-
-            public Texture aprMap;
-            public Material m_lodMaterial;
-            public float m_lodRenderDistance;
-            public Material m_segmentMaterial;
-            public Texture mainTex;
-            public NetInfo.Segment segment;
-
-            #endregion Public Fields
-        }
-
-        #endregion Private Structs
     }
 }

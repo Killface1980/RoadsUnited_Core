@@ -2,12 +2,11 @@ namespace RoadsUnited_Core2.Statics
 {
     public class SegmentSet
     {
-        public SegmentSet(NetInfo.Segment segment, string mainTex, string aprMap = null, string path = null)
+        public SegmentSet(NetInfo.Segment segment, string mainTex, string aprMap = null)
         {
             this.segment = segment;
             this.MainTex = mainTex;
             this.APRMap = aprMap;
-            this.path = path;
         }
 
         public NetInfo.Segment segment;

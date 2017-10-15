@@ -2,7 +2,7 @@
 {
     public class NodeSet
     {
-        public NodeSet(NetInfo.Node node, string mainTex, string aprMap = null, string path = null)
+        public NodeSet(NetInfo.Node node, string mainTex, string aprMap = null)
         {
             this.node = node;
             this.MainTex = mainTex;

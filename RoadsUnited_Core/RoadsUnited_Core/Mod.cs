@@ -30,7 +30,7 @@ namespace RoadsUnited_Core2
             base.OnCreated(loading);
 
             // cancel if Prefab Hook is not installed
-            if (!IsHooked())
+            if (!this.IsHooked())
             {
                 return;
             }
@@ -39,20 +39,11 @@ namespace RoadsUnited_Core2
             // NetInfoHook.OnPreInitialization += OnPreNetInit;
             NetInfoHook.OnPostInitialization += this.OnPostNetInit;
             NetInfoHook.Deploy();
-            PropInfoHook.OnPostInitialization += this.OnPostPropInit;
-            PropInfoHook.Deploy();
 
             // deploy (after event handler registration!)
         }
 
-        private void OnPostPropInit(PropInfo propInfo)
-        {
-            if (Config.selected_pack > 0)
-            {
-                RoadsUnitedCore2.ChangeArrowProp(propInfo);
-                RoadsUnitedCore2.ReplacePropTextures(propInfo, Config.currentTexturesPath_default);
-            }
-        }
+
 
         private static Configuration _config;
 
@@ -79,13 +70,29 @@ namespace RoadsUnited_Core2
             base.OnLevelLoaded(mode);
 
             // display warning when level is loaded if Prefab Hook is not installed
-            if (!IsHooked())
+            if (!this.IsHooked())
             {
                 UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel").SetMessage(
                     "Missing dependency",
                     this.Name + " requires the 'Prefab Hook' mod to work properly. Please subscribe to the mod and restart the game!",
                     false);
                 return;
+            }
+
+            if (Config.selected_pack > 0)
+            {
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+                {
+                    PropInfo propInfo = PrefabCollection<PropInfo>.GetLoaded(i);
+                    if (propInfo == null)
+                    {
+                        continue;
+                    }
+
+                    RoadsUnitedCore2.ChangeArrowProp(propInfo);
+
+                    RoadsUnitedCore2.ReplacePropTextures(propInfo, Config.currentTexturesPath_default);
+                }
             }
 
             // other stuff...
@@ -329,6 +336,8 @@ namespace RoadsUnited_Core2
 
         private static string modPath;
 
+        public static List<FileInfo> AllTexturesAvailable = new List<FileInfo>();
+
         #endregion Private Fields
 
         #region Public Constructors
@@ -389,16 +398,20 @@ namespace RoadsUnited_Core2
             Configuration.Serialize(configPath, Config);
         }
 
-        private void ReplaceTextures()
+        private void ReplaceTextures(bool parkingReset = false)
         {
+            if (parkingReset)
+            {
+                RoadsUnitedCore2.RevertSegments();
+            }
+
             // string log = "RU Core all files in folder: ";
             // string[] files = Directory.GetFiles(Config.currentTexturesPath_default);
             // foreach (string file in files)
             // {
-            //     log += file;
+            // log += file;
             // }
             // Debug.Log(log);
-
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
             {
                 NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
@@ -407,7 +420,12 @@ namespace RoadsUnited_Core2
                     continue;
                 }
 
-                RoadsUnitedCore2.ReplaceNetTextures(netInfo);
+                RoadsUnitedCore2.ReplaceNetTextures(netInfo, parkingReset);
+            }
+
+            if (parkingReset)
+            {
+                return;
             }
 
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
@@ -453,6 +471,8 @@ namespace RoadsUnited_Core2
 
                         if (selectedIndex > 0)
                         {
+
+
                             this.ReplaceTextures();
 
                             // RoadsUnited_CoreMod.panel2.isVisible = true;
@@ -688,7 +708,7 @@ namespace RoadsUnited_Core2
             Config.large_oneway_parking = c;
             SaveConfig();
 
-            // ModLoader.RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventLargeRoadBrightness(float c)
@@ -702,7 +722,7 @@ namespace RoadsUnited_Core2
             Config.large_road_bus_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventLargeRoadDecorationBrightness(float c)
@@ -716,7 +736,7 @@ namespace RoadsUnited_Core2
             Config.large_road_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventMediumRoadBrightness(float c)
@@ -730,7 +750,7 @@ namespace RoadsUnited_Core2
             Config.medium_road_bus_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventMediumRoadDecorationBrightness(float c)
@@ -744,7 +764,7 @@ namespace RoadsUnited_Core2
             Config.medium_road_grass_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventMediumRoadParking(int c)
@@ -752,7 +772,7 @@ namespace RoadsUnited_Core2
             Config.medium_road_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventMediumRoadTreesParking(int c)
@@ -760,7 +780,7 @@ namespace RoadsUnited_Core2
             Config.medium_road_trees_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         private void EventResetConfig()
@@ -768,6 +788,7 @@ namespace RoadsUnited_Core2
             _config = new Configuration();
 
             SaveConfig();
+            this.RevertAll();
         }
 
         private void EventSmallRoadBrightness(float c)
@@ -787,7 +808,7 @@ namespace RoadsUnited_Core2
             Config.basic_road_parking = c;
             SaveConfig();
 
-            // RoadsUnitedCore2.ReplaceNetTextures();
+            this.ReplaceTextures(true);
         }
 
         #endregion Private Methods

@@ -60,12 +60,13 @@
     <None Include="Class1.cs" />
     <Compile Include="DDSLoader.cs" />
     <None Include="Statics\Class1.cs" />
+    <Compile Include="ReplacementStateProp.cs" />
+    <Compile Include="ReplacementStateSegment.cs" />
     <Compile Include="Statics\RoadPos.cs" />
     <Compile Include="TextureExporter.cs" />
     <None Include="Stuff\NetInfoClasses.cs" />
     <None Include="Stuff\NetInfoVersion.cs" />
     <None Include="Stuff\NetInfos.cs" />
-    <None Include="RU_CoreDicts.cs" />
     <Compile Include="Statics\TexType.cs" />
     <Compile Include="Statics\NodeSet.cs" />
     <Compile Include="Configuration.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="LODResetter.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="RoadsUnited_CoreProps.cs" />
     <Compile Include="RoadColorChanger.cs" />
     <Compile Include="RoadsUnitedCore2.cs" />
     <Compile Include="RoadThemeManager\RoadThemeManager.cs" />

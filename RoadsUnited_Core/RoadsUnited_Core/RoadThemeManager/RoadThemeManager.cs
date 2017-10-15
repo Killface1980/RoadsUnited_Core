@@ -2,11 +2,14 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
     using ColossalFramework;
     using ColossalFramework.Plugins;
 
     using RoadsUnited_Core;
+
+    using UnityEngine;
 
     public class RoadThemeManager : Singleton<RoadThemeManager>
     {
@@ -29,7 +32,7 @@
                 ModLoader.Config.themeName = instance.activePack.themeName;
                 ModLoader.Config.supportsParkingLots = instance.activePack.supportsParkingLots;
                 ModLoader.Config.currentTexturesPath_default = Path.Combine(instance.activePack.packPath, "BaseTextures");
-
+                RoadsUnitedCore2.MarkFilelistDirty();
                 ModLoader.SaveConfig();
             }
         }

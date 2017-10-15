@@ -36,13 +36,7 @@
 
         public static void ReplacePlus(NetInfo netInfo, ref List<SegmentSet> segList, ref List<NodeSet> nodeList)
         {
-            string texturesPathDefault = ModLoader.Config.currentTexturesPath_default;
             string tex = string.Empty;
-            string path2 = texturesPathDefault + "/" + roadtiny + "/";
-            string path3 = texturesPathDefault + "/" + roadsmall + "/";
-            string path4 = texturesPathDefault + "/" + roadmedium + "/";
-            string path5 = texturesPathDefault + "/" + roadlarge + "/";
-            string path6 = texturesPathDefault + "/" + highway + "/";
 
             if (netInfo.m_class.name.Contains("NExt") || netInfo.name.Contains("Busway")
                 || (netInfo.name.Contains("Large Road") && netInfo.name.Contains("Bus Lane")))
@@ -53,11 +47,9 @@
                     NetInfo.Node node = nodes[i];
                     if (node.m_nodeMaterial.GetTexture(TexType.MainTex) != null && !node.m_nodeMaterial.name.Contains("rail"))
                     {
-                        string thisPath = null;
 
                         if (netInfo.name.Equals("Two-Lane Alley"))
                         {
-                            thisPath = path2;
                             tex = roadtiny + "2L" + text14;
 
                             // tex = roadtiny + "1L" + text14;
@@ -65,13 +57,11 @@
 
                         if (netInfo.name.Equals("One-Lane Oneway"))
                         {
-                            thisPath = path2;
                             tex = roadtiny + "1L" + text14;
                         }
 
                         if (netInfo.name.Contains("Eight-Lane Avenue"))
                         {
-                            thisPath = path2;
                             tex = roadlarge + "8L";
                             if (netInfo.name.Equals("Eight-Lane Avenue Elevated"))
                             {
@@ -93,7 +83,6 @@
 
                         if (netInfo.name.Contains("Highway"))
                         {
-                            thisPath = path5;
                             if (netInfo.name.Contains("Small Rural Highway"))
                             {
                                 tex = highway + "1L" + text14;
@@ -195,13 +184,9 @@
                             }
                         }
 
-                        if (!thisPath.IsNullOrWhiteSpace())
+                        if (!tex.IsNullOrWhiteSpace())
                         {
-                            nodeList.Add(
-                                new NodeSet(
-                                    node,
-                                    Path.Combine(thisPath, tex + TexType.MainTex),
-                                    Path.Combine(thisPath, tex + TexType.APRMap)));
+                            nodeList.Add(new NodeSet(node, tex + TexType.MainTex, tex + TexType.APRMap));
                         }
                     }
                 }
@@ -213,10 +198,8 @@
                     if (segment.m_segmentMaterial.GetTexture("_MainTex") != null
                         && !segment.m_material.name.ToLower().Contains("cable"))
                     {
-                        string thisPath = null;
                         if (netInfo.name.Equals("Two-Lane Alley"))
                         {
-                            thisPath = path2;
                             tex = roadtiny + "2L";
 
                             // tex = roadtiny + "1L";
@@ -224,13 +207,11 @@
 
                         if (netInfo.name.Equals("One-Lane Oneway"))
                         {
-                            thisPath = path2;
                             tex = roadtiny + "1L";
                         }
 
                         if (netInfo.name.Contains("BasicRoadTL"))
                         {
-                            thisPath = path3;
                             if (segment.m_segmentMaterial.GetTexture(TexType.APRMap).name.Contains("Ground"))
                             {
                                 tex = roadsmall + "TL" + gnd;
@@ -247,7 +228,6 @@
 
                         if (netInfo.name.Contains("Small Avenue"))
                         {
-                            thisPath = path3;
                             if (segment.m_segmentMaterial.GetTexture(TexType.APRMap).name.Contains("Ground"))
                             {
                                 tex = roadsmall + "4L" + gnd;
@@ -264,7 +244,6 @@
 
                         if (netInfo.name.Contains("Oneway3L"))
                         {
-                            thisPath = path3;
                             if (segment.m_segmentMaterial.GetTexture(TexType.APRMap).name.Contains("Ground"))
                             {
                                 tex = roadsmall + str + "3L" + gnd;
@@ -281,7 +260,6 @@
 
                         if (netInfo.name.Contains("Oneway4L"))
                         {
-                            thisPath = path3;
                             if (segment.m_segmentMaterial.GetTexture(TexType.APRMap).name.Contains("Ground"))
                             {
                                 tex = roadsmall + str + "4L" + gnd;
@@ -300,7 +278,6 @@
 
                         if (netInfo.name.Contains("AsymRoadL1R2"))
                         {
-                            thisPath = path3;
                             if (netInfo.name.Equals("AsymRoadL1R2"))
                             {
                                 tex = roadsmall + str4 + gnd;
@@ -347,7 +324,6 @@
 
                         if (netInfo.name.Contains("AsymRoadL1R3"))
                         {
-                            thisPath = path3;
                             if (netInfo.name.Equals("AsymRoadL1R3"))
                             {
                                 tex = roadsmall + str5 + gnd;
@@ -394,7 +370,6 @@
 
                         if (netInfo.name.Contains("Medium Avenue") && !netInfo.name.Contains("TL"))
                         {
-                            thisPath = path4;
                             if (segment.m_segmentMaterial.GetTexture(TexType.MainTex).name.Contains("Ground"))
                             {
                                 tex = roadmedium + "4L" + gnd;
@@ -415,7 +390,6 @@
 
                         if (netInfo.name.Contains("Medium Avenue") && netInfo.name.Contains("TL"))
                         {
-                            thisPath = path4;
                             if (segment.m_segmentMaterial.GetTexture(TexType.MainTex).name.Contains("Ground"))
                             {
                                 tex = roadmedium + "4LTL" + gnd;
@@ -436,7 +410,6 @@
 
                         if (netInfo.name.Contains("Eight-Lane Avenue"))
                         {
-                            thisPath = path5;
                             tex = roadlarge + "8L";
 
                             if (netInfo.name.Equals("Eight-Lane Avenue Elevated")
@@ -563,7 +536,6 @@
 
                         if (netInfo.name.Contains("Small"))
                         {
-                            thisPath = path3;
                             if (netInfo.name.Contains("Small Busway") && !netInfo.name.Contains("OneWay"))
                             {
                                 if (segment.m_mesh.name.Equals("SmallRoadSegment"))
@@ -712,14 +684,9 @@
                             }
                         }
 
-                        if (!thisPath.IsNullOrWhiteSpace())
+                        if (!tex.IsNullOrWhiteSpace())
                         {
-                            segList.Add(
-                                new SegmentSet(
-                                    segment,
-                                    Path.Combine(thisPath, tex + TexType.MainTex),
-                                    Path.Combine(thisPath, tex + TexType.APRMap),
-                                    thisPath));
+                            segList.Add(new SegmentSet(segment, tex + TexType.MainTex, tex + TexType.APRMap));
                         }
                     }
                 }
@@ -740,12 +707,10 @@
                         && !node.m_nodeMaterial.name.Equals(tramRailDoubleWnNoName)
                         && !node.m_nodeMaterial.name.Equals(value2))
                     {
-                        string thisPath = string.Empty;
                         tex = roadsmall + gnd + text14;
 
                         if (netInfo.name.Contains("Basic Road"))
                         {
-                            thisPath = path3;
                             if (netInfo.name.Equals("Basic Road Elevated"))
                             {
                                 tex = roadsmall + elevated + text14;
@@ -774,7 +739,6 @@
                         }
                         else if (netInfo.name.Contains("Oneway Road"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str;
                             if (netInfo.name.Equals("Oneway Road Elevated"))
                             {
@@ -792,17 +756,14 @@
                         }
                         else if (netInfo.name.Equals("Basic Road Bicycle"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + gnd + text14;
                         }
                         else if (netInfo.name.Equals("Basic Road Elevated Bike"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str2 + elevated + text14;
                         }
                         else if (netInfo.name.Contains("Large"))
                         {
-                            thisPath = path5;
                             if (netInfo.name.Equals("Large Road Elevated Bike"))
                             {
                                 tex = roadlarge + str2 + elevated + text14;
@@ -848,7 +809,6 @@
                         }
                         else if (netInfo.name.Contains("Highway"))
                         {
-                            thisPath = path6;
                             if (netInfo.name.Equals("HighwayRamp"))
                             {
                                 tex = highway + "Ramp" + text14;
@@ -892,7 +852,6 @@
                         }
                         else if (netInfo.name.Contains("Medium"))
                         {
-                            thisPath = path4;
                             if (netInfo.name.Equals("Medium Road Tram"))
                             {
                                 tex = roadmedium + str3 + gnd + text14;
@@ -929,42 +888,32 @@
                         }
                         else if (netInfo.name.Equals("Tram Track"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + deco + text14;
                         }
                         else if (netInfo.name.Equals("Tram Track Elevated"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + elevated + text14;
                         }
                         else if (netInfo.name.Equals("Tram Track Slope"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + deco + text14;
                         }
                         else if (netInfo.name.Equals("Oneway Tram Track"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + deco + text14;
                         }
                         else if (netInfo.name.Equals("Oneway Tram Track Elevated"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + elevated + text14;
                         }
                         else if (netInfo.name.Equals("Oneway Tram Track Slope"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + deco + text14;
                         }
 
-                        if (!thisPath.IsNullOrWhiteSpace())
+                        if (!tex.IsNullOrWhiteSpace())
                         {
-                            nodeList.Add(
-                                new NodeSet(
-                                    node,
-                                    Path.Combine(thisPath, tex + TexType.MainTex),
-                                    Path.Combine(thisPath, tex + TexType.APRMap)));
+                            nodeList.Add(new NodeSet(node, tex + TexType.MainTex, tex + TexType.APRMap));
                         }
                     }
                 }
@@ -977,10 +926,8 @@
                         && !segment.m_segmentMaterial.name.Contains("rail")
                         && !segment.m_material.name.ToLower().Contains("cable"))
                     {
-                        string thisPath = string.Empty;
                         if (netInfo.name.Contains("Basic Road"))
                         {
-                            thisPath = path3;
                             tex = roadsmall;
                             if (segment.m_segmentMesh.name.Equals("SmallRoadSegment"))
                             {
@@ -1076,7 +1023,6 @@
 
                         if (netInfo.name.Contains("Oneway Road"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str;
                             if (segment.m_mesh.name.Equals("SmallRoadSegment"))
                             {
@@ -1107,7 +1053,6 @@
                         if (netInfo.name.Equals("Oneway Road Decoration Grass")
                             || netInfo.name.Equals("Oneway Road Decoration Trees"))
                         {
-                            thisPath = path3;
                             if (segment.m_mesh.name.Equals("SmallRoadSegment2"))
                             {
                                 tex = roadsmall + str + deco;
@@ -1124,7 +1069,6 @@
 
                         if (netInfo.name.Contains("Medium"))
                         {
-                            thisPath = path4;
 
                             if (netInfo.name.Contains("Medium Road"))
                             {
@@ -1241,8 +1185,6 @@
 
                         if (netInfo.name.Contains("Large"))
                         {
-                            thisPath = path5;
-
                             if (netInfo.name.Contains("Large Road"))
                             {
                                 tex = roadlarge;
@@ -1388,7 +1330,6 @@
 
                         if (netInfo.name.Contains("Highway"))
                         {
-                            thisPath = path6;
                             if (netInfo.name.Equals("HighwayRamp") || netInfo.name.Equals("HighwayRampElevated"))
                             {
                                 tex = highway + "Ramp";
@@ -1417,7 +1358,6 @@
 
                         if (netInfo.name.Equals("Oneway Road Tram"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str;
                             if (segment.m_mesh.name.Equals("RoadSmallTramStopSingle"))
                             {
@@ -1431,18 +1371,15 @@
                         else if (netInfo.name.Equals("Oneway Road Elevated Tram")
                                  || netInfo.name.Equals("Oneway Road Bridge Tram"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str + elevated;
                         }
                         else if (netInfo.name.Equals("Oneway Road Slope Tram"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + str + slope;
                         }
 
                         if (netInfo.name.Contains("Tram Track"))
                         {
-                            thisPath = path3;
                             tex = roadsmall + deco;
                             if (netInfo.name.Equals("Tram Track Elevated"))
                             {
@@ -1466,13 +1403,9 @@
                             }
                         }
 
-                        if (!thisPath.IsNullOrWhiteSpace())
+                        if (!tex.IsNullOrWhiteSpace())
                         {
-                            segList.Add(
-                                new SegmentSet(
-                                    segment,
-                                    Path.Combine(thisPath, tex + TexType.MainTex),
-                                    Path.Combine(thisPath, tex + TexType.APRMap)));
+                            segList.Add(new SegmentSet(segment, tex + TexType.MainTex, tex + TexType.APRMap));
                         }
                     }
                 }

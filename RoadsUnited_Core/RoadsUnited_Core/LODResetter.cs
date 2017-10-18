@@ -71,9 +71,8 @@
             RenderTexture tmp = RenderTexture.GetTemporary(
                 sourceTex.width,
                 sourceTex.height,
-                0,
-                RenderTextureFormat.Default,
-                RenderTextureReadWrite.Linear);
+                0);
+
 
             // Blit the pixels on texture to the RenderTexture
             Graphics.Blit(sourceTex, tmp);
@@ -172,15 +171,6 @@
                                             throw new PrefabException(info, "LOD apr null");
                                         }
 
-                                        if (xys.width != rgb.width || xys.height != rgb.height)
-                                        {
-                                            segmentInfo.m_lodMaterial.SetTexture(TexType.MainTex, ScaleTexture(rgb, xys.width, xys.height));
-                                        }
-
-                                        if (apr.width != rgb.width || apr.height != rgb.height)
-                                        {
-                                            segmentInfo.m_lodMaterial.SetTexture(TexType.APRMap, ScaleTexture(apr, xys.width, xys.height));
-                                        }
 
                                         if (xys.width != rgb.width || xys.height != rgb.height)
                                         {

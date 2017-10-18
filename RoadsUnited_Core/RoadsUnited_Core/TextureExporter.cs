@@ -46,7 +46,6 @@
 
         public static void ExportPrefabTextures(object part)
         {
-            // deactivated, all textures created (way too dark, what's wrong?!?)
             if (true)
             {
                 return;

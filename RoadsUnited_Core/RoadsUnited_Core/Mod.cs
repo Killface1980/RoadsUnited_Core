@@ -1,5 +1,6 @@
 namespace RoadsUnited_Core2
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
 
@@ -93,6 +94,7 @@ namespace RoadsUnited_Core2
 
                     RoadsUnitedCore2.ReplacePropTextures(propInfo, Config.currentTexturesPath_default);
                 }
+               // LODResetter.ResetLOD();
             }
 
             // other stuff...
@@ -440,6 +442,7 @@ namespace RoadsUnited_Core2
             }
         }
 
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             packs = Singleton<RoadThemeManager.RoadThemeManager>.instance.GetAvailablePacks();
@@ -471,9 +474,8 @@ namespace RoadsUnited_Core2
 
                         if (selectedIndex > 0)
                         {
-
-
                             this.ReplaceTextures();
+                           // LODResetter.ResetLOD();
 
                             // RoadsUnited_CoreMod.panel2.isVisible = true;
                         }

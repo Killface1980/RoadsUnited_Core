@@ -17,7 +17,7 @@
     {
         private const string ExtDDS = ".dds";
 
-        private const float NewLodRenderDistance = 7000f;
+        private const float NewLodRenderDistance = 5000f;
 
         private static readonly List<string> Blacklist =
             new List<string>
@@ -242,6 +242,7 @@
             allNodes += "\nNExt nodes: ";
             allSegments += "\nNExt segments: ";
             string className = netInfo.m_class.name;
+            var list = new List<object>();
 
             if (!parkingReset)
             {
@@ -251,7 +252,11 @@
                         node => node.m_nodeMaterial.GetTexture(TexType.MainTex) != null
                                 && node.m_nodeMaterial.GetTexture(TexType.APRMap) != null))
                 {
-                    TextureExporter.ExportPrefabTextures(node);
+                    if (!list.Contains(node) && !netInfo.gameObject.name.Equals("TAM Road"))
+                    {
+                        TextureExporter.ExportPrefabTextures(node);
+                        list.Add(node);
+                    }
 
                     // Just look up the name and set the textures accordingly, no magic needed
                     string nodeMatName = node.m_nodeMaterial.GetTexture(TexType.MainTex).name;
@@ -291,7 +296,11 @@
                     segment => segment.m_segmentMaterial.GetTexture(TexType.MainTex) != null
                                && segment.m_segmentMaterial.GetTexture(TexType.APRMap) != null))
             {
-                TextureExporter.ExportPrefabTextures(segment);
+                if (!list.Contains(segment) && !netInfo.gameObject.name.Equals("TAM Road"))
+                {
+                    TextureExporter.ExportPrefabTextures(segment);
+                    list.Add(segment);
+                }
 
                 string mainTexName = segment.m_segmentMaterial.GetTexture(TexType.MainTex).name;
                 string aprName = segment.m_segmentMaterial.GetTexture(TexType.APRMap).name;
@@ -724,17 +733,17 @@
                 {
                     segmentChanges.Add(
                         new ReplacementStateSegment
-                            {
-                                segment = set.segment,
-                                mainTex =
+                        {
+                            segment = set.segment,
+                            mainTex =
                                     set.segment.m_segmentMaterial
                                         .GetTexture(TexType.MainTex) as Texture2D,
-                                aprMap =
+                            aprMap =
                                     set.segment.m_segmentMaterial
                                         .GetTexture(TexType.APRMap) as Texture2D,
-                                m_lodMaterial = set.segment.m_lodMaterial,
-                                m_lodRenderDistance = set.segment.m_lodRenderDistance
-                            });
+                            m_lodMaterial = set.segment.m_lodMaterial,
+                            m_lodRenderDistance = set.segment.m_lodRenderDistance
+                        });
                 }
 
                 SetSegmentDirect(set);
@@ -747,17 +756,17 @@
                 {
                     nodeChanges.Add(
                         new ReplacementStateNode
-                            {
-                                node = set.node,
-                                mainTex =
+                        {
+                            node = set.node,
+                            mainTex =
                                     set.node.m_nodeMaterial
                                         .GetTexture(TexType.MainTex) as Texture2D,
-                                aprMap =
+                            aprMap =
                                     set.node.m_nodeMaterial
                                         .GetTexture(TexType.APRMap) as Texture2D,
-                                m_lodMaterial = set.node.m_lodMaterial,
-                                m_lodRenderDistance = set.node.m_lodRenderDistance
-                            });
+                            m_lodMaterial = set.node.m_lodMaterial,
+                            m_lodRenderDistance = set.node.m_lodRenderDistance
+                        });
                 }
 
                 SetNodeDirect(set);
@@ -786,52 +795,38 @@
                 return;
             }
 
-            string path2 = path + "/PropTextures";
-
             if (propInfo.m_lodMaterialCombined == null || propInfo.m_lodMaterialCombined.GetTexture(TexType.MainTex)
                 == null)
             {
                 return;
             }
 
-            string defaultname = propInfo.m_lodMaterialCombined.GetTexture(TexType.MainTex).name;
-            if (defaultname.IsNullOrWhiteSpace())
+            string filename = propInfo.m_lodMaterialCombined.GetTexture(TexType.MainTex).name;
+            if (filename.IsNullOrWhiteSpace())
             {
                 return;
             }
 
-            if (defaultname.Equals("BusLaneText"))
+            if (filename.Equals("BusLaneText"))
             {
-                defaultname = "BusLane";
+                filename = "BusLane";
             }
 
-            string propLodTexture = Path.Combine(path, defaultname + ExtDDS);
-            string propLodTexture2 = Path.Combine(path2, defaultname + ExtDDS);
-            string propLodACIMapTexture = Path.Combine(path, defaultname + "-aci" + ExtDDS);
-            string propLodACIMapTexture2 = Path.Combine(path2, defaultname + "-aci" + ExtDDS);
+            string fullName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(filename + ExtDDS))
+                ?.FullName;
 
-            if (File.Exists(propLodTexture))
+            if (!fullName.IsNullOrWhiteSpace())
             {
                 UpdatePropChanges(propInfo);
+                SetMatWithFileList(filename, propInfo.m_lodMaterialCombined, TexType.MainTex);
 
-                // only the m_lodMaterialCombined texture is visible
-                propInfo.m_lodMaterialCombined.SetTexture(TexType.MainTex, propLodTexture.LoadDDS());
-            }
-            else if (File.Exists(propLodTexture2))
-            {
-                UpdatePropChanges(propInfo);
-
-                // only the m_lodMaterialCombined texture is visible
-                propInfo.m_lodMaterialCombined.SetTexture(TexType.MainTex, propLodTexture2.LoadDDS());
-            }
-
-            if (File.Exists(propLodACIMapTexture))
-            {
-                propInfo.m_lodMaterialCombined.SetTexture(TexType.ACIMap, propLodACIMapTexture.LoadDDS());
-            }
-            else if (File.Exists(propLodACIMapTexture2))
-            {
-                propInfo.m_lodMaterialCombined.SetTexture(TexType.ACIMap, propLodACIMapTexture2.LoadDDS());
+                string fileaci = propInfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap).name;
+                string aciName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(fileaci + ExtDDS))
+                    ?.FullName;
+                if (!aciName.IsNullOrWhiteSpace())
+                {
+                    SetMatWithFileList(fileaci, propInfo.m_lodMaterialCombined, TexType.ACIMap);
+                }
             }
         }
 
@@ -968,6 +963,7 @@
         {
             string fullName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(filename + ExtDDS))
                 ?.FullName;
+
             if (!fullName.IsNullOrWhiteSpace())
             {
                 mat.SetTexture(type, fullName?.LoadDDS());
@@ -995,13 +991,16 @@
                     SetMatWithFileList(mainTex, node.m_nodeMaterial, type);
                 }
 
-                string lodMainTex = node.m_lodMaterial.GetTexture(TexType.MainTex).name;
-                if (!SetMatWithFileList(lodMainTex, node.m_lodMaterial, type))
+                string lodMainTex = node.m_lodMaterial.GetTexture(TexType.MainTex)?.name;
+                if (!lodMainTex.IsNullOrWhiteSpace())
                 {
-                    lodMainTex = mainTex + "_lod";
                     if (!SetMatWithFileList(lodMainTex, node.m_lodMaterial, type))
                     {
-                        node.m_lodRenderDistance = NewLodRenderDistance;
+                        lodMainTex = mainTex + "_lod";
+                        if (!SetMatWithFileList(lodMainTex, node.m_lodMaterial, type))
+                        {
+                            node.m_lodRenderDistance = NewLodRenderDistance;
+                        }
                     }
                 }
             }
@@ -1016,13 +1015,16 @@
                     SetMatWithFileList(aprMap, node.m_nodeMaterial, type);
                 }
 
-                string lodAprTex = node.m_lodMaterial.GetTexture(TexType.APRMap).name;
-                if (!SetMatWithFileList(lodAprTex, node.m_lodMaterial, type))
+                string lodAprTex = node.m_lodMaterial.GetTexture(TexType.APRMap)?.name;
+                if (!lodAprTex.IsNullOrWhiteSpace())
                 {
-                    lodAprTex = aprMap + "_lod";
                     if (!SetMatWithFileList(lodAprTex, node.m_lodMaterial, type))
                     {
-                        node.m_lodRenderDistance = NewLodRenderDistance;
+                        lodAprTex = aprMap + "_lod";
+                        if (!SetMatWithFileList(lodAprTex, node.m_lodMaterial, type))
+                        {
+                            node.m_lodRenderDistance = NewLodRenderDistance;
+                        }
                     }
                 }
             }
@@ -1044,13 +1046,16 @@
                     SetMatWithFileList(mainTex, segment.m_segmentMaterial, type);
                 }
 
-                string lodMainTex = segment.m_lodMaterial.GetTexture(TexType.MainTex).name;
-                if (!SetMatWithFileList(lodMainTex, segment.m_lodMaterial, type))
+                string lodMainTex = segment.m_lodMaterial.GetTexture(TexType.MainTex)?.name;
+                if (!lodMainTex.IsNullOrWhiteSpace())
                 {
-                    lodMainTex = mainTex + "_lod";
                     if (!SetMatWithFileList(lodMainTex, segment.m_lodMaterial, type))
                     {
-                        segment.m_lodRenderDistance = NewLodRenderDistance;
+                        lodMainTex = mainTex + "_lod";
+                        if (!SetMatWithFileList(lodMainTex, segment.m_lodMaterial, type))
+                        {
+                            segment.m_lodRenderDistance = NewLodRenderDistance;
+                        }
                     }
                 }
             }
@@ -1065,13 +1070,16 @@
                     SetMatWithFileList(aprMap, segment.m_segmentMaterial, type);
                 }
 
-                string lodAprTex = segment.m_lodMaterial.GetTexture(TexType.APRMap).name;
-                if (!SetMatWithFileList(lodAprTex, segment.m_lodMaterial, type))
+                string lodAprTex = segment.m_lodMaterial.GetTexture(TexType.APRMap)?.name;
+                if (!lodAprTex.IsNullOrWhiteSpace())
                 {
-                    lodAprTex = aprMap + "_lod";
                     if (!SetMatWithFileList(lodAprTex, segment.m_lodMaterial, type))
                     {
-                        segment.m_lodRenderDistance = NewLodRenderDistance;
+                        lodAprTex = aprMap + "_lod";
+                        if (!SetMatWithFileList(lodAprTex, segment.m_lodMaterial, type))
+                        {
+                            segment.m_lodRenderDistance = NewLodRenderDistance;
+                        }
                     }
                 }
             }
@@ -1081,14 +1089,14 @@
         {
             propChanges.Add(
                 new ReplacementStateProp
-                    {
-                        propInfo = propInfo,
-                        mainTex =
+                {
+                    propInfo = propInfo,
+                    mainTex =
                             propInfo.m_lodMaterialCombined
                                 .GetTexture(TexType.MainTex) as Texture2D,
-                        aciMap =
+                    aciMap =
                             propInfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap) as Texture2D
-                    });
+                });
         }
 
         private struct ReplacementStateNode

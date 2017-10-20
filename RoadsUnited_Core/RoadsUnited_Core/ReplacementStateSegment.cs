@@ -15,8 +15,6 @@
 
             public float m_lodRenderDistance;
 
-            public Material m_segmentMaterial;
-
             public Texture mainTex;
 
             public NetInfo.Segment segment;

@@ -7,12 +7,9 @@
             this.node = node;
             this.MainTex = mainTex;
             this.APRMap = aprMap;
-            this.path = path;
         }
 
         public NetInfo.Node node;
-
-        public string path;
 
         public string MainTex { get; private set; }
 

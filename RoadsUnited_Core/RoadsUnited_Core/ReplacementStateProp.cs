@@ -11,19 +11,9 @@
 
             public Texture2D aciMap;
 
-            public int laneIndex;
-
             public Texture2D mainTex;
 
-            public float originalAngle;
-
-            public PropInfo originalProp;
-
-            public int propIndex;
-
             public PropInfo propInfo;
-
-            public PropInfo replacementProp;
 
             #endregion Public Fields
         }

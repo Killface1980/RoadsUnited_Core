@@ -58,7 +58,7 @@
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
             try
             {
-                using (StreamReader streamReader = new System.IO.StreamReader(filename))
+                using (StreamReader streamReader = new StreamReader(filename))
                 {
                     return (Configuration)xmlSerializer.Deserialize(streamReader);
                 }
@@ -75,7 +75,7 @@
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Configuration));
             try
             {
-                using (StreamWriter streamWriter = new System.IO.StreamWriter(filename))
+                using (StreamWriter streamWriter = new StreamWriter(filename))
                 {
                     xmlSerializer.Serialize(streamWriter, config);
                 }

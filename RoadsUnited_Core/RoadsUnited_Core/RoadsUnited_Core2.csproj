@@ -60,6 +60,7 @@
     <None Include="Class1.cs" />
     <Compile Include="DDSLoader.cs" />
     <None Include="Statics\Class1.cs" />
+    <Compile Include="Statics\PropNames.cs" />
     <Compile Include="ReplacementStateProp.cs" />
     <Compile Include="ReplacementStateSegment.cs" />
     <Compile Include="Statics\RoadPos.cs" />

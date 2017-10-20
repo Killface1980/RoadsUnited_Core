@@ -21,6 +21,8 @@
 
         private const string SegmentString = "/Segments";
 
+        private const string PropString = "/Props";
+
         private static readonly List<string> Paths;
 
         private static bool pathsChecked;
@@ -37,6 +39,7 @@
                                          ModLoader.Export_Path + SegmentString + AprmapsLod,
                                          ModLoader.Export_Path + NodeString + MaintexLod,
                                          ModLoader.Export_Path + NodeString + AprmapsLod,
+                                         ModLoader.Export_Path + PropString,
                                      };
         }
 
@@ -58,15 +61,27 @@
 
             NetInfo.Segment segment = part as NetInfo.Segment;
             NetInfo.Node node = part as NetInfo.Node;
-            bool isSegment = false;
+            PropInfo propinfo = part as PropInfo;
 
-            if (segment != null)
+            bool isSegment = segment != null;
+            bool isProp = propinfo != null;
+
+             if (isProp)
+             {
+                 texMain = LODResetter.MakeReadable(
+                     propinfo.m_lodMaterialCombined.GetTexture(TexType.MainTex) as Texture2D);
+                 texAPR = LODResetter.MakeReadable(
+                     propinfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap) as Texture2D);
+
+                 // texMainLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D);
+                 // texAPRLod = LODResetter.MakeReadable(node.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D);
+             }
+             else if (isSegment)
             {
                 texMain = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType.MainTex) as Texture2D);
                 texAPR = LODResetter.MakeReadable(segment.m_segmentMaterial.GetTexture(TexType.APRMap) as Texture2D);
                 texMainLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType.MainTex) as Texture2D);
                 texAPRLod = LODResetter.MakeReadable(segment.m_lodMaterial.GetTexture(TexType.APRMap) as Texture2D);
-                isSegment = true;
             }
             else if (node != null)
             {
@@ -86,37 +101,63 @@
                 pathsChecked = true;
             }
 
-            if (texMain != null)
+            if (isProp)
             {
-                string path = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + Maintex, texMain.name + ".png");
-                if (!File.Exists(path))
+                if (texMain != null)
                 {
-                    byte[] bytes = texMain.EncodeToPNG();
-                    File.WriteAllBytes(path, bytes);
+                    string path = Path.Combine(ModLoader.Export_Path + PropString, texMain.name + ".png");
+                    if (!File.Exists(path))
+                    {
+                        byte[] bytes = texMain.EncodeToPNG();
+                        File.WriteAllBytes(path, bytes);
+                    }
                 }
 
-                string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + MaintexLod, texMainLod.name + ".png");
-                if (!File.Exists(pathLod))
+                if (texAPR != null)
                 {
-                    byte[] bytes = texMainLod.EncodeToPNG();
-                    File.WriteAllBytes(pathLod, bytes);
+                    string path = Path.Combine(ModLoader.Export_Path + PropString, texAPR.name + ".png");
+                    if (!File.Exists(path))
+                    {
+                        byte[] bytes = texAPR.EncodeToPNG();
+                        File.WriteAllBytes(path, bytes);
+                    }
                 }
+
             }
-
-            if (texAPR != null)
+            else
             {
-                string path = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + Aprmaps, texAPR.name + ".png");
-                if (!File.Exists(path))
+                if (texMain != null)
                 {
-                    byte[] bytes = texAPR.EncodeToPNG();
-                    File.WriteAllBytes(path, bytes);
+                    string path = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + Maintex, texMain.name + ".png");
+                    if (!File.Exists(path))
+                    {
+                        byte[] bytes = texMain.EncodeToPNG();
+                        File.WriteAllBytes(path, bytes);
+                    }
+
+                    string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + MaintexLod, texMainLod.name + ".png");
+                    if (!File.Exists(pathLod))
+                    {
+                        byte[] bytes = texMainLod.EncodeToPNG();
+                        File.WriteAllBytes(pathLod, bytes);
+                    }
                 }
 
-                string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + AprmapsLod, texAPRLod.name + ".png");
-                if (!File.Exists(pathLod))
+                if (texAPR != null)
                 {
-                    byte[] bytes = texAPRLod.EncodeToPNG();
-                    File.WriteAllBytes(pathLod, bytes);
+                    string path = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + Aprmaps, texAPR.name + ".png");
+                    if (!File.Exists(path))
+                    {
+                        byte[] bytes = texAPR.EncodeToPNG();
+                        File.WriteAllBytes(path, bytes);
+                    }
+
+                    string pathLod = Path.Combine(ModLoader.Export_Path + (isSegment ? SegmentString : NodeString) + AprmapsLod, texAPRLod.name + ".png");
+                    if (!File.Exists(pathLod))
+                    {
+                        byte[] bytes = texAPRLod.EncodeToPNG();
+                        File.WriteAllBytes(pathLod, bytes);
+                    }
                 }
             }
         }

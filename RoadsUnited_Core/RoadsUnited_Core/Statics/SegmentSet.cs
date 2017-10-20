@@ -11,8 +11,6 @@ namespace RoadsUnited_Core2.Statics
 
         public NetInfo.Segment segment;
 
-        public string path;
-
         public string MainTex { get; private set; }
 
         public string APRMap { get; private set; }

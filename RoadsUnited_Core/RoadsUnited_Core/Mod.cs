@@ -1,5 +1,6 @@
 namespace RoadsUnited_Core2
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -92,9 +93,10 @@ namespace RoadsUnited_Core2
 
                     RoadsUnitedCore2.ChangeArrowProp(propInfo);
 
-                    RoadsUnitedCore2.ReplacePropTextures(propInfo, Config.currentTexturesPath_default);
+                    RoadsUnitedCore2.ReplacePropTextures(propInfo);
                 }
-               // LODResetter.ResetLOD();
+
+                // LODResetter.ResetLOD();
             }
 
             // other stuff...
@@ -243,7 +245,47 @@ namespace RoadsUnited_Core2
                 RoadColorChanger.ChangeColor(Config.large_road_brightness, "Large Road Slope With Bus Lanes");
             }
 
+            // PatchLODs();
             Debug.Log("RU Core2: OnLevelLoaded finished.");
+        }
+
+        public static void PatchLODs()
+        {
+            Singleton<NetManager>.instance.m_lodAprAtlas = PatchAPRTexture(Singleton<NetManager>.instance.m_lodAprAtlas);
+        }
+
+        // RoadColorChanger.RoadColorChanger
+        public static Texture2D PatchAPRTexture(Texture2D texture)
+        {
+            Texture2D result;
+            try
+            {
+                Texture2D texture2D = new Texture2D(texture.width, texture.height);
+                texture2D.anisoLevel = 8;
+                for (int i = 0; i < texture2D.height; i++)
+                {
+                    for (int j = 0; j < texture2D.width; j++)
+                    {
+                        if (texture.GetPixel(j, i).b > 0f)
+                        {
+                            texture2D.SetPixel(j, i, new Color(texture.GetPixel(j, i).r, texture.GetPixel(j, i).g, 0.9f));
+                        }
+                        else
+                        {
+                            texture2D.SetPixel(j, i, texture.GetPixel(j, i));
+                        }
+                    }
+                }
+
+                texture2D.Apply();
+                result = texture2D;
+            }
+            catch (Exception)
+            {
+                result = texture;
+            }
+
+            return result;
         }
 
         // This event handler is called after building initialization
@@ -414,6 +456,7 @@ namespace RoadsUnited_Core2
             // log += file;
             // }
             // Debug.Log(log);
+            string list = "RU Core 2: All Netinfo names: ";
             for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
             {
                 NetInfo netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
@@ -422,8 +465,11 @@ namespace RoadsUnited_Core2
                     continue;
                 }
 
+                list +=("\n" + netInfo.name);
                 RoadsUnitedCore2.ReplaceNetTextures(netInfo, parkingReset);
             }
+
+            Debug.Log(list);
 
             if (parkingReset)
             {
@@ -438,7 +484,7 @@ namespace RoadsUnited_Core2
                     continue;
                 }
 
-                RoadsUnitedCore2.ReplacePropTextures(propInfo, Config.currentTexturesPath_default);
+                RoadsUnitedCore2.ReplacePropTextures(propInfo);
             }
         }
 
@@ -475,7 +521,8 @@ namespace RoadsUnited_Core2
                         if (selectedIndex > 0)
                         {
                             this.ReplaceTextures();
-                           // LODResetter.ResetLOD();
+
+                            // LODResetter.ResetLOD();
 
                             // RoadsUnited_CoreMod.panel2.isVisible = true;
                         }
@@ -558,6 +605,7 @@ namespace RoadsUnited_Core2
             }
 
             UIHelperBase uIHelperRoadColorSettings = helper.AddGroup("Road brightness settings");
+
             uIHelperRoadColorSettings.AddCheckbox(
                 "Use the road brightness sliders below. Changes only visible after next level loading.",
                 Config.use_custom_colors,
@@ -587,6 +635,7 @@ namespace RoadsUnited_Core2
                 0.05f,
                 Config.medium_road_brightness,
                 this.EventMediumRoadBrightness);
+
             uIHelperMediumRoads.AddSlider(
                 "Decoration (grass and trees)",
                 0.2f,

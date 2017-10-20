@@ -637,7 +637,7 @@
                         {
                             if (netInfo.name.Equals("Large Road With Bus Lanes"))
                             {
-                                if (segment.m_mesh.name.Equals("RoadLageSegment"))
+                                if (segment.m_mesh.name.Equals("RoadLargeSegment"))
                                 {
                                     tex = roadlarge + text6 + gnd;
                                 }

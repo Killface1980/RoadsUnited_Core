@@ -81,8 +81,9 @@
                                                                                    "SmallAvenue4L"
                                                                                },
                                                                                {
-                                                                                   "AsymAvenueL2R4",
-                                                                                   "AsymAvenueL2R4"
+                                                                                   // todo el, br, t, sl?
+                                                                                   "AsymRoadL1R3",
+                                                                                   "AsymRoadL1R3"
                                                                                },
                                                                                {
                                                                                    // todo el, br, t, sl?
@@ -90,9 +91,8 @@
                                                                                    "AsymAvenueL2R3"
                                                                                },
                                                                                {
-                                                                                   // todo el, br, t, sl?
-                                                                                   "AsymRoadL1R3",
-                                                                                   "AsymRoadL1R3"
+                                                                                   "AsymAvenueL2R4",
+                                                                                   "AsymAvenueL2R4"
                                                                                },
                                                                                {
                                                                                    // todo el, br, t, sl?
@@ -153,38 +153,34 @@
                 return;
             }
 
-            Debug.Log("RU Core2: changing arrow props ...");
+            if (propInfo.name.Equals(PropNames.RoadArrowLFR))
             {
-                if (propInfo.name.Equals("Road Arrow LFR"))
+                if (ModLoader.Config.disable_optional_arrow_lfr)
                 {
-                    if (ModLoader.Config.disable_optional_arrow_lfr)
-                    {
-                        propInfo.m_maxRenderDistance = 0f;
-                        propInfo.m_maxScale = 0f;
-                        propInfo.m_minScale = 0f;
-                    }
-                    else
-                    {
-                        propInfo.m_maxRenderDistance = 1000f;
-                        propInfo.m_maxScale = 1f;
-                        propInfo.m_minScale = 1f;
-                    }
+                    propInfo.m_maxRenderDistance = 0f;
+                    propInfo.m_maxScale = 0f;
+                    propInfo.m_minScale = 0f;
                 }
-
-                if (propInfo.name.Equals("Road Arrow LR"))
+                else
                 {
-                    if (ModLoader.Config.disable_optional_arrow_lr)
-                    {
-                        propInfo.m_maxRenderDistance = 0f;
-                        propInfo.m_maxScale = 0f;
-                        propInfo.m_minScale = 0f;
-                    }
-                    else
-                    {
-                        propInfo.m_maxRenderDistance = 1000f;
-                        propInfo.m_maxScale = 1f;
-                        propInfo.m_minScale = 1f;
-                    }
+                    propInfo.m_maxRenderDistance = 1000f;
+                    propInfo.m_maxScale = 1f;
+                    propInfo.m_minScale = 1f;
+                }
+            }
+            else if (propInfo.name.Equals(PropNames.RoadArrowLR))
+            {
+                if (ModLoader.Config.disable_optional_arrow_lr)
+                {
+                    propInfo.m_maxRenderDistance = 0f;
+                    propInfo.m_maxScale = 0f;
+                    propInfo.m_minScale = 0f;
+                }
+                else
+                {
+                    propInfo.m_maxRenderDistance = 1000f;
+                    propInfo.m_maxScale = 1f;
+                    propInfo.m_minScale = 1f;
                 }
             }
         }
@@ -359,20 +355,8 @@
                             {
                                 if (mainTexName.Contains(RoadPos.Ground))
                                 {
-                                    segList.Add(new SegmentSet(segment, "Busway2L_DecoGrass_Ground_Segment"));
+                                    segList.Add(new SegmentSet(segment, "Busway2L_DecoGrass_Ground_Segment", "RoadBasic2-apr"));
                                 }
-
-                                // if (segment.m_segmentMaterial.GetTexture(TexType._APRMap).name.Contains(RoadPos.Ground))
-                                // if (File.Exists(Path.Combine(ModLoader.currentTexturesPath_default, "RoadBasic2-apr"+ ext_DDS)))
-                                // {
-                                // segment.m_segmentMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(Path.Combine(ModLoader.currentTexturesPath_default, "RoadBasic2-apr"+ ext_DDS)));
-                                // segment.m_lodRenderDistance = 2500;
-                                // }
-                                // else if (File.Exists(Path.Combine(ModLoader.APRMaps_Path, "RoadBasic2-apr"+ ext_DDS)))
-                                // {
-                                // segment.m_segmentMaterial.SetTexture(TexType._APRMap, DDSLoader.LoadDDS(Path.Combine(ModLoader.APRMaps_Path, "RoadBasic2-apr"+ ext_DDS)));
-                                // segment.m_lodRenderDistance = 2500;
-                                // }
                             }
                         }
                         else
@@ -400,34 +384,22 @@
                     {
                         if (mainTexName.Contains(RoadPos.Ground))
                         {
-                            segList.Add(new SegmentSet(segment, "Busway6L_DecoGrass_Ground_Segment"));
-                        }
-
-                        if (aprName.Contains(RoadPos.Ground))
-                        {
-                            segList.Add(new SegmentSet(segment, null, "RoadLargeSegment-default-apr"));
+                            segList.Add(new SegmentSet(segment, "Busway6L_DecoGrass_Ground_Segment", "RoadLargeSegment-default-apr"));
                         }
                     }
                     else
                     {
                         if (mainTexName.Contains(RoadPos.Ground))
                         {
-                            segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D"));
+                            segList.Add(new SegmentSet(segment, "RoadLargeBuslane_D", "RoadLargeSegment-default-apr"));
                         }
-
-                        if (mainTexName.Contains(RoadPos.Elevated))
+                        else if (mainTexName.Contains(RoadPos.Elevated))
                         {
                             segList.Add(new SegmentSet(segment, "RoadLargeElevatedBus_D"));
                         }
-
-                        if (mainTexName.Contains(RoadPos.Slope))
+                        else if (mainTexName.Contains(RoadPos.Slope))
                         {
                             segList.Add(new SegmentSet(segment, "large-tunnelBus_d"));
-                        }
-
-                        if (aprName.Contains(RoadPos.Ground))
-                        {
-                            segList.Add(new SegmentSet(segment, null, "RoadLargeSegment-default-apr"));
                         }
                     }
                 }
@@ -441,8 +413,7 @@
                         {
                             segList.Add(new SegmentSet(segment, "Oneway_RoadSmallSegment_BusSide"));
                         }
-
-                        if (meshName.Equals("SmallRoadSegmentBusBoth"))
+                        else if (meshName.Equals("SmallRoadSegmentBusBoth"))
                         {
                             segList.Add(new SegmentSet(segment, "Oneway_RoadSmallSegment_BusBoth"));
                         }
@@ -454,14 +425,14 @@
                         {
                             segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco_BusSide"));
                         }
-                    }
-                    else if (meshName.Equals("SmallRoadSegment2BusBoth"))
-                    {
-                        segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco_BusBoth"));
-                    }
-                    else
-                    {
-                        segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco"));
+                        else if (meshName.Equals("SmallRoadSegment2BusBoth"))
+                        {
+                            segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco_BusBoth"));
+                        }
+                        else
+                        {
+                            segList.Add(new SegmentSet(segment, "Oneway_SmallRoadSegmentDeco"));
+                        }
                     }
 
                     if (mainTexName.Equals("small-tunnel_d"))
@@ -783,14 +754,11 @@
             // Singleton<NetManager>.instance.InitRenderData();
         }
 
-        public static void ReplacePropTextures([CanBeNull] PropInfo propInfo, string path)
+        private static List<object> listy = new List<object>();
+
+        public static void ReplacePropTextures([CanBeNull] PropInfo propInfo)
         {
             if (propInfo == null)
-            {
-                return;
-            }
-
-            if (path.IsNullOrWhiteSpace())
             {
                 return;
             }
@@ -807,9 +775,10 @@
                 return;
             }
 
-            if (filename.Equals("BusLaneText"))
+            if (!listy.Contains(propInfo))
             {
-                filename = "BusLane";
+                TextureExporter.ExportPrefabTextures(propInfo);
+                listy.Add(propInfo);
             }
 
             string fullName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(filename + ExtDDS))
@@ -818,35 +787,43 @@
             if (!fullName.IsNullOrWhiteSpace())
             {
                 UpdatePropChanges(propInfo);
-                SetMatWithFileList(filename, propInfo.m_lodMaterialCombined, TexType.MainTex);
-
-                string fileaci = propInfo.m_lodMaterialCombined.GetTexture(TexType.ACIMap).name;
-                string aciName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(fileaci + ExtDDS))
-                    ?.FullName;
-                if (!aciName.IsNullOrWhiteSpace())
+                if (SetMatWithFileList(filename, propInfo.m_lodMaterialCombined, TexType.MainTex))
                 {
-                    SetMatWithFileList(fileaci, propInfo.m_lodMaterialCombined, TexType.ACIMap);
+                    filename += "-aci";
+                    SetMatWithFileList(filename, propInfo.m_lodMaterialCombined, TexType.ACIMap);
+                }
+
+                // string aciName = ModLoader.AllTexturesAvailable.FirstOrDefault(x => x.Name.Equals(filename + ExtDDS))
+                // ?.FullName;
+                {
+                    // if (!aciName.IsNullOrWhiteSpace())
                 }
             }
         }
 
         public static void RevertNodes()
         {
-            foreach (ReplacementStateNode state in nodeChanges)
+            if (nodeChanges.Any())
             {
-                state.node.m_nodeMaterial.SetTexture(TexType.MainTex, state.mainTex);
-                state.node.m_nodeMaterial.SetTexture(TexType.APRMap, state.aprMap);
-                state.node.m_lodMaterial = state.m_lodMaterial;
-                state.node.m_lodRenderDistance = state.m_lodRenderDistance;
+                foreach (ReplacementStateNode state in nodeChanges)
+                {
+                    state.node.m_nodeMaterial.SetTexture(TexType.MainTex, state.mainTex);
+                    state.node.m_nodeMaterial.SetTexture(TexType.APRMap, state.aprMap);
+                    state.node.m_lodMaterial = state.m_lodMaterial;
+                    state.node.m_lodRenderDistance = state.m_lodRenderDistance;
+                }
             }
         }
 
         public static void RevertProps()
         {
-            foreach (ReplacementStateProp state in propChanges)
+            if (propChanges.Any())
             {
-                state.propInfo.m_lodMaterialCombined.SetTexture(TexType.MainTex, state.mainTex);
-                state.propInfo.m_lodMaterialCombined.SetTexture(TexType.ACIMap, state.aciMap);
+                foreach (ReplacementStateProp state in propChanges)
+                {
+                    state.propInfo.m_lodMaterialCombined.SetTexture(TexType.MainTex, state.mainTex);
+                    state.propInfo.m_lodMaterialCombined.SetTexture(TexType.ACIMap, state.aciMap);
+                }
             }
 
             propChanges.Clear();
@@ -854,13 +831,16 @@
 
         public static void RevertSegments()
         {
-            foreach (ReplacementStateSegment state in segmentChanges)
+            if (segmentChanges.Any())
             {
-                state.segment.m_segmentMaterial.SetTexture(TexType.MainTex, state.mainTex);
-                state.segment.m_segmentMaterial.SetTexture(TexType.APRMap, state.aprMap);
+                foreach (ReplacementStateSegment state in segmentChanges)
+                {
+                    state.segment.m_segmentMaterial.SetTexture(TexType.MainTex, state.mainTex);
+                    state.segment.m_segmentMaterial.SetTexture(TexType.APRMap, state.aprMap);
 
-                // state.segment.m_lodMaterial = state.m_lodMaterial;
-                state.segment.m_lodRenderDistance = state.m_lodRenderDistance;
+                    // state.segment.m_lodMaterial = state.m_lodMaterial;
+                    state.segment.m_lodRenderDistance = state.m_lodRenderDistance;
+                }
             }
         }
 
